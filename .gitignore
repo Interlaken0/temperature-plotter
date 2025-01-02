@@ -1,0 +1,61 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Electron Forge build output
+out/
+dist/
+release/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Cache
+.cache/
+.parcel-cache/
+.next/
+coverage/
+
+# Webpack / Babel
+*.map
+
+# Tailwind / PostCSS
+tailwind.config.js.bak
+
+# DLL and hardware binaries (do NOT commit vendor files)
+assets/*.dll
+assets/*.so
+assets/*.dylib
+
+# Test artifacts
+jest-cache/
+test-results/
+
+# Misc
+tmp/
+temp/
+*.bak
+*.swp
