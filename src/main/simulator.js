@@ -1,0 +1,37 @@
+const EventEmitter = require('events');
+const store = require('./state/temperatureStore');
+
+class InterruptSimulator extends EventEmitter {
+  constructor() {
+    super();
+    this.running = false;
+  }
+
+  start() {
+    this.running = true;
+    this.triggerInterrupt();
+  }
+
+  triggerInterrupt() {
+    if (!this.running) return;
+
+    // Simulate hardware reading
+    const noise = Math.random() * 2 - 1;
+    const reading = 22.5 + Math.sin(Date.now() / 1000) * 5 + noise;
+    
+    this.emit('data', reading);
+
+    // Random interval simulates hardware IRQ jitter
+    const nextInterrupt = 500 + Math.random() * 500;
+    setTimeout(() => this.triggerInterrupt(), nextInterrupt);
+  }
+
+  stop() {
+    this.running = false;
+  }
+}
+
+const sim = new InterruptSimulator();
+sim.on('data', (temp) => store.updateTemperature(temp));
+
+module.exports = sim;
