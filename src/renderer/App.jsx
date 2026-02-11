@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTemperature } from './hooks/useTemperature';
 import TemperatureChart from './components/TemperatureChart';
 import StatusPanel from './components/StatusPanel';
@@ -7,6 +7,16 @@ import SaveButton from './components/SaveButton';
 export default function App() {
   const { temp, history } = useTemperature();
   const [darkMode, setDarkMode] = useState(true);
+  const [mode, setMode] = useState('unknown');
+
+  // Listen for mode changes from the main process
+  useEffect(() => {
+    if (window.api && window.api.onModeChange) {
+      window.api.onModeChange((data) => {
+        setMode(data.mode);
+      });
+    }
+  }, []);
 
   return (
     <div className={darkMode ? "dark" : ""}>
@@ -28,8 +38,8 @@ export default function App() {
           </div>
 
           <div className="glass p-6 rounded-2xl shadow-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-lg border border-gray-200 dark:border-white/10 h-96">
-            {/* ✅ FIX: Passing 'darkMode' prop here so the chart can change colors */}
-            <TemperatureChart data={history} darkMode={darkMode} />
+            {/* ✅ FIX: Passing 'darkMode' and 'mode' props so the chart can change colors and styling */}
+            <TemperatureChart data={history} darkMode={darkMode} mode={mode} />
           </div>
 
           <div className="flex justify-end pt-4">

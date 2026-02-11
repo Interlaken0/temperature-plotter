@@ -13,26 +13,30 @@ function initIpc() {
       win.webContents.send('temperature:update', data);
     }
     
-    // 2. Persistent Logging (Background Telemetry)
+    // 2. Persistent Logging
     const latest = data.history.at(-1);
     if (latest) {
-      // Create headers if file doesn't exist
       if (!fs.existsSync(logPath)) {
         fs.writeFileSync(logPath, 'Date,Time,Temperature(C)\n');
       }
 
-      // Convert Timestamp to Readable Date & Time
       const dateObj = new Date(latest.time);
-      const date = dateObj.toLocaleDateString('en-GB'); // DD/MM/YYYY
-      const time = dateObj.toLocaleTimeString('en-GB', { hour12: false }); // HH:MM:SS
-      const temp = latest.temp.toFixed(2); // Round to 2 decimals
+      const date = dateObj.toLocaleDateString('en-GB');
+      const time = dateObj.toLocaleTimeString('en-GB', { hour12: false });
+      const temp = latest.temp.toFixed(2);
 
-      // Append clean data
       fs.appendFileSync(logPath, `${date},${time},${temp}\n`);
+    }
+
+    // 3. Update hardware monitor if available
+    const { getCurrentDevice } = require('../main');
+    const { hardwareMonitor } = getCurrentDevice();
+    if (hardwareMonitor && hardwareMonitor.healthy) {
+      hardwareMonitor.updateLastUpdate();
     }
   });
 
-  // 3. Secure User Export (Formatted for Humans)
+  // 4. Secure User Export
   ipcMain.handle('save-csv', async () => {
     const { filePath } = await dialog.showSaveDialog({
       title: 'Export Temperature Data',
@@ -44,18 +48,62 @@ function initIpc() {
 
     const { history } = store.get();
 
-    // ✅ FIX: Convert raw timestamp to readable Date/Time string
     const csvContent = "Date,Time,Temperature(C)\n" + history.map(d => {
       const dateObj = new Date(d.time);
-      const date = dateObj.toLocaleDateString('en-GB'); // DD/MM/YYYY
-      const time = dateObj.toLocaleTimeString('en-GB', { hour12: false }); // HH:MM:SS
-      const temp = d.temp.toFixed(2); // Round to 2 decimals
+      const date = dateObj.toLocaleDateString('en-GB');
+      const time = dateObj.toLocaleTimeString('en-GB', { hour12: false });
+      const temp = d.temp.toFixed(2);
       
       return `${date},${time},${temp}`;
     }).join("\n");
     
     fs.writeFileSync(filePath, csvContent);
     return { success: true };
+  });
+
+  // 5. Get current device status
+  ipcMain.handle('get-device-status', async () => {
+    const { getCurrentDevice } = require('../main');
+    const { device, isHardwareMode, hardwareMonitor } = getCurrentDevice();
+    
+    return {
+      mode: isHardwareMode ? 'hardware' : 'simulator',
+      healthy: hardwareMonitor ? hardwareMonitor.healthy : true,
+      lastUpdate: hardwareMonitor ? hardwareMonitor.lastUpdate : Date.now(),
+      deviceType: device.constructor.name
+    };
+  });
+
+  // 6. Manual mode switch (for testing)
+  ipcMain.handle('switch-mode', async (event, { mode }) => {
+    const { getCurrentDevice, notifyModeChange } = require('../main');
+    const { hardwareMonitor } = getCurrentDevice();
+    
+    // Stop current monitoring
+    if (hardwareMonitor) {
+      hardwareMonitor.stop();
+    }
+    
+    // Switch device
+    let newDevice;
+    if (mode === 'simulator') {
+      newDevice = require('../simulator');
+      notifyModeChange('simulator', 'Manual switch to simulator');
+    } else {
+      try {
+        newDevice = require('../dll/tempDll');
+        notifyModeChange('hardware', 'Manual switch to hardware');
+      } catch (e) {
+        newDevice = require('../simulator');
+        notifyModeChange('simulator', 'Hardware unavailable, switched to simulator');
+      }
+    }
+    
+    // Update global device reference
+    const mainModule = require('../main');
+    mainModule.device = newDevice;
+    
+    return { success: true, mode: mode === 'simulator' ? 'simulator' : 'hardware' };
   });
 }
 

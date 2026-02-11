@@ -10,6 +10,7 @@ out/
 dist/
 release/
 build/
+.webpack/
 
 # OS files
 .DS_Store
@@ -37,7 +38,6 @@ logs/
 .cache/
 .parcel-cache/
 .next/
-coverage/
 
 # Webpack / Babel
 *.map
@@ -49,13 +49,28 @@ tailwind.config.js.bak
 assets/*.dll
 assets/*.so
 assets/*.dylib
+src/main/dll/*.dll
+src/main/dll/*.so
+src/main/dll/*.dylib
+src/main/dll/*.
 
 # Test artifacts
 jest-cache/
 test-results/
+
+# Coverage reports
+coverage/
+*.lcov
+lccov.info
 
 # Misc
 tmp/
 temp/
 *.bak
 *.swp
+
+# Testing backup files
+__tests__/*.bak
+
+# Test folder (work in progress)
+__tests__/

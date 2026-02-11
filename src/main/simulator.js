@@ -15,11 +15,15 @@ class InterruptSimulator extends EventEmitter {
   triggerInterrupt() {
     if (!this.running) return;
 
-    // Simulate hardware reading
+    // Simulate hardware reading with noise
     const noise = Math.random() * 2 - 1;
     const reading = 22.5 + Math.sin(Date.now() / 1000) * 5 + noise;
     
-    this.emit('data', reading);
+    // Direct update to store
+    store.updateTemperature(reading);
+    
+    // Log simulator readings with clear indication
+    console.log(`🔧 SIMULATOR Reading: ${reading.toFixed(2)}°C (Hardware disconnected - using simulation)`);
 
     // Random interval simulates hardware IRQ jitter
     const nextInterrupt = 500 + Math.random() * 500;
@@ -32,6 +36,4 @@ class InterruptSimulator extends EventEmitter {
 }
 
 const sim = new InterruptSimulator();
-sim.on('data', (temp) => store.updateTemperature(temp));
-
 module.exports = sim;
