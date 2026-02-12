@@ -1,49 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import { useTemperature } from './hooks/useTemperature';
-import TemperatureChart from './components/TemperatureChart';
-import StatusPanel from './components/StatusPanel';
-import SaveButton from './components/SaveButton';
+// REACT APPLICATION COMPONENT - Main Temperature Plotter Interface
+// ============================================================================
+// This is the root component of the temperature plotting application:
+// - Manages global application state (dark mode, device mode)
+// - Integrates temperature data streaming via custom hook
+// - Coordinates all UI components for cohesive user experience
+// - Handles IPC communication with main process
+// - Provides responsive layout with modern design system
+// ============================================================================
 
+import React, { useState, useEffect } from 'react'; // React hooks for state management and lifecycle
+import { useTemperature } from './hooks/useTemperature'; // Custom hook for temperature data streaming
+import TemperatureChart from './components/TemperatureChart'; // Real-time temperature visualization
+import StatusPanel from './components/StatusPanel'; // Current temperature and mode display
+import SaveButton from './components/SaveButton'; // CSV export functionality
+
+// MAIN APP COMPONENT - Application root with state management
 export default function App() {
-  const { temp, history } = useTemperature();
-  const [darkMode, setDarkMode] = useState(true);
-  const [mode, setMode] = useState('unknown');
+  // TEMPERATURE DATA - Real-time temperature streaming via custom hook
+  // Returns current temperature reading and historical data array
+  const { temp, history } = useTemperature(); // Custom hook manages IPC communication and data state
+  
+  // UI STATE - User interface preferences and device mode
+  const [darkMode, setDarkMode] = useState(true); // Theme preference for light/dark mode
+  const [mode, setMode] = useState('unknown'); // Current device mode (hardware/simulator）
 
-  // Listen for mode changes from the main process
+  // IPC MODE LISTENER - Real-time mode change detection
+  // ============================================================================
+  // Establishes communication with main process for mode changes:
+  // - Listens for hardware/simulator switching events
+  // - Updates UI state when device mode changes
+  // - Provides real-time feedback to user
+  // - Handles graceful degradation if API unavailable
+  // ============================================================================
   useEffect(() => {
-    if (window.api && window.api.onModeChange) {
-      window.api.onModeChange((data) => {
-        setMode(data.mode);
+    if (window.api && window.api.onModeChange) { // Check if preload script exposed API
+      window.api.onModeChange((data) => { // Register mode change listener
+        setMode(data.mode); // Update local mode state with new device mode
       });
     }
-  }, []);
+  }, []); // Empty dependency array - runs once on mount
 
+  // RENDER UI - Complete application interface with responsive design
   return (
+    // THEME WRAPPER - Applies dark mode class to entire application
     <div className={darkMode ? "dark" : ""}>
+      {/* MAIN CONTAINER - Full viewport with responsive layout */}
       <div className="min-h-screen bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white transition-colors duration-300 p-8 font-sans">
         
+        {/* LAYOUT CONTAINER - Centered content with optimal width */}
         <div className="max-w-5xl mx-auto space-y-6">
+          {/* HEADER SECTION - Title and theme toggle */}
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold tracking-tight">Temperature Plotter</h1>
+            {/* THEME TOGGLE - Dark/light mode switcher with emoji indicators */}
             <button 
-              onClick={() => setDarkMode(!darkMode)}
+              onClick={() => setDarkMode(!darkMode)} // Toggle dark mode state
               className="px-4 py-2 text-sm font-medium bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-slate-700 transition-all"
             >
-              {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+              {darkMode ? "Light Mode" : "Dark Mode"}
             </button>
           </div>
 
+          {/* STATUS PANEL - Current temperature and device mode display */}
           <div className="glass p-8 rounded-2xl shadow-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-lg border border-gray-200 dark:border-white/10">
-            <StatusPanel temp={temp} />
+            <StatusPanel temp={temp} /> {/* Pass current temperature for real-time display */}
           </div>
 
+          {/* TEMPERATURE CHART - Real-time data visualization */}
           <div className="glass p-6 rounded-2xl shadow-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-lg border border-gray-200 dark:border-white/10 h-96">
-            {/* ✅ FIX: Passing 'darkMode' and 'mode' props so the chart can change colors and styling */}
-            <TemperatureChart data={history} darkMode={darkMode} mode={mode} />
+            {/* CHART PROPS - Pass theme and mode for dynamic styling */}
+            {/* FIX: Passing 'darkMode' and 'mode' props so the chart can change colors and styling */}
+            <TemperatureChart data={history} darkMode={darkMode} mode={mode} /> {/* Historical data with visual theming */}
           </div>
 
+          {/* EXPORT SECTION - CSV data export functionality */}
           <div className="flex justify-end pt-4">
-            <SaveButton />
+            <SaveButton /> {/* CSV export button with secure file handling */}
           </div>
         </div>
 

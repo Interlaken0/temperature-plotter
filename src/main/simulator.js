@@ -1,39 +1,89 @@
-const EventEmitter = require('events');
-const store = require('./state/temperatureStore');
+// TEMPERATURE SIMULATOR - Hardware Interrupt Emulation System
+// ============================================================================
+// Advanced temperature sensor simulation with realistic patterns:
+// - Event-driven architecture mimicking hardware interrupts
+// - Realistic temperature patterns with sine wave and noise
+// - Variable timing jitter for authentic hardware behavior
+// - Integration with global temperature store for data consistency
+// - Demonstrates professional simulation techniques
+// ============================================================================
 
+const EventEmitter = require('events'); // Node.js event system for interrupt simulation
+const store = require('./state/temperatureStore'); // Global temperature data store
+
+// INTERRUPT SIMULATOR CLASS - Hardware behavior emulation
+// ============================================================================
+// Simulates hardware interrupt-driven temperature sensors:
+// - Extends EventEmitter for event-based architecture
+// - Generates realistic temperature readings with patterns
+// - Provides start/stop control for simulation lifecycle
+// - Integrates with global temperature store for data persistence
+// - Allows seamless switching between simulator and hardware
+// ============================================================================
 class InterruptSimulator extends EventEmitter {
   constructor() {
-    super();
-    this.running = false;
+    super(); // Initialize EventEmitter parent class
+    this.running = false; // Simulation state flag for start/stop control
   }
 
+  // START SIMULATION - Begin temperature data generation
+  // Initiates continuous temperature reading simulation with realistic patterns
   start() {
-    this.running = true;
-    this.triggerInterrupt();
+    this.running = true; // Set simulation state to active
+    this.triggerInterrupt(); // Start first interrupt cycle
   }
 
+  // TRIGGER INTERRUPT - Simulate hardware interrupt event
+  // ============================================================================
+  // This method simulates a hardware interrupt by:
+  // - Generating realistic temperature readings with mathematical patterns
+  // - Adding random noise for authentic sensor behavior
+  // - Updating global temperature store
+  // - Scheduling next interrupt with variable timing
+  // - Providing detailed logging for debugging and evidence
+  // ============================================================================
   triggerInterrupt() {
-    if (!this.running) return;
+    if (!this.running) return; // Exit if simulation stopped
 
-    // Simulate hardware reading with noise
-    const noise = Math.random() * 2 - 1;
-    const reading = 22.5 + Math.sin(Date.now() / 1000) * 5 + noise;
-    
-    // Direct update to store
-    store.updateTemperature(reading);
-    
-    // Log simulator readings with clear indication
-    console.log(`🔧 SIMULATOR Reading: ${reading.toFixed(2)}°C (Hardware disconnected - using simulation)`);
+    // TEMPERATURE GENERATION - Realistic sensor data patterns simulation
+    // Creates authentic temperature patterns using:
+    // - Base temperature of 22.5°C (room temperature)
+    // - Sine wave variation (±5°C) simulating daily temperature cycles
+    // - Random noise (±1°C) simulating sensor reading uncertainty
+    const noise = Math.random() * 2 - 1; // Random noise between -1 and +1 degrees
+    const reading = 22.5 + Math.sin(Date.now() / 1000) * 5 + noise; // Base + wave + noise
 
-    // Random interval simulates hardware IRQ jitter
-    const nextInterrupt = 500 + Math.random() * 500;
-    setTimeout(() => this.triggerInterrupt(), nextInterrupt);
+    // DATA STORE UPDATE - Persist temperature reading
+    // Direct update to global temperature store for UI consumption
+    store.updateTemperature(reading); // Store reading for chart updates and logging
+
+    // MODULE IMPORTS - Dependencies and configuration of simulated data
+    // Provides visual evidence that data is from simulator, not hardware
+    // Essential for debugging and portfolio documentation
+    console.log(`SIMULATOR Reading: ${reading.toFixed(2)}°C (Hardware disconnected - using simulation)`);
+
+    // VARIABLE TIMING - Simulate hardware interrupt jitter
+    // Real hardware doesn't trigger at perfect intervals:
+    // - Base interval of 500ms (2 Hz sampling rate)
+    // - Random variation up to 500ms (0-1 second total interval)
+    // - Simulates real hardware timing irregularities
+    const nextInterrupt = 500 + Math.random() * 500; // 500-1000ms variable interval
+    setTimeout(() => this.triggerInterrupt(), nextInterrupt); // Schedule next interrupt
   }
 
+  // STOP SIMULATION - Graceful termination of data generation
+  // Sets running flag to false, preventing further interrupt scheduling
   stop() {
-    this.running = false;
+    this.running = false; // Halt simulation by clearing state flag
   }
 }
 
-const sim = new InterruptSimulator();
-module.exports = sim;
+// SIMULATOR INSTANCE - Global export for main process
+// ============================================================================
+// Creates and exports singleton simulator instance:
+// - Ensures single simulator instance across application
+// - Provides consistent interface for main process device management
+// - Allows seamless switching between simulator and hardware
+// ============================================================================
+const sim = new InterruptSimulator(); // Create singleton simulator instance
+module.exports = sim; // Export for use in main process

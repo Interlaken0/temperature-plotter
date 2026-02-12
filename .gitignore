@@ -52,13 +52,10 @@ assets/*.dylib
 src/main/dll/*.dll
 src/main/dll/*.so
 src/main/dll/*.dylib
-src/main/dll/*.
 
-# Test artifacts
+# Test artifacts (keep tests, ignore generated files)
 jest-cache/
 test-results/
-
-# Coverage reports
 coverage/
 *.lcov
 lccov.info
@@ -71,6 +68,3 @@ temp/
 
 # Testing backup files
 __tests__/*.bak
-
-# Test folder (work in progress)
-__tests__/

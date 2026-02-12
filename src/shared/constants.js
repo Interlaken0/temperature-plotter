@@ -1,1 +1,19 @@
-export const MAX_BUFFER = 500;
+// GLOBAL CONSTANTS - Application Configuration Management
+// ============================================================================
+// Centralized configuration for application-wide settings:
+// - Defines buffer size for temperature data management
+// - Provides single source of truth for performance parameters
+// - Enables easy configuration adjustments across application
+// - Demonstrates professional constant management patterns
+// - Optimizes memory usage and performance
+// ============================================================================
+
+// MAXIMUM BUFFER SIZE - Data retention limit for temperature history
+// ============================================================================
+// Defines the maximum number of temperature data points to retain:
+// - 500 points provides approximately 8+ minutes of data at 1Hz sampling
+// - Balances memory usage with historical analysis capabilities
+// - Prevents memory leaks in long-running applications
+// - Ensures smooth chart performance with large datasets
+// ============================================================================
+export const MAX_BUFFER = 500; // Maximum historical data points to retain

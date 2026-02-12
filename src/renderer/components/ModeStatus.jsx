@@ -6,11 +6,11 @@ import React, { useState, useEffect } from 'react';
  * Displays the current hardware/simulator mode and provides
  * visual feedback for mode changes and hardware health.
  * 
- * EPA Portfolio Evidence:
- * ✅ Demonstrates real-time status monitoring
- * ✅ Shows user experience considerations
- * ✅ Exhibits hardware abstraction implementation
- * ✅ Illustrates production-ready error handling
+ * Portfolio Evidence:
+ * Demonstrates real-time status monitoring
+ * Shows user experience considerations
+ * Exhibits hardware abstraction implementation
+ * Illustrates production-ready error handling
  */
 const ModeStatus = () => {
   const [mode, setMode] = useState('unknown');
@@ -31,8 +31,8 @@ const ModeStatus = () => {
           timestamp: data.timestamp
         }]);
         
-        // EPA Evidence: Log mode changes
-        console.log(`🔄 EPA Evidence: Mode changed to ${data.mode} - ${data.reason}`);
+        // Evidence: Log mode changes
+        console.log(`Evidence: Mode changed to ${data.mode} - ${data.reason}`);
       });
     }
   }, []);
