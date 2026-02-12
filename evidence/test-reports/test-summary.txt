@@ -1,0 +1,28 @@
+Temperature Plotter - Test Summary
+===================================
+
+Test Results:
+- Test Suites: 10 passed, 10 total (100% pass rate)
+- Tests: 77 passed, 77 total (100% pass rate)
+- Execution Time: 6.339 seconds
+
+Coverage Summary:
+- Overall Coverage: 57.14% statements
+- Branch Coverage: 36.12%
+- Function Coverage: 66.66%
+- Line Coverage: 58.62%
+
+Test Categories:
+- Unit Tests: 6 suites
+- Integration Tests: 4 suites
+
+Files Tested:
+- main.js: 61.44% coverage
+- simulator.js: 88.88% coverage
+- tempDll.js: 36.36% coverage
+- temperatureIpc.js: 46.42% coverage
+- temperatureStore.js: 95.23% coverage
+- TemperatureChart.jsx: 60.6% coverage
+
+Generated: February 12, 2026
+Framework: Jest
