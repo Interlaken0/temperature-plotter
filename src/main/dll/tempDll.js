@@ -238,9 +238,9 @@ module.exports = {
         koffi.unregister(registeredCallback); // Unregister native callback
         registeredCallback = null; // Clear reference for garbage collection
         console.log('[HAL] Hardware Stopped (callback unregistered)'); // Log successful shutdown
-        console.log('[HAL] ✓ Hardware Stopped (callback unregistered)'); // Log successful shutdown
+        console.log('[HAL] Hardware Stopped (callback unregistered)'); // Log successful shutdown
       } catch (err) {
-        console.error('[HAL] ✗ Stop error:', err.message); // Log shutdown errors
+        console.error('[HAL] Stop error:', err.message); // Log shutdown errors
       }
     }
   }

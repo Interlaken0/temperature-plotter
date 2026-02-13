@@ -92,7 +92,7 @@ describe('DLL Binding Integration Tests', () => {
       
       // Assert: Check that hardware mode was attempted
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('🔌 Mode: Real Hardware (DLL)')
+        expect.stringContaining('Mode: Real Hardware (DLL)')
       );
       
       // Evidence: Shows DLL loading attempt
@@ -116,7 +116,7 @@ describe('DLL Binding Integration Tests', () => {
       
       // Assert: Check that simulator mode was used
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('🔧 Mode: Simulator')
+        expect.stringContaining('Mode: Simulator')
       );
       
       // Evidence: Shows simulator fallback
@@ -126,7 +126,7 @@ describe('DLL Binding Integration Tests', () => {
       // Check if any console.log was called with the simulator message
       const consoleCalls = console.log.mock.calls;
       const simulatorCallFound = consoleCalls.some(call => 
-        call[0] && call[0].includes && call[0].includes('🔧 Mode: Simulator')
+        call[0] && call[0].includes && call[0].includes('Mode: Simulator')
       );
       
       if (simulatorCallFound) {

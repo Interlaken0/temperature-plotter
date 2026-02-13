@@ -142,7 +142,7 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
             formatter={(value) => [formatTemp(value), getModeLabel()]} // Format temperature with mode label
           />
 
-          {/* 📈 TEMPERATURE LINE - Main data visualization with mode-based styling */}
+          {/* TEMPERATURE LINE - Main data visualization with mode-based styling */}
           <Line 
             dataKey="temp" // Temperature data field
             type="monotone" // Smooth curve interpolation

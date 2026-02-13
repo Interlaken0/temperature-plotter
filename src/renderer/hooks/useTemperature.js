@@ -41,6 +41,6 @@ export function useTemperature() {
     });
   }, []); // Empty dependency array - listener registered once on component mount
 
-  // 📤 HOOK API - Return clean interface for components
+  // HOOK API - Return clean interface for components
   return { temp, history }; // Provide current temperature and historical data to consuming components
 }

@@ -61,9 +61,9 @@ const ModeStatus = () => {
 
   const getModeIcon = () => {
     if (mode === 'hardware') {
-      return healthy ? '🔌' : '⚠️';
+      return healthy ? 'HW' : '!';
     }
-    return '🔧';
+    return 'SIM';
   };
 
   const getModeColor = () => {
@@ -155,7 +155,7 @@ const ModeStatus = () => {
             {notifications.slice(-3).reverse().map((notification, index) => (
               <div key={index} className="text-xs text-gray-600 dark:text-gray-400">
                 <span className="font-medium">
-                  {notification.type === 'mode-change' ? '🔄' : '🎛️'}
+                  {notification.type === 'mode-change' ? 'CHG' : 'CTL'}
                 </span>
                 {' '}{notification.message}
                 <span className="ml-2 text-gray-500">
