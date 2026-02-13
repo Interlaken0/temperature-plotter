@@ -1,14 +1,15 @@
-# Portfolio Evidence & Test Artifacts
+# Evidence
 
-This directory contains automated evidence generated during the development and testing of the Temperature Plotter application.
+This folder contains project evidence and documentation.
 
 ## Structure
-* **`/screenshots`**: Automatically captured images of the application states (Hardware Connected, Simulation Mode, Error States).
-* **`capture-script.ps1`**: PowerShell automation script used to generate consistent evidence for the apprenticeship portfolio (KSB S11).
+- `screenshots/` - Application screenshots and visual evidence
+- `test-reports/` - Test execution reports and coverage analysis
 
-## Usage
-To generate a fresh batch of evidence for a milestone report:
-1. Ensure the application is running (`npm start`).
-2. Run the capture script:
-   ```powershell
-   ./capture-script.ps1
+## Test Reports Contents
+The `test-reports/` folder should contain:
+- **Coverage reports** - Code coverage analysis (XML, JSON, LCOV formats)
+- **Test execution logs** - Detailed test run results and output
+- **Performance metrics** - Test execution times and performance data
+- **Coverage HTML reports** - Interactive coverage visualization (lcov-report/)
+- **Test summary files** - Pass/fail statistics and test counts
