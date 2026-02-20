@@ -106,7 +106,7 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
   };
 
   // STYLE CALCULATIONS - Pre-compute dynamic styles for performance
-  const lineColor = getLineColor(); // Current line color based on mode
+  const lineColour = getLineColor(); // Current line colour based on mode
   const dashArray = getLineStrokeDasharray(); // Current line style based on mode
 
   // CHART RENDER - Complete temperature visualization interface
@@ -133,10 +133,10 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
               backgroundColor: tooltipBg, 
               border: `1px solid ${tooltipBorder}`, 
               borderRadius: '8px', 
-              color: tooltipText, 
+              colour: tooltipText, 
               boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' 
             }}
-            itemStyle={{ color: lineColor }} // Data point color matches line
+            itemStyle={{ colour: lineColour }} // Data point colour matches line
             labelStyle={{ colour: axisColour, marginBottom: '0.25rem', fontSize: '0.9rem' }} // Timestamp styling
             labelFormatter={(label) => formatDateTime(label)} // Format timestamp display
             formatter={(value) => [formatTemp(value), getModeLabel()]} // Format temperature with mode label
@@ -146,7 +146,7 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
           <Line 
             dataKey="temp" // Temperature data field
             type="monotone" // Smooth curve interpolation
-            stroke={lineColor} // Dynamic color based on mode
+            stroke={lineColour} // Dynamic colour based on mode
             strokeWidth={3} // Bold line for visibility
             strokeDasharray={dashArray} // Dashed for simulator, solid for hardware
             dot={false} // No data points for cleaner line

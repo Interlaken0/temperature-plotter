@@ -102,7 +102,7 @@ const ModeStatus = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-4">
+    <div className="bg-white dark:bg-grey-800 rounded-lg shadow-md p-4 mb-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <span className="text-2xl">{getModeIcon()}</span>
@@ -110,7 +110,7 @@ const ModeStatus = () => {
             <h3 className={`font-semibold ${getModeColor()}`}>
               {mode === 'hardware' ? 'Hardware Mode' : 'Simulation Mode'}
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-grey-600 dark:text-grey-400">
               {getHealthStatus()} • {deviceType}
             </p>
             <p className="text-xs text-grey-600 dark:text-grey-500">

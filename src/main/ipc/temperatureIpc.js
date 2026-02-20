@@ -38,7 +38,7 @@ function initIpc() {
 
   // 4. Secure User Export
   ipcMain.handle('save-csv', async () => {
-    const { filePath } = await dialogue.showSaveDialog({
+    const { filePath } = await dialogue.showSaveDialogue({
       title: 'Export Temperature Data',
       defaultPath: 'session_log.csv',
       filters: [{ name: 'CSV Files', extensions: ['csv'] }]
