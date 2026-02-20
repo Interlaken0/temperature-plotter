@@ -1,5 +1,5 @@
 # System Architecture Design Artefacts
-## EPA Evidence - Design Thinking and Planning
+## Portfolio Evidence - Design Thinking and Planning
 
 ### 1. High-Level System Architecture
 
@@ -173,7 +173,7 @@ graph TB
 - **Implementation**: Comprehensive test suite with mocking and coverage reporting
 - **KSB Demonstration**: S4 (Unit testing), S5 (Integration testing), S13 (Testing frameworks)
 
-## EPA Evidence Mapping
+## Portfolio Evidence Mapping
 
 | Design Decision | KSB Demonstrated | Evidence Location |
 |----------------|------------------|-------------------|
@@ -185,4 +185,4 @@ graph TB
 | Semantic Git History | S14 (Version control) | Git commit history |
 
 Created: February 2026
-Purpose: EPA Portfolio Evidence - Design Thinking and Software Architecture
+Purpose: Portfolio Evidence - Design Thinking and Software Architecture

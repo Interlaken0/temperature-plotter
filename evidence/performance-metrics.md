@@ -1,5 +1,5 @@
 # Performance Metrics and Impact Analysis
-## EPA Evidence - Quantitative Results and Business Impact
+## Portfolio Evidence - Quantitative Results and Business Impact
 
 ### System Performance Metrics
 
@@ -99,7 +99,7 @@
 - **User Notification**: Clear error messages and status indicators
 - **Logging**: Comprehensive error logging for troubleshooting
 
-### EPA KSB Impact Mapping
+### Portfolio KSB Impact Mapping
 
 #### Skills (S) Impact Evidence
 - **S1 (Maintainable code)**: 85% maintainability index achieved

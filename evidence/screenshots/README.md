@@ -1,6 +1,6 @@
 # Screenshots Evidence Portfolio
 
-This directory contains visual evidence supporting EPA assessment requirements. Each screenshot is mapped to specific Knowledge, Skills, and Behaviours (KSBs) with detailed annotations.
+This directory contains visual evidence supporting assessment requirements. Each screenshot is mapped to specific Knowledge, Skills, and Behaviours (KSBs) with detailed annotations.
 
 ## Screenshot Evidence Mapping
 
@@ -15,7 +15,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Data Export**: CSV export functionality visible in interface
 - **Status Indicators**: Connection status and mode display
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S2 (Effective UI)**: Professional user interface design
 - **S3 (Link to data sets)**: Real-time data visualization
 - **K1 (SDLC)**: Complete application implementation
@@ -32,7 +32,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Knowledge Transfer**: Clear communication of technical concepts
 - **Maintainability**: Well-organized documentation structure
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S15 (Communication)**: Technical documentation for stakeholders
 - **K11 (Design specs)**: Comprehensive technical specifications
 - **B7 (Communication)**: Clear technical communication
@@ -51,7 +51,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Execution Speed**: Efficient test performance (5.797 seconds)
 - **Comprehensive Coverage**: Multiple test categories
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S4 (Unit testing)**: Comprehensive unit test implementation
 - **S5 (Integration testing)**: End-to-end test validation
 - **S13 (Testing frameworks)**: Professional Jest framework usage
@@ -68,7 +68,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Test Isolation**: Independent test execution
 - **Mock Implementation**: Professional testing practices
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S4 (Unit testing)**: Individual component testing
 - **S7 (Problem solving)**: Systematic test case design
 - **K12 (Testing methodologies)**: Professional test design
@@ -85,7 +85,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Props Testing**: Component behavior with different inputs
 - **Integration Testing**: Component interaction validation
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S2 (Effective UI)**: UI component testing and validation
 - **S5 (Integration testing)**: Component integration testing
 - **K7 (Design patterns)**: React component patterns
@@ -102,7 +102,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Lifecycle Testing**: Hook behavior over time
 - **Mock Implementation**: Professional mocking strategies
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S16 (Algorithms)**: State management algorithms
 - **S7 (Problem solving)**: Complex state testing scenarios
 - **K9 (Data structures)**: State data structures
@@ -119,7 +119,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Data Flow**: End-to-end data processing
 - **System Validation**: Complete application testing
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S5 (Integration testing)**: End-to-end workflow validation
 - **S10 (Deployment)**: Complete system testing
 - **K1 (SDLC)**: Full development lifecycle testing
@@ -138,7 +138,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Error Handling**: Comprehensive error management
 - **API Design**: Professional interface implementation
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S1 (Maintainable code)**: Clean, documented code
 - **K8 (Security)**: Secure IPC implementation
 - **K11 (Design specs)**: Professional API design
@@ -155,7 +155,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Performance Optimization**: Efficient rendering
 - **Code Organization**: Clean component structure
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S2 (Effective UI)**: Professional UI component development
 - **S11 (Development approaches)**: Modern React patterns
 - **K7 (Design patterns)**: Professional component patterns
@@ -172,7 +172,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Hook Composition**: Complex logic organization
 - **Performance**: Optimized re-rendering
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S16 (Algorithms)**: State management algorithms
 - **S11 (Development approaches)**: Modern React patterns
 - **K9 (Data structures)**: Efficient state structures
@@ -191,7 +191,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Visual Reporting**: Clear coverage visualization
 - **Continuous Improvement**: Coverage tracking
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S4 (Unit testing)**: Comprehensive coverage analysis
 - **S13 (Testing frameworks)**: Professional reporting tools
 - **K12 (Testing methodologies)**: Coverage-driven development
@@ -208,7 +208,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 - **Testing Strategy**: Targeted testing approach
 - **Professional Standards**: Industry-standard coverage
 
-**EPA KSB Mapping:**
+**KSB Mapping:**
 - **S4 (Unit testing)**: Component-level testing
 - **S7 (Problem solving)**: Targeted test improvement
 - **K12 (Testing methodologies)**: Component testing strategies
@@ -216,7 +216,7 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 
 ---
 
-## EPA Portfolio Summary
+## Portfolio Summary
 
 ### **Technical Excellence Demonstrated:**
 - **Software Architecture**: Multi-process IPC-based design
@@ -239,5 +239,5 @@ This directory contains visual evidence supporting EPA assessment requirements. 
 ---
 
 **Generated:** February 20, 2026  
-**Purpose:** EPA Portfolio Evidence  
+**Purpose:** Portfolio Evidence  
 **Framework:** Apprenticeship Assessment Standards

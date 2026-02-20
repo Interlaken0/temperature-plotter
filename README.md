@@ -119,9 +119,9 @@ src/
 └── shared/         # Shared utilities
 
 __tests__/          # Comprehensive test suite
-evidence/           # EPA documentation and reports
+evidence/           # Portfolio documentation and reports
 
-EPA Portfolio Highlights
+Portfolio Highlights
 ------------------------
 
 This project demonstrates full-stack development capabilities including:
@@ -232,9 +232,9 @@ sequenceDiagram
 - **docs/COMPLETE-DOCUMENTATION-GUIDE.md**: Navigation guide for all documentation
 
 ### Professional Documentation Package
-- **docs/System Architecture**: 5 Mermaid diagrams in `docs/system-architecture.md`
+- **docs/System Architecture**: 5 Mermaid diagrams in `docs/SYSTEM-ARCHITECTURE.md`
 - **docs/API Documentation**: Comprehensive API reference in `docs/API.md`
-- **EPA Portfolio**: Complete evidence package in `EPA-PORTFOLIO-SUMMARY.md`
+- **Portfolio**: Complete evidence package in `PORTFOLIO-SUMMARY.md`
 - **Testing Evidence**: Comprehensive test suite in `__tests__/` directory
 
 ---

@@ -1,4 +1,4 @@
-# EPA Reflective Journal - STARI Format
+# Reflective Journal - STARI Format
 ## Level 4 Software Developer Apprenticeship Evidence
 
 ### Entry 1: Hardware Abstraction Layer Implementation
@@ -203,7 +203,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
 ---
 
-## EPA Portfolio Summary
+## Portfolio Summary
 
 ### Technical Excellence Demonstrated
 - **Software Architecture**: Multi-process IPC-based design

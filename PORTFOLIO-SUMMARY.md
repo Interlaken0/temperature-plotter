@@ -1,9 +1,9 @@
-# EPA Portfolio Summary - Level 4 Software Developer
+# Portfolio Summary - Level 4 Software Developer
 ## Temperature Plotter Project - Complete Evidence Package
 
-### EPA Assessment Readiness: COMPLETE
+### Assessment Readiness: COMPLETE
 
-This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowledge, Skills, and Behaviours) required for Level 4 Software Developer apprenticeship assessment.
+This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowledge, Skills, and Behaviours) required for Level 4 Software Developer assessment.
 
 ---
 
@@ -26,7 +26,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 - **Error Handling**: Comprehensive error handling throughout the codebase
 
 ### 3. Design Artefacts
-**Location:** `docs/system-architecture.md`
+**Location:** `docs/SYSTEM-ARCHITECTURE.md`
 **Evidence:**
 - **Mermaid Architecture Diagrams**: System architecture, data flow, component design
 - **Sequence Diagrams**: Real-time data processing workflows
@@ -117,7 +117,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 
 ---
 
-## EPA Assessment Guide
+## Assessment Guide
 
 ### For Assessors: Evidence Locations
 
@@ -125,7 +125,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 |--------------|-------------------|--------------|
 | **Repository** | Git history, README | Semantic commits, professional documentation |
 | **Code Quality** | `src/` directory | JSDoc, clean architecture, security |
-| **Design Thinking** | `docs/system-architecture.md` | Mermaid diagrams, design rationale |
+| **Design Thinking** | `docs/SYSTEM-ARCHITECTURE.md` | Mermaid diagrams, design rationale |
 | **Testing** | `__tests__/` directory | Comprehensive test suite, coverage reports |
 | **Impact** | `evidence/` directory | STARI journal, performance metrics |
 | **Professional Practices** | Throughout project | Version control, documentation, security |
@@ -161,7 +161,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 
 ---
 
-## EPA Assessment Timeline
+## Assessment Timeline
 
 ### Pre-Assessment Preparation
 - [x] Complete portfolio documentation
@@ -184,7 +184,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 
 ## Conclusion
 
-This Temperature Plotter project represents **complete EPA readiness** with comprehensive evidence across all 38 KSBs. The portfolio demonstrates:
+This Temperature Plotter project represents **complete assessment readiness** with comprehensive evidence across all 38 KSBs. The portfolio demonstrates:
 
 - **Technical Excellence**: Industry-standard code quality and testing
 - **Professional Practices**: Documentation, security, and version control
@@ -200,4 +200,4 @@ The project exceeds apprenticeship requirements and demonstrates readiness for p
 
 Portfolio Completion Date: February 2026  
 Project Version: 1.0.0  
-EPA Assessment Status: READY
+Assessment Status: READY
