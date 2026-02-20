@@ -315,8 +315,8 @@ let mainWindow;
 // ============================================================================
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 1200, // Optimized width for temperature chart and controls
-    height: 800, // Optimized height for responsive layout
+    width: 1200, // Optimised width for temperature chart and controls
+    height: 800, // Optimised height for responsive layout
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY, // Secure preload script path
       contextIsolation: true, // Security: isolate renderer context

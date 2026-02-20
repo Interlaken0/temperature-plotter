@@ -113,7 +113,7 @@ const ModeStatus = () => {
             <p className="text-sm text-gray-600 dark:text-gray-400">
               {getHealthStatus()} • {deviceType}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-500">
+            <p className="text-xs text-grey-600 dark:text-grey-500">
               Last update: {getTimeSinceLastUpdate()}
             </p>
           </div>
@@ -125,7 +125,7 @@ const ModeStatus = () => {
             disabled={mode === 'hardware'}
             className={`px-3 py-1 rounded text-sm ${
               mode === 'hardware'
-                ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-not-allowed'
+                ? 'bg-grey-300 dark:bg-grey-600 text-grey-500 cursor-not-allowed'
                 : 'bg-green-500 hover:bg-green-600 text-white'
             }`}
           >
@@ -136,7 +136,7 @@ const ModeStatus = () => {
             disabled={mode === 'simulator'}
             className={`px-3 py-1 rounded text-sm ${
               mode === 'simulator'
-                ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-not-allowed'
+                ? 'bg-grey-300 dark:bg-grey-600 text-grey-500 cursor-not-allowed'
                 : 'bg-blue-500 hover:bg-blue-600 text-white'
             }`}
           >
@@ -148,18 +148,18 @@ const ModeStatus = () => {
       {/* Notifications */}
       {notifications.length > 0 && (
         <div className="mt-3 border-t pt-3">
-          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+          <h4 className="text-sm font-semibold text-grey-700 dark:text-grey-300 mb-2">
             Recent Activity
           </h4>
           <div className="space-y-1">
             {notifications.slice(-3).reverse().map((notification, index) => (
-              <div key={index} className="text-xs text-gray-600 dark:text-gray-400">
+              <div key={index} className="text-xs text-grey-600 dark:text-grey-400">
                 <span className="font-medium">
                   {notification.type === 'mode-change' ? 'CHG' : 'CTL'}
                 </span>
                 {' '}{notification.message}
-                <span className="ml-2 text-gray-500">
-                  {new Date(notification.timestamp).toLocaleTimeString()}
+                <span className="ml-2 text-grey-500">
+                  {new Date(notification.timestamp).toLocaleTimeString('en-GB')}
                 </span>
               </div>
             ))}

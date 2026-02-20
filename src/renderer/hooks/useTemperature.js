@@ -3,7 +3,7 @@
 // Professional hook for managing real-time temperature data:
 // - Handles IPC communication with main process
 // - Manages state for current temperature and historical data
-// - Implements buffer management for performance optimization
+// - Implements buffer management for performance optimisation
 // - Provides clean API for component consumption
 // - Demonstrates custom React hook patterns
 // ============================================================================
@@ -33,7 +33,7 @@ export function useTemperature() {
       // CURRENT UPDATE - Set immediate temperature reading
       setTemp(data.temp); // Update current temperature state for StatusPanel
       
-      // BUFFER MANAGEMENT - Performance optimization rolling buffer with size limit
+      // BUFFER MANAGEMENT - Performance optimisation rolling buffer with size limit
       // Keep last 300 existing data points to prevent memory overflow
       // Add only the newest data point from incoming batch to avoid duplicates
       setHistory((prev) => [
