@@ -27,30 +27,30 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
     setForceUpdate(prev => prev + 1); // Increment trigger to force React re-render
   }, [mode]); // Dependency on mode prop ensures execution on mode changes
 
-  // THEME COLOR SYSTEM - Dynamic color configuration
+  // THEME COLOUR SYSTEM - Dynamic colour configuration
   // ============================================================================
   // Provides adaptive theming based on dark/light mode preference:
-  // - Dark Mode: Light gray colors for contrast on dark background
-  // - Light Mode: Dark colors for visibility on light background
+  // - Dark Mode: Light grey colours for contrast on dark background
+  // - Light Mode: Dark colours for visibility on light background
   // - Ensures readability and visual consistency across themes
   // ============================================================================
-  const axisColor = darkMode ? "#94a3b8" : "#000000"; // Axis lines and labels
+  const axisColour = darkMode ? "#94a3b8" : "#000000"; // Axis lines and labels
   const tooltipBg = darkMode ? "#1e293b" : "#ffffff"; // Tooltip background
   const tooltipBorder = darkMode ? "#475569" : "#e2e8f0"; // Tooltip border
-  const tooltipText = darkMode ? "#f8fafc" : "#0f172a"; // Tooltip text color
+  const tooltipText = darkMode ? "#f8fafc" : "#0f172a"; // Tooltip text colour
 
   // MODE-BASED STYLING - Visual differentiation for data sources
   // ============================================================================
   // Provides clear visual indication of data source:
-  // - Simulator Mode: Amber color with dashed line (indicates simulated data)
-  // - Hardware Mode: Green color with solid line (indicates real data)
+  // - Simulator Mode: Amber colour with dashed line (indicates simulated data)
+  // - Hardware Mode: Green colour with solid line (indicates real data)
   // This helps users immediately understand data authenticity
   // ============================================================================
   const getLineColor = () => {
     if (mode === 'simulator') {
-      return '#f59e0b'; // Amber color for simulation mode (warning/indication)
+      return '#f59e0b'; // Amber colour for simulation mode (warning/indication)
     } else {
-      return '#10b981'; // Green color for hardware mode (success/authentic)
+      return '#10b981'; // Green colour for hardware mode (success/authentic)
     }
   };
 
@@ -123,9 +123,9 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
           
           <YAxis 
             domain={['auto', 'auto']} 
-            stroke={axisColor} 
-            tick={{ fill: axisColor }} 
-            tickLine={{ stroke: axisColor }} 
+            stroke={axisColour} 
+            tick={{ fill: axisColour }} 
+            tickLine={{ stroke: axisColour }} 
           />
 
           <Tooltip 
@@ -137,7 +137,7 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
               boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' 
             }}
             itemStyle={{ color: lineColor }} // Data point color matches line
-            labelStyle={{ color: axisColor, marginBottom: '0.25rem', fontSize: '0.9rem' }} // Timestamp styling
+            labelStyle={{ colour: axisColour, marginBottom: '0.25rem', fontSize: '0.9rem' }} // Timestamp styling
             labelFormatter={(label) => formatDateTime(label)} // Format timestamp display
             formatter={(value) => [formatTemp(value), getModeLabel()]} // Format temperature with mode label
           />

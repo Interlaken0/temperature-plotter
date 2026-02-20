@@ -11,7 +11,7 @@ const koffi = require('koffi');
 const fs = require('fs');
 const path = require('path');
 
-// MOCK TEMPERATURE STORE - Control data storage behavior
+// MOCK TEMPERATURE STORE - Control data storage behaviour
 jest.mock('../../src/main/state/temperatureStore', () => ({
   updateTemperature: jest.fn()
 }));

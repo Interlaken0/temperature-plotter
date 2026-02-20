@@ -3,7 +3,7 @@
 // Advanced temperature sensor simulation with realistic patterns:
 // - Event-driven architecture mimicking hardware interrupts
 // - Realistic temperature patterns with sine wave and noise
-// - Variable timing jitter for authentic hardware behavior
+// - Variable timing jitter for authentic hardware behaviour
 // - Integration with global temperature store for data consistency
 // - Demonstrates professional simulation techniques
 // ============================================================================
@@ -11,7 +11,7 @@
 const EventEmitter = require('events'); // Node.js event system for interrupt simulation
 const store = require('./state/temperatureStore'); // Global temperature data store
 
-// INTERRUPT SIMULATOR CLASS - Hardware behavior emulation
+// INTERRUPT SIMULATOR CLASS - Hardware behaviour emulation
 // ============================================================================
 // Simulates hardware interrupt-driven temperature sensors:
 // - Extends EventEmitter for event-based architecture
@@ -37,7 +37,7 @@ class InterruptSimulator extends EventEmitter {
   // ============================================================================
   // This method simulates a hardware interrupt by:
   // - Generating realistic temperature readings with mathematical patterns
-  // - Adding random noise for authentic sensor behavior
+  // - Adding random noise for authentic sensor behaviour
   // - Updating global temperature store
   // - Scheduling next interrupt with variable timing
   // - Providing detailed logging for debugging and evidence

@@ -2,7 +2,7 @@
 // ============================================================================
 // Focused test suite for main.js conditional branches to improve coverage:
 // - Environment variable handling
-// - Platform-specific behavior  
+// - Platform-specific behaviour  
 // - Error handling paths
 // - Mode switching logic
 // ============================================================================
@@ -80,9 +80,9 @@ describe('Main.js - Branch Coverage Tests', () => {
     });
   });
 
-  describe('Platform-Specific Behavior', () => {
+  describe('Platform-Specific Behaviour', () => {
     test('process.platform is accessible (line 383)', () => {
-      // Test that we can check platform behavior
+      // Test that we can check platform behaviour
       const originalPlatform = process.platform;
       
       // Test different platforms

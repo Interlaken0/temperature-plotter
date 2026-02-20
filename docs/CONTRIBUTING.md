@@ -206,10 +206,10 @@ Clear description of the issue
 2. Click on...
 3. See error
 
-**Expected Behavior**
+**Expected Behaviour**
 What should happen
 
-**Actual Behavior**
+**Actual Behaviour**
 What actually happens
 
 **Environment**

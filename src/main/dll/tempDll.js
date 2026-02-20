@@ -25,7 +25,7 @@ const fs = require('fs'); // File system module for DLL existence checks
 // Handles both standalone testing and Electron packaged environments:
 // - Detects if running within Electron app context
 // - Provides fallback for standalone testing scenarios
-// - Ensures consistent behavior across development and production
+// - Ensures consistent behaviour across development and production
 // - Enables module testing without full Electron environment
 // ============================================================================
 let app;
@@ -216,7 +216,7 @@ module.exports = {
       if (startStatus === 0) {
         console.log('[HAL] SUCCESS: Hardware Started!'); // Log successful hardware startup
       } else {
-        console.warn(`[HAL] StartDevice returned ${startStatus} (Expected for Virtual DLL)`); // Log expected virtual DLL behavior
+        console.warn(`[HAL] StartDevice returned ${startStatus} (Expected for Virtual DLL)`); // Log expected virtual DLL behaviour
       }
     } catch (err) {
       console.error('[HAL] Error:', err.message); // Log initialization errors

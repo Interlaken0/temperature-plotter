@@ -135,7 +135,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 1. **Technical Excellence**: "The project demonstrates industry-standard practices with 57% test coverage and zero security vulnerabilities."
 2. **Problem Solving**: "Complex FFI integration with hardware abstraction layer shows advanced technical capability."
 3. **Business Impact**: "1,200% ROI demonstrates understanding of business value and operational efficiency."
-4. **Professional Behaviors**: "Comprehensive documentation and testing shows commitment to quality and maintainability."
+4. **Professional Behaviours**: "Comprehensive documentation and testing shows commitment to quality and maintainability."
 
 ---
 
@@ -194,7 +194,7 @@ This Temperature Plotter project represents **complete assessment readiness** wi
 
 Assessment Outcome Expected: Distinction Level Performance
 
-The project exceeds apprenticeship requirements and demonstrates readiness for professional software development roles with advanced technical capabilities and strong professional behaviors.
+The project exceeds apprenticeship requirements and demonstrates readiness for professional software development roles with advanced technical capabilities and strong professional behaviours.
 
 ---
 

@@ -159,7 +159,7 @@ Future Enhancements
 *I want clear visual indicators showing whether the system is in "Simulator" or "Hardware" mode,*  
 *So that I can verify the validity of my experiments and ensure I am not accidentally recording dummy data for critical reports.*
 
-### 1. Data Model (Object Mapping)
+### 1. Data Modelling (Object Mapping)
 *Mapping the physical world to software objects.*
 
 | **Object** | **Property** | **Type** | **Description** |
@@ -193,7 +193,7 @@ flowchart TD
     Start([User Clicks Export]) --> Check{Has Data?}
     Check -- No --> Alert["Show Error: No Data"]
     Check -- Yes --> Bridge[Call window.api.saveCSV]
-    Bridge --> Main[Main Process: Open Save Dialog]
+    Bridge --> Main[Main Process: Open Save Dialogue]
     
     Main --> Cancelled{User Cancelled?}
     Cancelled -- Yes --> End([Stop])

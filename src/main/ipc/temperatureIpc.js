@@ -1,4 +1,4 @@
-const { ipcMain, BrowserWindow, dialog } = require('electron');
+const { ipcMain, BrowserWindow, dialogue } = require('electron');
 const fs = require('fs');
 const path = require('path');
 const store = require('../state/temperatureStore');
@@ -38,7 +38,7 @@ function initIpc() {
 
   // 4. Secure User Export
   ipcMain.handle('save-csv', async () => {
-    const { filePath } = await dialog.showSaveDialog({
+    const { filePath } = await dialogue.showSaveDialog({
       title: 'Export Temperature Data',
       defaultPath: 'session_log.csv',
       filters: [{ name: 'CSV Files', extensions: ['csv'] }]

@@ -30,7 +30,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 - **Technical Documentation**: Complete API reference and architecture
 - **Professional Standards**: Industry-standard documentation practices
 - **Knowledge Transfer**: Clear communication of technical concepts
-- **Maintainability**: Well-organized documentation structure
+- **Maintainability**: Well-organised documentation structure
 
 **KSB Mapping:**
 - **S15 (Communication)**: Technical documentation for stakeholders
@@ -82,7 +82,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 **Key Features Demonstrated:**
 - **Component Testing**: React Testing Library implementation
 - **UI Validation**: Component rendering verification
-- **Props Testing**: Component behavior with different inputs
+- **Props Testing**: Component behaviour with different inputs
 - **Integration Testing**: Component interaction validation
 
 **KSB Mapping:**
@@ -99,7 +99,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 **Key Features Demonstrated:**
 - **Hook Testing**: Custom React hook validation
 - **State Management**: State change testing
-- **Lifecycle Testing**: Hook behavior over time
+- **Lifecycle Testing**: Hook behaviour over time
 - **Mock Implementation**: Professional mocking strategies
 
 **KSB Mapping:**
@@ -224,7 +224,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 - **Security Implementation**: Professional security practices
 - **Code Quality**: Industry-standard development practices
 
-### **Professional Behaviors Shown:**
+### **Professional Behaviours Shown:**
 - **B1 (Independent work)**: Complete project ownership
 - **B2 (Logical thinking)**: Systematic problem-solving
 - **B6 (Initiative)**: Proactive testing and security

@@ -8,8 +8,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        // Custom colors if you want them later
+      colours: {
+        // Custom colours if you want them later
       }
     },
   },

@@ -42,8 +42,8 @@ jest.mock('electron', () => ({
   ipcMain: {
     handle: jest.fn()
   },
-  dialog: {
-    showSaveDialog: jest.fn().mockResolvedValue({ filePath: 'test.csv' })
+  dialogue: {
+    showSaveDialogue: jest.fn().mockResolvedValue({ filePath: 'test.csv' })
   }
 }));
 

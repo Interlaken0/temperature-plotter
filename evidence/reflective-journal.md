@@ -132,7 +132,7 @@ __tests__/
 1. **Jest Framework**: Industry-standard testing framework
 2. **Mock Strategy**: Comprehensive mocking for hardware dependencies
 3. **Coverage Reporting**: Detailed coverage analysis with visual reports
-4. **Test Categories**: Organized by unit, integration, and component tests
+4. **Test Categories**: Organised by unit, integration, and component tests
 5. **CI/CD Ready**: Automated test execution setup
 
 #### R - Result
@@ -212,7 +212,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 - **Testing Excellence**: Comprehensive test suite with detailed reporting
 - **Security Implementation**: Context-isolated IPC architecture
 
-### Professional Behaviors Shown
+### Professional Behaviours Shown
 - **B1 (Independent work)**: Complete project ownership
 - **B2 (Logical thinking)**: Systematic problem-solving approach
 - **B6 (Initiative)**: Proactive security and testing implementation
@@ -225,4 +225,4 @@ contextBridge.exposeInMainWorld('electronAPI', {
 - **Security**: Security-first development approach
 - **Performance**: Optimized real-time data processing
 
-This portfolio demonstrates readiness for professional software development roles with strong technical skills and professional behaviors aligned with industry standards.
+This portfolio demonstrates readiness for professional software development roles with strong technical skills and professional behaviours aligned with industry standards.

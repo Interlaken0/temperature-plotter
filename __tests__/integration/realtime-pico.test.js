@@ -44,8 +44,8 @@ jest.mock('electron', () => ({
   ipcMain: {
     handle: jest.fn()
   },
-  dialog: {
-    showSaveDialog: jest.fn().mockResolvedValue({ filePath: 'test-pico-data.csv' })
+  dialogue: {
+    showSaveDialogue: jest.fn().mockResolvedValue({ filePath: 'test-pico-data.csv' })
   }
 }));
 
@@ -181,7 +181,7 @@ describe('Real-Time Pico Temperature Tests', () => {
   });
 
   test('should maintain temperature history buffer correctly', async () => {
-    // Arrange: Test circular buffer behavior
+    // Arrange: Test circular buffer behaviour
     const testReadings = [];
     
     // Act: Add readings to test buffer

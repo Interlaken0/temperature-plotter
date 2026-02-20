@@ -295,7 +295,7 @@ Cannot find module 'src/main/simulator.js' from 'simulator.test.js'
 ### Issue: "Mock functions not working"
 **Symptoms:**
 - Mocked functions still call original implementation
-- Test timeouts or unexpected behavior
+- Test timeouts or unexpected behaviour
 
 **Solutions:**
 1. **Clear mocks between tests:**
