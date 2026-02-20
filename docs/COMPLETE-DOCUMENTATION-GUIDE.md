@@ -31,6 +31,7 @@ Performance Metrics: evidence/PERFORMANCE-METRICS.md
 ```
 Project README: README.md
 Package Configuration: package.json
+New Developer Onboarding: docs/NEW-DEVELOPER-ONBOARDING.md
 ```
 
 ### Portfolio Assessment Walkthrough
@@ -101,6 +102,7 @@ Package Configuration: package.json
 | **REFLECTIVE-JOURNAL.md** | B8, B6, B1 | "I reflect on my technical decisions and business impact" |
 | **PERFORMANCE-METRICS.md** | B8, K1 | "I measure and quantify the business value of my work" |
 | **README.md** | S15, K4 | "I communicate technical information to various audiences" |
+| **NEW-DEVELOPER-ONBOARDING.md** | S15, B7, K4 | "I created structured onboarding for team knowledge transfer" |
 
 ### **How to Access Each Documentation Type**
 
@@ -135,6 +137,9 @@ code evidence/REFLECTIVE-JOURNAL.md
 
 # Performance metrics
 code evidence/PERFORMANCE-METRICS.md
+
+# New developer onboarding guide
+code docs/NEW-DEVELOPER-ONBOARDING.md
 ```
 
 #### **Testing Evidence**
@@ -182,6 +187,6 @@ code __tests__/coverage/lcov-report/index.html
 ---
 
 **Documentation Creation Date:** February 2026  
-**Total Documentation Files:** 10+  
-**Coverage Areas:** Design, Implementation, Testing, Impact  
+**Total Documentation Files:** 11+  
+**Coverage Areas:** Design, Implementation, Testing, Impact, Onboarding  
 **Portfolio Readiness Level:** Distinction
