@@ -4,7 +4,7 @@
 // - Real-time data streaming and updates
 // - Dynamic theming based on dark/light mode
 // - Mode-based visual differentiation (hardware vs simulator)
-// - Responsive design with performance optimizations
+// - Responsive design with performance optimisations
 // - Professional data visualization using Recharts library
 // ============================================================================
 

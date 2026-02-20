@@ -47,7 +47,7 @@ export default function App() {
       {/* MAIN CONTAINER - Full viewport with responsive layout */}
       <div className="min-h-screen bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white transition-colors duration-300 p-8 font-sans">
         
-        {/* LAYOUT CONTAINER - Centered content with optimal width */}
+        {/* LAYOUT CONTAINER - Centred content with optimal width */}
         <div className="max-w-5xl mx-auto space-y-6">
           {/* HEADER SECTION - Title and theme toggle */}
           <div className="flex justify-between items-center mb-8">
