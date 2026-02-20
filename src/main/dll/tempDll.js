@@ -1,3 +1,9 @@
+/**
+ * @file Hardware Abstraction Layer for temperature sensor integration
+ * @module tempDll
+ * @description Advanced FFI implementation for native DLL communication
+ */
+
 // DLL BINDING MODULE - Hardware Abstraction Layer (HAL)
 // ============================================================================
 // Advanced Foreign Function Interface (FFI) implementation for temperature hardware:
@@ -129,14 +135,12 @@ let registeredCallback = null; // Reference to registered native callback
 // - Implements robust error handling throughout
 // ------------------------------------------------------------
 module.exports = {
-  // CONNECTION CHECK - Hardware availability verification
-  // ============================================================================
-  // Checks if temperature hardware is connected and available:
-  // - Calls native IsDeviceConnected function
-  // - Returns 0 for connected, 1 for disconnected
-  // - Handles missing DLL gracefully
-  // - Provides fallback for testing scenarios
-  // ============================================================================
+  /**
+   * Checks if temperature hardware is connected and available
+   * @function checkConnection
+   * @returns {number} 0 for connected, 1 for disconnected
+   * @description Calls native IsDeviceConnected function with graceful fallback
+   */
   checkConnection: () => {
     if (IsDeviceConnected_Func) { // Check if function is bound
       try {
@@ -146,16 +150,11 @@ module.exports = {
     return 1; // Default to disconnected if no function
   },
 
-  // HARDWARE STARTUP - Device initialization and data streaming
-  // ============================================================================
-  // Initializes temperature hardware and begins real-time data streaming:
-  // - Validates DLL and function availability
-  // - Checks hardware connection status
-  // - Registers JavaScript callback for real-time data
-  // - Starts hardware device with serial number
-  // - Implements data filtering for stale readings
-  // - Provides comprehensive error handling
-  // ============================================================================
+  /**
+   * Initializes temperature hardware and begins real-time data streaming
+   * @function start
+   * @description Validates DLL availability, registers callbacks, starts hardware
+   */
   start: () => {
     // AVAILABILITY CHECK - Ensure DLL and functions are ready
     if (!lib || !StartDevice_Func) {

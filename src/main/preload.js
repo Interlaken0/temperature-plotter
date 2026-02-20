@@ -1,3 +1,9 @@
+/**
+ * @file Secure IPC bridge for Electron application
+ * @module preload
+ * @description Context-isolated preload script for secure main/renderer communication
+ */
+
 // ELECTRON PRELOAD SCRIPT - Secure IPC Bridge Architecture
 // ============================================================================
 // This script creates a secure bridge between the main and renderer processes:

@@ -50,6 +50,7 @@ class InterruptSimulator extends EventEmitter {
     // - Base temperature of 22.5°C (room temperature)
     // - Sine wave variation (±5°C) simulating daily temperature cycles
     // - Random noise (±1°C) simulating sensor reading uncertainty
+    // - Time-based sine wave creates smooth, realistic temperature changes
     const noise = Math.random() * 2 - 1; // Random noise between -1 and +1 degrees
     const reading = 22.5 + Math.sin(Date.now() / 1000) * 5 + noise; // Base + wave + noise
 
