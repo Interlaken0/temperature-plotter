@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // ✅ THIS LINE IS REQUIRED FOR THE BUTTON TO WORK
+  // THIS LINE IS REQUIRED FOR THE BUTTON TO WORK
   darkMode: 'class', 
   
   content: [

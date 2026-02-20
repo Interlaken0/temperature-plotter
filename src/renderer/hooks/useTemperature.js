@@ -34,13 +34,15 @@ export function useTemperature() {
       setTemp(data.temp); // Update current temperature state for StatusPanel
       
       // BUFFER MANAGEMENT - Performance optimization rolling buffer with size limit
+      // Keep last 300 existing data points to prevent memory overflow
+      // Add only the newest data point from incoming batch to avoid duplicates
       setHistory((prev) => [
-        ...prev.slice(-300), // Keep last 300 existing data points to prevent memory overflow
-        ...data.history.slice(-1) // Add only the newest data point from incoming batch
+        ...prev.slice(-300), 
+        ...data.history.slice(-1) 
       ]);
     });
   }, []); // Empty dependency array - listener registered once on component mount
 
-  // 📤 HOOK API - Return clean interface for components
+  // HOOK API - Return clean interface for components
   return { temp, history }; // Provide current temperature and historical data to consuming components
 }
