@@ -15,7 +15,7 @@ __tests__/
 ## Running Tests
 
 ```bash
-# Run all tests
+# Run all tests with automatic summary generation
 npm test
 
 # Run tests with coverage
@@ -24,6 +24,21 @@ npm test -- --coverage
 # Run specific test file
 npm test -- unit/main-simple.test.js
 ```
+
+## Automated Test Summary
+
+The test suite includes an automated summary generation system:
+
+- **Script**: `scripts/generate-test-summary.js`
+- **Output**: `evidence/test-reports/test-summary.txt`
+- **Trigger**: Runs automatically after `npm test`
+- **Features**: 
+  - Captures current test results and execution metrics
+  - Includes timestamp for Git change detection
+  - Generates British English compliant documentation
+  - Updates EPA evidence automatically
+
+The summary file is tracked by Git to provide current testing evidence for portfolio assessment.
 
 ## Test Categories
 
