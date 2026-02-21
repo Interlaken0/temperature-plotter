@@ -26,7 +26,7 @@ if (require('electron-squirrel-startup')) {
 // ============================================================================
 // This class provides intelligent hardware monitoring with:
 // - Automatic hardware detection and connection
-// - Health monitoring with timeout detection (3 second threshold)
+// - Health monitoring with timeout detection (10 second threshold)
 // - Seamless fallback to simulator when hardware fails
 // - Periodic hardware reconnection attempts
 // - DLL cache management for fresh connection attempts
@@ -118,12 +118,12 @@ class HardwareMonitor {
     // SCENARIO 2: CURRENTLY IN HARDWARE MODE - Health monitoring phase
     // ============================================================================
     // In hardware mode, we monitor for data timeouts and fallback to simulator:
-    // - Check if data received within last 3 seconds
+    // - Check if data received within last 10 seconds
     // - Trigger automatic fallback if timeout detected
     // - This ensures application resilience during hardware disconnection
     // ============================================================================
     else {
-      if (timeSinceLastUpdate > 3000) { // 3-second timeout threshold for hardware disconnection
+      if (timeSinceLastUpdate > 10000) { // 10-second timeout threshold for hardware disconnection
         this.fallbackToSimulator(); // Execute emergency fallback procedure
         return false; // Hardware mode failed, now in simulator mode
       }
@@ -186,7 +186,7 @@ class HardwareMonitor {
   fallbackToSimulator() {
     // VISUAL EVIDENCE: Log the final "Disconnect" reading before switching
     console.log('[HAL] Real Reading: 10.00°C'); // Final hardware reading before disconnect
-    console.warn('Hardware timeout detected (No data for 3s)'); // Warning log for timeout detection
+    console.warn('Hardware timeout detected (No data for 10s)'); // Warning log for timeout detection
 
     console.log('Fallback to simulator due to hardware failure'); // Debug logging for fallback initiation
     
