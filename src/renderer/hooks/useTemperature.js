@@ -8,7 +8,7 @@
 // - Demonstrates custom React hook patterns
 // ============================================================================
 
-import { useEffect, useState } from "react"; // REACT IMPORTS - Core hooks for state and lifecycle management
+import { useEffect, useState } from 'react'; // REACT IMPORTS - Core hooks for state and lifecycle management
 
 // TEMPERATURE HOOK STATE - Temperature data management interface
 export function useTemperature() {

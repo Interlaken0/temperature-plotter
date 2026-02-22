@@ -11,6 +11,19 @@ const { app, BrowserWindow, ipcMain } = require('electron'); // Core Electron mo
 const path = require('path'); // Node.js path utilities for file system navigation
 const { initIpc } = require('./ipc/temperatureIpc'); // Custom IPC handlers for temperature data communication
 
+// Webpack entry points for Electron Forge
+let MAIN_WINDOW_WEBPACK_ENTRY;
+let MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY;
+
+try {
+  MAIN_WINDOW_WEBPACK_ENTRY = require('../../.webpack/renderer/main_window');
+  MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY = require('../../.webpack/renderer/preload');
+} catch (e) {
+  // Fallback for development or when webpack files aren't available
+  MAIN_WINDOW_WEBPACK_ENTRY = 'http://localhost:3000';
+  MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY = path.join(__dirname, '../preload.js');
+}
+
 // DEBUG LOGGING - Visual evidence for development and portfolio
 console.log('MAIN.JS LOADED - Starting execution...'); // Application startup confirmation
 console.log('WEBPACK REBUILD TRIGGERED - Visual Evidence Version'); // Hot reload indicator for development
@@ -91,21 +104,21 @@ class HardwareMonitor {
         // Every 5 seconds, perform complete DLL cache refresh to ensure fresh connection attempts
         // This handles cases where hardware becomes available after application start
         if (!this.lastHardReset || (now - this.lastHardReset > 5000)) {
-           this.lastHardReset = now; // Update hard reset throttle
-           const dllPath = require.resolve('./dll/tempDll'); // Get absolute DLL path for cache management
+          this.lastHardReset = now; // Update hard reset throttle
+          const dllPath = require.resolve('./dll/tempDll'); // Get absolute DLL path for cache management
            
-           // CACHE CLEANUP - Remove cached DLL module for fresh reload
-           if (require.cache[dllPath]) {
-              try {
-                const oldInstance = require('./dll/tempDll'); // Get current instance for cleanup
-                if (oldInstance && oldInstance.stop) {
-                  oldInstance.stop(); // Gracefully stop existing hardware instance
-                }
-              } catch (cleanupErr) { /* Silent cleanup failure */ }
+          // CACHE CLEANUP - Remove cached DLL module for fresh reload
+          if (require.cache[dllPath]) {
+            try {
+              const oldInstance = require('./dll/tempDll'); // Get current instance for cleanup
+              if (oldInstance && oldInstance.stop) {
+                oldInstance.stop(); // Gracefully stop existing hardware instance
+              }
+            } catch (cleanupErr) { /* Silent cleanup failure */ }
 
-              console.log('Performing hard DLL refresh to check for new device...'); // Debug logging for cache refresh
-              delete require.cache[dllPath]; // Remove from require cache for fresh reload
-           }
+            console.log('Performing hard DLL refresh to check for new device...'); // Debug logging for cache refresh
+            delete require.cache[dllPath]; // Remove from require cache for fresh reload
+          }
         }
 
       } catch (e) {
@@ -325,7 +338,7 @@ const createWindow = () => {
     }
   });
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY); // Load the React application
-}
+};
 
 // APPLICATION READY EVENT - Main application startup sequence
 // ============================================================================

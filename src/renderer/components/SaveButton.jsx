@@ -24,10 +24,10 @@ export default function SaveButton() {
     if (window.api && window.api.saveCSV) { // Check if secure API is available
       const result = await window.api.saveCSV(); // Call main process for secure file operation
       if (result.success) {
-        console.log("Saved successfully"); // Log successful export for debugging
+        console.log('Saved successfully'); // Log successful export for debugging
       }
     } else {
-      console.error("Secure API not found"); // Log API unavailability for debugging
+      console.error('Secure API not found'); // Log API unavailability for debugging
     }
   };
 

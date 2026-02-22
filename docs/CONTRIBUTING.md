@@ -31,7 +31,7 @@ cd temperature-plotter
 npm install
 
 # Start development server
-npm run dev
+npm start
 
 # Run tests to verify setup
 npm test
@@ -247,7 +247,7 @@ Any other relevant information
 git checkout -b feature/your-feature-name
 
 # Start development
-npm run dev
+npm start
 ```
 
 ### 2. Make Changes
@@ -261,11 +261,8 @@ npm run dev
 # Run tests
 npm test
 
-# Check code style (if configured)
-npm run lint
-
 # Build application
-npm run build
+npm run make
 ```
 
 ### 4. Submit Changes

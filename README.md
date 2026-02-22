@@ -83,13 +83,13 @@ npm install
 
 Development Commands:
 # Start development server
-npm run dev
+npm start
 
 # Run tests
 npm test
 
 # Build application
-npm run build
+npm run make
 
 # Package for distribution
 npm run package
@@ -236,6 +236,19 @@ sequenceDiagram
 - **docs/API Documentation**: Comprehensive API reference in `docs/API.md`
 - **Portfolio**: Complete evidence package in `PORTFOLIO-SUMMARY.md`
 - **Testing Evidence**: Comprehensive test suite in `__tests__/` directory
+
+## Presentation Resources
+
+### Academic Assessment Materials:
+- **PRESENTATION-SCRIPT.md** - Complete presentation narrative for academic assessment
+- **DEMO-CHECKLIST.md** - Step-by-step demonstration guide with talking points
+- **QUICK-REFERENCE.md** - Technical specifications and key metrics summary
+
+### Key Presentation Points:
+- 77 tests with 100% pass rate demonstrating testing excellence
+- Professional IPC architecture with hardware abstraction layer
+- 1,200% ROI showing business impact understanding
+- Complete documentation package following industry standards
 
 ---
 

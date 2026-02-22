@@ -9,7 +9,7 @@
 // ============================================================================
 
 import React, { useState, useEffect } from 'react'; // React hooks for state and lifecycle management
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts"; // Charting library components
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'; // Charting library components
 
 // CHART RENDERING - Main visualization component
 export default function TemperatureChart({ data, darkMode, mode }) { // Accept props for data and theming
@@ -34,10 +34,10 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
   // - Light Mode: Dark colours for visibility on light background
   // - Ensures readability and visual consistency across themes
   // ============================================================================
-  const axisColour = darkMode ? "#94a3b8" : "#000000"; // Axis lines and labels
-  const tooltipBg = darkMode ? "#1e293b" : "#ffffff"; // Tooltip background
-  const tooltipBorder = darkMode ? "#475569" : "#e2e8f0"; // Tooltip border
-  const tooltipText = darkMode ? "#f8fafc" : "#0f172a"; // Tooltip text colour
+  const axisColour = darkMode ? '#94a3b8' : '#000000'; // Axis lines and labels
+  const tooltipBg = darkMode ? '#1e293b' : '#ffffff'; // Tooltip background
+  const tooltipBorder = darkMode ? '#475569' : '#e2e8f0'; // Tooltip border
+  const tooltipText = darkMode ? '#f8fafc' : '#0f172a'; // Tooltip text colour
 
   // MODE-BASED STYLING - Visual differentiation for data sources
   // ============================================================================
@@ -67,7 +67,7 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
   // - Handles null/undefined timestamps gracefully
   // ============================================================================
   const formatDateTime = (timestamp) => {
-    if (!timestamp) return ""; // Graceful handling of missing timestamps
+    if (!timestamp) return ''; // Graceful handling of missing timestamps
     const date = new Date(timestamp); // Convert timestamp to Date object
     return date.toLocaleString('en-GB', { 
       hour12: false, // Use 24-hour format
@@ -89,7 +89,7 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
   // - Handles non-numeric values gracefully
   // ============================================================================
   const formatTemp = (value) => {
-    if (typeof value !== 'number') return ""; // Validate input is numeric
+    if (typeof value !== 'number') return ''; // Validate input is numeric
     return `${value.toFixed(1)} °C`; // Format to 1 decimal place with unit
   };
 

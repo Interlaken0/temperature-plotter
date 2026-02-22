@@ -186,7 +186,7 @@ module.exports = {
       if (isFirstReading) {
         isFirstReading = false; // Clear first reading flag
         if (Math.abs(fTemp - 10.00) < 0.1) {
-           return; // Skip stale 10.00°C reading
+          return; // Skip stale 10.00°C reading
         }
       }
 
@@ -207,7 +207,7 @@ module.exports = {
       
       // SERIAL NUMBER SETUP - Hardware identification for device communication
       const serialNumber = Buffer.alloc(32); // Allocate buffer for serial number
-      serialNumber.write("E66480454F6D2F31", 'utf8'); // Write device serial number to buffer
+      serialNumber.write('E66480454F6D2F31', 'utf8'); // Write device serial number to buffer
       
       // DEVICE STARTUP - Initialize hardware with callback and serial number
       const startStatus = StartDevice_Func(registeredCallback, serialNumber); // Call native StartDevice function

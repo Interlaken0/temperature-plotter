@@ -48,14 +48,14 @@ function initIpc() {
 
     const { history } = store.get();
 
-    const csvContent = "Date,Time,Temperature(C)\n" + history.map(d => {
+    const csvContent = 'Date,Time,Temperature(C)\n' + history.map(d => {
       const dateObj = new Date(d.time);
       const date = dateObj.toLocaleDateString('en-GB');
       const time = dateObj.toLocaleTimeString('en-GB', { hour12: false });
       const temp = d.temp.toFixed(2);
       
       return `${date},${time},${temp}`;
-    }).join("\n");
+    }).join('\n');
     
     fs.writeFileSync(filePath, csvContent);
     return { success: true };

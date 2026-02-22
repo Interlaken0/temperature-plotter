@@ -18,7 +18,7 @@ export default function StatusPanel({ temp }) { // Receive current temperature a
     // This ensures proper contrast and readability across both themes
     <div className="text-4xl font-mono text-grey-900 dark:text-white transition-colors duration-300">
       {/* TEMPERATURE FORMATTING - Precise display with fallback */}
-      {typeof temp === 'number' ? temp.toFixed(2) : "0.00"} °C
+      {typeof temp === 'number' ? temp.toFixed(2) : '0.00'} °C
     </div>
   );
 }

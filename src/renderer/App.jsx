@@ -43,7 +43,7 @@ export default function App() {
   // RENDER UI - Complete application interface with responsive design
   return (
     // THEME WRAPPER - Applies dark mode class to entire application
-    <div className={darkMode ? "dark" : ""}>
+    <div className={darkMode ? 'dark' : ''}>
       {/* MAIN CONTAINER - Full viewport with responsive layout */}
       <div className="min-h-screen bg-grey-100 dark:bg-slate-900 text-grey-900 dark:text-white transition-colors duration-300 p-8 font-sans">
         
@@ -57,7 +57,7 @@ export default function App() {
               onClick={() => setDarkMode(!darkMode)} // Toggle dark mode state
               className="px-4 py-2 text-sm font-medium bg-white dark:bg-slate-800 border border-grey-300 dark:border-slate-600 rounded-lg shadow-sm hover:bg-grey-50 dark:hover:bg-slate-700 transition-all"
             >
-              {darkMode ? "Light Mode" : "Dark Mode"}
+              {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
           </div>
 

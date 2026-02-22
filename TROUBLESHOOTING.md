@@ -91,7 +91,7 @@ gyp: Call to 'python' returned exit code 1
 
 ## Development Setup Problems
 
-### Issue: "npm run dev fails to start"
+### Issue: "npm start fails to start"
 **Symptoms:**
 ```
 ERROR: The main process entry point is missing
@@ -108,7 +108,7 @@ ERROR: The main process entry point is missing
 2. **Rebuild webpack:**
    ```bash
    rm -rf .webpack/
-   npm run dev
+   npm start
    ```
 
 3. **Check Electron installation:**
@@ -127,19 +127,19 @@ ERROR: The main process entry point is missing
    ```bash
    # Kill existing processes
    taskkill /f /im electron.exe
-   npm run dev
+   npm start
    ```
 
 2. **Verify file watching:**
    ```bash
    # Check if files are being watched
-   npm run dev -- --verbose
+   npm start -- --verbose
    ```
 
 3. **Clear webpack cache:**
    ```bash
    rm -rf .webpack/cache/
-   npm run dev
+   npm start
    ```
 
 ### Issue: "Port already in use"
@@ -156,20 +156,20 @@ Error: listen EADDRINUSE: address already in use :::3000
    taskkill /PID <PID> /f
    
    # Or use different port
-   npm run dev -- --port 3001
+   npm start -- --port 3001
    ```
 
 ## Application Runtime Issues
 
 ### Issue: "Application window doesn't open"
 **Symptoms:**
-- `npm run dev` starts but no window appears
+- `npm start` starts but no window appears
 - Process running in background but no UI
 
 **Solutions:**
 1. **Check main process logs:**
    ```bash
-   npm run dev 2>&1 | tee main.log
+   npm start 2>&1 | tee main.log
    # Look for errors in main.log
    ```
 
@@ -313,7 +313,7 @@ Cannot find module 'src/main/simulator.js' from 'simulator.test.js'
 
 ## Build and Package Issues
 
-### Issue: "npm run build fails"
+### Issue: "npm run make fails"
 **Symptoms:**
 ```
 Module not found: Error: Can't resolve 'react'
@@ -324,7 +324,7 @@ Module not found: Error: Can't resolve 'react'
    ```bash
    rm -rf node_modules/ package-lock.json
    npm install
-   npm run build
+   npm run make
    ```
 
 2. **Check webpack configuration:**
@@ -336,7 +336,7 @@ Module not found: Error: Can't resolve 'react'
 3. **Update dependencies:**
    ```bash
    npm update
-   npm run build
+   npm run make
    ```
 
 ### Issue: "npm run package fails"
@@ -534,7 +534,7 @@ Enable debug logging for troubleshooting:
 ```bash
 # Set environment variable
 set DEBUG=temperature-plotter:*
-npm run dev
+npm start
 ```
 
 ### Log Files
