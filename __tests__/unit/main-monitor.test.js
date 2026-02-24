@@ -131,14 +131,14 @@ describe('HardwareMonitor Logic (Deep Coverage)', () => {
   });
 
   test('checkHealth in hardware mode should detect timeout logic', () => {
-    // Set up timeout condition - last update was more than 3 seconds ago
-    monitor.lastUpdate = Date.now() - 4000;
+    // Set up timeout condition - last update was more than 5 seconds ago
+    monitor.lastUpdate = Date.now() - 6000;
     
     // Test that the timeout detection logic works by checking the time calculation
     const now = Date.now();
     const timeSinceLastUpdate = now - monitor.lastUpdate;
     
-    expect(timeSinceLastUpdate).toBeGreaterThan(3000);
+    expect(timeSinceLastUpdate).toBeGreaterThan(5000);
     
     // The actual fallback would be called when isHardwareMode is true
     // We can't easily test that here, but we can verify the timeout logic
