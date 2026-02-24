@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Initial Release**: Complete temperature monitoring application
-- **Real-time Visualization**: Live temperature graphing using Recharts
+- **Real-time Visualisation**: Live temperature graphing using Recharts
 - **Data Persistence**: Continuous CSV logging to `temperature_telemetry.csv`
 - **Export Functionality**: User-triggered CSV data export
 - **Simulation Mode**: Sine wave temperature data generator
@@ -46,11 +46,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Mode Indicators**: Visual indicators for simulation vs hardware mode
 - **Responsive Design**: Modern UI that works across different screen sizes
 - **Error Handling**: Comprehensive error handling and user feedback
-- **Performance Optimization**: Memory-efficient ring buffer for data storage
+- **Performance Optimisation**: Memory-efficient ring buffer for data storage
 
 ### Technical Specifications
 - **Framework**: Electron 40.1.0 with React 18.2.0
-- **Visualization**: Recharts 2.12.0 for interactive charts
+- **Visualisation**: Recharts 2.12.0 for interactive charts
 - **Styling**: Tailwind CSS 3.4.17 for modern UI
 - **Testing**: Jest 29.7.0 with comprehensive test reporting
 - **Build**: Webpack 5.91.0 with Electron Forge 7.3.0

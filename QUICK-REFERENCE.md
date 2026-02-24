@@ -77,7 +77,7 @@ npm test -- --coverage    # Generate coverage report
 
 ### Multi-Process Design:
 - **Main Process:** Node.js backend, hardware abstraction
-- **Renderer Process:** React frontend, real-time visualization
+- **Renderer Process:** React frontend, real-time visualisation
 - **IPC Bridge:** Secure communication between processes
 
 ### Data Flow:
@@ -142,7 +142,7 @@ Temperature Sensor → Hardware Abstraction → IPC Bridge → React UI → CSV 
 
 ### Operational Efficiency:
 - Automated temperature monitoring
-- Real-time data visualization
+- Real-time data visualisation
 - Persistent data logging
 - Comprehensive data export
 

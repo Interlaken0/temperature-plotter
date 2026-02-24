@@ -1,17 +1,17 @@
-// TEMPERATURE CHART COMPONENT - Advanced Real-time Data Visualization
+// TEMPERATURE CHART COMPONENT - Advanced Real-time Data Visualisation
 // ============================================================================
 // Sophisticated charting component for temperature data with:
 // - Real-time data streaming and updates
 // - Dynamic theming based on dark/light mode
 // - Mode-based visual differentiation (hardware vs simulator)
 // - Responsive design with performance optimisations
-// - Professional data visualization using Recharts library
+// - Professional data visualisation using Recharts library
 // ============================================================================
 
 import React, { useState, useEffect } from 'react'; // React hooks for state and lifecycle management
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'; // Charting library components
 
-// CHART RENDERING - Main visualization component
+// CHART RENDERING - Main visualisation component
 export default function TemperatureChart({ data, darkMode, mode }) { // Accept props for data and theming
   const buffer = data || []; // Safe data handling with fallback to empty array
   const [forceUpdate, setForceUpdate] = useState(0); // Force re-render trigger for mode changes
@@ -46,7 +46,7 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
   // - Hardware Mode: Green colour with solid line (indicates real data)
   // This helps users immediately understand data authenticity
   // ============================================================================
-  const getLineColor = () => {
+  const getLineColour = () => {
     if (mode === 'simulator') {
       return '#f59e0b'; // Amber colour for simulation mode (warning/indication)
     } else {
@@ -60,7 +60,7 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
 
   // DATE/TIME FORMATTER - Human-readable timestamp conversion
   // ============================================================================
-  // Converts Unix timestamps to localized date/time strings:
+  // Converts Unix timestamps to localised date/time strings:
   // - Uses en-GB locale for consistent formatting (DD/MM/YYYY)
   // - 24-hour format for technical accuracy
   // - Includes seconds for precise timing analysis
@@ -106,10 +106,10 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
   };
 
   // STYLE CALCULATIONS - Pre-compute dynamic styles for performance
-  const lineColour = getLineColor(); // Current line colour based on mode
+  const lineColour = getLineColour(); // Current line colour based on mode
   const dashArray = getLineStrokeDasharray(); // Current line style based on mode
 
-  // CHART RENDER - Complete temperature visualization interface
+  // CHART RENDER - Complete temperature visualisation interface
   return (
     <div className="h-64 w-full">
       <ResponsiveContainer>
@@ -142,7 +142,7 @@ export default function TemperatureChart({ data, darkMode, mode }) { // Accept p
             formatter={(value) => [formatTemp(value), getModeLabel()]} // Format temperature with mode label
           />
 
-          {/* TEMPERATURE LINE - Main data visualization with mode-based styling */}
+          {/* TEMPERATURE LINE - Main data visualisation with mode-based styling */}
           <Line 
             dataKey="temp" // Temperature data field
             type="monotone" // Smooth curve interpolation

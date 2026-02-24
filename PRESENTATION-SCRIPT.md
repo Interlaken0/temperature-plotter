@@ -9,10 +9,10 @@
 ### Project Overview (3 minutes)
 
 **What is Temperature Plotter?**
-Temperature Plotter is a real-time industrial temperature monitoring solution built with Electron, React, and Node.js. The application provides continuous temperature data visualization, persistent logging, and comprehensive data export capabilities.
+Temperature Plotter is a real-time industrial temperature monitoring solution built with Electron, React, and Node.js. The application provides continuous temperature data visualisation, persistent logging, and comprehensive data export capabilities.
 
 **Key Technical Features:**
-- Real-time temperature visualization at 1Hz refresh rate using Recharts
+- Real-time temperature visualisation at 1Hz refresh rate using Recharts
 - Persistent CSV logging ensuring zero data loss
 - Hardware abstraction layer ready for DLL integration
 - Professional IPC-based architecture separating frontend and backend concerns
@@ -104,7 +104,7 @@ The application exceeds industry benchmarks:
 
 **Live Application Showcase:**
 During this demonstration, I'll highlight:
-- Real-time temperature visualization with smooth updates
+- Real-time temperature visualisation with smooth updates
 - CSV export functionality with timestamp accuracy
 - Dark mode toggle for different working environments
 - Status indicators showing system mode and connectivity
@@ -118,7 +118,7 @@ During this demonstration, I'll highlight:
 ### Conclusion (1 minute)
 
 **Project Significance:**
-Temperature Plotter represents more than just a technical exercise - it demonstrates professional software development practices including comprehensive testing, documentation, security implementation, and performance optimization. The project showcases readiness for professional development roles with advanced technical capabilities.
+Temperature Plotter represents more than just a technical exercise - it demonstrates professional software development practices including comprehensive testing, documentation, security implementation, and performance optimisation. The project showcases readiness for professional development roles with advanced technical capabilities.
 
 **Key Achievements:**
 - Complete full-stack application with enterprise-level quality
@@ -149,7 +149,7 @@ Thank you for your attention. I'm now ready for any questions about the technica
 - Semantic version control and feature branching
 - JSDoc documentation standards
 - Security best practices in Electron applications
-- Performance optimization techniques
+- Performance optimisation techniques
 
 ---
 

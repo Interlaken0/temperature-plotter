@@ -8,10 +8,10 @@ A real-time industrial temperature monitoring application built with Electron, R
 Project Overview
 ----------------
 
-This application provides a "Vertical Slice" solution for reading, visualizing, and logging temperature sensor data. It features a robust IPC (Inter-Process Communication) architecture that bridges a Node.js backend (handling hardware/simulation) with a React frontend (handling visualization).
+This application provides a "Vertical Slice" solution for reading, visualizing, and logging temperature sensor data. It features a robust IPC (Inter-Process Communication) architecture that bridges a Node.js backend (handling hardware/simulation) with a React frontend (handling visualisation).
 
 Key Capabilities:
-- Real-Time Visualization: Live graphing of sensor data (1Hz refresh rate) using Recharts
+- Real-Time Visualisation: Live graphing of sensor data (1Hz refresh rate) using Recharts
 - Persistent Telemetry: Background logging to temperature_telemetry.csv ensures data is never lost, even if the UI is closed
 - Data Export: On-demand CSV export for reporting and analysis
 - Hardware Abstraction: Currently operating in Simulation Mode (Sine Wave Generator), ready for seamless DLL integration
@@ -47,7 +47,7 @@ Backend (Node.js/Electron Main):
 - Hardware Abstraction Layer: Ready for DLL integration
 
 Frontend (React):
-- Real-Time Charts: Interactive temperature visualization using Recharts
+- Real-Time Charts: Interactive temperature visualisation using Recharts
 - Data Management: Custom hooks for state management and data buffering
 - Export Functionality: User-triggered CSV data export
 - Responsive UI: Modern interface with Tailwind CSS
@@ -108,7 +108,7 @@ Technical Specifications
 Dependencies:
 - Electron: Cross-platform desktop application framework
 - React: User interface library
-- Recharts: Data visualization library
+- Recharts: Data visualisation library
 - Tailwind CSS: Utility-first CSS framework
 - Jest: JavaScript testing framework
 
@@ -193,7 +193,7 @@ flowchart TD
     Start([User Clicks Export]) --> Check{Has Data?}
     Check -- No --> Alert["Show Error: No Data"]
     Check -- Yes --> Bridge[Call window.api.saveCSV]
-    Bridge --> Main[Main Process: Open Save Dialogue]
+    Bridge --> Main[Main Process: Open Save Dialog]
     
     Main --> Cancelled{User Cancelled?}
     Cancelled -- Yes --> End([Stop])

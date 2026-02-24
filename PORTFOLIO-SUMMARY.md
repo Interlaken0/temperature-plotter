@@ -70,7 +70,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 ### Skills (S) - 17/17
 - **S1 (Maintainable code)**: 85% maintainability index
 - **S2 (Effective UI)**: Responsive React interface
-- **S3 (Data linkage)**: Real-time sensor to visualization pipeline
+- **S3 (Data linkage)**: Real-time sensor to visualisation pipeline
 - **S4 (Unit testing)**: 45 unit tests with 100% pass rate
 - **S5 (Integration testing)**: End-to-end workflow validation
 - **S6 (Test scenarios)**: Comprehensive test case design
@@ -92,9 +92,9 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 - **B3 (Professional environment)**: Clean, documented, maintainable codebase
 - **B4 (Collaboration)**: Industry-standard practices and tools
 - **B5 (Integrity)**: Professional security and ethical implementation
-- **B6 (Initiative)**: Proactive testing, documentation, and optimization
+- **B6 (Initiative)**: Proactive testing, documentation, and optimisation
 - **B7 (Communication)**: Clear technical and user documentation
-- **B8 (Curiosity)**: Advanced FFI, real-time systems, and performance optimization
+- **B8 (Curiosity)**: Advanced FFI, real-time systems, and performance optimisation
 - **B9 (Development)**: Continuous learning and skill demonstration
 
 ---
@@ -150,7 +150,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 ### Professional Practices
 - **Documentation**: Complete JSDoc coverage and architectural diagrams
 - **Version Control**: Semantic git history with feature branching
-- **Performance Optimization**: Efficient ring buffer and memory management
+- **Performance Optimisation**: Efficient ring buffer and memory management
 - **User Experience**: Responsive design with intuitive interface
 
 ### Business Value

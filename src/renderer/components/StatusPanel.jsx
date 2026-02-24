@@ -14,9 +14,9 @@ import React from 'react'; // React library for component rendering
 export default function StatusPanel({ temp }) { // Receive current temperature as prop
   return (
     // TEMPERATURE DISPLAY - Formatted real-time data temperature reading
-    // FIX: "text-gray-900" is Black (Light Mode), "dark:text-white" is White (Dark Mode)
+    // FIX: "text-grey-900" is Black (Light Mode), "dark:text-white" is White (Dark Mode)
     // This ensures proper contrast and readability across both themes
-    <div className="text-4xl font-mono text-grey-900 dark:text-white transition-colors duration-300">
+    <div className="text-4xl font-mono text-grey-900 dark:text-white transition-colours duration-300">
       {/* TEMPERATURE FORMATTING - Precise display with fallback */}
       {typeof temp === 'number' ? temp.toFixed(2) : '0.00'} °C
     </div>

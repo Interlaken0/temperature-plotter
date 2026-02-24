@@ -10,7 +10,7 @@
 
 import React, { useState, useEffect } from 'react'; // React hooks for state management and lifecycle
 import { useTemperature } from './hooks/useTemperature'; // Custom hook for temperature data streaming
-import TemperatureChart from './components/TemperatureChart'; // Real-time temperature visualization
+import TemperatureChart from './components/TemperatureChart'; // Real-time temperature visualisation
 import StatusPanel from './components/StatusPanel'; // Current temperature and mode display
 import SaveButton from './components/SaveButton'; // CSV export functionality
 
@@ -45,12 +45,12 @@ export default function App() {
     // THEME WRAPPER - Applies dark mode class to entire application
     <div className={darkMode ? 'dark' : ''}>
       {/* MAIN CONTAINER - Full viewport with responsive layout */}
-      <div className="min-h-screen bg-grey-100 dark:bg-slate-900 text-grey-900 dark:text-white transition-colors duration-300 p-8 font-sans">
+      <div className="min-h-screen bg-grey-100 dark:bg-slate-900 text-grey-900 dark:text-white transition-colours duration-300 p-8 font-sans">
         
         {/* LAYOUT CONTAINER - Centred content with optimal width */}
         <div className="max-w-5xl mx-auto space-y-6">
           {/* HEADER SECTION - Title and theme toggle */}
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex justify-between items-centre mb-8">
             <h1 className="text-3xl font-bold tracking-tight">Temperature Plotter</h1>
             {/* THEME TOGGLE - Dark/light mode switcher with emoji indicators */}
             <button 
@@ -66,10 +66,10 @@ export default function App() {
             <StatusPanel temp={temp} /> {/* Pass current temperature for real-time display */}
           </div>
 
-          {/* TEMPERATURE CHART - Real-time data visualization */}
+          {/* TEMPERATURE CHART - Real-time data visualisation */}
           <div className="glass p-6 rounded-2xl shadow-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-lg border border-grey-200 dark:border-white/10 h-96">
             {/* CHART PROPS - Pass theme and mode for dynamic styling */}
-            {/* FIX: Passing 'darkMode' and 'mode' props so the chart can change colors and styling */}
+            {/* FIX: Passing 'darkMode' and 'mode' props so the chart can change colours and styling */}
             <TemperatureChart data={history} darkMode={darkMode} mode={mode} /> {/* Historical data with visual theming */}
           </div>
 

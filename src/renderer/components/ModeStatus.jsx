@@ -66,7 +66,7 @@ const ModeStatus = () => {
     return 'SIM';
   };
 
-  const getModeColor = () => {
+  const getModeColour = () => {
     if (mode === 'hardware') {
       return healthy ? 'text-green-600' : 'text-red-600';
     }
@@ -103,11 +103,11 @@ const ModeStatus = () => {
 
   return (
     <div className="bg-white dark:bg-grey-800 rounded-lg shadow-md p-4 mb-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-3">
+      <div className="flex items-centre justify-between">
+        <div className="flex items-centre space-x-3">
           <span className="text-2xl">{getModeIcon()}</span>
           <div>
-            <h3 className={`font-semibold ${getModeColor()}`}>
+            <h3 className={`font-semibold ${getModeColour()}`}>
               {mode === 'hardware' ? 'Hardware Mode' : 'Simulation Mode'}
             </h3>
             <p className="text-sm text-grey-600 dark:text-grey-400">

@@ -52,7 +52,7 @@ The implementation includes:
 
 ---
 
-### Entry 2: Real-time Data Visualization Architecture
+### Entry 2: Real-time Data Visualisation Architecture
 **Date:** February 2026  
 **KSB Focus:** S2, S16, K7
 
@@ -61,7 +61,7 @@ The application needed to display real-time temperature data at 1Hz refresh rate
 
 #### T - Task
 I needed to create:
-- Real-time chart visualization with dynamic updates
+- Real-time chart visualisation with dynamic updates
 - Efficient data buffering to prevent UI lag
 - Background CSV logging for data persistence
 - User-triggered export functionality
@@ -95,7 +95,7 @@ const ringBuffer = {
 - 1Hz refresh rate maintained consistently
 
 **KSB Evidence:**
-- **S2 (Effective user interfaces)**: Smooth real-time visualization
+- **S2 (Effective user interfaces)**: Smooth real-time visualisation
 - **S16 (Algorithms and logic)**: Efficient ring buffer implementation
 - **K7 (Design patterns)**: React hooks pattern for state management
 

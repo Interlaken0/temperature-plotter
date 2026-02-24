@@ -8,7 +8,7 @@ import TemperatureChart from '../../src/renderer/components/TemperatureChart';
  * Visual evidence: @see screenshots/unit-tests/temperature-chart-test.png
  * 
  * What: Tests React chart component rendering, behaviour, and user interactions
- * Why: Ensure temperature visualization works correctly across different data states and themes
+ * Why: Ensure temperature visualisation works correctly across different data states and themes
  * Coverage: Component rendering, data handling, dark/light mode, edge cases, accessibility
  * 
  * Portfolio Evidence:

@@ -10,14 +10,14 @@ This directory contains visual evidence supporting assessment requirements. Each
 **Description:** Main application interface showing real-time temperature monitoring dashboard
 
 **Key Features Demonstrated:**
-- **Real-time Visualization**: Live temperature graph with 1Hz refresh rate
+- **Real-time Visualisation**: Live temperature graph with 1Hz refresh rate
 - **Professional UI**: Clean, responsive design using Tailwind CSS
 - **Data Export**: CSV export functionality visible in interface
 - **Status Indicators**: Connection status and mode display
 
 **KSB Mapping:**
 - **S2 (Effective UI)**: Professional user interface design
-- **S3 (Link to data sets)**: Real-time data visualization
+- **S3 (Link to data sets)**: Real-time data visualisation
 - **K1 (SDLC)**: Complete application implementation
 - **B3 (Professional environment)**: Clean, maintainable interface
 
@@ -77,7 +77,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 ---
 
 #### `temperature-chart-test.png` (33KB)
-**Description:** React component testing for temperature visualization showing UI test coverage
+**Description:** React component testing for temperature visualisation showing UI test coverage
 
 **Key Features Demonstrated:**
 - **Component Testing**: React Testing Library implementation
@@ -151,8 +151,8 @@ This directory contains visual evidence supporting assessment requirements. Each
 
 **Key Features Demonstrated:**
 - **Component Architecture**: Professional React patterns
-- **Data Visualization**: Recharts integration
-- **Performance Optimization**: Efficient rendering
+- **Data Visualisation**: Recharts integration
+- **Performance Optimisation**: Efficient rendering
 - **Code Organization**: Clean component structure
 
 **KSB Mapping:**
@@ -188,7 +188,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 **Key Features Demonstrated:**
 - **Coverage Analysis**: Detailed coverage reporting
 - **Quality Metrics**: Professional quality assurance
-- **Visual Reporting**: Clear coverage visualization
+- **Visual Reporting**: Clear coverage visualisation
 - **Continuous Improvement**: Coverage tracking
 
 **KSB Mapping:**
