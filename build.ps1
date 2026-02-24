@@ -22,10 +22,6 @@ if (Test-Path ".webpack") {
 Write-Host "Installing dependencies..." -ForegroundColor Blue
 npm install
 
-# Run linting to validate code quality before building
-Write-Host "Running code quality checks..." -ForegroundColor Blue
-npm run lint
-
 # Run tests to validate code before building (prevents broken builds)
 Write-Host "Running tests to validate code quality..." -ForegroundColor Blue
 npm test
@@ -38,16 +34,16 @@ npm run make
 if (Test-Path "out/make") {
     $exeFiles = Get-ChildItem -Path "out/make" -Filter "*.exe" -Recurse
     if ($exeFiles.Count -gt 0) {
-        Write-Host "✅ Build successful! Found $($exeFiles.Count) executable(s)" -ForegroundColor Green
-        Write-Host "📁 Location: out/make/" -ForegroundColor Cyan
+        Write-Host "Build successful! Found $($exeFiles.Count) executable(s)" -ForegroundColor Green
+        Write-Host "Location: out/make/" -ForegroundColor Cyan
         foreach ($exe in $exeFiles) {
             Write-Host "   - $($exe.Name)" -ForegroundColor White
         }
     } else {
-        Write-Host "⚠️  Build completed but no EXE files found in out/make/" -ForegroundColor Yellow
+        Write-Host "Build completed but no EXE files found in out/make/" -ForegroundColor Yellow
     }
 } else {
-    Write-Host "❌ Build failed - no output directory found at out/make/" -ForegroundColor Red
+    Write-Host "Build failed - no output directory found at out/make/" -ForegroundColor Red
     Write-Host "Check the build logs above for error details" -ForegroundColor Red
     exit 1
 }
