@@ -11,19 +11,6 @@ const { app, BrowserWindow, ipcMain } = require('electron'); // Core Electron mo
 const path = require('path'); // Node.js path utilities for file system navigation
 const { initIpc } = require('./ipc/temperatureIpc'); // Custom IPC handlers for temperature data communication
 
-// Webpack entry points for Electron Forge
-let MAIN_WINDOW_WEBPACK_ENTRY;
-let MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY;
-
-try {
-  MAIN_WINDOW_WEBPACK_ENTRY = require('../../.webpack/renderer/main_window');
-  MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY = require('../../.webpack/renderer/preload');
-} catch (e) {
-  // Fallback for development or when webpack files aren't available
-  MAIN_WINDOW_WEBPACK_ENTRY = 'http://localhost:3000';
-  MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY = path.join(__dirname, '../preload.js');
-}
-
 // DEBUG LOGGING - Visual evidence for development and portfolio
 console.log('MAIN.JS LOADED - Starting execution...'); // Application startup confirmation
 console.log('WEBPACK REBUILD TRIGGERED - Visual Evidence Version'); // Hot reload indicator for development
@@ -331,13 +318,13 @@ const createWindow = () => {
     width: 1200, // Optimised width for temperature chart and controls
     height: 800, // Optimised height for responsive layout
     webPreferences: {
-      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY, // Secure preload script path
+      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY, // Secure preload script path natively injected by Webpack
       contextIsolation: true, // Security: isolate renderer context
       sandbox: false, // Development: allow Node.js access
       nodeIntegration: true // Development: enable Node.js in renderer
     }
   });
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY); // Load the React application
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY); // Load the React application natively mapped by Webpack
 };
 
 // APPLICATION READY EVENT - Main application startup sequence
