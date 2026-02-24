@@ -144,20 +144,57 @@ Future Enhancements
 
 ### User Stories (Role → Goal → Value)
 
-**Story 1: The Data Export (Primary Feature)**
+**Story 1: Telemetry Data Export (Data Engineering)**
 *As a Laboratory Analyst,*  
-*I want to export the recorded temperature history to a CSV file,*  
-*So that I can perform detailed statistical analysis and graphing in external tools like Microsoft Excel.*
+*I want to export the complete temperature telemetry history to a structured CSV file,*  
+*So that I can perform high-precision statistical analysis in external tools like Microsoft Excel without data corruption or formatting loss.*
 
-**Story 2: The User Experience (UI Upgrade)**  
-*As a Shift Operator working in low-light conditions,*  
-*I want to toggle the application interface into "Dark Mode,"*  
-*So that I can monitor the system for long periods without experiencing eye strain or screen glare.*
+**Acceptance Criteria:**
+```mermaid
+flowchart TD
+    A[Given: Application has recorded temperature telemetry] --> B[When: User clicks 'Export to CSV']
+    B --> C[Then: System generates CSV with ISO 8601 timestamps]
+    B --> D[Then: Dual-unit temperature values (Celsius/Fahrenheit)]
+    B --> E[Then: Raw timestamp metadata prevents Excel scientific notation]
+```
 
-**Story 3: Data Integrity (Verification)**
-*As a Lab Technician,*  
-*I want clear visual indicators showing whether the system is in "Simulator" or "Hardware" mode,*  
-*So that I can verify the validity of my experiments and ensure I am not accidentally recording dummy data for critical reports.*
+**Story 2: Ergonomic User Experience (UI Architecture)**
+*As a Shift Operator working in varying environmental conditions,*  
+*I want to dynamically toggle the application interface into a high-contrast "Dark Mode,"*  
+*So that I can continuously monitor real-time telemetry during low-light night shifts without experiencing visual fatigue or screen glare.*
+
+**Acceptance Criteria:**
+```mermaid
+flowchart TD
+    A[Given: Application running in default state] --> B[When: User interacts with theme toggle]
+    B --> C[Then: UI instantly updates to dark CSS palette]
+    B --> D[Then: Recharts component updates dynamically]
+    D --> E[And: Maintains optimal accessibility and contrast ratios]
+```
+
+**Story 3: Data Integrity & State Verification (System Reliability)**
+*As a Quality Assurance Technician,*  
+*I want an immediate, unambiguous visual indicator of the active data stream source (Hardware vs. Simulator),*  
+*So that I can guarantee the integrity of my experimental data and never accidentally submit simulated fallback telemetry for compliance reporting.*
+
+**Acceptance Criteria:**
+```mermaid
+stateDiagram-v2
+    [*] --> Hardware: DLL connected
+    Hardware --> Simulator: Hardware disconnects
+    Hardware --> Simulator: 10-second timeout
+    Simulator --> Hardware: DLL reconnects
+    
+    note right of Hardware
+        Green 'Hardware' badge
+        Real telemetry data
+    end note
+    
+    note right of Simulator
+        Amber 'Simulator' badge
+        Fallback telemetry
+    end note
+```
 
 ### 1. Data Modelling (Object Mapping)
 *Mapping the physical world to software objects.*

@@ -26,7 +26,7 @@ This guide provides a structured reading order for new developers joining the Te
 
 ## Phase 2: Technical Architecture (30 minutes)
 
-### 3. docs/system-architecture.md
+### 3. docs/SYSTEM-ARCHITECTURE.md
 **Why third:** How the system is designed
 
 **What you'll learn:**
