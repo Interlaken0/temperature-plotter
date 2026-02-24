@@ -69,8 +69,15 @@ npm run package           # Create distributable
 npm run make                # Build for production
 
 # Testing
-npm test -- --verbose     # Detailed test output
-npm test -- --coverage    # Generate coverage report
+npm test                    # Runs tests, no coverage
+npm test -- --verbose       # Runs tests with verbose output, no coverage
+npm test -- --coverage      # Runs tests AND generates/updates coverage
+
+# View Coverage Report
+start coverage/lcov-report/index.html    # Open coverage in browser (Windows)
+open coverage/lcov-report/index.html     # Open coverage in browser (macOS)
+xdg-open coverage/lcov-report/index.html # Open coverage in browser (Linux)
+# Or manually navigate to coverage/lcov-report/ and double-click index.html
 ```
 
 ## Architecture Highlights
