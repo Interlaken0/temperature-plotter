@@ -185,7 +185,8 @@ class HardwareMonitor {
   // ============================================================================
   fallbackToSimulator() {
     // VISUAL EVIDENCE: Log the final "Disconnect" reading before switching
-    console.log('[HAL] Real Reading: 10.00°C'); // Final hardware reading before disconnect
+    const fahrenheit = (10.00 * 9/5) + 32; // Convert to Fahrenheit
+    console.log(`[HAL] Real Reading: 10.00°C (${fahrenheit.toFixed(2)}°F)`); // Final hardware reading before disconnect
     console.warn('Hardware timeout detected (No data for 5s)'); // Warning log for timeout detection
 
     console.log('Fallback to simulator due to hardware failure'); // Debug logging for fallback initiation

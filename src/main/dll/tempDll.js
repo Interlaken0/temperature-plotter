@@ -190,7 +190,8 @@ module.exports = {
         }
       }
 
-      console.log(`[HAL] Real Reading: ${fTemp.toFixed(2)}°C`); // Log authentic hardware data
+      const fahrenheit = (fTemp * 9/5) + 32; // Convert to Fahrenheit
+      console.log(`[HAL] Real Reading: ${fTemp.toFixed(2)}°C (${fahrenheit.toFixed(2)}°F)`); // Log authentic hardware data
       // DATA VALIDATION - Filter out invalid temperature readings
       if (fTemp > -50 && fTemp < 200) { // Reasonable temperature range check
         store.updateTemperature(fTemp); // Update global temperature store

@@ -61,7 +61,8 @@ class InterruptSimulator extends EventEmitter {
     // MODULE IMPORTS - Dependencies and configuration of simulated data
     // Provides visual evidence that data is from simulator, not hardware
     // Essential for debugging and portfolio documentation
-    console.log(`SIMULATOR Reading: ${reading.toFixed(2)}°C (Hardware disconnected - using simulation)`);
+    const fahrenheit = (reading * 9/5) + 32; // Convert to Fahrenheit
+    console.log(`SIMULATOR Reading: ${reading.toFixed(2)}°C (${fahrenheit.toFixed(2)}°F) (Hardware disconnected - using simulation)`);
 
     // VARIABLE TIMING - Simulate hardware interrupt jitter
     // Real hardware doesn't trigger at perfect intervals:
