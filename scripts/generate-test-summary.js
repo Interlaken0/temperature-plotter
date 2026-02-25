@@ -26,7 +26,15 @@ function generateTestSummary() {
     
     // For now, use the timestamp to ensure file changes are detected
     // The actual test results are consistent (77/77 passing)
-    const timestamp = new Date().toISOString();
+    const timestamp = new Date().toLocaleString('en-GB', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
     
     console.log('Test results updated at:', timestamp);
     
