@@ -24,14 +24,14 @@ class InterruptSimulator extends EventEmitter {
   constructor() {
     super(); // Initialize EventEmitter parent class
     this.running = false; // Simulation state flag for start/stop control
-    this.readingCount = 0; // Track number of readings to implement start/end pattern
+    this.readingCount = 0; // Track number of readings for debugging purposes
   }
 
   // START SIMULATION - Begin temperature data generation
   // Initiates continuous temperature reading simulation with realistic patterns
   start() {
     this.running = true; // Set simulation state to active
-    this.readingCount = 0; // Reset reading count for start/end pattern
+    this.readingCount = 0; // Reset reading count for debugging
     this.triggerInterrupt(); // Start first interrupt cycle
   }
 
@@ -48,9 +48,8 @@ class InterruptSimulator extends EventEmitter {
     if (!this.running) return; // Exit if simulation stopped
 
     // TEMPERATURE GENERATION - Realistic sensor data patterns simulation
-    // Creates authentic temperature patterns with signature start/end values:
-    // - First reading: 30°C (signature start value for real reading identification)
-    // - Subsequent readings: realistic patterns with sine wave and noise
+    // Creates authentic temperature patterns with completely random values:
+    // - All readings: realistic patterns with sine wave and noise
     // - Base temperature of 22.5°C (room temperature)
     // - Sine wave variation (±5°C) simulating daily temperature cycles
     // - Random noise (±1°C) simulating sensor reading uncertainty
@@ -58,12 +57,9 @@ class InterruptSimulator extends EventEmitter {
     let reading;
     this.readingCount++; // Increment reading counter
     
-    if (this.readingCount === 1) {
-      reading = 30.00; // First reading always 30°C - signature start value
-    } else {
-      const noise = Math.random() * 2 - 1; // Random noise between -1 and +1 degrees
-      reading = 22.5 + Math.sin(Date.now() / 1000) * 5 + noise; // Base + wave + noise
-    }
+    // Simulator generates completely random temperatures (no 30°C start or 10°C end pattern)
+    const noise = Math.random() * 2 - 1; // Random noise between -1 and +1 degrees
+    reading = 22.5 + Math.sin(Date.now() / 1000) * 5 + noise; // Base + wave + noise
 
     // DATA STORE UPDATE - Persist temperature reading
     // Direct update to global temperature store for UI consumption
@@ -86,16 +82,12 @@ class InterruptSimulator extends EventEmitter {
 
   // STOP SIMULATION - Graceful termination of data generation
   // Sets running flag to false, preventing further interrupt scheduling
-  // Sends final signature reading of 10°C for real reading identification
   stop() {
     this.running = false; // Halt simulation by clearing state flag
     
-    // Send final signature reading of 10°C before stopping
-    const finalReading = 10.00; // Signature end value for real reading identification
-    store.updateTemperature(finalReading); // Store final reading
-    
-    const fahrenheit = (finalReading * 9/5) + 32; // Convert to Fahrenheit
-    console.log(`SIMULATOR Final Reading: ${finalReading.toFixed(2)}°C (${fahrenheit.toFixed(2)}°F) (Hardware disconnected - using simulation)`);
+    // Simulator stops without sending any final signature reading
+    const fahrenheit = (22.5 * 9/5) + 32; // Convert base temperature to Fahrenheit for logging
+    console.log(`SIMULATOR Stopped: No final reading sent (Hardware disconnected - using simulation)`);
   }
 }
 
