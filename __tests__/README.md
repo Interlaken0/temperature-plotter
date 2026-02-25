@@ -12,14 +12,19 @@ __tests__/
 └── README.md       # This file
 ```
 
-## Running Tests
+# Testing
 
 ```bash
 # Run all tests with automatic summary generation
-npm test
+npm test                    # Runs tests, no coverage
+npm test -- --verbose       # Runs tests with verbose output, no coverage
+npm test -- --coverage      # Runs tests AND generates/updates coverage
 
-# Run tests with coverage
-npm test -- --coverage
+# View Coverage Report
+start coverage/lcov-report/index.html    # Open coverage in browser (Windows)
+open coverage/lcov-report/index.html     # Open coverage in browser (macOS)
+xdg-open coverage/lcov-report/index.html # Open coverage in browser (Linux)
+# Or manually navigate to coverage/lcov-report/ and double-click index.html
 
 # Run specific test file
 npm test -- unit/main-simple.test.js
@@ -46,6 +51,7 @@ The summary file is tracked by Git to provide current testing evidence for portf
 - **main-simple.test.js** - Core application logic
 - **main-monitor.test.js** - Temperature monitoring functionality
 - **main-branch.test.js** - Conditional logic and branching
+- **simulator-branch.test.js** - Simulator branching logic
 - **temperature-chart.test.js** - Chart component rendering
 - **use-temperature-simple.test.js** - Custom hook functionality
 - **tempDll.test.js** - DLL binding and native integration
@@ -62,4 +68,4 @@ Tests use Jest with React Testing Library. Global mocks are configured in `setup
 
 ## Coverage
 
-Current test coverage targets 75% pass rate with comprehensive unit and integration testing.
+The test suite maintains comprehensive coverage across all application components with both unit and integration testing approaches.

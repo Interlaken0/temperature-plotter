@@ -387,7 +387,7 @@ ERROR: Failed to package application
    }, []);
    ```
 
-3. **Optimize data storage:**
+3. **Optimise data storage:**
    ```javascript
    // Check ring buffer implementation
    // Ensure old data is properly removed
@@ -399,7 +399,7 @@ ERROR: Failed to package application
 - Slow response to user interactions
 
 **Solutions:**
-1. **Optimize React rendering:**
+1. **Optimise React rendering:**
    ```javascript
    // Use React.memo for expensive components
    const TemperatureChart = React.memo(({ data }) => {

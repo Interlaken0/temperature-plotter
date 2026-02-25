@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Improved error handling throughout the application
 - Enhanced IPC security implementation
-- Optimized memory usage for long-running processes
+- Optimised memory usage for long-running processes
 
 ### Fixed
 - Memory leak in temperature store ring buffer
@@ -73,10 +73,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Performance Metrics
 - **Data Rate**: 1Hz temperature updates
-- **Memory Usage**: Optimized for long-running processes
+- **Memory Usage**: Optimised for long-running processes
 - **Response Time**: <100ms UI update latency
 - **Data Integrity**: 100% telemetry persistence
-- **File Size**: Optimized build with minimal dependencies
+- **File Size**: Optimised build with minimal dependencies
 
 ### Security
 - **IPC Security**: Context-isolated IPC with no Node.js exposure

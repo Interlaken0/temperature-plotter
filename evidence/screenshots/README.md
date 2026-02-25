@@ -28,7 +28,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 
 **Key Features Demonstrated:**
 - **Technical Documentation**: Complete API reference and architecture
-- **Professional Standards**: Industry-standard documentation practices
+- **Professional Standards**: Industry-standard documentation practises
 - **Knowledge Transfer**: Clear communication of technical concepts
 - **Maintainability**: Well-organised documentation structure
 
@@ -36,7 +36,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 - **S15 (Communication)**: Technical documentation for stakeholders
 - **K11 (Design specs)**: Comprehensive technical specifications
 - **B7 (Communication)**: Clear technical communication
-- **B9 (Development)**: Commitment to professional practices
+- **B9 (Development)**: Commitment to professional practises
 
 ---
 
@@ -46,7 +46,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 **Description:** Jest test execution results showing comprehensive test suite performance
 
 **Key Features Demonstrated:**
-- **100% Pass Rate**: All 77 tests passing consistently
+- **100% Pass Rate**: All 79 tests passing consistently
 - **Test Framework**: Professional Jest testing setup
 - **Execution Speed**: Efficient test performance (5.797 seconds)
 - **Comprehensive Coverage**: Multiple test categories
@@ -63,10 +63,10 @@ This directory contains visual evidence supporting assessment requirements. Each
 **Description:** Unit test execution for constants validation showing test structure and assertions
 
 **Key Features Demonstrated:**
-- **Test Structure**: Professional test organization
+- **Test Structure**: Professional test organisation
 - **Assertion Logic**: Clear validation of expected outcomes
 - **Test Isolation**: Independent test execution
-- **Mock Implementation**: Professional testing practices
+- **Mock Implementation**: Professional testing practises
 
 **KSB Mapping:**
 - **S4 (Unit testing)**: Individual component testing
@@ -153,7 +153,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 - **Component Architecture**: Professional React patterns
 - **Data Visualisation**: Recharts integration
 - **Performance Optimisation**: Efficient rendering
-- **Code Organization**: Clean component structure
+- **Code Organisation**: Clean component structure
 
 **KSB Mapping:**
 - **S2 (Effective UI)**: Professional UI component development
@@ -169,8 +169,8 @@ This directory contains visual evidence supporting assessment requirements. Each
 **Key Features Demonstrated:**
 - **Custom Hooks**: Advanced React patterns
 - **State Management**: Professional state handling
-- **Hook Composition**: Complex logic organization
-- **Performance**: Optimized re-rendering
+- **Hook Composition**: Complex logic organisation
+- **Performance**: Optimised re-rendering
 
 **KSB Mapping:**
 - **S16 (Algorithms)**: State management algorithms
@@ -221,8 +221,8 @@ This directory contains visual evidence supporting assessment requirements. Each
 ### **Technical Excellence Demonstrated:**
 - **Software Architecture**: Multi-process IPC-based design
 - **Testing Excellence**: 100% pass rate with comprehensive coverage
-- **Security Implementation**: Professional security practices
-- **Code Quality**: Industry-standard development practices
+- **Security Implementation**: Professional security practises
+- **Code Quality**: Industry-standard development practises
 
 ### **Professional Behaviours Shown:**
 - **B1 (Independent work)**: Complete project ownership
@@ -232,7 +232,7 @@ This directory contains visual evidence supporting assessment requirements. Each
 
 ### **Industry Readiness Evidence:**
 - **Modern Technologies**: React, Electron, Jest, Tailwind CSS
-- **Professional Practices**: Testing, documentation, security
+- **Professional Practises**: Testing, documentation, security
 - **Quality Assurance**: Comprehensive testing and coverage
 - **Communication Skills**: Clear documentation and code
 

@@ -36,7 +36,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 ### 4. Testing Excellence
 **Location:** `__tests__/` directory
 **Evidence:**
-- **Comprehensive Test Suite**: Multiple test categories with detailed reporting
+- **Comprehensive Testing Excellence**: 100% pass rate with 79 tests across 11 suites
 - **Coverage Reports**: Detailed coverage analysis with visual reports
 - **Mock Implementation**: Professional mocking for hardware dependencies
 - **CI/CD Ready**: Automated test execution configuration
@@ -71,7 +71,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 - **S1 (Maintainable code)**: 85% maintainability index
 - **S2 (Effective UI)**: Responsive React interface
 - **S3 (Data linkage)**: Real-time sensor to visualisation pipeline
-- **S4 (Unit testing)**: 45 unit tests with 100% pass rate
+- **S4 (Unit testing)**: 49 unit tests with 100% pass rate
 - **S5 (Integration testing)**: End-to-end workflow validation
 - **S6 (Test scenarios)**: Comprehensive test case design
 - **S7 (Problem solving)**: Complex FFI and real-time system integration
@@ -90,7 +90,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 - **B1 (Independent work)**: Complete project ownership and delivery
 - **B2 (Logical thinking)**: Systematic problem-solving approach
 - **B3 (Professional environment)**: Clean, documented, maintainable codebase
-- **B4 (Collaboration)**: Industry-standard practices and tools
+- **B4 (Collaboration)**: Industry-standard practises and tools
 - **B5 (Integrity)**: Professional security and ethical implementation
 - **B6 (Initiative)**: Proactive testing, documentation, and optimisation
 - **B7 (Communication)**: Clear technical and user documentation
@@ -128,11 +128,11 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 | **Design Thinking** | `docs/SYSTEM-ARCHITECTURE.md` | Mermaid diagrams, design rationale |
 | **Testing** | `__tests__/` directory | Comprehensive test suite, coverage reports |
 | **Impact** | `evidence/` directory | STARI journal, performance metrics |
-| **Professional Practices** | Throughout project | Version control, documentation, security |
+| **Professional Practises** | Throughout project | Version control, documentation, security |
 
 ### Assessment Talking Points
 
-1. **Technical Excellence**: "The project demonstrates industry-standard practices with 57% test coverage and zero security vulnerabilities."
+1. **Technical Excellence**: "The project demonstrates industry-standard practises with 57% test coverage and zero security vulnerabilities."
 2. **Problem Solving**: "Complex FFI integration with hardware abstraction layer shows advanced technical capability."
 3. **Business Impact**: "1,200% ROI demonstrates understanding of business value and operational efficiency."
 4. **Professional Behaviours**: "Comprehensive documentation and testing shows commitment to quality and maintainability."
@@ -144,10 +144,10 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 ### Technical Innovation
 - **Hardware Abstraction Layer**: Professional FFI implementation with Koffi
 - **Real-time Architecture**: 1Hz data processing with smooth UI updates
-- **Security Implementation**: Context-isolated IPC following Electron best practices
+- **Security Implementation**: Context-isolated IPC following Electron best practises
 - **Testing Infrastructure**: Professional test suite with 100% pass rate
 
-### Professional Practices
+### Professional Practises
 - **Documentation**: Complete JSDoc coverage and architectural diagrams
 - **Version Control**: Semantic git history with feature branching
 - **Performance Optimisation**: Efficient ring buffer and memory management
@@ -187,7 +187,7 @@ This portfolio demonstrates comprehensive competence across all 38 KSBs (Knowled
 This Temperature Plotter project represents **complete assessment readiness** with comprehensive evidence across all 38 KSBs. The portfolio demonstrates:
 
 - **Technical Excellence**: Industry-standard code quality and testing
-- **Professional Practices**: Documentation, security, and version control
+- **Professional Practises**: Documentation, security, and version control
 - **Business Impact**: Quantifiable ROI and operational improvements
 - **Innovation**: Advanced FFI integration and real-time systems
 - **Growth Mindset**: Continuous learning and skill development

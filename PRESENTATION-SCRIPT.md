@@ -44,7 +44,7 @@ The system follows a clean data pipeline: Simulator → IPC Bridge → React Com
 I've implemented a professional testing strategy that exceeds industry standards:
 
 *Test Coverage:*
-- 77 tests across 10 test suites with 100% pass rate
+- 79 tests across 11 test suites with 100% pass rate
 - Unit tests for core modules (main.js, simulator.js, temperatureStore.js)
 - Integration tests validating end-to-end workflows
 - Component tests ensuring UI reliability
@@ -71,7 +71,7 @@ Optimized for industrial environments with:
 ### Professional Documentation (2 minutes)
 
 **Complete Documentation Package:**
-The project includes comprehensive documentation following industry best practices:
+The project includes comprehensive documentation following industry best practises:
 
 *Technical Documentation:*
 - Complete JSDoc API coverage (100%)
@@ -145,10 +145,10 @@ Thank you for your attention. I'm now ready for any questions about the technica
 - Visual regression testing for UI components
 - Performance testing for real-time constraints
 
-**Professional Practices:**
+**Professional Practises:**
 - Semantic version control and feature branching
 - JSDoc documentation standards
-- Security best practices in Electron applications
+- Security best practises in Electron applications
 - Performance optimisation techniques
 
 ---

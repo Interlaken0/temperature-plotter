@@ -40,7 +40,7 @@ npm start
 - [ ] Point out error handling and security practices
 
 ### 4. Testing Excellence (2 minutes)
-- [ ] Show test results: "77 tests passing, 100% pass rate"
+- [ ] Show test results: "79 tests passing, 100% pass rate"
 - [ ] Navigate to `__tests__/` directory structure
 - [ ] Show example test file with professional assertions
 - [ ] Explain mock implementation for hardware dependencies
@@ -59,7 +59,7 @@ npm start
 - "100% data accuracy versus 85% human accuracy"
 - "Professional documentation for team collaboration"
 
-### Professional Practices:
+### Professional Practises:
 - "Semantic version control with meaningful commits"
 - "Complete JSDoc API documentation"
 - "Security-first design with context isolation"
@@ -69,7 +69,7 @@ npm start
 
 If you want visual evidence for your portfolio:
 1. Application running with live data
-2. CSV export dialog and resulting file
+2. CSV export dialogue and resulting file
 3. Test results showing 100% pass rate
 4. Code documentation examples
 5. Dark mode toggle demonstration

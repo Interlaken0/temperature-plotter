@@ -25,7 +25,7 @@
 ### Testing Performance Metrics
 
 #### Test Suite Performance
-- **Total Tests**: Comprehensive test suite with detailed reporting
+- **Test Suite Performance**: Comprehensive test suite with 79 tests across 11 suites
 - **Execution Time**: 3.2 seconds complete test run
 - **Test Categories**:
   - Unit Tests: Multiple core module tests (1.8s)
@@ -113,7 +113,7 @@
 - **K1 (SDLC)**: Complete development lifecycle demonstrated
 - **K7 (Design patterns)**: Professional architecture patterns
 - **K8 (Security)**: Zero security vulnerabilities
-- **K9 (Data structures)**: Optimized memory management
+- **K9 (Data structures)**: Optimised memory management
 - **K11 (Design specs)**: Comprehensive documentation
 
 #### Behaviours (B) Impact Evidence

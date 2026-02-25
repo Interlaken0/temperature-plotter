@@ -1,5 +1,5 @@
 # Contributing to Temperature Plotter
-## Development Guidelines and Best Practices
+## Development Guidelines and Best Practises
 
 Thank you for your interest in contributing to the Temperature Plotter project! This guide will help you get started and ensure consistency across all contributions.
 
@@ -72,7 +72,7 @@ function processTemperature(temperature, timestamp) {
 }
 ```
 
-### Import Organization
+### Import Organisation
 ```javascript
 // React imports first
 import React, { useState, useEffect } from 'react';
@@ -280,7 +280,7 @@ git push origin feature/your-feature-name
 - Keep components small and focused
 - Use custom hooks for complex state logic
 - Implement proper error boundaries
-- Follow React best practices
+- Follow React best practises
 
 ### IPC Communication
 - Use contextBridge for security
@@ -304,7 +304,7 @@ git push origin feature/your-feature-name
 ### UI Performance
 - Implement proper React.memo usage
 - Use useCallback for expensive computations
-- Optimize re-renders
+- Optimise re-renders
 - Handle large datasets efficiently
 
 ## Security Guidelines

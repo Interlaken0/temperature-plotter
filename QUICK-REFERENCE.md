@@ -3,7 +3,7 @@
 ## Project Statistics
 
 **Technical Metrics:**
-- **Tests:** 77 tests across 10 suites (100% pass rate)
+- **Tests:** 79 tests across 11 suites (100% pass rate)
 - **Architecture:** Electron + React + Node.js
 - **Performance:** <100ms latency, 1Hz refresh rate
 - **Security:** Zero vulnerabilities, context isolation
@@ -39,7 +39,7 @@ src/
 ### Testing Infrastructure:
 ```
 __tests__/
-├── unit/                    # Unit tests (6 suites)
+├── unit/                    # Unit tests (7 suites)
 ├── integration/             # Integration tests (4 suites)
 ├── setup.js                # Test configuration
 └── coverage/               # Coverage reports
@@ -125,7 +125,7 @@ Temperature Sensor → Hardware Abstraction → IPC Bridge → React UI → CSV 
 - Zero frame drops during operation
 - Efficient IPC communication
 
-## Professional Practices
+## Professional Practises
 
 ### Documentation Standards:
 - Complete JSDoc API coverage

@@ -69,12 +69,12 @@ New Developer Onboarding: docs/NEW-DEVELOPER-ONBOARDING.md
   - Unit tests for core functionality
   - Integration tests for end-to-end workflows
 
-#### 4. Professional Practices
+#### 4. Professional Practises
 **Files:** Git history + README.md
 
 **What to Show Assessor:**
 - "Here's my semantic git history showing professional version control"
-- "This shows S14 (version control) and professional development practices"
+- "This shows S14 (version control) and professional development practises"
 - **Evidence:**
   - Semantic commit messages
   - Feature branching strategy
@@ -84,7 +84,7 @@ New Developer Onboarding: docs/NEW-DEVELOPER-ONBOARDING.md
 **Files:** `evidence/REFLECTIVE-JOURNAL.md` + `evidence/PERFORMANCE-METRICS.md`
 
 **What to Show Assessor:**
-- "Here's my STARI journal showing reflective practice and business impact"
+- "Here's my STARI journal showing reflective practise and business impact"
 - "This demonstrates B8 (curiosity) and understanding of business value"
 - **Key Metrics:**
   - 1,200% ROI analysis
@@ -166,9 +166,10 @@ code __tests__/coverage/lcov-report/index.html
 #### **Key Phrases for Assessment:**
 - *"My Mermaid diagrams demonstrate K7 (design patterns) and K11 (software design specifications)"*
 - *"The JSDoc documentation shows S1 (maintainable code) and professional communication skills"*
-- *"My test suite demonstrates S4 (unit testing) and S5 (integration testing) with 100% pass rate"*
-- *"The STARI journal shows B8 (curiosity) and reflective practice"*
+- "My test suite demonstrates S4 (unit testing) and S5 (integration testing) with 79 tests across 11 suites and 100% pass rate"*
+- "The STARI journal shows B8 (curiosity) and reflective practice"*
 - *"Performance metrics demonstrate understanding of business value and ROI"*
+
 
 ### **Documentation Quality Summary**
 

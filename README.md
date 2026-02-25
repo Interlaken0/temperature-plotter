@@ -8,7 +8,7 @@ A real-time industrial temperature monitoring application built with Electron, R
 Project Overview
 ----------------
 
-This application provides a "Vertical Slice" solution for reading, visualizing, and logging temperature sensor data. It features a robust IPC (Inter-Process Communication) architecture that bridges a Node.js backend (handling hardware/simulation) with a React frontend (handling visualisation).
+This application provides a "Vertical Slice" solution for reading, visualising, and logging temperature sensor data. It features a robust IPC (Inter-Process Communication) architecture that bridges a Node.js backend (handling hardware/simulation) with a React frontend (handling visualisation).
 
 Key Capabilities:
 - Real-Time Visualisation: Live graphing of sensor data (1Hz refresh rate) using Recharts
@@ -230,7 +230,7 @@ flowchart TD
     Start([User Clicks Export]) --> Check{Has Data?}
     Check -- No --> Alert["Show Error: No Data"]
     Check -- Yes --> Bridge[Call window.api.saveCSV]
-    Bridge --> Main[Main Process: Open Save Dialog]
+    Bridge --> Main[Main Process: Open Save Dialogue]
     
     Main --> Cancelled{User Cancelled?}
     Cancelled -- Yes --> End([Stop])
@@ -282,7 +282,7 @@ sequenceDiagram
 - **QUICK-REFERENCE.md** - Technical specifications and key metrics summary
 
 ### Key Presentation Points:
-- 77 tests with 100% pass rate demonstrating testing excellence
+- 79 tests with 100% pass rate demonstrating testing excellence
 - Professional IPC architecture with hardware abstraction layer
 - 1,200% ROI showing business impact understanding
 - Complete documentation package following industry standards

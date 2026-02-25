@@ -136,10 +136,11 @@ __tests__/
 5. **CI/CD Ready**: Automated test execution setup
 
 #### R - Result
-**Impact:** Achieved 100% test pass rate with comprehensive coverage demonstrating professional software quality practices.
+**Impact:** Achieved 100% test pass rate with comprehensive coverage demonstrating professional software quality practises.
 
-**Quantitative Results:**
-- Comprehensive test suite with 100% pass rate
+- **Quantitative Results:**
+- Comprehensive test suite with 79 tests across 11 suites
+- 100% pass rate with detailed coverage analysis
 - Detailed coverage analysis with visual reports
 - Multiple test categories (unit, integration, component)
 - Professional test infrastructure with mocking
@@ -165,7 +166,7 @@ I needed to implement secure IPC communication that:
 - Isolates Node.js APIs from the renderer process
 - Provides controlled API exposure via contextBridge
 - Maintains functionality while ensuring security
-- Follows Electron security best practices
+- Follows Electron security best practises
 
 #### A - Action
 I implemented a security-focused IPC architecture:
@@ -188,7 +189,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 5. **Error Boundaries**: Implemented error handling for IPC failures
 
 #### R - Result
-**Impact:** Created a secure Electron application that follows industry best practices while maintaining full functionality.
+**Impact:** Created a secure Electron application that follows industry best practises while maintaining full functionality.
 
 **Security Outcomes:**
 - 0 exposed Node.js APIs to renderer process
@@ -199,7 +200,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 **KSB Evidence:**
 - **K8 (Security)**: Comprehensive security implementation
 - **S17 (Security requirements)**: Compliance with security standards
-- **B5 (Integrity and security)**: Professional security practices
+- **B5 (Integrity and security)**: Professional security practises
 
 ---
 
@@ -223,6 +224,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
 - **Documentation**: Comprehensive README and design artefacts
 - **Testing**: Professional test suite with coverage reporting
 - **Security**: Security-first development approach
-- **Performance**: Optimized real-time data processing
+- **Performance**: Optimised real-time data processing
 
 This portfolio demonstrates readiness for professional software development roles with strong technical skills and professional behaviours aligned with industry standards.
