@@ -67,3 +67,6 @@ temp/
 
 # Testing backup files
 __tests__/*.bak
+
+# CSV data files
+*.csv

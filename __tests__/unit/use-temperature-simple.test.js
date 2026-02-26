@@ -14,6 +14,8 @@
  * Exhibits state management testing
  */
 
+import { MAX_BUFFER } from '../../src/shared/constants.js'; // CONSTANTS IMPORT - Centralised buffer configuration
+
 // HOOK TEST SUITE - Main test group for useTemperature hook logic
 describe('useTemperature Hook - Simple Tests', () => {
   // DATA STRUCTURE VALIDATION TEST - Ensure temperature data integrity
@@ -45,8 +47,8 @@ describe('useTemperature Hook - Simple Tests', () => {
   // BUFFER MANAGEMENT TEST - Validate history buffer size limits
   test('should handle history buffer management', () => {
     // Arrange: Test buffer logic
-    const maxBuffer = 300; // Maximum buffer size from hook implementation
-    const largeHistory = Array.from({ length: 350 }, (_, i) => 20 + i * 0.1); // Oversized history array
+    const maxBuffer = MAX_BUFFER; // Maximum buffer size from centralised configuration
+    const largeHistory = Array.from({ length: 550 }, (_, i) => 20 + i * 0.1); // Oversized history array (larger than MAX_BUFFER)
     const newEntry = 25.5; // New temperature entry to add
     
     // Act: Simulate buffer management
