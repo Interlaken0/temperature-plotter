@@ -45,6 +45,7 @@ graph TB
         A --> C[tempDll.js<br/>Hardware Interface]
         A --> D[temperatureStore.js<br/>State Management]
         A --> E[temperatureIpc.js<br/>IPC Communication]
+        A --> F[consoleColours.js<br/>Logging Utilities]
     end
     
     subgraph "Preload Security Layer"
@@ -69,9 +70,16 @@ graph TB
 ```
 
 **Strict Separation of Concerns:**
-- **Main Process**: Hardware interaction, data processing, file system access
+- **Main Process**: Hardware interaction, data processing, file system access, enhanced logging
 - **Preload Layer**: Security boundary, controlled API exposure
 - **Renderer Process**: UI rendering, user interaction, data presentation
+
+**Utility Layer Architecture:**
+The `consoleColours.js` module demonstrates clean separation of concerns by:
+- **Centralising logging logic**: Consistent colour-coded output across all main process modules
+- **Providing semantic logging**: Context-aware messages (hardware, simulator, temperature, status)
+- **Maintaining testability**: Pure functions that don't affect application state
+- **Enhancing debugging**: Visual distinction between different system events and data sources
 
 ### 2.2 Real-Time Data Flow Sequence
 
@@ -435,4 +443,4 @@ graph TD
 
 **Created:** February 2026  
 **Purpose:** Portfolio Evidence - Elite System Architecture & Design Thinking  
-**Standards:** British English, Professional Documentation, 100% Mermaid Coverage
+**Standards:** British English, Professional Documentation, 12 Mermaid Diagrams
