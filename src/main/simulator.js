@@ -10,6 +10,7 @@
 
 const EventEmitter = require('events'); // Node.js event system for interrupt simulation
 const store = require('./state/temperatureStore'); // Global temperature data store
+const consoleColours = require('./utils/consoleColours'); // Enhanced console output
 
 // INTERRUPT SIMULATOR CLASS - Hardware behaviour emulation
 // ============================================================================
@@ -69,7 +70,7 @@ class InterruptSimulator extends EventEmitter {
     // Provides visual evidence that data is from simulator, not hardware
     // Essential for debugging and portfolio documentation
     const fahrenheit = (reading * 9/5) + 32; // Convert to Fahrenheit
-    console.log(`SIMULATOR Reading: ${reading.toFixed(2)}°C (${fahrenheit.toFixed(2)}°F) (Hardware disconnected - using simulation)`);
+    consoleColours.temperature(reading, fahrenheit, 'SIMULATOR');
 
     // VARIABLE TIMING - Simulate hardware interrupt jitter
     // Real hardware doesn't trigger at perfect intervals:
@@ -87,7 +88,7 @@ class InterruptSimulator extends EventEmitter {
     
     // Simulator stops without sending any final signature reading
     const fahrenheit = (22.5 * 9/5) + 32; // Convert base temperature to Fahrenheit for logging
-    console.log(`SIMULATOR Stopped: No final reading sent (Hardware disconnected - using simulation)`);
+    consoleColours.simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)');
   }
 }
 

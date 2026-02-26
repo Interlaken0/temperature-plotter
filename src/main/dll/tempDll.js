@@ -7,6 +7,7 @@ const koffi = require('koffi');
 const path = require('path');
 const store = require('../state/temperatureStore');
 const fs = require('fs');
+const consoleColours = require('../utils/consoleColours');
 
 let app;
 try {
@@ -31,9 +32,9 @@ try {
     try { koffi.unload('TempMeasure64.dll'); } catch (e) { }
     try {
       lib = koffi.load('TempMeasure64.dll');
-      console.log('[HAL] TempMeasure64.dll loaded successfully');
+      consoleColours.success('TempMeasure64.dll loaded successfully');
     } catch (e) {
-      console.error('[HAL] Library Load Error:', e.message);
+      consoleColours.error('Library Load Error: ' + e.message);
     }
   }
 } finally {
@@ -48,9 +49,9 @@ if (lib) {
   try {
     StartDevice_Func = lib.func('StartDevice', 'int', [koffi.pointer(CallbackProto), 'char*']);
     IsDeviceConnected_Func = lib.func('IsDeviceConnected', 'int', []);
-    console.log('[HAL] Functions bound');
+    consoleColours.success('Functions bound');
   } catch (err) {
-    console.error('[HAL] Function Binding Failed:', err.message);
+    consoleColours.error('Function Binding Failed: ' + err.message);
   }
 }
 
@@ -77,13 +78,13 @@ module.exports = {
 
       // Force first reading of the session to 30.00
       if (isFirstReading) {
-        console.log(`[HAL] Session Start: Forcing 30.00°C (Sensor was: ${fTemp.toFixed(2)})`);
+        consoleColours.hardware(`Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})`);
         outputTemp = 30.00;
         isFirstReading = false;
       }
 
       const fahrenheit = (outputTemp * 9/5) + 32;
-      console.log(`[HAL] Real Reading: ${outputTemp.toFixed(2)}°C`);
+      consoleColours.temperature(outputTemp, fahrenheit, 'REAL');
 
       if (outputTemp > -50 && outputTemp < 200) {
         store.updateTemperature(outputTemp);
@@ -106,7 +107,7 @@ module.exports = {
       
       StartDevice_Func(registeredCallback, serialNumber);
     } catch (err) {
-      console.error('[HAL] Hardware Start Error:', err.message);
+      consoleColours.error('Hardware Start Error: ' + err.message);
     }
   },
 
@@ -115,9 +116,9 @@ module.exports = {
       try {
         koffi.unregister(registeredCallback);
         registeredCallback = null;
-        console.log('[HAL] Hardware Stopped (callback unregistered)');
+        consoleColours.warning('Hardware Stopped (callback unregistered)');
       } catch (err) {
-        console.error('[HAL] Stop error:', err.message);
+        consoleColours.error('Stop error: ' + err.message);
       }
     }
   }

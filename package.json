@@ -6,7 +6,7 @@
   "author": "Greg",
   "license": "MIT",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "electron-forge start -- --force-node-api-uncaught-exceptions-policy=true",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "test": "jest --verbose --json --outputFile=coverage/test-results.json && node scripts/generate-test-summary.js"

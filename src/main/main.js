@@ -1,11 +1,13 @@
 // Electron Main Process Entry Point - Temperature Plotter Application
 // ============================================================================
+process.noDeprecation = true; // Suppress N-API Deprecation Warnings on Windows
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { initIpc } = require('./ipc/temperatureIpc');
 const store = require('./state/temperatureStore'); // REQUIRED for 10.00 injection
+const consoleColours = require('./utils/consoleColours'); // Enhanced console output
 
-console.log('MAIN.JS LOADED - Starting execution...');
+consoleColours.header('Temperature Plotter Starting');
 
 if (require('electron-squirrel-startup')) {
     app.quit();
@@ -22,7 +24,7 @@ class HardwareMonitor {
     }
 
     startMonitoring() {
-        console.log('Starting hardware monitoring...');
+        consoleColours.info('Starting hardware monitoring...');
         this.checkInterval = setInterval(() => {
             this.checkHealth();
         }, 1000);
@@ -43,7 +45,7 @@ class HardwareMonitor {
                 } catch (e) { /* Hardware not available */ }
 
                 if (hw && hw.checkConnection && hw.checkConnection() === 0) {
-                    console.log('Hardware signal detected! Initiating switch...');
+                    consoleColours.success('Hardware signal detected! Initiating switch...');
                     this.switchToHardware(hw);
                     return true;
                 }
@@ -52,7 +54,7 @@ class HardwareMonitor {
                     this.lastHardReset = now;
                     const dllPath = require.resolve('./dll/tempDll');
                     if (require.cache[dllPath]) {
-                        console.log('Performing hard DLL refresh to check for new device...');
+                        consoleColours.status('Performing hard DLL refresh to check for new device...', 'info');
                         delete require.cache[dllPath];
                     }
                 }
@@ -69,7 +71,7 @@ class HardwareMonitor {
     }
 
     switchToHardware(hardwareDevice) {
-        console.log('Switching back to hardware mode');
+        consoleColours.status('Switching back to hardware mode', 'success');
         if (device && device.stop) {
             device.stop();
         }
@@ -94,7 +96,7 @@ class HardwareMonitor {
 
     fallbackToSimulator() {
         // REQUIREMENT: Log the final "Disconnect" reading before switching
-        console.warn('Hardware timeout detected. Injecting final 10.00°C reading.');
+        consoleColours.warning('Hardware timeout detected. Injecting final 10.00 deg C reading.');
         store.updateTemperature(10.00); 
 
         if (this.checkInterval) clearInterval(this.checkInterval);
