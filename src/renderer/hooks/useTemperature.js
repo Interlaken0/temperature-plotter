@@ -9,6 +9,7 @@
 // ============================================================================
 
 import { useEffect, useState } from 'react'; // REACT IMPORTS - Core hooks for state and lifecycle management
+import { MAX_BUFFER } from '../../shared/constants.js'; // CONSTANTS IMPORT - Centralised configuration management
 
 // TEMPERATURE HOOK STATE - Temperature data management interface
 export function useTemperature() {
@@ -23,7 +24,7 @@ export function useTemperature() {
   // Establishes communication bridge with main process:
   // - Registers temperature update listener on component mount
   // - Updates current temperature state for immediate display
-  // - Maintains rolling buffer of historical data (last 300 points)
+  // - Maintains rolling buffer of historical data (last MAX_BUFFER points)
   // - Prevents memory leaks through buffer size management
   // - Provides seamless data flow from hardware/simulator to UI
   // ============================================================================
@@ -34,10 +35,10 @@ export function useTemperature() {
       setTemp(data.temp); // Update current temperature state for StatusPanel
       
       // BUFFER MANAGEMENT - Performance optimisation rolling buffer with size limit
-      // Keep last 300 existing data points to prevent memory overflow
+      // Keep last MAX_BUFFER existing data points to prevent memory overflow
       // Add only the newest data point from incoming batch to avoid duplicates
       setHistory((prev) => [
-        ...prev.slice(-300), 
+        ...prev.slice(-MAX_BUFFER), 
         ...data.history.slice(-1) 
       ]);
     });
