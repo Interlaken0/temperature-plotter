@@ -4,23 +4,38 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-02-26
+
+### Added
+- **Industrial Console Utilities**: Implemented `consoleColours.js` for professional, colour-coded telemetry logging.
+- **Cross-Platform Compatibility**: Replaced Unicode symbols with ASCII-safe notation to prevent PowerShell encoding corruption (`┬░`).
+- **N-API Warning Suppression**: Improved developer experience by silencing internal Node.js deprecation warnings.
+
+### Fixed
+- **CI/CD Pipeline**: Refactored `npm test` to dynamically generate test summaries from JSON results instead of static templates.
+
 ## [Unreleased]
 
 ### Added
-- Hardware Abstraction Layer preparation for DLL integration
-- Comprehensive test suite with detailed reporting and analysis
-- Professional documentation package for portfolio
-- Inline JSDoc API documentation in source code
+- Industrial-grade console formatting for enhanced terminal output
+- Centralised configuration management for temperature buffer system
+- Dynamic JSON integration for enhanced test reporting
+- Automatic coverage report generation with Jest configuration
+- Consolidated documentation structure with duplicate removal
 
 ### Changed
 - Improved error handling throughout the application
 - Enhanced IPC security implementation
 - Optimised memory usage for long-running processes
+- Streamlined test suite architecture to match current system design
+- Updated gitignore configuration for centralised buffer management
 
 ### Fixed
 - Memory leak in temperature store ring buffer
 - CSV export file path handling on Windows
 - UI responsiveness during high-frequency updates
+- Backend test suite compatibility with current architecture
+- Coverage screenshot filename and documentation references
 
 ## [1.0.0] - 2026-02-20
 
@@ -133,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date | Type | Key Features |
 |---------|------|------|-------------|
+| 1.1.0 | 2026-02-26 | Minor Update | Console utilities, cross-platform fixes, CI/CD improvements |
 | 1.0.0 | 2026-02-20 | Major Release | Complete production-ready application |
 | 0.9.0 | 2026-02-15 | Beta | Feature-complete with known issues |
 | 0.8.0 | 2026-02-10 | Alpha | Initial prototype with basic functionality |
@@ -154,7 +170,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Support and Maintenance
 
 ### Supported Versions
-- **1.0.x**: Current stable version with full support
+- **1.1.x**: Current stable version with full support
+- **1.0.x**: Previous stable version with full support
 - **0.9.x**: Beta version - security updates only
 - **0.8.x**: Alpha version - no longer supported
 
@@ -164,7 +181,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Patch Updates**: Bug fixes and security updates only
 
 ### LTS Support
-- Version 1.0.x will receive Long Term Support (LTS)
+- Version 1.1.x will receive Long Term Support (LTS)
 - Security patches for 2 years from release date
 - Bug fixes for 1 year from release date
 

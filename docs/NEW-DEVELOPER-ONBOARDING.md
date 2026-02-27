@@ -75,6 +75,7 @@ This guide provides a structured reading order for new developers joining the Te
 4. `src/renderer/App.jsx` - React application root
 5. `src/renderer/components/` - UI components
 6. `src/renderer/hooks/` - Custom React hooks
+7. `src/utils/consoleColours.js` - Cross-platform console utilities and separation of concerns
 
 ## Phase 5: Advanced Topics (30 minutes)
 
@@ -86,6 +87,7 @@ This guide provides a structured reading order for new developers joining the Te
 - Feature development timeline
 - Bug fixes and improvements
 - Technical debt and resolutions
+- Recent evolution from static to dynamic reporting (v1.1.0)
 
 ### 9. TROUBLESHOOTING.md
 **Why ninth:** Common problems and solutions

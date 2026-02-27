@@ -13,6 +13,9 @@ This guide provides solutions to common problems developers and users may encoun
 - [Performance Issues](#performance-issues)
 - [Hardware Integration Issues](#hardware-integration-issues)
 - [Platform-Specific Issues](#platform-specific-issues)
+- [Version 1.1.0 Specific Issues](#version-110-specific-issues)
+- [Quick-Fix Solutions](#quick-fix-solutions)
+- [Diagnostic Commands](#diagnostic-commands)
 
 ## Installation Issues
 
@@ -491,6 +494,23 @@ Error: Dynamic Link Library "TempMeasure64.dll" not found
    # Configure code signing in forge.config.js
    ```
 
+#### Issue: "Corrupted characters (┬░) appearing in the terminal"
+**Symptoms:**
+- Degree symbols (°) appear as ┬░ or other garbled text in Windows PowerShell or CMD
+
+**Solutions:**
+1. **Use ASCII-Safe Notation:**
+   Ensure you are using the consoleColours.js utility which converts these to the string "deg C".
+
+2. **Force UTF-8 Encoding:**
+   If you must use the symbol, run this command in your terminal before starting the app:
+   ```powershell
+   [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+   ```
+
+3. **Check Terminal Fonts:**
+   Ensure the terminal font (like Cascadia Code or Consolas) supports extended Unicode characters.
+
 #### Issue: "Path separators in code"
 **Symptoms:**
 - File operations fail on Windows
@@ -527,6 +547,214 @@ Error: Dynamic Link Library "TempMeasure64.dll" not found
    const userDataPath = path.join(os.homedir(), '.temperature-plotter');
    ```
 
+## Version 1.1.0 Specific Issues
+
+### Issue: "Fahrenheit display problems"
+**Symptoms:**
+- Fahrenheit values showing as undefined or NaN
+- Incorrect temperature conversions
+- Missing Fahrenheit values in CSV exports
+
+**Solutions:**
+1. **Check temperature conversion function:**
+   ```javascript
+   // Verify conversion in consoleColours.js
+   const fahrenheit = (celsius * 9/5) + 32;
+   ```
+
+2. **Validate data structure:**
+   ```javascript
+   // Ensure temperature objects include fahrenheit field
+   { timestamp: 123, value: 24.5, fahrenheit: 76.1, source: "REAL" }
+   ```
+
+3. **Check export formatting:**
+   ```javascript
+   // Verify CSV export includes Fahrenheit column
+   const headers = ['timestamp', 'celsius', 'fahrenheit', 'source'];
+   ```
+
+### Issue: "Hardware mode switching not working"
+**Symptoms:**
+- Manual hardware override (force-hardware-mode) fails
+- Mode change notifications not appearing in UI
+- Application stuck in simulator mode
+
+**Solutions:**
+1. **Test manual override:**
+   ```javascript
+   // Check browser console for errors
+   window.api.invoke('force-hardware-mode')
+     .then(result => console.log('Hardware override:', result));
+   ```
+
+2. **Verify IPC channel setup:**
+   ```javascript
+   // Ensure mode:change listener is registered in main.js
+   ipcMain.on('mode:change', (event, data) => {
+     // Handle mode change notification
+   });
+   ```
+
+3. **Check hardware timeout settings:**
+   ```javascript
+   // Verify timeout configuration in tempDll.js
+   const HARDWARE_TIMEOUT = 5000; // 5 seconds
+   ```
+
+### Issue: "Console output missing colours"
+**Symptoms:**
+- Terminal output appears in plain text
+- No colour-coded logging for temperature values
+- Debug information hard to read
+
+**Solutions:**
+1. **Verify consoleColours.js import:**
+   ```javascript
+   // Check main.js imports console utilities
+   const { logTemperature, logStatus } = require('./utils/consoleColours');
+   ```
+
+2. **Check terminal compatibility:**
+   ```bash
+   # Test if terminal supports ANSI colours
+   echo -e "\033[31mRed Text\033[0m"
+   ```
+
+3. **Force colour output:**
+   ```javascript
+   // Set environment variable for colour output
+   process.env.FORCE_COLOR = '1';
+   ```
+
+### Issue: "Test coverage regression"
+**Symptoms:**
+- Test count drops below 99 tests
+- Coverage percentage falls below 100%
+- Test summary generation fails
+
+**Solutions:**
+1. **Run full test suite:**
+   ```bash
+   npm test -- --coverage --verbose
+   ```
+
+2. **Check for missing tests:**
+   ```bash
+   # Verify test count matches expected
+   npm test | grep -E "(passing|failing)"
+   ```
+
+3. **Regenerate test summary:**
+   ```bash
+   # Run test summary generation script
+   node scripts/generate-test-summary.js
+   ```
+
+## Quick-Fix Solutions
+
+| Problem | Quick Fix | Time |
+|---------|-----------|------|
+| App won't start | `npm install && npm start` | 2 mins |
+| No temperature data | Check hardware connection | 1 min |
+| Console garbled text | Use ASCII-safe notation | 30 secs |
+| Tests failing | `npm test -- --updateSnapshot` | 1 min |
+| Export not working | Check file permissions | 1 min |
+| UI not updating | Restart application | 30 secs |
+
+### Troubleshooting Flow Diagram
+
+```mermaid
+flowchart TD
+    A[Problem Identified] --> B{Quick Fix Available?}
+    B -->|Yes| C[Apply Quick Fix]
+    B -->|No| D[Check Diagnostic Commands]
+    
+    C --> E{Problem Resolved?}
+    E -->|Yes| F[Document Solution]
+    E -->|No| D
+    
+    D --> G[Run System Health Check]
+    G --> H{Tests Pass?}
+    H -->|No| I[Fix Test Issues]
+    H -->|Yes| J[Check Hardware]
+    
+    J --> K{Hardware OK?}
+    K -->|No| L[Hardware Troubleshooting]
+    K -->|Yes| M[Check Console Output]
+    
+    M --> N{Console OK?}
+    N -->|No| O[Console Utilities Fix]
+    N -->|Yes| P[Advanced Debugging]
+    
+    I --> H
+    L --> K
+    O --> N
+    
+    F --> Q[Success]
+    P --> Q
+    
+    style A fill:#ffcccc
+    style Q fill:#ccffcc
+    style F fill:#ccffcc
+```
+
+### Error Resolution Decision Tree
+
+```mermaid
+flowchart TD
+    A[Error Occurs] --> B{Error Type?}
+    
+    B -->|Console Encoding| C[Check Terminal Settings]
+    B -->|Hardware Connection| D[Verify DLL/Ports]
+    B -->|Test Failure| E[Run Individual Tests]
+    B -->|UI Not Responding| F[Check React Components]
+    
+    C --> G[Force UTF-8 Encoding]
+    D --> H[Test Hardware Directly]
+    E --> I[Check Mock Data]
+    F --> J[Verify IPC Channels]
+    
+    G --> K{Fixed?}
+    H --> K
+    I --> K
+    J --> K
+    
+    K -->|Yes| L[Success]
+    K -->|No| M[Escalate to Advanced Debugging]
+    
+    style A fill:#ffcccc
+    style L fill:#ccffcc
+    style M fill:#ffffcc
+```
+
+## Diagnostic Commands
+
+### System Health Check
+```bash
+# Complete system diagnostic
+npm run diagnose || npm test && npm run make && echo "System OK"
+```
+
+### Test Coverage Verification
+```bash
+# Verify 99-test baseline
+npm test -- --coverage --passWithNoTests
+node scripts/generate-test-summary.js
+```
+
+### Hardware Connection Test
+```bash
+# Test DLL integration
+node -e "require('./src/main/dll/tempDll.js').testConnection()"
+```
+
+### Console Utilities Test
+```bash
+# Test colour output
+node -e "require('./src/utils/consoleColours.js').testColours()"
+```
+
 ## Getting Additional Help
 
 ### Debug Mode
@@ -552,6 +780,12 @@ tail -f logs/main.log
 2. **Create detailed issue:** Include error messages, system info, and steps to reproduce
 3. **Include diagnostics:** Run diagnostics script and include output
 
+### Cross-Reference Documentation
+For detailed technical information, see:
+- **API Documentation:** [API.md](docs/API.md) - IPC channels and data structures
+- **System Architecture:** [SYSTEM-ARCHITECTURE.md](docs/SYSTEM-ARCHITECTURE.md) - Design patterns and components
+- **Development Guide:** [CONTRIBUTING.md](docs/CONTRIBUTING.md) - Development setup and standards
+
 ### Diagnostic Information
 Create diagnostic report:
 ```bash
@@ -568,8 +802,8 @@ git log --oneline -5
 
 ---
 
-**Last Updated:** 2026-02-20  
-**Version:** 1.0.0  
+**Last Updated:** 2026-02-26  
+**Version:** 1.1.0  
 **For:** Temperature Plotter Application
 
 If your issue isn't covered here, please create an issue in the project repository with detailed information about the problem you're experiencing.

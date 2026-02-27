@@ -55,7 +55,7 @@ npm test
 ### File Naming Conventions
 - Components: `PascalCase.jsx` (e.g., `TemperatureChart.jsx`)
 - Hooks: `camelCase.js` with `use` prefix (e.g., `useTemperature.js`)
-- Utilities: `camelCase.js` (e.g., `temperatureUtils.js`)
+- Utilities: `camelCase.js` (e.g., `consoleColours.js`)
 - Tests: `PascalCase.test.js` (e.g., `TemperatureChart.test.js`)
 
 ### JSDoc Documentation
@@ -91,7 +91,7 @@ import { useTemperature } from '../hooks/useTemperature';
 - All new features must include unit tests
 - Critical paths must have integration tests
 - UI components must have component tests
-- Maintain minimum 50% test coverage
+- Maintain minimum 90% test coverage
 
 ### Test Structure
 ```javascript
@@ -256,6 +256,89 @@ npm start
 - Update documentation
 - Commit with conventional messages
 
+#### **Practical Examples**
+
+**Example 1: Adding a New Temperature Sensor Type**
+```javascript
+// 1. Update consoleColours.js
+const logSensorType = (sensorType, data) => {
+  const colours = {
+    'THERMOCOUPLE': '\x1b[33m', // Yellow
+    'RTD': '\x1b[34m',         // Blue
+    'THERMISTOR': '\x1b[35m'   // Magenta
+  };
+  
+  console.log(`${colours[sensorType]}[${sensorType}] ${data.value}°C\x1b[0m`);
+};
+
+// 2. Add corresponding test
+describe('logSensorType', () => {
+  it('should log thermocouple data in yellow', () => {
+    const consoleSpy = jest.spyOn(console, 'log');
+    logSensorType('THERMOCOUPLE', { value: 25.0 });
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('\x1b[33m'));
+  });
+});
+```
+
+**Example 2: Implementing New IPC Channel**
+```javascript
+// 1. Add to preload.js
+contextBridge.exposeInMainWorld('api', {
+  // ... existing methods
+  getSensorInfo: () => ipcRenderer.invoke('get-sensor-info')
+});
+
+// 2. Add handler in main.js
+ipcMain.handle('get-sensor-info', async () => {
+  return {
+    type: 'THERMOCOUPLE',
+    range: { min: -200, max: 1200 },
+    accuracy: 0.1
+  };
+});
+
+// 3. Use in renderer component
+const [sensorInfo, setSensorInfo] = useState(null);
+
+useEffect(() => {
+  window.api.getSensorInfo().then(setSensorInfo);
+}, []);
+```
+
+**Example 3: Adding Fahrenheit Conversion Enhancement**
+```javascript
+// 1. Extend consoleColours.js
+const formatTemperature = (celsius, includeFahrenheit = true) => {
+  const fahrenheit = includeFahrenheit ? ` (${celsiusToFahrenheit(celsius)}°F)` : '';
+  return `${celsius}°C${fahrenheit}`;
+};
+
+// 2. Update existing function
+const logTemperature = (data) => {
+  const { value, fahrenheit, source, timestamp } = data;
+  const sourceColour = source === 'REAL' ? '\x1b[32m' : '\x1b[90m';
+  const tempDisplay = formatTemperature(value, true);
+  
+  console.log(`${sourceColour}[${source}] ${tempDisplay} at ${new Date(timestamp).toISOString()}\x1b[0m`);
+};
+
+// 3. Add comprehensive tests
+describe('formatTemperature', () => {
+  it('should format Celsius only', () => {
+    expect(formatTemperature(25.0, false)).toBe('25.0°C');
+  });
+  
+  it('should format Celsius with Fahrenheit', () => {
+    expect(formatTemperature(25.0, true)).toBe('25.0°C (77.0°F)');
+  });
+  
+  it('should handle negative temperatures', () => {
+    expect(formatTemperature(-10.5, true)).toBe('-10.5°C (13.1°F)');
+  });
+});
+```
+
 ### 3. Quality Assurance
 ```bash
 # Run tests
@@ -281,6 +364,7 @@ git push origin feature/your-feature-name
 - Use custom hooks for complex state logic
 - Implement proper error boundaries
 - Follow React best practises
+- Separation of Concerns: Keep business/hardware logic separate from presentation logic (use src/utils/ for formatting and terminal output)
 
 ### IPC Communication
 - Use contextBridge for security
