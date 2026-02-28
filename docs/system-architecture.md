@@ -422,6 +422,167 @@ graph TD
 - **Purpose**: Ensures reliability and maintainability via a comprehensive Jest test suite with mocking and coverage reporting to catch regressions early.
 - **KSB Demonstration**: S4 (Unit testing), S5 (Integration testing), S13 (Testing frameworks)
 
+### 8. Algorithm Pseudocode
+
+#### 8.1 Temperature Data Processing Algorithm
+
+```
+ALGORITHM ProcessTemperatureReading(reading)
+INPUT: sensor_reading object with temp, timestamp, sensorId
+OUTPUT: processed_temperature object or null
+
+1. VALIDATE input parameters
+   IF sensor_reading is null OR missing required fields THEN
+      RETURN null
+   END IF
+
+2. CHECK temperature range validity
+   IF sensor_reading.temp < -273.15 OR sensor_reading.temp > 200 THEN
+      LOG "Invalid temperature range: " + sensor_reading.temp
+      RETURN null
+   END IF
+
+3. APPLY unit conversion IF needed
+   IF sensor_reading.unit = "fahrenheit" THEN
+      converted_temp = (sensor_reading.temp - 32) * 5/9
+   ELSE IF sensor_reading.unit = "kelvin" THEN
+      converted_temp = sensor_reading.temp - 273.15
+   ELSE
+      converted_temp = sensor_reading.temp
+   END IF
+
+4. CREATE processed object
+   processed = {
+      temp: converted_temp,
+      timestamp: current_timestamp(),
+      sensorId: sensor_reading.sensorId,
+      quality: "good"
+   }
+
+5. UPDATE circular buffer
+   ADD_TO_BUFFER(processed)
+   
+6. TRIGGER UI update
+   SEND_TO_RENDERER(processed)
+
+7. RETURN processed
+END ALGORITHM
+```
+
+#### 8.2 Circular Buffer Implementation
+
+```
+ALGORITHM CircularBufferInsert(buffer, new_data, max_size)
+INPUT: buffer array, new_data object, max_size integer
+OUTPUT: updated buffer array
+
+1. CHECK buffer size
+   IF length(buffer) >= max_size THEN
+      // Remove oldest entry (FIFO)
+      REMOVE buffer[0]
+   END IF
+
+2. INSERT new data
+   APPEND new_data TO buffer
+
+3. UPDATE buffer metadata
+   buffer.last_updated = current_timestamp()
+   buffer.count = length(buffer)
+
+4. RETURN buffer
+END ALGORITHM
+```
+
+#### 8.3 Sensor Validation Logic
+
+```
+ALGORITHM ValidateSensorData(raw_data)
+INPUT: raw_data object from hardware sensor
+OUTPUT: validation_result object
+
+1. INITIALISE result
+   result = { valid: false, errors: [], warnings: [] }
+
+2. CHECK data structure
+   IF raw_data is null THEN
+      ADD "No data received" TO result.errors
+      RETURN result
+   END IF
+
+3. VALIDATE temperature value
+   IF typeof raw_data.temp != "number" THEN
+      ADD "Temperature must be numeric" TO result.errors
+   ELSE IF raw_data.temp < -50 OR raw_data.temp > 200 THEN
+      ADD "Temperature out of operational range" TO result.errors
+   END IF
+
+4. CHECK timestamp
+   IF raw_data.timestamp is missing OR invalid THEN
+      ADD "Missing or invalid timestamp" TO result.errors
+   END IF
+
+5. VERIFY sensor identifier
+   IF raw_data.sensorId is missing OR empty THEN
+      ADD "Sensor identifier required" TO result.errors
+   END IF
+
+6. SET validation status
+   IF length(result.errors) = 0 THEN
+      result.valid = true
+   END IF
+
+7. RETURN result
+END ALGORITHM
+```
+
+#### 8.4 CSV Export Algorithm
+
+```
+ALGORITHM ExportTemperatureData(buffer, filename)
+INPUT: temperature buffer array, output filename string
+OUTPUT: export_result object
+
+1. VALIDATE inputs
+   IF buffer is empty THEN
+      RETURN { success: false, message: "No data to export" }
+   END IF
+
+2. CREATE CSV headers
+   headers = ["Timestamp", "Temperature (°C)", "Sensor ID", "Quality"]
+
+3. INITIALISE CSV content
+   csv_content = JOIN(headers, ",") + newline
+
+4. PROCESS each temperature reading
+   FOR each reading IN buffer DO
+      row = [
+         FORMAT_TIMESTAMP(reading.timestamp),
+         FORMAT_NUMBER(reading.temp, 2),
+         reading.sensorId,
+         reading.quality
+      ]
+      csv_content += JOIN(row, ",") + newline
+   END FOR
+
+5. WRITE to file
+   TRY
+      WRITE_FILE(filename, csv_content)
+      result = { 
+         success: true, 
+         message: "Exported " + length(buffer) + " records",
+         filename: filename
+      }
+   CATCH error
+      result = { 
+         success: false, 
+         message: "Export failed: " + error.message 
+      }
+   END TRY
+
+6. RETURN result
+END ALGORITHM
+```
+
 ### 7.1 Performance Benchmarks & Metrics
 
 ```mermaid
