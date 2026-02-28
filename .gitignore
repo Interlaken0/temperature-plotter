@@ -59,6 +59,9 @@ coverage/
 *.lcov
 lccov.info
 
+# Test reports (auto-generated files)
+evidence/test-reports/test-summary.txt
+
 # Misc
 tmp/
 temp/
