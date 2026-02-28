@@ -3,55 +3,54 @@
  * @module tempDll
  */
 
-const koffi = require('koffi');
+const { app } = require('electron');
+const koffi = typeof __non_webpack_require__ !== 'undefined' ? __non_webpack_require__('koffi') : require('koffi');
+
 const path = require('path');
-const store = require('../state/temperatureStore');
 const fs = require('fs');
+const store = require('../state/temperatureStore');
 const consoleColours = require('../utils/consoleColours');
 
-let app;
-try {
-  app = require('electron');
-} catch (e) {
-  app = {
-    isPackaged: false,
-    getAppPath: () => process.cwd()
-  };
+// Ultra-safe path resolution to prevent Webpack build warnings
+let assetsFolder = '';
+if (app && app.isPackaged) {
+  // Hard fallback just in case process.resourcesPath is undefined during build
+  const resPath = process.resourcesPath || path.join(process.cwd(), 'resources');
+  assetsFolder = path.join(resPath, 'assets');
+} else {
+  assetsFolder = path.resolve(__dirname, '..', '..', 'assets');
 }
 
-const assetsPath = app.isPackaged
-  ? path.join(process.resourcesPath, 'assets')
-  : path.join(__dirname, '..', '..', 'assets');
-
+const dllName = 'TempMeasure64.dll';
 let lib = null;
-const originalCwd = process.cwd();
-
-try {
-  if (fs.existsSync(assetsPath)) {
-    process.chdir(assetsPath);
-    try { koffi.unload('TempMeasure64.dll'); } catch (e) { }
-    try {
-      lib = koffi.load('TempMeasure64.dll');
-      consoleColours.success('TempMeasure64.dll loaded successfully');
-    } catch (e) {
-      consoleColours.error('Library Load Error: ' + e.message);
-    }
-  }
-} finally {
-  try { process.chdir(originalCwd); } catch (e) { }
-}
-
 let StartDevice_Func = null;
 let IsDeviceConnected_Func = null;
 const CallbackProto = koffi.proto('void __cdecl (float fTemp)');
+
+const originalCwd = process.cwd();
+
+try {
+  const folderExists = typeof assetsFolder === 'string' && assetsFolder !== '' ? fs.existsSync(assetsFolder) : false;
+  
+  if (folderExists) {
+    process.chdir(assetsFolder);
+    
+    try { koffi.unload(dllName); } catch (e) { } 
+    
+    lib = koffi.load(dllName);
+  }
+} catch (e) {
+  // Silent fail - will fall back to simulator
+} finally {
+  try { process.chdir(originalCwd); } catch (e) { }
+}
 
 if (lib) {
   try {
     StartDevice_Func = lib.func('StartDevice', 'int', [koffi.pointer(CallbackProto), 'char*']);
     IsDeviceConnected_Func = lib.func('IsDeviceConnected', 'int', []);
-    consoleColours.success('Functions bound');
   } catch (err) {
-    consoleColours.error('Function Binding Failed: ' + err.message);
+    // Silent fail - will fall back to simulator
   }
 }
 
@@ -60,9 +59,7 @@ let registeredCallback = null;
 module.exports = {
   checkConnection: () => {
     if (IsDeviceConnected_Func) {
-      try {
-        return IsDeviceConnected_Func();
-      } catch (e) { return 1; }
+      try { return IsDeviceConnected_Func(); } catch (e) { return 1; }
     }
     return 1;
   },
@@ -70,13 +67,11 @@ module.exports = {
   start: () => {
     if (!lib || !StartDevice_Func) return;
 
-    // REQUIREMENT: State tracking for 30.00 start upon connection
     let isFirstReading = true;
 
     const onMeasurement = (fTemp) => {
       let outputTemp = fTemp;
 
-      // Force first reading of the session to 30.00
       if (isFirstReading) {
         consoleColours.hardware(`Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})`);
         outputTemp = 30.00;
@@ -88,8 +83,6 @@ module.exports = {
 
       if (outputTemp > -50 && outputTemp < 200) {
         store.updateTemperature(outputTemp);
-        
-        // Update health monitor via global instance
         if (global.hardwareMonitorInstance) {
             global.hardwareMonitorInstance.updateLastUpdate();
         }
@@ -97,9 +90,7 @@ module.exports = {
     };
 
     try {
-      if (registeredCallback) {
-          koffi.unregister(registeredCallback);
-      }
+      if (registeredCallback) koffi.unregister(registeredCallback);
       registeredCallback = koffi.register(onMeasurement, koffi.pointer(CallbackProto));
       
       const serialNumber = Buffer.alloc(32);
