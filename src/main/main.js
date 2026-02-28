@@ -1,4 +1,4 @@
-// Electron Main Process Entry Point - Temperature Plotter Application
+// Electron Main Process Entry Point - AMF-Temperature-Plotter Application
 // ============================================================================
 process.noDeprecation = true; // Suppress N-API Deprecation Warnings on Windows
 const { app, BrowserWindow, ipcMain } = require('electron');
@@ -7,7 +7,7 @@ const { initIpc } = require('./ipc/temperatureIpc');
 const store = require('./state/temperatureStore'); // REQUIRED for 10.00 injection
 const consoleColours = require('./utils/consoleColours'); // Enhanced console output
 
-consoleColours.header('Temperature Plotter Starting');
+consoleColours.header('AMF-Temperature-Plotter Starting');
 
 if (require('electron-squirrel-startup')) {
     app.quit();

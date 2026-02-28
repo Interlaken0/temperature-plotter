@@ -1,7 +1,7 @@
 {
-  "name": "temperature-plotter",
+  "name": "amf-temp-plotter",
   "version": "1.0.0",
-  "description": "A real-time temperature monitoring and plotting application.",
+  "productName": "AMF-Temperature-Plotter",
   "main": ".webpack/main",
   "author": "Greg",
   "license": "MIT",

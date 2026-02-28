@@ -1,4 +1,4 @@
-// REACT APPLICATION COMPONENT - Main Temperature Plotter Interface
+// REACT APPLICATION COMPONENT - Main AMF-Temperature-Plotter Interface
 // ============================================================================
 // This is the root component of the temperature plotting application:
 // - Manages global application state (dark mode, device mode)
@@ -51,7 +51,7 @@ export default function App() {
         <div className="max-w-5xl mx-auto space-y-6">
           {/* HEADER SECTION - Title and theme toggle */}
           <div className="flex justify-between items-centre mb-8">
-            <h1 className="text-3xl font-bold tracking-tight">Temperature Plotter</h1>
+            <h1 className="text-3xl font-bold tracking-tight">AMF-Temperature-Plotter</h1>
             {/* THEME TOGGLE - Dark/light mode switcher with emoji indicators */}
             <button 
               onClick={() => setDarkMode(!darkMode)} // Toggle dark mode state

@@ -13,7 +13,8 @@ module.exports = {
     // Unpack native modules from asar
     asarUnpack: [
       '**/node_modules/koffi/**/*'
-    ]
+    ],
+    executableName: 'AMF-Temperature-Plotter'
   },
   rebuildConfig: {
     onlyModules: ['koffi'],
@@ -23,10 +24,11 @@ module.exports = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        name: 'temperature_plotter', // Note: No spaces or dashes usually allowed here
+        name: 'amf_temp_plotter', // Note: No spaces or dashes usually allowed here
         authors: 'Greg Schaerer',    // Squirrel requires an author!
-        exe: 'Temperature-Plotter.exe', // Must match package.json name
-        setupExe: 'TemperaturePlotterSetup.exe' // Optional: Names your installer nicely
+        exe: 'AMF-Temperature-Plotter.exe', // Must match executableName
+        setupExe: 'AMF-Temperature-PlotterSetup.exe', // Optional: Names your installer nicely
+        description: 'AMF-Temperature-Plotter - Real-time temperature monitoring application'
       }
     }
   ],

@@ -1,10 +1,4 @@
-let standardRules = [];
-try {
-  // Tries to grab the webpack.rules.js file from the project root (one folder up)
-  standardRules = require('../webpack.rules');
-} catch (e) {
-  // If the file doesn't exist, safely do nothing so the build continues
-}
+const rendererConfig = require('./webpack.renderer.config.js');
 
 module.exports = {
   /**
@@ -13,7 +7,7 @@ module.exports = {
   entry: './src/main/main.js',
   
   module: {
-    rules: standardRules,
+    rules: rendererConfig.module.rules,
   },
 
   // CRITICAL FIX: Stops Webpack from breaking the native Koffi library
