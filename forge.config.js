@@ -4,12 +4,6 @@ module.exports = {
     extraResource: [
       './assets'
     ],
-    // Ensure native modules are properly packaged
-    ignore: [
-      /out/,
-      /\.git/,
-      /node_modules\/\.bin/
-    ],
     // Unpack native modules from asar
     asarUnpack: [
       '**/node_modules/koffi/**/*'
