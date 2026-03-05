@@ -20,18 +20,18 @@ This document provides a comprehensive reference for the Temperature Plotter app
 
 ### Temperature Data Channels
 
-#### `temperature-update`
+#### `temperature:update`
 **Direction:** Main → Renderer  
 **Frequency:** 1Hz  
 **Data:** Temperature reading object
 
 ```javascript
 {
-  timestamp: 1715694820123,    // Unix timestamp
-  iso_time: "2024-02-20T14:45:32.123Z",  // ISO 8601
-  value: 24.5,                   // Temperature in Celsius
-  fahrenheit: 76.1,              // Pre-calculated Fahrenheit
-  source: "REAL"                 // "REAL" or "SIMULATED"
+  temp: 24.5,                   // Temperature in Celsius
+  history: [                   // Historical temperature array
+    { time: 1715694820123, temp: 24.3 },
+    { time: 1715694821123, temp: 24.5 }
+  ]
 }
 ```
 
@@ -47,123 +47,271 @@ This document provides a comprehensive reference for the Temperature Plotter app
 }
 ```
 
-#### `temperature-status`
-**Direction:** Main → Renderer  
-**Purpose:** Hardware connection status updates
-
-```javascript
-{
-  connected: true,               // Connection status
-  mode: "simulator",           // "simulator" or "hardware"
-  port: "COM3"                 // Communication port (hardware mode)
-}
-```
-
 ### User Action Channels
 
-#### `export-csv`
+#### `save-csv`
 **Direction:** Renderer → Main  
 **Purpose:** Request CSV export of temperature data
 
 ```javascript
 // Request (no payload)
-window.api.exportCsv()
+window.api.saveCSV()
 
 // Response
 {
   success: true,
-  filepath: "C:\\Users\\User\\Downloads\\temperature_export_20240220.csv",
-  recordCount: 1440
+  canceled: false  // User cancelled the save dialog
 }
+```
+
+#### `get-device-status`
+**Direction:** Renderer → Main  
+**Purpose:** Retrieve current device status and health information
+
+```javascript
+// Request
+window.api.getDeviceStatus()
+
+// Response
+{
+  mode: "simulator",           // "simulator" or "hardware"
+  healthy: true,               // Device health status
+  lastUpdate: 1715694820123,   // Last update timestamp
+  deviceType: "Simulator"      // Device class name
+}
+```
+
+#### `switch-mode`
+**Direction:** Renderer → Main   
+**Purpose:** Manually switch between hardware and simulator modes.
+
+```javascript
+// Request
+const result = await window.api.switchMode({ mode: 'simulator' });
+
+// Response
+{ success: true, mode: "simulator" }
 ```
 
 #### `force-hardware-mode`
 **Direction:** Renderer → Main   
-**Purpose:** Manually trigger a DLL refresh and attempt to re-establish hardware connection.
+**Purpose:** Force hardware mode for development and testing.
 
 ```javascript
 // Request
-const result = await window.api.invoke('force-hardware-mode');
+const result = await window.api.forceHardwareMode();
 
 // Response
 { success: true } // or { success: false, message: "Error details" }
 ```
 
-#### `get-historical-data`
-**Direction:** Renderer → Main  
-**Purpose:** Retrieve historical temperature data
-
-```javascript
-// Request
-window.api.getHistoricalData()
-
-// Response
-{
-  success: true,
-  data: [
-    { timestamp: 1715694820123, iso_time: "2024-02-20T14:45:32.123Z", value: 24.5 },
-    // ... more records
-  ]
-}
-```
-
 ## Main Process APIs
 
-### Console Utilities (`src/utils/consoleColours.js`)
+### Console Utilities (`src/main/utils/consoleColours.js`)
 
-#### `logTemperature(temperatureData)`
-Logs temperature data with colour-coded formatting and ASCII-safe notation.
+#### `success(message)`
+Logs success messages with green colour formatting.
 
 **Parameters:**
-- `temperatureData` (object): Temperature reading object
-  - `value` (number): Temperature in Celsius
-  - `fahrenheit` (number): Temperature in Fahrenheit
-  - `source` (string): Data source ("REAL" or "SIMULATED")
-  - `timestamp` (number): Unix timestamp
+- `message` (string): Success message to display
 
 **Returns:** void
 
 **Example:**
 ```javascript
-const { logTemperature } = require('./utils/consoleColours');
-logTemperature({
-  value: 24.5,
-  fahrenheit: 76.1,
-  source: "REAL",
-  timestamp: Date.now()
-});
-// Output: ✓ [REAL] 24.5°C (76.1°F) at 2026-02-26T16:20:00.000Z
+const { success } = require('./utils/consoleColours');
+success('Hardware connected');
+// Output: [OK] Hardware connected
 ```
 
-#### `logStatus(message, type)`
-Logs status messages with appropriate colour coding.
+#### `error(message)`
+Logs error messages with red colour formatting.
 
 **Parameters:**
-- `message` (string): Status message to display
-- `type` (string): Log type ("info", "success", "warning", "error")
+- `message` (string): Error message to display
 
 **Returns:** void
 
 **Example:**
 ```javascript
-const { logStatus } = require('./utils/consoleColours');
-logStatus("Hardware connected", "success");
-logStatus("Connection timeout", "warning");
-logStatus("DLL not found", "error");
+const { error } = require('./utils/consoleColours');
+error('Connection failed');
+// Output: [ERROR] Connection failed
 ```
 
-#### `celsiusToFahrenheit(celsius)`
-Converts Celsius to Fahrenheit with proper formatting.
+#### `warning(message)`
+Logs warning messages with yellow colour formatting.
+
+**Parameters:**
+- `message` (string): Warning message to display
+
+**Returns:** void
+
+**Example:**
+```javascript
+const { warning } = require('./utils/consoleColours');
+warning('Hardware timeout detected');
+// Output: [!] Hardware timeout detected
+```
+
+#### `info(message)`
+Logs informational messages with cyan colour formatting.
+
+**Parameters:**
+- `message` (string): Information message to display
+
+**Returns:** void
+
+**Example:**
+```javascript
+const { info } = require('./utils/consoleColours');
+info('Starting hardware monitoring...');
+// Output: [i] Starting hardware monitoring...
+```
+
+#### `hardware(message)`
+Logs hardware-specific messages with blue colour formatting and HAL prefix.
+
+**Parameters:**
+- `message` (string): Hardware-related message
+
+**Returns:** void
+
+**Example:**
+```javascript
+const { hardware } = require('./utils/consoleColours');
+hardware(`Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})`);
+// Output: [+] [HAL] Session Start: Forcing 30.00 deg C (Sensor was: 25.00)
+```
+
+#### `simulator(message)`
+Logs simulator-specific messages with magenta colour formatting.
+
+**Parameters:**
+- `message` (string): Simulator-related message
+
+**Returns:** void
+
+**Example:**
+```javascript
+const { simulator } = require('./utils/consoleColours');
+simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)');
+// Output: [~] SIMULATOR Stopped: No final reading sent (Hardware disconnected - using simulation)
+```
+
+#### `temperature(celsius, fahrenheit, source = 'REAL')`
+Logs temperature readings with colour-coded formatting based on data source.
 
 **Parameters:**
 - `celsius` (number): Temperature in Celsius
+- `fahrenheit` (number): Temperature in Fahrenheit
+- `source` (string, optional): Data source ("REAL" or "SIMULATOR") - defaults to "REAL"
 
-**Returns:** number - Temperature in Fahrenheit
+**Returns:** void
 
 **Example:**
 ```javascript
-const { celsiusToFahrenheit } = require('./utils/consoleColours');
-const fahrenheit = celsiusToFahrenheit(24.5); // 76.1
+const { temperature } = require('./utils/consoleColours');
+temperature(24.5, 76.1, 'REAL');
+// Output: [+] [REAL] 24.50 deg C (76.10 deg F)
+
+temperature(22.0, 71.6, 'SIMULATOR');
+// Output: [~] [SIMULATOR] 22.00 deg C (71.60 deg F)
+```
+
+#### `status(message, type = 'info')`
+Logs status messages with configurable colour coding.
+
+**Parameters:**
+- `message` (string): Status message to display
+- `type` (string, optional): Log type ("success", "error", "warning", "info") - defaults to "info"
+
+**Returns:** void
+
+**Example:**
+```javascript
+const { status } = require('./utils/consoleColours');
+status('Switching back to hardware mode', 'success');
+// Output: > Switching back to hardware mode
+
+status('Performing hard DLL refresh', 'info');
+// Output: > Performing hard DLL refresh
+```
+
+#### `separator()`
+Outputs a visual separator line for console organisation.
+
+**Returns:** void
+
+**Example:**
+```javascript
+const { separator } = require('./utils/consoleColours');
+separator();
+// Output: ==================================================
+```
+
+#### `header(title)`
+Outputs a formatted section header with title.
+
+**Parameters:**
+- `title` (string): Section title to display
+
+**Returns:** void
+
+**Example:**
+```javascript
+const { header } = require('./utils/consoleColours');
+header('AMF-Temperature-Plotter Starting');
+// Output:
+// ==================================================
+//   AMF-TEMPERATURE-PLOTTER STARTING  
+// ==================================================
+```
+
+### Exported Objects
+
+#### `colours`
+ANSI colour code object for custom formatting.
+
+**Properties:**
+- `reset` - Reset all formatting
+- `bright` - Bright/bold text
+- `dim` - Dim text
+- `red` - Red text
+- `green` - Green text
+- `yellow` - Yellow text
+- `blue` - Blue text
+- `magenta` - Magenta text
+- `cyan` - Cyan text
+- `white` - White text
+- `gray` - Gray text
+- `bgRed` - Red background
+- `bgGreen` - Green background
+- `bgYellow` - Yellow background
+- `bgBlue` - Blue background
+
+**Example:**
+```javascript
+const { colours } = require('./utils/consoleColours');
+console.log(`${colours.red}Error message${colours.reset}`);
+```
+
+#### `symbols`
+Symbol definitions object for consistent prefixes.
+
+**Properties:**
+- `success` - '[OK]'
+- `error` - '[ERROR]'
+- `warning` - '[!]'
+- `info` - '[i]'
+- `hardware` - '[+]'
+- `simulator` - '[~]'
+- `temperature` - '[TEMP]'
+
+**Example:**
+```javascript
+const { symbols } = require('./utils/consoleColours');
+console.log(`${symbols.success} Operation completed`);
 ```
 
 ### Temperature Store (`src/main/state/temperatureStore.js`)
@@ -191,25 +339,20 @@ Gets current store status.
 
 ### Hardware Abstraction Layer (`src/main/dll/tempDll.js`)
 
-#### `initialize()`
-Initializes hardware connection.
+#### `checkConnection()`
+Checks hardware connection status.
 
-**Returns:** Promise<boolean> - Connection success
+**Returns:** number - 0 for connected, 1 for disconnected
 
-#### `startMonitoring()`
-Starts real-time temperature monitoring.
+#### `start()`
+Starts hardware monitoring.
 
-**Returns:** Promise<void>
+**Returns:** void
 
-#### `stopMonitoring()`
-Stops temperature monitoring.
+#### `stop()`
+Stops hardware monitoring.
 
-**Returns:** Promise<void>
-
-#### `getTemperature()`
-Gets current temperature reading.
-
-**Returns:** Promise<number> - Temperature in Celsius
+**Returns:** void
 
 ### Simulator (`src/main/simulator.js`)
 
@@ -240,10 +383,8 @@ Sets simulation frequency.
 ```javascript
 {
   data: Array<TemperatureReading>,  // Temperature data array
-  width: number,                    // Chart width
-  height: number,                    // Chart height
-  showGrid: boolean,                 // Grid visibility
-  timeRange: number                  // Time range in minutes
+  darkMode: boolean,                // Theme mode (true for dark, false for light)
+  mode: string                      // Device mode ("simulator" or "hardware")
 }
 ```
 
@@ -252,12 +393,58 @@ Sets simulation frequency.
 import TemperatureChart from './components/TemperatureChart';
 
 <TemperatureChart
-  data={temperatureData}
-  width={800}
-  height={400}
-  showGrid={true}
-  timeRange={60}
+  data={temperatureHistory}
+  darkMode={true}
+  mode="simulator"
 />
+```
+
+### StatusPanel Component
+**Location:** `src/renderer/components/StatusPanel.jsx`
+
+**Props:**
+```javascript
+{
+  temp: number                      // Current temperature value
+}
+```
+
+**Usage Example:**
+```jsx
+import StatusPanel from './components/StatusPanel';
+
+<StatusPanel temp={24.5} />
+```
+
+### ModeStatus Component
+**Location:** `src/renderer/components/ModeStatus.jsx`
+
+**Props:** None (uses internal state management)
+
+**Features:**
+- Real-time device mode display
+- Hardware health monitoring
+- Manual mode switching buttons
+- Activity notification system
+- Last update timestamp tracking
+
+**Usage Example:**
+```jsx
+import ModeStatus from './components/ModeStatus';
+
+<ModeStatus />
+```
+
+### SaveButton Component
+**Location:** `src/renderer/components/SaveButton.jsx`
+
+**Props:** None
+
+**Usage Example:**
+```jsx
+import SaveButton from './components/SaveButton';
+
+<SaveButton />
 ```
 
 ### useTemperature Hook
@@ -266,12 +453,8 @@ import TemperatureChart from './components/TemperatureChart';
 **Returns:**
 ```javascript
 {
-  currentTemperature: number,          // Latest temperature
-  temperatureHistory: Array,         // Historical data
-  isConnected: boolean,             // Connection status
-  mode: string,                    // "simulator" or "hardware"
-  exportCsv: () => Promise,        // Export function
-  getHistoricalData: () => Promise  // Historical data function
+  temp: number,                     // Current temperature
+  history: Array<TemperatureReading> // Historical temperature data
 }
 ```
 
@@ -280,13 +463,12 @@ import TemperatureChart from './components/TemperatureChart';
 import { useTemperature } from './hooks/useTemperature';
 
 function TemperatureDisplay() {
-  const { currentTemperature, isConnected, exportCsv } = useTemperature();
+  const { temp, history } = useTemperature();
   
   return (
     <div>
-      <p>Current: {currentTemperature}°C</p>
-      <p>Status: {isConnected ? 'Connected' : 'Disconnected'}</p>
-      <button onClick={exportCsv}>Export CSV</button>
+      <p>Current: {temp}°C</p>
+      <p>History: {history.length} readings</p>
     </div>
   );
 }
@@ -297,31 +479,45 @@ function TemperatureDisplay() {
 ### TemperatureReading
 ```javascript
 interface TemperatureReading {
-  timestamp: number;      // Unix timestamp (milliseconds)
-  iso_time: string;       // ISO 8601 formatted time
-  value: number;          // Temperature in Celsius
-  fahrenheit?: number;    // Temperature in Fahrenheit (optional)
-  source?: string;        // Data source: "REAL" or "SIMULATED" (optional)
+  time: number;          // Unix timestamp (milliseconds)
+  temp: number;         // Temperature in Celsius
 }
 ```
 
-### ConnectionStatus
+### DeviceStatus
 ```javascript
-interface ConnectionStatus {
-  connected: boolean;     // Connection state
-  mode: string;          // "simulator" or "hardware"
-  port?: string;         // Communication port (hardware mode only)
-  lastUpdate?: number;    // Last update timestamp
+interface DeviceStatus {
+  mode: string;         // "simulator" or "hardware"
+  healthy: boolean;     // Device health status
+  lastUpdate: number;   // Last update timestamp
+  deviceType: string;   // Device class name
 }
 ```
 
-### ExportResult
+### ModeChangeData
 ```javascript
-interface ExportResult {
-  success: boolean;       // Export success status
-  filepath?: string;      // Export file path (success only)
-  recordCount?: number;   // Number of records exported
-  error?: string;         // Error message (failure only)
+interface ModeChangeData {
+  mode: string;         // New device mode
+  reason: string;       // Reason for mode change
+  timestamp: string;    // ISO 8601 timestamp
+}
+```
+
+### NotificationData
+```javascript
+interface NotificationData {
+  type: string;         // "mode-change" or "manual-switch"
+  message: string;      // Notification message
+  reason?: string;      // Reason for mode change (optional)
+  timestamp: string;    // ISO 8601 timestamp
+}
+```
+
+### TemperatureUpdateData
+```javascript
+interface TemperatureUpdateData {
+  temp: number;                    // Current temperature
+  history: Array<TemperatureReading> // Historical data array
 }
 ```
 
@@ -333,16 +529,16 @@ interface ExportResult {
 import { useTemperature } from './hooks/useTemperature';
 
 function App() {
-  const { currentTemperature, isConnected } = useTemperature();
+  const { temp, history } = useTemperature();
   
   useEffect(() => {
     // Component automatically receives temperature updates
-  }, [currentTemperature]);
+  }, [temp]);
   
   return (
     <div>
-      <h1>Temperature: {currentTemperature}°C</h1>
-      <p>Status: {isConnected ? 'Connected' : 'Disconnected'}</p>
+      <h1>Temperature: {temp}°C</h1>
+      <p>History: {history.length} readings</p>
     </div>
   );
 }
@@ -353,14 +549,61 @@ function App() {
 // In renderer process
 async function handleExport() {
   try {
-    const result = await window.api.exportCsv();
-    if (result.success) {
-      alert(`Exported ${result.recordCount} records to ${result.filepath}`);
-    } else {
-      alert('Export failed');
+    const result = await window.api.saveCSV();
+    if (result.success && !result.canceled) {
+      alert('CSV exported successfully');
+    } else if (result.canceled) {
+      alert('Export cancelled by user');
     }
   } catch (error) {
     alert('Export error: ' + error.message);
+  }
+}
+```
+
+### Device Status Monitoring
+```javascript
+// In renderer process
+async function checkDeviceStatus() {
+  try {
+    const status = await window.api.getDeviceStatus();
+    console.log(`Device mode: ${status.mode}`);
+    console.log(`Device healthy: ${status.healthy}`);
+    console.log(`Last update: ${new Date(status.lastUpdate).toLocaleString()}`);
+  } catch (error) {
+    console.error('Status check failed:', error);
+  }
+}
+```
+
+### Manual Mode Switching
+```javascript
+// In renderer process
+async function switchToSimulator() {
+  try {
+    const result = await window.api.switchMode({ mode: 'simulator' });
+    if (result.success) {
+      console.log('Switched to simulator mode');
+    }
+  } catch (error) {
+    console.error('Mode switch failed:', error);
+  }
+}
+```
+
+### Force Hardware Mode
+```javascript
+// In renderer process
+async function forceHardwareConnection() {
+  try {
+    const result = await window.api.forceHardwareMode();
+    if (result.success) {
+      console.log('Hardware mode forced');
+    } else {
+      console.error('Hardware force failed:', result.message);
+    }
+  } catch (error) {
+    console.error('Force hardware error:', error);
   }
 }
 ```
@@ -370,17 +613,17 @@ async function handleExport() {
 // In main process
 const tempDll = require('./dll/tempDll');
 
-async function initializeHardware() {
+function checkHardwareConnection() {
   try {
-    const connected = await tempDll.initialize();
-    if (connected) {
-      await tempDll.startMonitoring();
-      console.log('Hardware monitoring started');
+    const connected = tempDll.checkConnection();
+    if (connected === 0) {
+      console.log('Hardware connected');
+      tempDll.start();
     } else {
-      console.log('Using simulator mode');
+      console.log('Hardware not connected - using simulator');
     }
   } catch (error) {
-    console.error('Hardware initialization failed:', error);
+    console.error('Hardware check failed:', error);
   }
 }
 ```
@@ -396,28 +639,6 @@ async function initializeHardware() {
 - `ECONVERSION`: Fahrenheit conversion failed
 - `EMODESWITCH`: Hardware mode switching failed
 - `ECONSOLEUTIL`: Console utilities not available
-
-### 1.1.0 Specific Error Responses
-
-#### Console Encoding Error
-```javascript
-{
-  success: false,
-  error: "EENCODING",
-  message: "Console encoding corrupted - use ASCII-safe notation",
-  solution: "Ensure consoleColours.js is used for terminal output"
-}
-```
-
-#### Mode Switch Error
-```javascript
-{
-  success: false,
-  error: "EMODESWITCH",
-  message: "Failed to switch to hardware mode",
-  details: "Hardware timeout after 5000ms"
-}
-```
 
 ### Standard Error Response Format
 ```javascript
@@ -435,7 +656,7 @@ async function initializeHardware() {
 - All IPC communication uses `contextBridge` for security
 - No Node.js APIs are exposed directly to renderer
 - File operations are sandboxed and validated
-- User input is sanitized before processing
+- User input is sanitised before processing
 
 ## Performance Considerations
 
@@ -467,12 +688,20 @@ None - all 1.0.0 APIs remain compatible.
 
 ### Recommended Updates
 ```javascript
-// Before (1.0.0)
-console.log(`Temperature: ${temp.value}°C`);
+// Before (incorrect - functions don't exist)
+const { logTemperature, celsiusToFahrenheit } = require('./utils/consoleColours');
+logTemperature({
+  value: 24.5,
+  fahrenheit: 76.1,
+  source: "SIMULATOR",
+  timestamp: Date.now()
+});
 
-// After (1.1.0)
-const { logTemperature } = require('./utils/consoleColours');
-logTemperature(temp);
+// After (correct - using actual functions)
+const { temperature, success, error } = require('./utils/consoleColours');
+temperature(24.5, 76.1, 'REAL');
+success('Temperature logged successfully');
+error('Failed to read temperature');
 ```
 
 ## Debugging
@@ -490,32 +719,36 @@ window.api.on('debug-ipc', (event, data) => {
 
 ### Console Output Debugging
 ```javascript
-// Test console utilities
-const { testColours } = require('./utils/consoleColours');
-testColours(); // Outputs colour test pattern
+// Test console utilities with actual functions
+const { temperature, success, error, warning, info } = require('./utils/consoleColours');
 
-// Verify ASCII-safe notation
-const { logTemperature } = require('./utils/consoleColours');
-logTemperature({
-  value: 24.5,
-  fahrenheit: 76.1,
-  source: "TEST",
-  timestamp: Date.now()
-});
+// Test temperature logging
+temperature(24.5, 76.1, 'REAL');
+temperature(22.0, 71.6, 'SIMULATOR');
+
+// Test status logging
+success('Hardware connected');
+error('Connection failed');
+warning('Hardware timeout detected');
+info('Starting monitoring...');
+
+// Test hardware-specific logging
+const { hardware, simulator } = require('./utils/consoleColours');
+hardware('Session Start: Forcing 30.00 deg C');
+simulator('Stopped: No final reading sent');
 ```
 
 ### Hardware Debugging
 ```javascript
 // Test hardware connection directly
 const tempDll = require('./dll/tempDll');
-tempDll.testConnection()
-  .then(result => console.log('Hardware test:', result))
-  .catch(error => console.error('Hardware error:', error));
+const connected = tempDll.checkConnection();
+console.log('Hardware connection status:', connected === 0 ? 'Connected' : 'Disconnected');
 ```
 
 ---
 
-**Last Updated:** February 2026  
+**Last Updated:** March 2026  
 **Version:** 1.1.0  
 **For:** Temperature Plotter Application
 

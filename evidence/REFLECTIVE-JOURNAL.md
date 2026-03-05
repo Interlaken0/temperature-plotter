@@ -147,7 +147,7 @@ I implemented a systematic enhancement of the temperature data processing pipeli
 
 The implementation included:
 - **Enhanced temperature objects** with pre-calculated Fahrenheit values
-- **Source tracking** to distinguish "REAL" vs "SIMULATED" data sources
+- **Source tracking** to distinguish "REAL" vs "SIMULATOR" data sources
 - **Updated IPC channels** to transmit dual-unit temperature data
 - **Modified console utilities** to display both units with colour coding
 - **API documentation updates** reflecting the enhanced data structures

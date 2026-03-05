@@ -28,10 +28,10 @@ graph TB
         I --> L[User Export CSV]
     end
     
-    style A fill:#ff9999
-    style B fill:#ffcc99
-    style C fill:#99ccff
-    style G fill:#99ff99
+    style A fill:#ff9999,color:#000000
+    style B fill:#ffcc99,color:#000000
+    style C fill:#99ccff,color:#000000
+    style G fill:#99ff99,color:#000000
 ```
 
 ## 2. Component Architecture & Data Flow
@@ -42,31 +42,32 @@ graph TB
 graph TB
     subgraph "Node.js Backend (Main Process)"
         A[main.js<br/>Application Entry] --> B[simulator.js<br/>Temperature Data Generation]
-        A --> C[tempDll.js<br/>Hardware Interface]
-        A --> D[temperatureStore.js<br/>State Management]
-        A --> E[temperatureIpc.js<br/>IPC Communication]
-        A --> F[consoleColours.js<br/>Logging Utilities]
+        A --> C[dll/tempDll.js<br/>Hardware Interface]
+        A --> D[state/temperatureStore.js<br/>State Management]
+        A --> E[ipc/temperatureIpc.js<br/>IPC Communication]
+        A --> F[utils/consoleColours.js<br/>Logging Utilities]
+        A --> G[HardwareMonitor<br/>Hardware Health Management]
     end
     
     subgraph "Preload Security Layer"
-        F[preload.js<br/>Security Bridge] --> G[contextBridge<br/>XSS Protection]
-        F --> H[API Exposure<br/>Controlled Access]
+        H[preload.js<br/>Security Bridge] --> I[contextBridge<br/>XSS Protection]
+        H --> J[API Exposure<br/>Controlled Access]
     end
     
     subgraph "React Frontend (Renderer Process)"
-        I[App.jsx<br/>Main Component] --> J[TemperatureChart.jsx<br/>Data Visualisation]
-        I --> K[useTemperature.js<br/>State Hook]
-        I --> L[SaveButton.jsx<br/>Export Functionality]
-        I --> M[StatusPanel.jsx<br/>System Status]
-        I --> N[ModeStatus.jsx<br/>Hardware/Simulator Mode]
+        J[App.jsx<br/>Main Component] --> K[TemperatureChart.jsx<br/>Data Visualisation]
+        J --> L[useTemperature.js<br/>State Hook]
+        J --> M[SaveButton.jsx<br/>Export Functionality]
+        J --> N[StatusPanel.jsx<br/>System Status]
+        J --> O[ModeStatus.jsx<br/>Hardware/Simulator Mode]
     end
     
-    E -.-> F
-    F -.-> I
+    E -.-> H
+    H -.-> J
     
-    style A fill:#ffcccc
-    style F fill:#ffebcc
-    style I fill:#ccffcc
+    style A fill:#ffcccc,color:#000000
+    style H fill:#ffebcc,color:#000000
+    style J fill:#ccffcc,color:#000000
 ```
 
 **Strict Separation of Concerns:**
@@ -77,11 +78,222 @@ graph TB
 **Utility Layer Architecture:**
 The `consoleColours.js` module demonstrates clean separation of concerns by:
 - **Centralising logging logic**: Consistent colour-coded output across all main process modules
-- **Providing semantic logging**: Context-aware messages (hardware, simulator, temperature, status)
+- **Providing semantic logging**: Context-aware messages via dedicated functions:
+  - `success(message)` - Green [OK] prefixed messages
+  - `error(message)` - Red [ERROR] prefixed messages  
+  - `warning(message)` - Yellow [!] prefixed messages
+  - `info(message)` - Cyan [i] prefixed messages
+  - `hardware(message)` - Blue [+] [HAL] prefixed hardware messages
+  - `simulator(message)` - Magenta [~] SIMULATOR formatted messages
+  - `temperature(celsius, fahrenheit, source = 'REAL')` - Temperature-specific logging with source-aware colouring (green for 'REAL', magenta for 'SIMULATOR'), uses dynamic symbols and 2 decimal place formatting, outputs as "deg C" and "deg F"
+  - `status(message, type = 'info')` - Configurable status messages with type-based colouring (defaults to 'info' with blue colour), outputs with "> " prefix
+  - `separator()` - Visual separators (50 dimmed equal signs)
+  - `header(title)` - Formatted section headers with cyan formatting and uppercase conversion, surrounded by 50 equal signs
 - **Maintaining testability**: Pure functions that don't affect application state
 - **Enhancing debugging**: Visual distinction between different system events and data sources
 
-### 2.2 Real-Time Data Flow Sequence
+### 2.3 Console Utilities Implementation
+
+#### Console Utilities API Reference
+
+**Core Logging Functions**
+- `success(message)` - Success messages with green formatting and [OK] prefix
+- `error(message)` - Error messages with red formatting and [ERROR] prefix  
+- `warning(message)` - Warning messages with yellow formatting and [!] prefix
+- `info(message)` - Informational messages with cyan formatting and [i] prefix
+
+**Context-Specific Functions**
+- `hardware(message)` - Hardware-specific messages with blue [+] [HAL] prefix
+- `simulator(message)` - Simulator-specific messages with magenta [~] SIMULATOR format
+- `temperature(celsius, fahrenheit, source = 'REAL')` - Temperature reading logging with source-aware colouring (green for 'REAL', magenta for 'SIMULATOR'), uses [+] symbol for REAL and [~] for SIMULATOR, formats to 2 decimal places, outputs as "deg C" and "deg F"
+- `status(message, type = 'info')` - Configurable status messages with type-based colouring (defaults to 'info' with blue colour), outputs with "> " prefix
+
+**Utility Functions**
+- `separator()` - Visual separator lines (50 equal signs with dim formatting)
+- `header(title)` - Formatted section headers with cyan formatting and uppercase conversion, surrounded by 50 equal signs
+
+**Exported Objects**
+- `colours` - ANSI colour code object (reset, bright, dim, red, green, yellow, blue, magenta, cyan, white, gray, bgRed, bgGreen, bgYellow, bgBlue)
+- `symbols` - Symbol definitions object (success: '[OK]', error: '[ERROR]', warning: '[!]', info: '[i]', hardware: '[+]', simulator: '[~]', temperature: '[TEMP]')
+
+#### Console Integration Points
+
+```mermaid
+flowchart TD
+    A[Hardware Event] --> B{Event Type}
+    B -->|Connection| C[hardware('Session Start: Forcing 30.00 deg C (Sensor was: X.XX)')]
+    B -->|Temperature| D[temperature(celsius, fahrenheit, source = 'REAL')]
+    B -->|Error| E[error('Hardware Start Error: ' + err.message)]
+    B -->|Stop Error| R[error('Stop error: ' + err.message)]
+    
+    F[Simulator Event] --> G{Event Type}
+    G -->|Temperature| I[temperature(celsius, fahrenheit, 'SIMULATOR')]
+    G -->|Stop| J[simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)')]
+    
+    K[System Event] --> L{Event Type}
+    L -->|Success| M[success('Hardware signal detected! Initiating switch...')]
+    L -->|Info| N[info('Starting hardware monitoring...')]
+    L -->|Warning| O[warning('Hardware timeout detected. Injecting final 10.00 deg C reading.')]
+    L -->|Hardware Stopped| S[warning('Hardware Stopped (callback unregistered)')]
+    L -->|Status Info| P[status('Performing hard DLL refresh to check for new device...', 'info')]
+    L -->|Status Success| Q[status('Switching back to hardware mode', 'success')]
+    
+    style C fill:#90EE90,color:#000000
+    style D fill:#90EE90,color:#000000
+    style E fill:#FFB6C1,color:#000000
+    style R fill:#FFB6C1,color:#000000
+    style I fill:#DDA0DD,color:#000000
+    style J fill:#DDA0DD,color:#000000
+    style M fill:#90EE90,color:#000000
+    style N fill:#87CEEB,color:#000000
+    style O fill:#FFD700,color:#000000
+    style S fill:#FFD700,color:#000000
+    style P fill:#87CEEB,color:#000000
+    style Q fill:#90EE90,color:#000000
+```
+
+#### Logging Strategy Benefits
+
+- **Visual Distinction**: Colour-coded messages provide instant recognition of event types
+- **Semantic Clarity**: Function names clearly indicate message purpose and context
+- **Debugging Efficiency**: Structured logging enables rapid issue identification
+- **Professional Output**: Consistent formatting enhances maintainability
+- **Performance Optimised**: Minimal overhead for enhanced readability
+
+### 2.5 HardwareMonitor Implementation
+
+#### Hardware Health Management System
+
+**Core Responsibility**
+The `HardwareMonitor` class provides automatic hardware health monitoring and seamless fallback between real hardware and simulation mode.
+
+**Key Features**
+- **Automatic Health Monitoring**: Continuous 1-second health checks on hardware connection
+- **Intelligent Fallback**: Automatic switch to simulator when hardware times out (>5 seconds)
+- **DLL Refresh Logic**: Periodic DLL cache refresh to detect reconnected hardware
+- **Connection Recovery**: Automatic switch back to hardware when available
+- **Final Reading Injection**: 10.00°C signature reading on hardware disconnect
+
+**HardwareMonitor API Reference**
+
+```javascript
+class HardwareMonitor {
+  constructor(device)
+  startMonitoring()
+  checkHealth()
+  switchToHardware(hardwareDevice)
+  updateLastUpdate()
+  fallbackToSimulator()
+  stop()
+}
+```
+
+**Integration Points**
+
+```mermaid
+flowchart TD
+    A[HardwareMonitor Start] --> B[1-Second Health Check Loop]
+    B --> C{Hardware Connected?}
+    C -->|Yes| D[Update Last Update Time]
+    C -->|No| E{Timeout > 5s?}
+    E -->|Yes| F[Inject 10.00°C Reading]
+    F --> G[Switch to Simulator]
+    E -->|No| H[Check DLL Refresh]
+    H --> I{Hardware Available?}
+    I -->|Yes| J[Switch to Hardware]
+    I -->|No| K[Continue Monitoring]
+    
+    style D fill:#90EE90,color:#000000
+    style F fill:#FFB6C1,color:#000000
+    style G fill:#DDA0DD,color:#000000
+    style J fill:#90EE90,color:#000000
+```
+
+**Hardware Monitoring Strategy Benefits**
+
+- **Reliability**: Automatic detection and recovery from hardware failures
+- **Data Integrity**: Signature readings ensure clear mode transition indicators
+- **User Experience**: Seamless switching without user intervention
+- **Debugging**: Comprehensive logging of all mode transitions
+- **Performance**: Minimal overhead with efficient health checking
+
+### 2.7 IPC Handlers Implementation
+
+#### Main Process IPC API
+
+**Core IPC Handlers**
+The application provides several IPC handlers for secure frontend-backend communication:
+
+**save-csv** - User-triggered data export
+- **Purpose**: Secure CSV export with file dialog
+- **Input**: None (triggers save dialog)
+- **Output**: `{ success: boolean, canceled?: boolean }`
+- **Security**: Uses Electron's native save dialog for file system access
+
+**get-device-status** - Device status query
+- **Purpose**: Current device mode and health information
+- **Input**: None
+- **Output**: `{ mode: 'hardware'|'simulator', healthy: boolean, lastUpdate: number, deviceType: string }`
+- **Integration**: Real-time hardware monitor status
+
+**switch-mode** - Manual mode switching
+- **Purpose**: Manual switching between hardware and simulator
+- **Input**: `{ mode: 'hardware'|'simulator' }`
+- **Output**: `{ success: boolean, mode: string }`
+- **Use Case**: Testing and manual device management
+
+**force-hardware-mode** - Hardware reconnection
+- **Purpose**: Force hardware reconnection and DLL refresh
+- **Input**: None
+- **Output**: `{ success: boolean, message?: string }`
+- **Function**: Clears DLL cache and attempts hardware reconnection
+
+**mode:change** - Mode change notifications
+- **Purpose**: Real-time mode change notifications to frontend
+- **Direction**: Main process → Renderer process
+- **Data**: `{ mode: string, reason: string, timestamp: string }`
+- **Trigger**: Automatic or manual mode changes
+
+**temperature:update** - Real-time data updates
+- **Purpose**: Real-time temperature data streaming
+- **Direction**: Main process → Renderer process
+- **Data**: `{ temp: number, history: Array<{time: number, temp: number}> }`
+- **Frequency**: 1Hz (hardware) or variable (simulator)
+
+**IPC Security Architecture**
+
+```mermaid
+flowchart LR
+    A[Renderer Process] --> B[contextBridge]
+    B --> C[Preload Script]
+    C --> D[Whitelisted API]
+    D --> E[ipcMain Handlers]
+    E --> F[Main Process Logic]
+    
+    subgraph "Security Layer"
+        G[XSS Protection]
+        H[API Validation]
+        I[Secure Channel]
+    end
+    
+    B --> G
+    C --> H
+    D --> I
+    
+    style B fill:#ffcc99,color:#000000
+    style G fill:#90EE90,color:#000000
+    style H fill:#90EE90,color:#000000
+    style I fill:#90EE90,color:#000000
+```
+
+**IPC Communication Benefits**
+
+- **Security**: contextBridge prevents XSS attacks
+- **Reliability**: Structured error handling and validation
+- **Performance**: Minimal latency with direct process communication
+- **Maintainability**: Clear separation of frontend/backend concerns
+
+### 2.8 Real-Time Data Flow Sequence
 
 ```mermaid
 sequenceDiagram
@@ -99,6 +311,7 @@ sequenceDiagram
     DLL->>HAL: fTemp callback (24.5°C)
     HAL->>HAL: Filter stale readings
     HAL->>Store: updateTemperature(fTemp)
+    HAL->>Console: temperature(24.5, 76.1, source = 'REAL')
     
     Store->>Store: Ring buffer management
     Store->>CSV: Background logging
@@ -184,10 +397,10 @@ flowchart TD
     Cancel -- No --> Write[Write CSV File]
     Write --> Success[Show Success Toast]
     
-    style Start fill:#90EE90
-    style Success fill:#90EE90
-    style Error fill:#FFB6C1
-    style End fill:#D3D3D3
+    style Start fill:#90EE90,color:#000000
+    style Success fill:#90EE90,color:#000000
+    style Error fill:#FFB6C1,color:#000000
+    style End fill:#D3D3D3,color:#000000
 ```
 
 **Excel-Safe Formatting Logic:**
@@ -224,10 +437,10 @@ graph TB
     C --> G
     D --> H
     
-    style A fill:#90EE90
-    style B fill:#87CEEB
-    style C fill:#DDA0DD
-    style D fill:#F0E68C
+    style A fill:#90EE90,color:#000000
+    style B fill:#87CEEB,color:#000000
+    style C fill:#DDA0DD,color:#000000
+    style D fill:#F0E68C,color:#000000
 ```
 
 ### 4.2 Deployment Architecture
@@ -254,9 +467,9 @@ flowchart LR
     
     D --> E
     
-    style A fill:#FFE4B5
-    style H fill:#98FB98
-    style J fill:#E6E6FA
+    style A fill:#FFE4B5,color:#000000
+    style H fill:#98FB98,color:#000000
+    style J fill:#E6E6FA,color:#000000
 ```
 
 ## 5. Agile User Stories (Phase 9)
@@ -270,11 +483,11 @@ flowchart TD
     B --> D[Then: Dual-unit temperature values (Celsius/Fahrenheit)]
     B --> E[Then: Raw timestamp metadata prevents Excel scientific notation]
     
-    style A fill:#E6E6FA
-    style B fill:#FFE4B5
-    style C fill:#90EE90
-    style D fill:#90EE90
-    style E fill:#90EE90
+    style A fill:#E6E6FA,color:#000000
+    style B fill:#FFE4B5,color:#000000
+    style C fill:#90EE90,color:#000000
+    style D fill:#90EE90,color:#000000
+    style E fill:#90EE90,color:#000000
 ```
 
 *As a Laboratory Analyst,*  
@@ -290,11 +503,11 @@ flowchart TD
     B --> D[Then: Recharts component updates dynamically]
     D --> E[And: Maintains optimal accessibility and contrast ratios]
     
-    style A fill:#E6E6FA
-    style B fill:#FFE4B5
-    style C fill:#90EE90
-    style D fill:#90EE90
-    style E fill:#90EE90
+    style A fill:#E6E6FA,color:#000000
+    style B fill:#FFE4B5,color:#000000
+    style C fill:#90EE90,color:#000000
+    style D fill:#90EE90,color:#000000
+    style E fill:#90EE90,color:#000000
 ```
 
 *As a Shift Operator working in varying environmental conditions,*  
@@ -346,7 +559,7 @@ graph LR
     C --> F
     C --> G
     
-    style C fill:#99ccff
+    style C fill:#99ccff,color:#000000
 ```
 - **Purpose**: Isolates hardware-specific code from business logic, enabling seamless switching between simulation and real hardware without rewriting the UI.
 - **KSB Demonstration**: S7 (Problem solving), K11 (Software designs)
@@ -368,7 +581,7 @@ graph TB
     B --> F
     B --> G
     
-    style B fill:#ffcc99
+    style B fill:#ffcc99,color:#000000
 ```
 - **Purpose**: Ensures secure communication between the Node.js backend and React frontend using contextBridge to prevent cross-site scripting (XSS) and unauthorised API access.
 - **KSB Demonstration**: K8 (Security), S2 (Effective user interfaces)
@@ -377,7 +590,7 @@ graph TB
 ```mermaid
 graph LR
     A[New Reading] --> B[Ring Buffer]
-    B --> C[Fixed Size: 1000]
+    B --> C[Fixed Size: 500]
     B --> D[Automatic Overflow]
     B --> E[Memory Efficient]
     
@@ -391,7 +604,7 @@ graph LR
     B --> G
     B --> H
     
-    style B fill:#99ff99
+    style B fill:#99ff99,color:#000000
 ```
 - **Purpose**: Provides memory-efficient storage of temperature history using a fixed-size circular buffer with automatic overflow handling to prevent memory leaks during long 24/7 logging sessions.
 - **KSB Demonstration**: K9 (Data structures), S16 (Algorithms and logic)
@@ -416,8 +629,8 @@ graph TD
     B --> H
     B --> I
     
-    style A fill:#90EE90
-    style C fill:#90EE90
+    style A fill:#90EE90,color:#000000
+    style C fill:#90EE90,color:#000000
 ```
 - **Purpose**: Ensures reliability and maintainability via a comprehensive Jest test suite with mocking and coverage reporting to catch regressions early.
 - **KSB Demonstration**: S4 (Unit testing), S5 (Integration testing), S13 (Testing frameworks)
@@ -594,7 +807,7 @@ graph LR
     end
     
     subgraph "Memory Usage"
-        D[Ring Buffer: 80KB]
+        D[Ring Buffer: 40KB]
         E[Console Logs: 50KB]
         F[IPC Queue: 10KB]
     end
@@ -605,14 +818,14 @@ graph LR
         I[File I/O: 1MB/s]
     end
     
-    style A fill:#90EE90
-    style D fill:#90EE90
-    style G fill:#90EE90
+    style A fill:#90EE90,color:#000000
+    style D fill:#90EE90,color:#000000
+    style G fill:#90EE90,color:#000000
 ```
 
 #### **Performance Specifications**
 - **UI Responsiveness**: <100ms latency for temperature display updates
-- **Memory Efficiency**: Ring buffer maintains fixed 80KB footprint for 1000 readings
+- **Memory Efficiency**: Ring buffer maintains fixed 40KB footprint for 500 readings
 - **Processing Speed**: Fahrenheit conversion <1ms per reading
 - **File Operations**: CSV export of 1440 records in <200ms
 - **Console Output**: Colour-coded logging with <5ms overhead
@@ -628,7 +841,7 @@ graph LR
     "p99": 98ms
   },
   "memory_usage": {
-    "ring_buffer": "80KB (fixed)",
+    "ring_buffer": "40KB (fixed)",
     "console_logs": "50KB (average)",
     "total_heap": "45MB (stable)"
   },
@@ -643,16 +856,18 @@ graph LR
 #### **Optimisation Evidence**
 - **Ring Buffer**: O(1) insertion/retrieval, constant memory usage
 - **React.memo**: 40% reduction in unnecessary re-renders
-- **ASCII-Safe Logging**: 60% faster than Unicode rendering
+- **ANSI Colour Logging**: Optimised console output with colour-coded formatting
 - **Debounced Updates**: 70% CPU usage reduction during high-frequency updates
 
 ## 7. Portfolio Evidence Mapping (KSBs)
 
 | Design Decision | KSB Demonstrated | Evidence Location |
 |----------------|------------------|-------------------|
-| **Elite Mermaid Architecture Diagrams** | K7 (Design patterns) | This document |
+| **Console Utilities Architecture** | K7 (Design patterns) | `src/main/utils/consoleColours.js` |
+| **HardwareMonitor System** | S7 (Problem solving) | `src/main/main.js` (HardwareMonitor class) |
 | **Hardware Abstraction Layer** | S7 (Problem solving) | `src/main/dll/tempDll.js` |
 | **IPC Security Implementation** | K8 (Security) | `src/main/preload.js` |
+| **IPC Handlers Architecture** | K7 (Design patterns) | `src/main/ipc/temperatureIpc.js` |
 | **Ring Buffer Data Structure** | K9 (Data structures) | `src/main/state/temperatureStore.js` |
 | **Comprehensive Test Suite** | S4, S5, S13 (Testing) | `__tests__/` directory |
 | **Component Architecture** | S2 (Effective UI) | `src/renderer/components/` |

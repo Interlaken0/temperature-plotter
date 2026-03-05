@@ -21,18 +21,18 @@ This application provides a comprehensive "Vertical Slice" solution for reading,
 - **Hardware Mode Management**: Manual override and automatic mode switching
 
 **Key Capabilities:**
-- Real-Time Visualisation: Live graphing of sensor data (1Hz refresh rate) using Recharts
-- Dual-Unit Temperature Display: Celsius and Fahrenheit with pre-calculated conversions
-- Persistent Telemetry: Background logging to temperature_telemetry.csv ensures data is never lost
-- Data Export: On-demand CSV export for reporting and analysis
-- Hardware Abstraction: Ready for seamless DLL integration with fallback simulation mode
-- Professional Console Output: Colour-coded logging with cross-platform compatibility
+- **Real-Time Visualisation**: Live graphing of sensor data (1Hz refresh rate) using Recharts
+- **Dual-Unit Temperature Display**: Celsius and Fahrenheit with pre-calculated conversions
+- **Persistent Telemetry**: Background logging to temperature_telemetry.csv ensures data is never lost
+- **Data Export**: On-demand CSV export for reporting and analysis
+- **Hardware Abstraction**: Ready for seamless DLL integration with fallback simulation mode
+- **Professional Console Output**: Colour-coded logging with cross-platform compatibility
 
 ## Quick Installation
 
 ### End Users
 1. Navigate to: `out/make/squirrel.windows/x64/`
-2. Double-click `TemperaturePlotterSetup.exe`
+2. Double-click `AMF-Temperature-PlotterSetup.exe`
 3. Application installs and launches automatically
 4. Desktop shortcut created for easy access
 
@@ -104,11 +104,11 @@ graph TB
 ## Testing
 
 Comprehensive Jest test suite with **99 tests** achieving **100% pass rate**:
-- Unit Tests: Core module testing including console utilities
-- Integration Tests: End-to-end workflow validation with dual-unit support
-- Component Tests: React component testing with Fahrenheit display
-- DLL Binding Tests: Native library integration and hardware simulation
-- Console Utilities Tests: Cross-platform logging and encoding compatibility
+- **Unit Tests**: Core module testing including console utilities
+- **Integration Tests**: End-to-end workflow validation with dual-unit support
+- **Component Tests**: React component testing with Fahrenheit display
+- **DLL Binding Tests**: Native library integration and hardware simulation
+- **Console Utilities Tests**: Cross-platform logging and encoding compatibility
 
 ### v1.1.0 Testing Enhancements
 - **Dynamic Test Reporting**: JSON-based summary generation replacing static templates
@@ -121,47 +121,47 @@ Comprehensive Jest test suite with **99 tests** achieving **100% pass rate**:
 ## Technical Specifications
 
 **Dependencies:**
-- Electron 40.1.0: Cross-platform desktop framework
-- React 18.2.0: User interface library
-- Recharts 2.12.0: Data visualisation
-- Tailwind CSS 3.4.17: Utility-first CSS framework
-- Jest 29.7.0: JavaScript testing framework
-- Koffi 2.15.1: Foreign Function Interface for DLL binding
+- **Electron 40.1.0**: Cross-platform desktop framework
+- **React 18.2.0**: User interface library
+- **Recharts 2.12.0**: Data visualisation
+- **Tailwind CSS 3.4.17**: Utility-first CSS framework
+- **Jest 29.7.0**: JavaScript testing framework
+- **Koffi 2.15.1**: Foreign Function Interface for DLL binding
 
 **Performance (v1.1.0 Enhanced):**
-- Data Rate: 1Hz temperature updates
-- Response Time: <100ms UI update latency
-- Console Logging: 60% faster than Unicode rendering
-- Fahrenheit Conversion: <1ms processing time
-- Memory Usage: Optimised for 24/7 operation (45-50MB stable)
-- Data Integrity: 100% telemetry persistence
-- Cross-Platform: 100% Windows PowerShell/CMD compatibility
+- **Data Rate**: 1Hz temperature updates
+- **Response Time**: <100ms UI update latency
+- **Console Logging**: 60% faster than Unicode rendering
+- **Fahrenheit Conversion**: <1ms processing time
+- **Memory Usage**: Optimised for 24/7 operation (45-50MB stable)
+- **Data Integrity**: 100% telemetry persistence
+- **Cross-Platform**: 100% Windows PowerShell/CMD compatibility
 
 ## Documentation
 
 ### Professional Documentation Ecosystem (7 Files)
 **[docs/COMPLETE-DOCUMENTATION-GUIDE.md](docs/COMPLETE-DOCUMENTATION-GUIDE.md)** - Navigation guide for all documentation with:
-- Complete file-by-file evidence mapping
-- Assessment day performance guidance
-- KSB achievement evidence with specific examples
-- Professional standards demonstration
+- **Complete file-by-file evidence mapping**
+- **Assessment day performance guidance**
+- **KSB achievement evidence** with specific examples
+- **Professional standards demonstration**
 
 ### Architecture & Design
 **[docs/SYSTEM-ARCHITECTURE.md](docs/SYSTEM-ARCHITECTURE.md)** - Complete technical documentation with:
 - **14 detailed Mermaid diagrams** covering all system aspects
-- Component architecture with security layers and console utilities
-- Performance benchmarks and optimisation evidence
-- Design rationale with KSB evidence mapping
-- User stories with acceptance criteria
-- Testing and deployment strategies
+- **Component architecture** with security layers and console utilities
+- **Performance benchmarks** and optimisation evidence
+- **Design rationale** with KSB evidence mapping
+- **User stories** with acceptance criteria
+- **Testing and deployment strategies**
 
 ### API Reference
 **[docs/API.md](docs/API.md)** - Comprehensive API reference including:
 - **7 IPC channels** with temperature data, mode changes, and hardware controls
 - **Console utilities API** with colour-coded logging functions
-- Performance specifications and error handling
-- Migration guide from v1.0.0 to v1.1.0
-- Debugging and troubleshooting commands
+- **Performance specifications** and error handling
+- **Migration guide** from v1.0.0 to v1.1.0
+- **Debugging and troubleshooting commands**
 
 ### Developer Resources
 - **[docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)** - Development guidelines with practical examples
@@ -186,14 +186,15 @@ Comprehensive Jest test suite with **99 tests** achieving **100% pass rate**:
 ### Console Utilities
 ```javascript
 // Professional colour-coded logging
-const { logTemperature, logStatus } = require('./utils/consoleColours');
-logTemperature({
-  value: 24.5,
-  fahrenheit: 76.1,
-  source: "REAL",
-  timestamp: Date.now()
-});
-// Output: ✓ [REAL] 24.5°C (76.1°F) at 2026-02-26T16:20:00.000Z
+const consoleColours = require('./utils/consoleColours');
+consoleColours.temperature(24.5, 76.1, 'REAL');
+// Output: [+] [REAL] 24.50 deg C (76.10 deg F)
+
+// Other logging functions
+consoleColours.success('Hardware connected');
+consoleColours.error('Connection failed');
+consoleColours.warning('High temperature detected');
+consoleColours.info('System starting');
 ```
 
 ### Dual-Unit Temperature Support
@@ -204,7 +205,7 @@ logTemperature({
   iso_time: "2024-02-20T14:45:32.123Z",
   value: 24.5,           // Celsius
   fahrenheit: 76.1,      // Pre-calculated Fahrenheit
-  source: "REAL"         // "REAL" or "SIMULATED"
+  source: "REAL"         // "REAL" or "SIMULATOR"
 }
 ```
 
@@ -217,7 +218,7 @@ logTemperature({
 
 ### Common Issues
 - **PowerShell Encoding**: Run `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8` before starting
-- **Missing Dependencies**: Ensure Node.js 16+ is installed
+- **Missing Dependencies**: Ensure Node.js LTS 16+ is installed
 - **Build Failures**: Run `npm install` and `npm run make` in clean environment
 
 ### Quick Fixes
@@ -229,19 +230,19 @@ logTemperature({
 
 ## Future Enhancements
 
-- Hardware Integration: Connect to actual temperature sensors via DLL
-- Advanced Analytics: Statistical analysis and trend detection
-- Alert System: Temperature threshold notifications
-- Multi-Sensor Support: Expand beyond single temperature monitoring
-- Web Dashboard: Browser-based monitoring interface
-- Mobile Support: React Native mobile application
+- **Hardware Integration**: Connect to actual temperature sensors via DLL
+- **Advanced Analytics**: Statistical analysis and trend detection
+- **Alert System**: Temperature threshold notifications
+- **Multi-Sensor Support**: Expand beyond single temperature monitoring
+- **Web Dashboard**: Browser-based monitoring interface
+- **Mobile Support**: React Native mobile application
 
 ## Professional Standards
 
 This project demonstrates:
 - **British English Compliance**: Consistent professional terminology throughout
 - **Semantic Versioning**: Proper changelog maintenance and version control
-- **Quality Assurance**: 90% coverage requirements with 99 tests
+- **Quality Assurance**: 100% pass rate with 99 tests
 - **Documentation Excellence**: 7-file professional ecosystem
 - **Cross-Platform Compatibility**: Windows PowerShell/CMD encoding solutions
 - **Performance Optimisation**: Sub-100ms response times with efficient memory usage

@@ -268,7 +268,7 @@ const logSensorType = (sensorType, data) => {
     'THERMISTOR': '\x1b[35m'   // Magenta
   };
   
-  console.log(`${colours[sensorType]}[${sensorType}] ${data.value}°C\x1b[0m`);
+  console.log(`${colours[sensorType]}[${sensorType}] ${data.value}deg C\x1b[0m`);
 };
 
 // 2. Add corresponding test
@@ -310,8 +310,8 @@ useEffect(() => {
 ```javascript
 // 1. Extend consoleColours.js
 const formatTemperature = (celsius, includeFahrenheit = true) => {
-  const fahrenheit = includeFahrenheit ? ` (${celsiusToFahrenheit(celsius)}°F)` : '';
-  return `${celsius}°C${fahrenheit}`;
+  const fahrenheit = includeFahrenheit ? ` (${celsiusToFahrenheit(celsius)}deg F)` : '';
+  return `${celsius}deg C${fahrenheit}`;
 };
 
 // 2. Update existing function
@@ -326,15 +326,15 @@ const logTemperature = (data) => {
 // 3. Add comprehensive tests
 describe('formatTemperature', () => {
   it('should format Celsius only', () => {
-    expect(formatTemperature(25.0, false)).toBe('25.0°C');
+    expect(formatTemperature(25.0, false)).toBe('25.0deg C');
   });
   
   it('should format Celsius with Fahrenheit', () => {
-    expect(formatTemperature(25.0, true)).toBe('25.0°C (77.0°F)');
+    expect(formatTemperature(25.0, true)).toBe('25.0deg C (77.0deg F)');
   });
   
   it('should handle negative temperatures', () => {
-    expect(formatTemperature(-10.5, true)).toBe('-10.5°C (13.1°F)');
+    expect(formatTemperature(-10.5, true)).toBe('-10.5deg C (13.1deg F)');
   });
 });
 ```

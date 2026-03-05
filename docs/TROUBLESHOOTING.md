@@ -612,7 +612,9 @@ Error: Dynamic Link Library "TempMeasure64.dll" not found
 1. **Verify consoleColours.js import:**
    ```javascript
    // Check main.js imports console utilities
-   const { logTemperature, logStatus } = require('./utils/consoleColours');
+   const consoleColours = require('./utils/consoleColours');
+   consoleColours.success('Test message');
+   consoleColours.temperature(24.5, 76.1, 'REAL');
    ```
 
 2. **Check terminal compatibility:**
@@ -751,8 +753,8 @@ node -e "require('./src/main/dll/tempDll.js').testConnection()"
 
 ### Console Utilities Test
 ```bash
-# Test colour output
-node -e "require('./src/utils/consoleColours.js').testColours()"
+# Test console utilities are available
+node -e "require('./src/main/utils/consoleColours'); console.log('Console utilities loaded successfully')"
 ```
 
 ## Getting Additional Help
