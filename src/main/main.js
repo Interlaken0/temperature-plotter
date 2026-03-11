@@ -1,11 +1,11 @@
 // Electron Main Process Entry Point - AMF-Temperature-Plotter Application
 // ============================================================================
-process.noDeprecation = true; // Suppress N-API Deprecation Warnings on Windows
+process.noDeprecation = true; 
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { initIpc } = require('./ipc/temperatureIpc');
 const store = require('./state/temperatureStore'); 
-const consoleColours = require('./utils/consoleColours'); // Enhanced console output
+const consoleColours = require('./utils/consoleColours'); 
 
 consoleColours.header('AMF-Temperature-Plotter Starting');
 
@@ -42,7 +42,7 @@ class HardwareMonitor {
                 let hw = null;
                 try {
                     hw = require('./dll/tempDll');
-                } catch (e) { /* Hardware not available */ }
+                } catch (e) { /* Expected when hardware is unplugged */ }
 
                 if (hw && hw.checkConnection && hw.checkConnection() === 0) {
                     consoleColours.success('Hardware signal detected! Initiating switch...');
@@ -54,11 +54,10 @@ class HardwareMonitor {
                     this.lastHardReset = now;
                     const dllPath = require.resolve('./dll/tempDll');
                     if (require.cache[dllPath]) {
-                        consoleColours.status('Performing hard DLL refresh to check for new device...', 'info');
                         delete require.cache[dllPath];
                     }
                 }
-            } catch (e) { }
+            } catch (e) { consoleColours.error('Health check error: ' + e.message); }
             return false;
         } 
         else {
@@ -72,9 +71,7 @@ class HardwareMonitor {
 
     switchToHardware(hardwareDevice) {
         consoleColours.status('Switching back to hardware mode', 'success');
-        if (device && device.stop) {
-            device.stop();
-        }
+        if (device && device.stop) device.stop();
         
         device = hardwareDevice;
         isHardwareMode = true;
@@ -82,10 +79,7 @@ class HardwareMonitor {
         this.healthy = true;
         this.lastUpdate = Date.now();
         
-        if (device.start) {
-            device.start(); // This will trigger the 30.00 start in tempDll.js
-        }
-        
+        if (device.start) device.start(); 
         notifyModeChange('hardware', 'Pico reconnected - switched to hardware mode');
     }
 
@@ -96,24 +90,16 @@ class HardwareMonitor {
 
     fallbackToSimulator() {
         consoleColours.warning('Hardware timeout detected. Hardware DLL dropped connection.');
-        
-        // Removed the duplicate 10.00 injection here because the DLL naturally 
-        // outputs a 10.00 reading just before it dies, which our log catches.
-
         if (this.checkInterval) clearInterval(this.checkInterval);
-        
         if (this.device && this.device.stop) {
-            try { this.device.stop(); } catch(e) { }
+            try { this.device.stop(); } catch(e) { consoleColours.error('Error stopping device: ' + e.message); }
         }
         
         const simulator = require('./simulator');
         device = simulator;
         isHardwareMode = false;
         
-        if (simulator.start) {
-            simulator.start();
-        }
-        
+        if (simulator.start) simulator.start();
         notifyModeChange('simulator', 'Hardware disconnected - automatic fallback');
         this.startMonitoring();
     }
@@ -124,13 +110,9 @@ class HardwareMonitor {
 }
 
 function notifyModeChange(mode, reason) {
-    const win = BrowserWindow.getAllWindows()[0];
-    if (win && !win.isDestroyed()) {
-        win.webContents.send('mode:change', {
-            mode,
-            reason,
-            timestamp: new Date().toISOString()
-        });
+    const windows = BrowserWindow.getAllWindows();
+    if (windows.length > 0 && !windows[0].isDestroyed()) {
+        windows[0].webContents.send('mode:change', { mode, reason, timestamp: new Date().toISOString() });
     }
 }
 
@@ -148,6 +130,7 @@ async function initializeDevice() {
             device = require('./dll/tempDll');
             isHardwareMode = true;
         } catch (e) {
+            consoleColours.error('Failed to load hardware DLL on startup: ' + e.message);
             device = require('./simulator');
             isHardwareMode = false;
         }
@@ -155,8 +138,6 @@ async function initializeDevice() {
     
     hardwareMonitor = new HardwareMonitor(device);
     hardwareMonitor.startMonitoring();
-    
-    // Setup global access for IPC/DLL to update health
     global.hardwareMonitorInstance = hardwareMonitor;
 }
 
@@ -168,9 +149,10 @@ const createWindow = () => {
         height: 800,
         webPreferences: {
             preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+            // CRITICAL SECURITY FIXES APPLIED HERE
             contextIsolation: true,
-            sandbox: false,
-            nodeIntegration: true
+            sandbox: true,
+            nodeIntegration: false 
         }
     });
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
@@ -184,11 +166,8 @@ app.whenReady().then(async () => {
     if (device && device.start) device.start(); 
 
     setTimeout(() => {
-        if (isHardwareMode) {
-            notifyModeChange('hardware', 'Hardware connected successfully');
-        } else {
-            notifyModeChange('simulator', 'Using simulator mode');
-        }
+        if (isHardwareMode) notifyModeChange('hardware', 'Hardware connected successfully');
+        else notifyModeChange('simulator', 'Using simulator mode');
     }, 2000);
 });
 
@@ -201,7 +180,6 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 });
 
-// Manual Force Hardware IPC
 ipcMain.handle('force-hardware-mode', async () => {
     try {
         delete require.cache[require.resolve('./dll/tempDll')];
@@ -219,6 +197,7 @@ ipcMain.handle('force-hardware-mode', async () => {
             return { success: true };
         }
     } catch (e) {
+        consoleColours.error('Force hardware failed: ' + e.message);
         return { success: false, message: e.message };
     }
 });

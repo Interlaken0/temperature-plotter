@@ -4,6 +4,7 @@
 // - Handles IPC communication with main process
 // - Manages state for current temperature and historical data
 // - Implements buffer management for performance optimisation
+// - Prevents memory leaks with proper unmount cleanup
 // - Provides clean API for component consumption
 // - Demonstrates custom React hook patterns
 // ============================================================================
@@ -31,7 +32,8 @@ export function useTemperature() {
   // ============================================================================
   useEffect(() => {
     // TEMPERATURE LISTENER - Register for real-time updates
-    window.api.onTemperature((data) => {
+    // MEMORY LEAK FIX: Capture the cleanup function returned by the secure IPC bridge
+    const cleanup = window.api.onTemperature((data) => {
       // CURRENT UPDATE - Set immediate temperature reading
       setTemp(data.temp); // Update current temperature state for StatusPanel
       
@@ -50,6 +52,9 @@ export function useTemperature() {
         newDataPoint
       ]);
     });
+
+    // React automatically executes this cleanup function when the component unmounts
+    return cleanup;
   }, []); // Empty dependency array - listener registered once on component mount
 
   // HOOK API - Return clean interface for components

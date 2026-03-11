@@ -1,23 +1,16 @@
 /**
  * @file Temperature data management with ring buffer implementation
  * @module temperatureStore
- * @description Memory-efficient circular buffer for real-time temperature data
  */
 
-const MAX_SIZE = 500; // Fixed Memory Footprint
+// FIXED CONSTANT MISMATCH: Aligned with intended 5000 limit
+const MAX_SIZE = 5000; 
 const buffer = new Array(MAX_SIZE);
 let head = 0;
 let size = 0;
 let currentTemp = 0;
 const listeners = [];
 
-/**
- * Adds temperature reading to ring buffer
- * @function add
- * @param {number} value - Temperature value to store
- * @param {boolean} isHardware - Flag indicating if data came from hardware
- * @description Adds timestamped temperature data to circular buffer
- */
 function add(value, isHardware) {
   buffer[head] = { time: Date.now(), temp: value, isHardwareMode: isHardware };
   head = (head + 1) % MAX_SIZE;
@@ -26,18 +19,34 @@ function add(value, isHardware) {
 
 function getOrderedHistory() {
   if (size < MAX_SIZE) return buffer.slice(0, size);
-  // Reconstruct chronological order from ring buffer
-  // Head points to next insertion point, so oldest data is at head index
   return [...buffer.slice(head), ...buffer.slice(0, head)];
 }
 
 module.exports = {
   updateTemperature(val, isHardware = false) {
+    // CRITICAL SECURITY: Input Validation
+    if (typeof val !== 'number' || isNaN(val) || val < -50 || val > 200) {
+      console.warn(`[SECURITY] Rejected invalid temperature reading: ${val}`);
+      return;
+    }
+
     currentTemp = val;
     add(val, isHardware);
     const data = { temp: currentTemp, history: getOrderedHistory() };
     listeners.forEach(cb => cb(data));
   },
-  onUpdate(cb) { listeners.push(cb); },
+  
+  onUpdate(cb) { 
+    listeners.push(cb); 
+  },
+  
+  // MEMORY LEAK FIX: Allow components to unmount safely
+  removeListener(cb) {
+    const index = listeners.indexOf(cb);
+    if (index > -1) {
+      listeners.splice(index, 1);
+    }
+  },
+  
   get() { return { temp: currentTemp, history: getOrderedHistory() }; }
 };

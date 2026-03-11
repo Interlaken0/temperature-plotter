@@ -19,11 +19,11 @@ import ThemeButton from './components/ThemeButton'; // Elite theme toggle functi
 export default function App() {
   // TEMPERATURE DATA - Real-time temperature streaming via custom hook
   // Returns current temperature reading and historical data arrays
-  const { temp, history, unlimitedHistory } = useTemperature(); // Custom hook manages IPC communication and dual data buffers
+  const { temp, history, unlimitedHistory } = useTemperature(); 
   
   // UI STATE - User interface preferences and device mode
-  const [darkMode, setDarkMode] = useState(true); // Theme preference for light/dark mode
-  const [mode, setMode] = useState('unknown'); // Current device mode (hardware/simulator）
+  const [darkMode, setDarkMode] = useState(true); 
+  const [mode, setMode] = useState('unknown'); 
 
   // IPC MODE LISTENER - Real-time mode change detection
   // ============================================================================
@@ -34,12 +34,16 @@ export default function App() {
   // - Handles graceful degradation if API unavailable
   // ============================================================================
   useEffect(() => {
-    if (window.api && window.api.onModeChange) { // Check if preload script exposed API
-      window.api.onModeChange((data) => { // Register mode change listener
-        setMode(data.mode); // Update local mode state with new device mode
+    if (window.api && window.api.onModeChange) { 
+      // MEMORY LEAK FIX: Capture the cleanup function returned by the preload script
+      const cleanup = window.api.onModeChange((data) => { 
+        setMode(data.mode); 
       });
+      
+      // React will automatically run this when the component unmounts
+      return cleanup; 
     }
-  }, []); // Empty dependency array - runs once on mount
+  }, []); 
 
   // RENDER UI - Complete application interface with responsive design
   return (
@@ -59,19 +63,17 @@ export default function App() {
 
           {/* STATUS PANEL - Current temperature and device mode display */}
           <div className="glass p-8 rounded-2xl shadow-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-lg border border-grey-200 dark:border-white/10">
-            <StatusPanel temp={temp} /> {/* Pass current temperature for real-time display */}
+            <StatusPanel temp={temp} /> 
           </div>
 
           {/* TEMPERATURE CHART - Real-time data visualisation */}
           <div className="glass p-6 rounded-2xl shadow-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-lg border border-grey-200 dark:border-white/10 h-96">
-            {/* CHART PROPS - Pass theme and mode for dynamic styling */}
-            {/* FIX: Passing 'darkMode' and 'mode' props so the chart can change colours and styling */}
-            <TemperatureChart data={history} unlimitedHistory={unlimitedHistory} darkMode={darkMode} mode={mode} /> {/* Historical data with visual theming and unlimited history support */}
+            <TemperatureChart data={history} unlimitedHistory={unlimitedHistory} darkMode={darkMode} mode={mode} /> 
           </div>
 
           {/* EXPORT SECTION - CSV data export functionality */}
           <div className="flex justify-end pt-4">
-            <SaveButton /> {/* CSV export button with secure file handling */}
+            <SaveButton /> 
           </div>
         </div>
 

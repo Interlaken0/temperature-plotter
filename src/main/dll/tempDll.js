@@ -5,16 +5,13 @@
 
 const { app } = require('electron');
 const koffi = typeof __non_webpack_require__ !== 'undefined' ? __non_webpack_require__('koffi') : require('koffi');
-
 const path = require('path');
 const fs = require('fs');
 const store = require('../state/temperatureStore');
 const consoleColours = require('../utils/consoleColours');
 
-// Ultra-safe path resolution to prevent Webpack build warnings
 let assetsFolder = '';
 if (app && app.isPackaged) {
-  // Hard fallback just in case process.resourcesPath is undefined during build
   const resPath = process.resourcesPath || path.join(process.cwd(), 'resources');
   assetsFolder = path.join(resPath, 'assets');
 } else {
@@ -26,7 +23,6 @@ let lib = null;
 let StartDevice_Func = null;
 let IsDeviceConnected_Func = null;
 const CallbackProto = koffi.proto('void __cdecl (float fTemp)');
-
 const originalCwd = process.cwd();
 
 try {
@@ -34,13 +30,14 @@ try {
   
   if (folderExists) {
     process.chdir(assetsFolder);
-    try { koffi.unload(dllName); } catch (e) { } 
+    // FIXED ERROR HANDLING: Replaced silent failure
+    try { koffi.unload(dllName); } catch (e) { consoleColours.info('No prior DLL instance to unload.'); } 
     lib = koffi.load(dllName);
   }
 } catch (e) {
-  // Silent fail - will fall back to simulator
+  consoleColours.warning('Hardware DLL not found. Falling back to simulator. (' + e.message + ')');
 } finally {
-  try { process.chdir(originalCwd); } catch (e) { }
+  try { process.chdir(originalCwd); } catch (e) { consoleColours.error('Failed to restore working directory: ' + e.message); }
 }
 
 if (lib) {
@@ -48,7 +45,8 @@ if (lib) {
     StartDevice_Func = lib.func('StartDevice', 'int', [koffi.pointer(CallbackProto), 'char*']);
     IsDeviceConnected_Func = lib.func('IsDeviceConnected', 'int', []);
   } catch (err) {
-    // Silent fail - will fall back to simulator
+    // FIXED ERROR HANDLING: Replaced silent failure
+    consoleColours.error('Failed to bind hardware functions from DLL: ' + err.message);
   }
 }
 
@@ -80,7 +78,6 @@ module.exports = {
       consoleColours.temperature(outputTemp, fahrenheit, 'REAL');
 
       if (outputTemp > -50 && outputTemp < 200) {
-        // EXPLICIT HARDWARE TAG ADDED HERE (true)
         store.updateTemperature(outputTemp, true);
         if (global.hardwareMonitorInstance) {
             global.hardwareMonitorInstance.updateLastUpdate();
