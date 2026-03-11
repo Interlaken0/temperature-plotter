@@ -8,6 +8,7 @@
 // - Critical (80°C) and Warning (40°C) engineering threshold lines
 // - Dual-unit (Celsius/Fahrenheit) diagnostic tooltips
 // - Dynamic SVG linear gradient anchored to absolute temperatures
+// - Fully responsive Light/Dark mode theming
 // ============================================================================
 
 import React, { useState, useEffect } from 'react';
@@ -121,23 +122,29 @@ export default function TemperatureChart({ data, darkMode, mode }) {
     <div className="w-full mt-4">
       
       {/* HEADER CONTROL PANEL: KPIs on the left, Timeframe buttons on the right */}
-      <div className={`flex flex-col sm:flex-row justify-between items-center gap-4 mb-4 p-3 rounded-lg ${panelBg} border border-slate-700/50`}>
+      <div className={`flex flex-col sm:flex-row justify-between items-center gap-4 mb-4 p-3 rounded-lg ${panelBg} border ${darkMode ? 'border-slate-700/50' : 'border-slate-300'}`}>
         
-        {/* LIVE KPI ANALYTICS */}
+        {/* LIVE KPI ANALYTICS - Adaptive Light/Dark Mode text */}
         <div className="flex gap-4 sm:gap-6">
           <div className="flex flex-col">
             <span className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Peak High</span>
-            <span className="text-lg font-bold text-red-400">{currentMax.toFixed(1)}°C</span>
+            <span className={`text-lg font-bold ${darkMode ? 'text-red-400' : 'text-red-600'}`}>
+              {currentMax.toFixed(1)}°C
+            </span>
           </div>
-          <div className="w-px h-8 bg-slate-600/50"></div> {/* Divider */}
+          <div className={`w-px h-8 ${darkMode ? 'bg-slate-600/50' : 'bg-slate-300'}`}></div> {/* Divider */}
           <div className="flex flex-col">
             <span className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Average</span>
-            <span className="text-lg font-bold text-slate-200">{currentAvg.toFixed(1)}°C</span>
+            <span className={`text-lg font-bold ${darkMode ? 'text-slate-200' : 'text-slate-800'}`}>
+              {currentAvg.toFixed(1)}°C
+            </span>
           </div>
-          <div className="w-px h-8 bg-slate-600/50"></div> {/* Divider */}
+          <div className={`w-px h-8 ${darkMode ? 'bg-slate-600/50' : 'bg-slate-300'}`}></div> {/* Divider */}
           <div className="flex flex-col">
             <span className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Absolute Low</span>
-            <span className="text-lg font-bold text-cyan-400">{currentMin.toFixed(1)}°C</span>
+            <span className={`text-lg font-bold ${darkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>
+              {currentMin.toFixed(1)}°C
+            </span>
           </div>
         </div>
 
