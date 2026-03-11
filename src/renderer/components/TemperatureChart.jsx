@@ -3,7 +3,7 @@
 // Upgraded industrial charting component featuring:
 // - Real-time KPI Analytics (Max, Min, Average for current timeframe)
 // - Dynamic Timeframe Toggle (Live Stream, Rolling Window, Full Dataset)
-// - Fixed Y-Axis scaling for visual stability (0°C to 100°C)
+// - Intelligent Auto-Scaling Y-Axis (Dynamic Zoom based on active data)
 // - Visible X-Axis with rolling HH:mm:ss timestamps
 // - Critical (80°C) and Warning (40°C) engineering threshold lines
 // - Dual-unit (Celsius/Fahrenheit) diagnostic tooltips
@@ -98,12 +98,15 @@ export default function TemperatureChart({ data, unlimitedHistory, darkMode, mod
   const currentMin = validData.length ? Math.min(...validData.map(d => d.temp)) : 0;
   const currentAvg = validData.length ? (validData.reduce((sum, d) => sum + d.temp, 0) / validData.length) : 0;
   
-  const dataRange = Math.max(currentMax - currentMin, 1);
+  // INTELLIGENT AUTO-SCALING MATH
+  // Rounds to the nearest 5 and adds a 5-degree padding for visual comfort
+  const yAxisMin = Math.max(0, Math.floor(currentMin / 5) * 5 - 5); 
+  const yAxisMax = Math.ceil(currentMax / 5) * 5 + 5;
+  const chartRange = Math.max(yAxisMax - yAxisMin, 1);
 
-  const getOffset = (targetTemp) => {
-    const percent = (currentMax - targetTemp) / dataRange;
-    return Math.max(0, Math.min(1, percent)) * 100;
-  };
+  // UNCLAMPED OFFSET
+  // Prevents the gradient colours from squishing when the graph zooms in
+  const getOffset = (targetTemp) => ((yAxisMax - targetTemp) / chartRange) * 100;
 
   const activeBtnClass = "bg-blue-600 text-white font-bold shadow-md";
   const inactiveBtnClass = darkMode 
@@ -186,8 +189,10 @@ export default function TemperatureChart({ data, unlimitedHistory, darkMode, mod
               minTickGap={30} 
             />
             
+            {/* UPDATED Y-AXIS: Now fully dynamic using the calculated bounds */}
             <YAxis 
-              domain={[0, 100]} 
+              domain={[yAxisMin, yAxisMax]} 
+              tickCount={6}
               stroke={axisColour} 
               tick={{ fill: axisColour, fontSize: 12 }} 
               tickFormatter={(val) => `${val}°`}
