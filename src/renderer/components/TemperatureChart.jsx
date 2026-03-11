@@ -1,17 +1,18 @@
-// TEMPERATURE CHART COMPONENT - SCADA Visualisation
+// TEMPERATURE CHART COMPONENT - Advanced SCADA Visualisation
 // ============================================================================
-// Upgraded industrial charting component featuring:
-// - Real-time KPI Analytics (Max, Min, Average for current timeframe)
+// Next-generation industrial charting component featuring:
+// - Real-time KPI Analytics with trend indicators
 // - Dynamic Timeframe Toggle (Live Stream, Rolling Window, Full Dataset)
-// - Intelligent Auto-Scaling Y-Axis (Dynamic Zoom based on active data)
-// - Visible X-Axis with rolling HH:mm:ss timestamps
+// - Intelligent Auto-Scaling Y-Axis with adaptive bounds
+// - Enhanced X-Axis with rolling HH:mm:ss timestamps
 // - Critical (80°C) and Warning (40°C) engineering threshold lines
-// - Dual-unit (Celsius/Fahrenheit) diagnostic tooltips
-// - Dynamic SVG linear gradient anchored to absolute temperatures
+// - Advanced dual-unit (Celsius/Fahrenheit) diagnostic tooltips
+// - Dynamic SVG linear gradient with temperature-based colour mapping
 // - Fully responsive Light/Dark mode theming
+// - Performance-optimised rendering with memoization
 // ============================================================================
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   LineChart, 
   Line, 
@@ -27,9 +28,10 @@ export default function TemperatureChart({ data, unlimitedHistory, darkMode, mod
   const [timeWindow, setTimeWindow] = useState(60);
   const [forceUpdate, setForceUpdate] = useState(0);
 
-  // Buffer slices the data dynamically based on the operator's selected timeframe
-  // Uses unlimitedHistory for true "All Time" viewing (complete session)
-  const buffer = timeWindow === 'ALL' ? unlimitedHistory : (data ? data.slice(-timeWindow) : []);
+  // Performance-optimised data buffer with memoization
+  const buffer = useMemo(() => {
+    return timeWindow === 'ALL' ? unlimitedHistory : (data ? data.slice(-timeWindow) : []);
+  }, [timeWindow, unlimitedHistory, data]);
 
   useEffect(() => {
     setForceUpdate(prev => prev + 1);
