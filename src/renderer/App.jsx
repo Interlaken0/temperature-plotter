@@ -18,8 +18,8 @@ import ThemeButton from './components/ThemeButton'; // Elite theme toggle functi
 // MAIN APP COMPONENT - Application root with state management
 export default function App() {
   // TEMPERATURE DATA - Real-time temperature streaming via custom hook
-  // Returns current temperature reading and historical data array
-  const { temp, history } = useTemperature(); // Custom hook manages IPC communication and data state
+  // Returns current temperature reading and historical data arrays
+  const { temp, history, unlimitedHistory } = useTemperature(); // Custom hook manages IPC communication and dual data buffers
   
   // UI STATE - User interface preferences and device mode
   const [darkMode, setDarkMode] = useState(true); // Theme preference for light/dark mode
@@ -66,7 +66,7 @@ export default function App() {
           <div className="glass p-6 rounded-2xl shadow-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-lg border border-grey-200 dark:border-white/10 h-96">
             {/* CHART PROPS - Pass theme and mode for dynamic styling */}
             {/* FIX: Passing 'darkMode' and 'mode' props so the chart can change colours and styling */}
-            <TemperatureChart data={history} darkMode={darkMode} mode={mode} /> {/* Historical data with visual theming */}
+            <TemperatureChart data={history} unlimitedHistory={unlimitedHistory} darkMode={darkMode} mode={mode} /> {/* Historical data with visual theming and unlimited history support */}
           </div>
 
           {/* EXPORT SECTION - CSV data export functionality */}

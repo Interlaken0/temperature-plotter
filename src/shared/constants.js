@@ -16,4 +16,5 @@
 // - Prevents memory leaks in long-running applications
 // - Ensures smooth chart performance with large datasets
 // ============================================================================
-export const MAX_BUFFER = 500; // Maximum historical data points to retain
+export const MAX_BUFFER = 5000; // Maximum historical data points to retain (~83 minutes at 1Hz)
+export const ALL_TIME = 'ALL_TIME'; // Special marker for unlimited historical data

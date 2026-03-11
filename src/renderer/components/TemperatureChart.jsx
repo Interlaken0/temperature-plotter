@@ -23,11 +23,13 @@ import {
   CartesianGrid 
 } from 'recharts';
 
-export default function TemperatureChart({ data, darkMode, mode }) {
+export default function TemperatureChart({ data, unlimitedHistory, darkMode, mode }) {
   const [timeWindow, setTimeWindow] = useState(60);
   const [forceUpdate, setForceUpdate] = useState(0);
 
-  const buffer = data ? (timeWindow === 'ALL' ? data : data.slice(-timeWindow)) : [];
+  // Buffer slices the data dynamically based on the operator's selected timeframe
+  // Uses unlimitedHistory for true "All Time" viewing (complete session)
+  const buffer = timeWindow === 'ALL' ? unlimitedHistory : (data ? data.slice(-timeWindow) : []);
 
   useEffect(() => {
     setForceUpdate(prev => prev + 1);
