@@ -12,15 +12,6 @@ const EventEmitter = require('events'); // Node.js event system for interrupt si
 const store = require('./state/temperatureStore'); // Global temperature data store
 const consoleColours = require('./utils/consoleColours'); // Enhanced console output
 
-// INTERRUPT SIMULATOR CLASS - Hardware behaviour emulation
-// ============================================================================
-// Simulates hardware interrupt-driven temperature sensors:
-// - Extends EventEmitter for event-based architecture
-// - Generates realistic temperature readings with patterns
-// - Provides start/stop control for simulation lifecycle
-// - Integrates with global temperature store for data persistence
-// - Allows seamless switching between simulator and hardware
-// ============================================================================
 class InterruptSimulator extends EventEmitter {
   constructor() {
     super(); // Initialize EventEmitter parent class
@@ -28,76 +19,39 @@ class InterruptSimulator extends EventEmitter {
     this.readingCount = 0; // Track number of readings for debugging purposes
   }
 
-  // START SIMULATION - Begin temperature data generation
-  // Initiates continuous temperature reading simulation with realistic patterns
   start() {
-    this.running = true; // Set simulation state to active
-    this.readingCount = 0; // Reset reading count for debugging
-    this.triggerInterrupt(); // Start first interrupt cycle
+    this.running = true; 
+    this.readingCount = 0; 
+    this.triggerInterrupt(); 
   }
 
-  // TRIGGER INTERRUPT - Simulate hardware interrupt event
-  // ============================================================================
-  // This method simulates a hardware interrupt by:
-  // - Generating realistic temperature readings with mathematical patterns
-  // - Adding random noise for authentic sensor behaviour
-  // - Updating global temperature store
-  // - Scheduling next interrupt with variable timing
-  // - Providing detailed logging for debugging and evidence
-  // ============================================================================
   triggerInterrupt() {
-    if (!this.running) return; // Exit if simulation stopped
+    if (!this.running) return; 
 
-    // TEMPERATURE GENERATION - Realistic sensor data patterns simulation
-    // Creates authentic temperature patterns with completely random values:
-    // - All readings: realistic patterns with sine wave and noise
-    // - Base temperature of 22.5°C (room temperature)
-    // - Sine wave variation (±5°C) simulating daily temperature cycles
-    // - Random noise (±1°C) simulating sensor reading uncertainty
-    // - Time-based sine wave creates smooth, realistic temperature changes
     let reading;
-    this.readingCount++; // Increment reading counter
+    this.readingCount++; 
     
-    // Simulator generates completely random temperatures (no 30°C start or 10°C end pattern)
-    const noise = Math.random() * 2 - 1; // Random noise between -1 and +1 degrees
-    reading = 22.5 + Math.sin(Date.now() / 1000) * 5 + noise; // Base + wave + noise
+    const noise = Math.random() * 2 - 1; 
+    reading = 22.5 + Math.sin(Date.now() / 1000) * 5 + noise; 
 
     // DATA STORE UPDATE - Persist temperature reading
-    // Direct update to global temperature store for UI consumption
-    store.updateTemperature(reading); // Store reading for chart updates and logging
+    // EXPLICIT SIMULATOR TAG ADDED HERE (false)
+    store.updateTemperature(reading, false); 
 
-    // MODULE IMPORTS - Dependencies and configuration of simulated data
-    // Provides visual evidence that data is from simulator, not hardware
-    // Essential for debugging and portfolio documentation
-    const fahrenheit = (reading * 9/5) + 32; // Convert to Fahrenheit
+    const fahrenheit = (reading * 9/5) + 32; 
     consoleColours.temperature(reading, fahrenheit, 'SIMULATOR');
 
-    // VARIABLE TIMING - Simulate hardware interrupt jitter
-    // Real hardware doesn't trigger at perfect intervals:
-    // - Base interval of 500ms (2 Hz sampling rate)
-    // - Random variation up to 500ms (0-1 second total interval)
-    // - Simulates real hardware timing irregularities
-    const nextInterrupt = 500 + Math.random() * 500; // 500-1000ms variable interval
-    setTimeout(() => this.triggerInterrupt(), nextInterrupt); // Schedule next interrupt
+    const nextInterrupt = 500 + Math.random() * 500; 
+    setTimeout(() => this.triggerInterrupt(), nextInterrupt); 
   }
 
-  // STOP SIMULATION - Graceful termination of data generation
-  // Sets running flag to false, preventing further interrupt scheduling
   stop() {
-    this.running = false; // Halt simulation by clearing state flag
+    this.running = false; 
     
-    // Simulator stops without sending any final signature reading
-    const fahrenheit = (22.5 * 9/5) + 32; // Convert base temperature to Fahrenheit for logging
+    const fahrenheit = (22.5 * 9/5) + 32; 
     consoleColours.simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)');
   }
 }
 
-// SIMULATOR INSTANCE - Global export for main process
-// ============================================================================
-// Creates and exports singleton simulator instance:
-// - Ensures single simulator instance across application
-// - Provides consistent interface for main process device management
-// - Allows seamless switching between simulator and hardware
-// ============================================================================
-const sim = new InterruptSimulator(); // Create singleton simulator instance
-module.exports = sim; // Export for use in main process
+const sim = new InterruptSimulator(); 
+module.exports = sim;

@@ -34,9 +34,7 @@ try {
   
   if (folderExists) {
     process.chdir(assetsFolder);
-    
     try { koffi.unload(dllName); } catch (e) { } 
-    
     lib = koffi.load(dllName);
   }
 } catch (e) {
@@ -82,7 +80,8 @@ module.exports = {
       consoleColours.temperature(outputTemp, fahrenheit, 'REAL');
 
       if (outputTemp > -50 && outputTemp < 200) {
-        store.updateTemperature(outputTemp);
+        // EXPLICIT HARDWARE TAG ADDED HERE (true)
+        store.updateTemperature(outputTemp, true);
         if (global.hardwareMonitorInstance) {
             global.hardwareMonitorInstance.updateLastUpdate();
         }

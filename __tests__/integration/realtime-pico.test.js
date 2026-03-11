@@ -281,7 +281,7 @@ describe('Real-Time Pico Temperature Tests', () => {
     expect(fs.existsSync).toHaveBeenCalled();
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       expect.stringContaining('temperature_telemetry.csv'),
-      'Date,Time,Temperature(C)\n'
+      'Date,Time,Temperature(C),Data_Source,Mode,Device_Status\n'
     );
     
     expect(fs.appendFileSync).toHaveBeenCalledTimes(testTemps.length + 2); // +2 for header and potential extra calls

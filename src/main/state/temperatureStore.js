@@ -15,10 +15,11 @@ const listeners = [];
  * Adds temperature reading to ring buffer
  * @function add
  * @param {number} value - Temperature value to store
+ * @param {boolean} isHardware - Flag indicating if data came from hardware
  * @description Adds timestamped temperature data to circular buffer
  */
-function add(value) {
-  buffer[head] = { time: Date.now(), temp: value };
+function add(value, isHardware) {
+  buffer[head] = { time: Date.now(), temp: value, isHardwareMode: isHardware };
   head = (head + 1) % MAX_SIZE;
   if (size < MAX_SIZE) size++;
 }
@@ -31,9 +32,9 @@ function getOrderedHistory() {
 }
 
 module.exports = {
-  updateTemperature(val) {
+  updateTemperature(val, isHardware = false) {
     currentTemp = val;
-    add(val);
+    add(val, isHardware);
     const data = { temp: currentTemp, history: getOrderedHistory() };
     listeners.forEach(cb => cb(data));
   },

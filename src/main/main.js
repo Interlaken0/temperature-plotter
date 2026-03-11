@@ -4,7 +4,7 @@ process.noDeprecation = true; // Suppress N-API Deprecation Warnings on Windows
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { initIpc } = require('./ipc/temperatureIpc');
-const store = require('./state/temperatureStore'); // REQUIRED for 10.00 injection
+const store = require('./state/temperatureStore'); 
 const consoleColours = require('./utils/consoleColours'); // Enhanced console output
 
 consoleColours.header('AMF-Temperature-Plotter Starting');
@@ -95,9 +95,10 @@ class HardwareMonitor {
     }
 
     fallbackToSimulator() {
-        // REQUIREMENT: Log the final "Disconnect" reading before switching
-        consoleColours.warning('Hardware timeout detected. Injecting final 10.00 deg C reading.');
-        store.updateTemperature(10.00); 
+        consoleColours.warning('Hardware timeout detected. Hardware DLL dropped connection.');
+        
+        // Removed the duplicate 10.00 injection here because the DLL naturally 
+        // outputs a 10.00 reading just before it dies, which our log catches.
 
         if (this.checkInterval) clearInterval(this.checkInterval);
         
