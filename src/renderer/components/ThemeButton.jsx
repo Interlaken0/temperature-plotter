@@ -1,11 +1,11 @@
 // THEME BUTTON COMPONENT - Elite Theme Toggle System
 // ============================================================================
 // Professional component for switching between light and dark themes:
-// - Features elite UI design with advanced animations and sound feedback
+// - Features elite UI design with advanced animations and visual feedback
 // - Provides smooth transitions between theme states
 // - Includes accessibility features for screen readers
 // - Demonstrates professional state management patterns
-// - Includes visual feedback, loading states, and audio confirmation
+// - Includes visual feedback and loading states
 // ============================================================================
 
 import React, { useState, useEffect } from 'react'; // React library for component rendering
@@ -14,48 +14,16 @@ import React, { useState, useEffect } from 'react'; // React library for compone
 export default function ThemeButton({ darkMode, onToggle }) {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // AUDIO SYSTEM - Elite theme switch sound
-  useEffect(() => {
-    // Create audio context for elite theme switch sound
-    const createThemeSwitchSound = () => {
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-      
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      
-      // Elite theme switch sound: smooth ascending/descending tone
-      oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(darkMode ? 400 : 1200, audioContext.currentTime + 0.2);
-      oscillator.type = 'sine'; // Clean sine wave
-      
-      gainNode.gain.setValueAtTime(0.2, audioContext.currentTime); // Start volume
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3); // Fade out
-      
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.3);
-    };
-
-    // Store sound function for later use
-    window.playEliteThemeSound = createThemeSwitchSound;
-  }, [darkMode]);
-
-  // THEME TOGGLE HANDLER - Elite theme switching with feedback
+  // THEME TOGGLE HANDLER - Elite theme switching with visual feedback
   // ============================================================================
   // Handles theme toggle with enhanced user experience:
-  // - Provides visual and audio feedback
+  // - Provides visual feedback only (no sound)
   // - Uses smooth transitions between states
   // - Prevents rapid clicking during transition
   // - Gracefully handles state changes
   // ============================================================================
   const handleThemeToggle = () => {
     if (isTransitioning) return; // Prevent rapid clicking
-    
-    // Play elite theme switch sound
-    if (window.playEliteThemeSound) {
-      window.playEliteThemeSound();
-    }
     
     setIsTransitioning(true);
     
