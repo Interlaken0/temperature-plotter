@@ -121,24 +121,33 @@ export default function TemperatureChart({ data, unlimitedHistory, darkMode, mod
         {/* UPGRADED KPI TEXT */}
         <div className="flex gap-4 sm:gap-6">
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Peak Value</span>
-            <span className={`text-lg font-bold ${darkMode ? 'text-red-400' : 'text-red-600'}`}>
-              {currentMax.toFixed(1)}°C
-            </span>
+            <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">PEAK OPERATIONAL VALUE</span>
+            <div className="flex items-center gap-2">
+              <span className={`text-lg font-bold ${darkMode ? 'text-red-400' : 'text-red-600'}`}>
+                {currentMax.toFixed(1)}°C
+              </span>
+              <span className="text-xs text-red-400">↑</span>
+            </div>
           </div>
           <div className={`w-px h-8 ${darkMode ? 'bg-slate-600/50' : 'bg-slate-300'}`}></div>
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Mean Value</span>
-            <span className={`text-lg font-bold ${darkMode ? 'text-slate-200' : 'text-slate-800'}`}>
-              {currentAvg.toFixed(1)}°C
-            </span>
+            <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">AVERAGE OPERATIONAL TEMP</span>
+            <div className="flex items-center gap-2">
+              <span className={`text-lg font-bold ${darkMode ? 'text-slate-200' : 'text-slate-800'}`}>
+                {currentAvg.toFixed(1)}°C
+              </span>
+              <span className="text-xs text-slate-400">⚖</span>
+            </div>
           </div>
           <div className={`w-px h-8 ${darkMode ? 'bg-slate-600/50' : 'bg-slate-300'}`}></div>
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Base Value</span>
-            <span className={`text-lg font-bold ${darkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>
-              {currentMin.toFixed(1)}°C
-            </span>
+            <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">MINIMUM BASELINE TEMP</span>
+            <div className="flex items-center gap-2">
+              <span className={`text-lg font-bold ${darkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>
+                {currentMin.toFixed(1)}°C
+              </span>
+              <span className="text-xs text-cyan-400">↓</span>
+            </div>
           </div>
         </div>
 
