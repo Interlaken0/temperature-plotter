@@ -13,6 +13,7 @@ import { useTemperature } from './hooks/useTemperature'; // Custom hook for temp
 import TemperatureChart from './components/TemperatureChart'; // Real-time temperature visualisation
 import StatusPanel from './components/StatusPanel'; // Current temperature and mode display
 import SaveButton from './components/SaveButton'; // CSV export functionality
+import ThemeButton from './components/ThemeButton'; // Elite theme toggle functionality
 
 // MAIN APP COMPONENT - Application root with state management
 export default function App() {
@@ -49,16 +50,11 @@ export default function App() {
         
         {/* LAYOUT CONTAINER - Centred content with optimal width */}
         <div className="max-w-5xl mx-auto space-y-6">
-          {/* HEADER SECTION - Title and theme toggle */}
+          {/* HEADER SECTION - Title and elite theme toggle */}
           <div className="flex justify-between items-centre mb-8">
             <h1 className="text-3xl font-bold tracking-tight">AMF-Temperature-Plotter</h1>
-            {/* THEME TOGGLE - Dark/light mode switcher with emoji indicators */}
-            <button 
-              onClick={() => setDarkMode(!darkMode)} // Toggle dark mode state
-              className="px-4 py-2 text-sm font-medium bg-white dark:bg-slate-800 border border-grey-300 dark:border-slate-600 rounded-lg shadow-sm hover:bg-grey-50 dark:hover:bg-slate-700 transition-all"
-            >
-              {darkMode ? 'Light Mode' : 'Dark Mode'}
-            </button>
+            {/* ELITE THEME TOGGLE - Premium theme switcher with animations and sound */}
+            <ThemeButton darkMode={darkMode} onToggle={() => setDarkMode(!darkMode)} />
           </div>
 
           {/* STATUS PANEL - Current temperature and device mode display */}
