@@ -33,7 +33,7 @@ describe('TemperatureChart Component', () => {
     render(<TemperatureChart data={mockData} darkMode={false} />);
     
     // Assert: Check if chart container is rendered with correct classes
-    const chartContainer = document.querySelector('.h-64.w-full');
+    const chartContainer = document.querySelector('.h-72.w-full');
     expect(chartContainer).toBeInTheDocument();
     
     // Evidence: Shows component rendering validation
@@ -47,7 +47,7 @@ describe('TemperatureChart Component', () => {
     render(<TemperatureChart data={[]} darkMode={false} />);
     
     // Assert: Should still render the chart container even with no data
-    const chartContainer = document.querySelector('.h-64.w-full');
+    const chartContainer = document.querySelector('.h-72.w-full');
     expect(chartContainer).toBeInTheDocument();
     
     // Evidence: Shows edge case handling and error resilience
@@ -60,7 +60,7 @@ describe('TemperatureChart Component', () => {
     render(<TemperatureChart data={null} darkMode={false} />);
     
     // Assert: Should still render the chart container
-    const chartContainer = document.querySelector('.h-64.w-full');
+    const chartContainer = document.querySelector('.h-72.w-full');
     expect(chartContainer).toBeInTheDocument();
     
     // Evidence: Shows null safety and defensive programming
@@ -73,7 +73,7 @@ describe('TemperatureChart Component', () => {
     render(<TemperatureChart data={mockData} darkMode={false} />);
     
     // Assert: Chart should render successfully in light mode
-    const chartContainer = document.querySelector('.h-64.w-full');
+    const chartContainer = document.querySelector('.h-72.w-full');
     expect(chartContainer).toBeInTheDocument();
     
     // Evidence: Shows theme testing and UI consistency
@@ -87,7 +87,7 @@ describe('TemperatureChart Component', () => {
     render(<TemperatureChart data={mockData} darkMode={true} />);
     
     // Assert: Chart should render successfully in dark mode
-    const chartContainer = document.querySelector('.h-64.w-full');
+    const chartContainer = document.querySelector('.h-72.w-full');
     expect(chartContainer).toBeInTheDocument();
     
     // Evidence: Shows dark theme support and accessibility
@@ -103,7 +103,7 @@ describe('TemperatureChart Component', () => {
     render(<TemperatureChart data={singleDataPoint} darkMode={false} />);
     
     // Assert: Should handle minimal data gracefully
-    const chartContainer = document.querySelector('.h-64.w-full');
+    const chartContainer = document.querySelector('.h-72.w-full');
     expect(chartContainer).toBeInTheDocument();
     
     // Evidence: Shows minimal data handling and edge case testing
@@ -126,7 +126,7 @@ describe('TemperatureChart Component', () => {
     );
     
     // Assert: Should handle large datasets without performance issues
-    const chartContainer = document.querySelector('.h-64.w-full');
+    const chartContainer = document.querySelector('.h-72.w-full');
     expect(chartContainer).toBeInTheDocument();
     
     // Evidence: Shows performance testing and scalability
