@@ -1,157 +1,128 @@
-// TEMPERATURE CHART COMPONENT - Advanced Real-time Data Visualisation
+// TEMPERATURE CHART COMPONENT - Elite SCADA Visualisation
 // ============================================================================
-// Sophisticated charting component for temperature data with:
-// - Real-time data streaming and updates
-// - Dynamic theming based on dark/light mode
-// - Mode-based visual differentiation (hardware vs simulator)
-// - Responsive design with performance optimisations
-// - Professional data visualisation using Recharts library
+// Upgraded industrial charting component featuring:
+// - Fixed Y-Axis scaling for visual stability
+// - Visible X-Axis with rolling HH:mm:ss timestamps
+// - Critical and Warning engineering threshold lines
+// - Dual-unit (Celsius/Fahrenheit) diagnostic tooltips
 // ============================================================================
 
-import React, { useState, useEffect } from 'react'; // React hooks for state and lifecycle management
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'; // Charting library components
+import React, { useState, useEffect } from 'react';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, CartesianGrid } from 'recharts';
 
-// CHART RENDERING - Main visualisation component
-export default function TemperatureChart({ data, darkMode, mode }) { // Accept props for data and theming
-  const buffer = data || []; // Safe data handling with fallback to empty array
-  const [forceUpdate, setForceUpdate] = useState(0); // Force re-render trigger for mode changes
+export default function TemperatureChart({ data, darkMode, mode }) {
+  const buffer = data || [];
+  const [forceUpdate, setForceUpdate] = useState(0);
 
-  // MODE CHANGE HANDLER - Force re-render when device mode changes
-  // ============================================================================
-  // Ensures chart updates visual styling when switching between:
-  // - Hardware mode (green solid line)
-  // - Simulator mode (amber dashed line)
-  // This prevents cached styling issues during mode transitions
-  // ============================================================================
   useEffect(() => {
-    setForceUpdate(prev => prev + 1); // Increment trigger to force React re-render
-  }, [mode]); // Dependency on mode prop ensures execution on mode changes
+    setForceUpdate(prev => prev + 1);
+  }, [mode]);
 
-  // THEME COLOUR SYSTEM - Dynamic colour configuration
-  // ============================================================================
-  // Provides adaptive theming based on dark/light mode preference:
-  // - Dark Mode: Light grey colours for contrast on dark background
-  // - Light Mode: Dark colours for visibility on light background
-  // - Ensures readability and visual consistency across themes
-  // ============================================================================
-  const axisColour = darkMode ? '#94a3b8' : '#000000'; // Axis lines and labels
-  const tooltipBg = darkMode ? '#1e293b' : '#ffffff'; // Tooltip background
-  const tooltipBorder = darkMode ? '#475569' : '#e2e8f0'; // Tooltip border
-  const tooltipText = darkMode ? '#f8fafc' : '#0f172a'; // Tooltip text colour
+  // INDUSTRIAL THEME COLOURS
+  const axisColour = darkMode ? '#94a3b8' : '#475569';
+  const gridColour = darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+  const tooltipBg = darkMode ? '#0f172a' : '#ffffff';
+  const tooltipBorder = darkMode ? '#334155' : '#cbd5e1';
+  const tooltipText = darkMode ? '#f8fafc' : '#0f172a';
 
-  // MODE-BASED STYLING - Visual differentiation for data sources
-  // ============================================================================
-  // Provides clear visual indication of data source:
-  // - Simulator Mode: Amber colour with dashed line (indicates simulated data)
-  // - Hardware Mode: Green colour with solid line (indicates real data)
-  // This helps users immediately understand data authenticity
-  // ============================================================================
   const getLineColour = () => {
-    if (mode === 'simulator') {
-      return '#f59e0b'; // Amber colour for simulation mode (warning/indication)
-    } else {
-      return '#10b981'; // Green colour for hardware mode (success/authentic)
-    }
+    return mode === 'simulator' ? '#f59e0b' : '#00ffcc'; // Bright cyan for real hardware
   };
 
-  const getLineStrokeDasharray = () => {
-    return mode === 'simulator' ? '5 5' : '0'; // Dashed line for simulator, solid for hardware
+  const dashArray = mode === 'simulator' ? '5 5' : '0';
+
+  // FORMATTERS
+  const formatXAxisTime = (timestamp) => {
+    if (!timestamp) return '';
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString('en-GB', { hour12: false }); // HH:mm:ss
   };
 
-  // DATE/TIME FORMATTER - Human-readable timestamp conversion
-  // ============================================================================
-  // Converts Unix timestamps to localised date/time strings:
-  // - Uses en-GB locale for consistent formatting (DD/MM/YYYY)
-  // - 24-hour format for technical accuracy
-  // - Includes seconds for precise timing analysis
-  // - Handles null/undefined timestamps gracefully
-  // ============================================================================
-  const formatDateTime = (timestamp) => {
-    if (!timestamp) return ''; // Graceful handling of missing timestamps
-    const date = new Date(timestamp); // Convert timestamp to Date object
-    return date.toLocaleString('en-GB', { 
-      hour12: false, // Use 24-hour format
-      year: 'numeric', // Full year (2024)
-      month: '2-digit', // Two-digit month (01-12)
-      day: '2-digit', // Two-digit day (01-31)
-      hour: '2-digit', // Two-digit hour (00-23)
-      minute: '2-digit', // Two-digit minute (00-59)
-      second: '2-digit' // Two-digit second (00-59)
-    });
-  };
-
-  // TEMPERATURE FORMATTER - Precise temperature display
-  // ============================================================================
-  // Formats temperature values for consistent display:
-  // - Ensures numeric input validation
-  // - Formats to 1 decimal place for precision
-  // - Adds °C unit symbol for clarity
-  // - Handles non-numeric values gracefully
-  // ============================================================================
   const formatTemp = (value) => {
-    if (typeof value !== 'number') return ''; // Validate input is numeric
-    return `${value.toFixed(1)} °C`; // Format to 1 decimal place with unit
+    if (typeof value !== 'number') return '';
+    return `${value.toFixed(1)}°C`;
   };
 
-  // MODE LABEL GENERATOR - User-friendly mode identification
-  // ============================================================================
-  // Provides descriptive labels for data source:
-  // - Simulator Mode: Clear indication of simulated data
-  // - Hardware Mode: Professional "Real-Time" label for authentic data
-  // - Used in tooltips to inform users about data source
-  // ============================================================================
   const getModeLabel = () => {
-    if (mode === 'simulator') return 'Simulation Mode'; // Clear simulator indication
-    return 'Real-Time Temperature'; // Professional hardware mode label
+    return mode === 'simulator' ? '[SIMULATOR]' : '[HARDWARE]';
   };
 
-  // STYLE CALCULATIONS - Pre-compute dynamic styles for performance
-  const lineColour = getLineColour(); // Current line colour based on mode
-  const dashArray = getLineStrokeDasharray(); // Current line style based on mode
+  // CUSTOM DIAGNOSTIC TOOLTIP
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      const tempC = payload[0].value;
+      const tempF = (tempC * 9/5) + 32;
+      
+      return (
+        <div style={{
+          backgroundColor: tooltipBg,
+          border: `1px solid ${tooltipBorder}`,
+          borderRadius: '8px',
+          padding: '12px',
+          color: tooltipText,
+          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)'
+        }}>
+          <p style={{ margin: '0 0 8px 0', fontWeight: 'bold', color: axisColour, borderBottom: `1px solid ${gridColour}`, paddingBottom: '4px' }}>
+            {formatXAxisTime(label)}
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '20px', alignItems: 'center' }}>
+            <span style={{ color: getLineColour(), fontWeight: 'bold', fontSize: '1.2rem' }}>
+              {tempC.toFixed(2)} °C
+            </span>
+            <span style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
+              ({tempF.toFixed(2)} °F)
+            </span>
+          </div>
+          <p style={{ margin: '8px 0 0 0', fontSize: '0.8rem', opacity: 0.7, textAlign: 'right' }}>
+            {getModeLabel()}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
 
-  // CHART RENDER - Complete temperature visualisation interface
   return (
-    <div className="h-64 w-full">
+    <div className="h-72 w-full mt-4"> {/* Slightly taller for better Y-axis resolution */}
       <ResponsiveContainer>
-        <LineChart data={buffer}>
+        <LineChart data={buffer} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+          
+          {/* Subtle Grid for Readability */}
+          <CartesianGrid strokeDasharray="3 3" stroke={gridColour} vertical={false} />
+          
+          {/* X-AXIS: Now visible and formatted to HH:mm:ss */}
           <XAxis 
             dataKey="time" 
-            hide 
-            domain={['auto', 'auto']} 
-            type="number" 
+            tickFormatter={formatXAxisTime}
+            stroke={axisColour}
+            tick={{ fill: axisColour, fontSize: 12 }}
+            minTickGap={30} // Prevents timestamps from overlapping
           />
           
+          {/* Y-AXIS: Locked domain for stability */}
           <YAxis 
-            domain={['auto', 'auto']} 
+            domain={[0, 100]} // STATIC DOMAIN: 0 to 100 degrees Celsius
             stroke={axisColour} 
-            tick={{ fill: axisColour }} 
-            tickLine={{ stroke: axisColour }} 
+            tick={{ fill: axisColour, fontSize: 12 }} 
+            tickFormatter={(val) => `${val}°`}
+            width={45}
           />
 
-          <Tooltip 
-            contentStyle={{ 
-              backgroundColor: tooltipBg, 
-              border: `1px solid ${tooltipBorder}`, 
-              borderRadius: '8px', 
-              colour: tooltipText, 
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' 
-            }}
-            itemStyle={{ colour: lineColour }} // Data point colour matches line
-            labelStyle={{ colour: axisColour, marginBottom: '0.25rem', fontSize: '0.9rem' }} // Timestamp styling
-            labelFormatter={(label) => formatDateTime(label)} // Format timestamp display
-            formatter={(value) => [formatTemp(value), getModeLabel()]} // Format temperature with mode label
-          />
+          <Tooltip content={<CustomTooltip />} />
 
-          {/* TEMPERATURE LINE - Main data visualisation with mode-based styling */}
+          {/* ENGINEERING THRESHOLDS */}
+          <ReferenceLine y={80} stroke="#ef4444" strokeDasharray="3 3" label={{ position: 'insideTopLeft', value: 'CRITICAL', fill: '#ef4444', fontSize: 10 }} />
+          <ReferenceLine y={40} stroke="#eab308" strokeDasharray="3 3" label={{ position: 'insideTopLeft', value: 'WARNING', fill: '#eab308', fontSize: 10 }} />
+
           <Line 
-            dataKey="temp" // Temperature data field
-            type="monotone" // Smooth curve interpolation
-            stroke={lineColour} // Dynamic colour based on mode
-            strokeWidth={3} // Bold line for visibility
-            strokeDasharray={dashArray} // Dashed for simulator, solid for hardware
-            dot={false} // No data points for cleaner line
-            isAnimationActive={false} // Disable animations for real-time performance
-            key={`${mode}-${forceUpdate}`} // Force re-render when mode changes
+            dataKey="temp" 
+            type="monotone" 
+            stroke={getLineColour()} 
+            strokeWidth={3} 
+            strokeDasharray={dashArray} 
+            dot={false} 
+            isAnimationActive={false} 
+            key={`${mode}-${forceUpdate}`} 
           />
         </LineChart>
       </ResponsiveContainer>
