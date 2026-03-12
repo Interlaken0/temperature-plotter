@@ -144,8 +144,8 @@ function initIpc() {
       const historicalDataSource = wasHardwareMode ? 'THERMAL_SENSOR_HARDWARE' : 'SOFTWARE_SIMULATION';
       
       // Elite Alert Classification System
-      let alertLevel = 'NORMAL';
-      let qualityFlag = 'GOOD';
+      let alertLevel = wasHardwareMode ? 'ACTIVE' : 'NORMAL';
+      let qualityFlag = wasHardwareMode ? 'CONNECTED' : 'GOOD';
       
       if (tempC >= 80) {
         alertLevel = 'CRITICAL';
