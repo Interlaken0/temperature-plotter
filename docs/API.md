@@ -247,7 +247,7 @@ Logs hardware-specific messages with blue colour formatting and HAL prefix.
 ```javascript
 const { hardware } = require('./utils/consoleColours');
 hardware(`Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})`);
-// Output: [+] [HAL] Session Start: Forcing 30.00 deg C (Sensor was: 25.00)
+// Output: [+] [HAL] Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})
 ```
 
 #### `simulator(message)`
@@ -293,6 +293,12 @@ Logs status messages with configurable colour coding.
 - `type` (string, optional): Log type ("success", "error", "warning", "info") - defaults to "info"
 
 **Returns:** void
+
+**Colour Mapping:**
+- "success": Green
+- "error": Red
+- "warning": Yellow
+- "info": Blue
 
 **Example:**
 ```javascript
@@ -399,7 +405,7 @@ console.log(`${symbols.success} Operation completed`);
 The console utilities are used throughout the application with specific message patterns:
 
 **Hardware Integration Messages:**
-- `consoleColours.hardware('Session Start: Forcing 30.00 deg C (Sensor was: X.XX)')`
+- `consoleColours.hardware('Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})')`
 - `consoleColours.error('Hardware Start Error: ' + err.message)`
 - `consoleColours.error('Stop error: ' + err.message)`
 - `consoleColours.warning('Hardware Stopped (callback unregistered)')`
@@ -411,9 +417,12 @@ The console utilities are used throughout the application with specific message 
 - `consoleColours.success('Hardware signal detected! Initiating switch...')`
 - `consoleColours.status('Switching back to hardware mode', 'success')`
 - `consoleColours.warning('Hardware timeout detected. Hardware DLL dropped connection.')`
+- `consoleColours.error('Health check error: ' + e.message)`
 
 **DLL Integration Messages:**
 - `consoleColours.warning('Hardware DLL not found. Falling back to simulator. (' + e.message + ')')`
+- `consoleColours.error('Failed to bind hardware functions from DLL: ' + err.message)`
+- `consoleColours.error('Failed to restore working directory: ' + e.message)`
 
 **Simulator Messages:**
 - `consoleColours.temperature(celsius, fahrenheit, 'REAL')`
@@ -422,11 +431,8 @@ The console utilities are used throughout the application with specific message 
 
 **Error Handling Messages:**
 - `consoleColours.error('Failed to load hardware DLL on startup: ' + e.message)`
-- `consoleColours.error('Failed to bind hardware functions from DLL: ' + err.message)`
 - `consoleColours.error('Force hardware failed: ' + e.message)`
-- `consoleColours.error('Health check error: ' + e.message)`
 - `consoleColours.error('Error stopping device: ' + e.message)`
-- `consoleColours.error('Failed to restore working directory: ' + e.message)`
 
 ### Temperature Store (`src/main/state/temperatureStore.js`)
 
