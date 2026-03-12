@@ -269,6 +269,7 @@ The console utilities are used throughout the application with specific message 
 - `consoleColours.error('Failed to load hardware DLL on startup: ' + e.message)`
 - `consoleColours.error('Force hardware failed: ' + e.message)`
 - `consoleColours.error('Error stopping device: ' + e.message)`
+- `consoleColours.error('Stop error: ' + e.message)`
 
 **Cross-Platform Features:**
 - ASCII-safe notation replaces °C with "deg C" to prevent PowerShell corruption
