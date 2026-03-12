@@ -300,8 +300,8 @@ const { status } = require('./utils/consoleColours');
 status('Switching back to hardware mode', 'success');
 // Output: > Switching back to hardware mode
 
-status('Performing hard DLL refresh', 'info');
-// Output: > Performing hard DLL refresh
+status('Hardware timeout detected', 'warning');
+// Output: > Hardware timeout detected
 ```
 
 #### `separator()`

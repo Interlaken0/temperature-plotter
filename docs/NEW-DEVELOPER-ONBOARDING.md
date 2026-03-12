@@ -299,8 +299,7 @@ graph TB
 consoleColours.header('AMF-Temperature-Plotter Starting');
 consoleColours.info('Starting hardware monitoring...');
 consoleColours.success('Hardware signal detected! Initiating switch...');
-consoleColours.status('Performing hard DLL refresh to check for new device...', 'info');
-consoleColours.warning('Hardware timeout detected. Injecting final 10.00 deg C reading.');
+consoleColours.warning('Hardware timeout detected. Hardware DLL dropped connection.');
 
 // From tempDll.js
 consoleColours.hardware(`Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})`);
