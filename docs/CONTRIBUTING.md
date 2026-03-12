@@ -24,7 +24,7 @@ Thank you for your interest in contributing to the Temperature Plotter project! 
 ### Initial Setup
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/Interlaken0/temperature-plotter.git
 cd temperature-plotter
 
 # Install dependencies
@@ -241,6 +241,49 @@ Any other relevant information
 
 ## Development Workflow
 
+### Development Process Overview
+
+```mermaid
+graph TB
+    subgraph "Phase 1: Setup"
+        A[Clone Repository] --> B[Install Dependencies]
+        B --> C[Create Feature Branch]
+        C --> D[Verify Setup]
+    end
+    
+    subgraph "Phase 2: Development"
+        D --> E[Write Code]
+        E --> F[Add Tests]
+        F --> G[Update Documentation]
+        G --> H[Run Tests]
+    end
+    
+    subgraph "Phase 3: Quality Assurance"
+        H --> I{Tests Pass?}
+        I -->|No| J[Fix Issues]
+        I -->|Yes| K[Build Application]
+        J --> H
+        K --> L{Build Success?}
+        L -->|No| M[Debug Build]
+        L -->|Yes| N[Submit PR]
+        M --> E
+    end
+    
+    subgraph "Phase 4: Review & Merge"
+        N --> O[Code Review]
+        O --> P{Review Approved?}
+        P -->|No| Q[Address Feedback]
+        P -->|Yes| R[Merge to Main]
+        Q --> E
+    end
+    
+    style A fill:#e1f5fe
+    style E fill:#f3e5f5
+    style I fill:#fff3e0
+    style P fill:#e8f5e8
+    style R fill:#ccffcc
+```
+
 ### 1. Setup Development Environment
 ```bash
 # Create feature branch
@@ -359,20 +402,84 @@ git push origin feature/your-feature-name
 
 ## Architecture Guidelines
 
-### Component Design
+### Component Design Principles
+
+```mermaid
+graph TB
+    subgraph "Component Architecture"
+        A[Presentation Components] --> B[Custom Hooks]
+        B --> C[Business Logic]
+        C --> D[Data Services]
+        D --> E[IPC Layer]
+    end
+    
+    subgraph "Separation of Concerns"
+        F[UI Components<br/>React/JSX] --> G[State Management<br/>Hooks/Context]
+        G --> H[Business Logic<br/>Utils/Services]
+        H --> I[Hardware Layer<br/>DLL/Simulator]
+    end
+    
+    style A fill:#e1f5fe
+    style F fill:#f3e5f5
+```
+
 - Keep components small and focused
 - Use custom hooks for complex state logic
 - Implement proper error boundaries
 - Follow React best practises
-- Separation of Concerns: Keep business/hardware logic separate from presentation logic (use src/utils/ for formatting and terminal output)
+- **Separation of Concerns**: Keep business/hardware logic separate from presentation logic (use src/utils/ for formatting and terminal output)
 
-### IPC Communication
+### IPC Communication Flow
+
+```mermaid
+graph LR
+    subgraph "Renderer Process"
+        A[React Component] --> B[Custom Hook]
+        B --> C[window.api]
+    end
+    
+    subgraph "IPC Bridge"
+        C --> D[preload.js]
+        D --> E[contextBridge]
+    end
+    
+    subgraph "Main Process"
+        E --> F[ipcMain.handle]
+        F --> G[Service Layer]
+        G --> H[Hardware/DLL]
+    end
+    
+    style A fill:#e1f5fe
+    style D fill:#f3e5f5
+    style F fill:#e8f5e8
+```
+
 - Use contextBridge for security
 - Validate all data crossing IPC boundary
 - Implement proper error handling
 - Document all IPC channels
 
-### State Management
+### State Management Architecture
+
+```mermaid
+graph TB
+    subgraph "Temperature Data Flow"
+        A[Hardware Input] --> B[Validation Layer]
+        B --> C[Ring Buffer Store]
+        C --> D[Event Broadcasting]
+        D --> E[UI Updates]
+    end
+    
+    subgraph "Data Validation"
+        F[Range Check<br/>-50°C to 200°C] --> G[Type Validation<br/>Number only]
+        G --> H[NaN Prevention<br/>Reject invalid]
+        H --> I[Security Logging<br/>Track rejections]
+    end
+    
+    style A fill:#e1f5fe
+    style F fill:#ffebee
+```
+
 - Use ring buffer for temperature history
 - Implement proper data validation
 - Handle edge cases (empty data, errors)
@@ -380,18 +487,82 @@ git push origin feature/your-feature-name
 
 ## Performance Considerations
 
-### Memory Management
+### Memory Management Strategy
+
+```mermaid
+graph TB
+    subgraph "Memory Optimisation"
+        A[Interval Cleanup] --> B[Listener Removal]
+        B --> C[Ring Buffer Management]
+        C --> D[React.memo Usage]
+    end
+    
+    subgraph "Leak Prevention"
+        E[useEffect Cleanup] --> F[Event Listener Removal]
+        F --> G[Timer Clearing]
+        G --> H[Reference Management]
+    end
+    
+    style A fill:#e1f5fe
+    style E fill:#ffebee
+```
+
 - Clean up intervals and listeners
 - Use efficient data structures
 - Monitor memory usage in long-running processes
 
-### UI Performance
+### UI Performance Optimisation
+
+```mermaid
+graph LR
+    subgraph "Rendering Optimisation"
+        A[React.memo] --> B[useCallback]
+        B --> C[useMemo]
+        C --> D[Virtualisation]
+    end
+    
+    subgraph "Data Handling"
+        E[Debounced Updates] --> F[Batched Operations]
+        F --> G[Lazy Loading]
+        G --> H[Efficient Algorithms]
+    end
+    
+    style A fill:#e1f5fe
+    style E fill:#f3e5f5
+```
+
 - Implement proper React.memo usage
 - Use useCallback for expensive computations
 - Optimise re-renders
 - Handle large datasets efficiently
 
 ## Security Guidelines
+
+### Security Architecture
+
+```mermaid
+graph TB
+    subgraph "Security Boundaries"
+        A[Renderer Process<br/>Sandboxed] --> B[IPC Bridge<br/>contextBridge]
+        B --> C[Main Process<br/>Privileged]
+    end
+    
+    subgraph "Data Validation"
+        D[Input Validation] --> E[Type Checking]
+        E --> F[Range Validation]
+        F --> G[Sanitisation]
+    end
+    
+    subgraph "Secure Communication"
+        H[contextBridge API] --> I[Validated Data Transfer]
+        I --> J[Error Handling]
+        J --> K[Audit Logging]
+    end
+    
+    style A fill:#e1f5fe
+    style D fill:#ffebee
+    style H fill:#e8f5e8
+```
 
 ### IPC Security
 - Never expose Node.js APIs directly to renderer
@@ -405,18 +576,98 @@ git push origin feature/your-feature-name
 - Handle file operations safely
 - Implement proper logging
 
+## Code Review Guidelines
+
+### Review Checklist
+
+```mermaid
+graph TB
+    subgraph "Code Quality"
+        A[Style Compliance] --> B[Documentation]
+        B --> C[Error Handling]
+        C --> D[Performance]
+    end
+    
+    subgraph "Testing"
+        E[Test Coverage] --> F[Test Quality]
+        F --> G[Edge Cases]
+        G --> H[Integration Tests]
+    end
+    
+    subgraph "Security"
+        I[Input Validation] --> J[IPC Security]
+        J --> K[Data Sanitisation]
+        K --> L[Error Boundaries]
+    end
+    
+    style A fill:#e1f5fe
+    style E fill:#f3e5f5
+    style I fill:#ffebee
+```
+
+### Review Process
+1. **Automated Checks**: Ensure all tests pass and coverage is maintained
+2. **Code Quality**: Verify adherence to style guidelines and best practises
+3. **Functionality**: Confirm the feature works as intended
+4. **Performance**: Check for potential performance issues
+5. **Security**: Validate security measures are in place
+6. **Documentation**: Ensure documentation is updated
+
 ## Getting Help
 
 ### Resources
 - [Project Documentation](docs/COMPLETE-DOCUMENTATION-GUIDE.md)
-- [System Architecture](docs/system-architecture.md)
-- [API Documentation](Inline JSDoc comments in source code)
+- [System Architecture](docs/SYSTEM-ARCHITECTURE.md)
+- [API Documentation](docs/API.md)
 - [Test Documentation](__tests__/README.md)
+- [Troubleshooting Guide](docs/TROUBLESHOOTING.md)
+
+### Development Support
+```mermaid
+graph LR
+    subgraph "Help Resources"
+        A[Documentation] --> B[Issue Tracker]
+        B --> C[Discussions]
+        C --> D[Code Reviews]
+    end
+    
+    subgraph "Learning Resources"
+        E[API Examples] --> F[Code Patterns]
+        F --> G[Best Practises]
+        G --> H[Architecture Guides]
+    end
+    
+    style A fill:#e1f5fe
+    style E fill:#f3e5f5
+```
 
 ### Contact
 - Create an issue for bugs or questions
 - Start a discussion for general questions
 - Check existing issues before creating new ones
+
+## British English Compliance
+
+All contributions must follow British English standards:
+- Use British English spelling (colour, behaviour, organised, etc.)
+- Professional UK terminology throughout
+- No American English spellings in any files
+- Consistent grammar and punctuation
+
+## Quality Standards
+
+### Code Quality Metrics
+- **Test Coverage**: Minimum 90%
+- **Documentation**: All functions must have JSDoc comments
+- **Style**: Adherence to ESLint rules
+- **Performance**: No memory leaks or performance regressions
+- **Security**: Follow all security guidelines
+
+### Release Standards
+- All tests must pass
+- Documentation must be updated
+- CHANGELOG.md must be updated
+- Version must follow semantic versioning
 
 ---
 

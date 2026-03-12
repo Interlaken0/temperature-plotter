@@ -18,6 +18,35 @@ This document provides a comprehensive reference for the Temperature Plotter app
 
 ## IPC Channels
 
+### IPC Communication Architecture
+
+```mermaid
+graph TB
+    subgraph "Renderer Process"
+        A[React Components] --> B[Preload Script API]
+        B --> C[IPC Renderer]
+    end
+    
+    subgraph "Main Process"
+        C --> D[IPC Main]
+        D --> E[IPC Handlers]
+        E --> F[Core Services]
+    end
+    
+    subgraph "Data Flow"
+        G[Temperature Updates] --> H[temperature:update]
+        I[Mode Changes] --> J[mode:change]
+        K[User Actions] --> L[save-csv]
+        K --> M[get-device-status]
+        K --> N[switch-mode]
+        K --> O[force-hardware-mode]
+    end
+    
+    style A fill:#e1f5fe
+    style D fill:#f3e5f5
+    style G fill:#e8f5e8
+```
+
 ### Temperature Data Channels
 
 #### `temperature:update`
@@ -108,6 +137,43 @@ const result = await window.api.forceHardwareMode();
 ## Main Process APIs
 
 ### Console Utilities (`src/main/utils/consoleColours.js`)
+
+#### Console Utility Functions Architecture
+
+```mermaid
+graph TB
+    subgraph "Console Utilities"
+        A[consoleColours.js] --> B[Logging Functions]
+        A --> C[Formatting Functions]
+        A --> D[Exported Objects]
+    end
+    
+    subgraph "Logging Functions"
+        B --> E[success]
+        B --> F[error]
+        B --> G[warning]
+        B --> H[info]
+        B --> I[hardware]
+        B --> J[simulator]
+        B --> K[temperature]
+        B --> L[status]
+    end
+    
+    subgraph "Formatting Functions"
+        C --> M[separator]
+        C --> N[header]
+    end
+    
+    subgraph "Exported Objects"
+        D --> O[colours - ANSI Codes]
+        D --> P[symbols - Prefixes]
+    end
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+```
 
 #### `success(message)`
 Logs success messages with green colour formatting.
@@ -316,6 +382,41 @@ console.log(`${symbols.success} Operation completed`);
 
 ### Temperature Store (`src/main/state/temperatureStore.js`)
 
+#### Temperature Store Architecture
+
+```mermaid
+graph TB
+    subgraph "Temperature Store"
+        A[temperatureStore.js] --> B[Ring Buffer]
+        A --> C[Event System]
+        A --> D[Validation Layer]
+    end
+    
+    subgraph "Ring Buffer"
+        B --> E[5000 Entry Capacity]
+        B --> F[Circular Array]
+        B --> G[Head Pointer]
+        B --> H[Size Counter]
+    end
+    
+    subgraph "Event System"
+        C --> I[Update Listeners]
+        C --> J[Data Broadcasting]
+        C --> K[IPC Integration]
+    end
+    
+    subgraph "Validation Layer"
+        D --> L[Range Check -50°C to 200°C]
+        D --> M[Type Validation]
+        D --> N[NaN Prevention]
+    end
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+```
+
 #### `updateTemperature(temperature)`
 Updates the temperature store with new reading.
 
@@ -339,6 +440,34 @@ Gets current store status.
 
 ### Hardware Abstraction Layer (`src/main/dll/tempDll.js`)
 
+#### Hardware Integration Architecture
+
+```mermaid
+graph TB
+    subgraph "Hardware Layer"
+        A[tempDll.js] --> B[Koffi FFI]
+        A --> C[Hardware DLL]
+        A --> D[Connection Management]
+    end
+    
+    subgraph "Hardware Functions"
+        D --> E[checkConnection]
+        D --> F[start]
+        D --> G[stop]
+        D --> H[Temperature Reading]
+    end
+    
+    subgraph "Hardware Device"
+        C --> I[Pico Hardware]
+        I --> J[Temperature Sensor]
+        J --> K[USB Interface]
+    end
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+```
+
 #### `checkConnection()`
 Checks hardware connection status.
 
@@ -355,6 +484,39 @@ Stops hardware monitoring.
 **Returns:** void
 
 ### Simulator (`src/main/simulator.js`)
+
+#### Simulator Architecture
+
+```mermaid
+graph TB
+    subgraph "Simulator Module"
+        A[simulator.js] --> B[Data Generation]
+        A --> C[Timing Control]
+        A --> D[Mode Management]
+    end
+    
+    subgraph "Data Generation"
+        B --> E[Sine Wave Pattern]
+        B --> F[Random Variation]
+        B --> G[Configurable Range]
+    end
+    
+    subgraph "Timing Control"
+        C --> H[1Hz Updates]
+        C --> I[Configurable Frequency]
+        C --> J[Interval Management]
+    end
+    
+    subgraph "Mode Management"
+        D --> K[start]
+        D --> L[stop]
+        D --> M[setFrequency]
+    end
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+```
 
 #### `start()`
 Starts temperature simulation.
@@ -375,6 +537,38 @@ Sets simulation frequency.
 **Returns:** void
 
 ## Renderer Components
+
+### Component Architecture Overview
+
+```mermaid
+graph TB
+    subgraph "Renderer Components"
+        A[App.jsx] --> B[useTemperature Hook]
+        A --> C[TemperatureChart]
+        A --> D[StatusPanel]
+        A --> E[ModeStatus]
+        A --> F[SaveButton]
+        A --> G[ThemeButton]
+    end
+    
+    subgraph "Data Flow"
+        B --> H[IPC Bridge]
+        H --> I[Real-time Updates]
+        I --> J[Component State]
+        J --> K[UI Rendering]
+    end
+    
+    subgraph "User Interactions"
+        L[Button Clicks] --> M[IPC Calls]
+        M --> N[Main Process]
+        N --> O[State Changes]
+        O --> P[UI Updates]
+    end
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style H fill:#e8f5e8
+```
 
 ### TemperatureChart Component
 **Location:** `src/renderer/components/TemperatureChart.jsx`
@@ -476,11 +670,52 @@ function TemperatureDisplay() {
 
 ## Data Structures
 
+### Data Type Relationships
+
+```mermaid
+classDiagram
+    class TemperatureReading {
+        +number time
+        +number temp
+        +boolean isHardwareMode
+    }
+    
+    class TemperatureData {
+        +number temp
+        +TemperatureReading[] history
+    }
+    
+    class DeviceStatus {
+        +string mode
+        +boolean healthy
+        +number lastUpdate
+        +string deviceType
+    }
+    
+    class ModeChangeData {
+        +string mode
+        +string reason
+        +string timestamp
+    }
+    
+    class NotificationData {
+        +string type
+        +string message
+        +string reason
+        +string timestamp
+    }
+    
+    TemperatureData --> TemperatureReading
+    DeviceStatus --> ModeChangeData
+    NotificationData --> ModeChangeData
+```
+
 ### TemperatureReading
 ```javascript
 interface TemperatureReading {
   time: number;          // Unix timestamp (milliseconds)
   temp: number;         // Temperature in Celsius
+  isHardwareMode: boolean; // Data source indicator
 }
 ```
 
@@ -630,6 +865,35 @@ function checkHardwareConnection() {
 
 ## Error Handling
 
+### Error Handling Flow
+
+```mermaid
+graph TB
+    subgraph "Error Sources"
+        A[Hardware Errors] --> D[Error Handler]
+        B[IPC Errors] --> D
+        C[Validation Errors] --> D
+    end
+    
+    subgraph "Error Processing"
+        D --> E[Error Classification]
+        E --> F[Error Logging]
+        F --> G[User Notification]
+        G --> H[Recovery Actions]
+    end
+    
+    subgraph "Error Types"
+        I[ECONNREFUSED] --> J[Connection Failed]
+        K[ETIMEDOUT] --> L[Timeout Occurred]
+        M[EACCES] --> N[Permission Denied]
+        O[ENOENT] --> P[File Not Found]
+    end
+    
+    style D fill:#ffebee
+    style E fill:#ffcdd2
+    style F fill:#f8bbd9
+```
+
 ### Common Error Codes
 - `ECONNREFUSED`: Hardware connection failed
 - `ETIMEDOUT`: Hardware response timeout
@@ -653,6 +917,35 @@ function checkHardwareConnection() {
 
 ## Security Considerations
 
+### Security Architecture
+
+```mermaid
+graph TB
+    subgraph "Security Boundaries"
+        A[Renderer Process<br/>Sandboxed] --> B[Preload Script<br/>Context Bridge]
+        B --> C[Main Process<br/>Privileged Operations]
+    end
+    
+    subgraph "Security Controls"
+        D[contextIsolation: true] --> A
+        E[sandbox: true] --> A
+        F[nodeIntegration: false] --> A
+        G[Secure IPC API] --> B
+        H[Input Validation] --> C
+        I[File Access Control] --> C
+    end
+    
+    subgraph "Data Protection"
+        J[Temperature Range<br/>Validation] --> H
+        K[Type Checking<br/>NaN Prevention] --> H
+        L[Memory Limits<br/>Ring Buffer] --> H
+    end
+    
+    style A fill:#ffebee
+    style B fill:#e8f5e8
+    style C fill:#e3f2fd
+```
+
 - All IPC communication uses `contextBridge` for security
 - No Node.js APIs are exposed directly to renderer
 - File operations are sandboxed and validated
@@ -660,13 +953,40 @@ function checkHardwareConnection() {
 
 ## Performance Considerations
 
+### Performance Architecture
+
+```mermaid
+graph TB
+    subgraph "Rate Limiting"
+        A[Temperature Updates<br/>1Hz Max] --> B[UI Performance]
+        C[Hardware Polling<br/>10/sec Max] --> D[System Load]
+        E[Console Output<br/>Buffered] --> F[Terminal Performance]
+    end
+    
+    subgraph "Memory Management"
+        G[Ring Buffer<br/>5000 Entries] --> H[Controlled Usage]
+        I[Console Logs<br/>Auto Cleanup] --> J[Memory Efficiency]
+        K[IPC Messages<br/>1KB Limit] --> L[Network Efficiency]
+    end
+    
+    subgraph "CPU Optimisation"
+        M[Temperature Conversion<br/>Optimised] --> N[Minimal Overhead]
+        O[Chart Rendering<br/>60fps Max] --> P[Smooth UI]
+        Q[File Operations<br/>Async] --> R[Non-blocking]
+    end
+    
+    style A fill:#e1f5fe
+    style G fill:#f3e5f5
+    style M fill:#e8f5e8
+```
+
 ### Rate Limiting
 - **Temperature Updates**: Limited to 1Hz to prevent UI overload
 - **Hardware Polling**: Maximum 10 requests per second
 - **Console Output**: Buffered to prevent terminal spam
 
 ### Memory Management
-- **Ring Buffer**: Fixed 1000-entry limit for temperature history
+- **Ring Buffer**: Fixed 5000-entry limit for temperature history
 - **Console Logs**: Automatic cleanup of old entries
 - **IPC Messages**: Payload size limited to 1KB
 
@@ -705,6 +1025,33 @@ error('Failed to read temperature');
 ```
 
 ## Debugging
+
+### Debugging Architecture
+
+```mermaid
+graph TB
+    subgraph "Debugging Tools"
+        A[IPC Logging] --> B[Communication Debug]
+        C[Console Debug] --> D[Function Testing]
+        E[Hardware Debug] --> F[Device Testing]
+    end
+    
+    subgraph "Debug Methods"
+        G[Environment Variables] --> A
+        H[Direct Function Calls] --> C
+        I[Connection Testing] --> E
+    end
+    
+    subgraph "Debug Output"
+        J[IPC Traffic Monitor] --> B
+        K[Console Output Test] --> D
+        L[Hardware Status Check] --> F
+    end
+    
+    style A fill:#e1f5fe
+    style C fill:#f3e5f5
+    style E fill:#e8f5e8
+```
 
 ### IPC Communication Debugging
 ```javascript

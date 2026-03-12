@@ -730,6 +730,66 @@ flowchart TD
     style M fill:#ffffcc
 ```
 
+### Hardware Integration Troubleshooting
+
+```mermaid
+graph TB
+    subgraph "Hardware Issues"
+        A[DLL Not Found] --> B[Check File Path]
+        C[Hardware Not Detected] --> D[Check Connections]
+        E[Permission Denied] --> F[Run as Admin]
+    end
+    
+    subgraph "Diagnostic Steps"
+        B --> G[Verify DLL Location]
+        D --> H[Test Device Manager]
+        F --> I[Check UAC Settings]
+    end
+    
+    subgraph "Resolution Paths"
+        G --> J[Update Path Configuration]
+        H --> K[Reconnect Hardware]
+        I --> L[Adjust Permissions]
+    end
+    
+    style A fill:#ffebee
+    style C fill:#ffebee
+    style E fill:#ffebee
+    style J fill:#e8f5e8
+    style K fill:#e8f5e8
+    style L fill:#e8f5e8
+```
+
+### Performance Issue Diagnosis
+
+```mermaid
+graph TB
+    subgraph "Performance Symptoms"
+        A[High Memory Usage] --> B[Memory Leak Check]
+        C[UI Lag] --> D[Rendering Optimisation]
+        E[Slow Startup] --> F[Dependency Analysis]
+    end
+    
+    subgraph "Diagnostic Tools"
+        B --> G[Process Monitor]
+        D --> H[React DevTools]
+        F --> I[Webpack Bundle Analyzer]
+    end
+    
+    subgraph "Solutions"
+        G --> J[Clear Intervals/Listeners]
+        H --> K[React.memo/Debounce]
+        I --> L[Optimise Imports]
+    end
+    
+    style A fill:#fff3e0
+    style C fill:#fff3e0
+    style E fill:#fff3e0
+    style J fill:#e8f5e8
+    style K fill:#e8f5e8
+    style L fill:#e8f5e8
+```
+
 ## Diagnostic Commands
 
 ### System Health Check
@@ -804,7 +864,7 @@ git log --oneline -5
 
 ---
 
-**Last Updated:** 2026-02-26  
+**Last Updated:** March 2026  
 **Version:** 1.1.0  
 **For:** Temperature Plotter Application
 
