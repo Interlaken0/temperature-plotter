@@ -352,9 +352,9 @@ graph TB
         M --> N[Career Development<br/>Senior Developer Ready]
     end
     
-    style A fill:#e1f5fe
-    style F fill:#f3e5f5
-    style K fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style F fill:#f3e5f5,color:#000000
+    style K fill:#e8f5e8,color:#000000
 ```
 
 #### Quantified Performance Metrics

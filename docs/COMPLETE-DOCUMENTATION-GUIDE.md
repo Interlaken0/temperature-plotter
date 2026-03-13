@@ -35,13 +35,13 @@ graph TB
     E --> K
     F --> J
     
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-    style E fill:#ffebee
-    style H fill:#f8bbd9
-    style K fill:#e0f2f1
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style C fill:#e8f5e8,color:#000000
+    style D fill:#fff3e0,color:#000000
+    style E fill:#ffebee,color:#000000
+    style H fill:#f8bbd9,color:#000000
+    style K fill:#e0f2f1,color:#000000
 ```
 
 ## Quick Navigation Index
@@ -78,12 +78,12 @@ graph LR
     D --> E[Development Standards<br/>CONTRIBUTING.md]
     E --> F[Testing Guide<br/>__tests__/README.md]
     
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-    style E fill:#ffebee
-    style F fill:#e0f2f1
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style C fill:#e8f5e8,color:#000000
+    style D fill:#fff3e0,color:#000000
+    style E fill:#ffebee,color:#000000
+    style F fill:#e0f2f1,color:#000000
 ```
 
 **Recommended Reading Order:**
@@ -104,12 +104,12 @@ graph TB
     D --> E[Professional Practises<br/>CONTRIBUTING.md + CHANGELOG.md]
     E --> F[Business Impact<br/>Performance Metrics]
     
-    style A fill:#f8bbd9
-    style B fill:#e1f5fe
-    style C fill:#f3e5f5
-    style D fill:#e8f5e8
-    style E fill:#fff3e0
-    style F fill:#ffebee
+    style A fill:#f8bbd9,color:#000000
+    style B fill:#e1f5fe,color:#000000
+    style C fill:#f3e5f5,color:#000000
+    style D fill:#e8f5e8,color:#000000
+    style E fill:#fff3e0,color:#000000
+    style F fill:#ffebee,color:#000000
 ```
 
 **Assessment Walkthrough:**
@@ -130,12 +130,12 @@ graph LR
     D --> E[Testing Updates<br/>__tests__/README.md]
     E --> F[Issue Resolution<br/>TROUBLESHOOTING.md]
     
-    style A fill:#ffebee
-    style B fill:#e1f5fe
-    style C fill:#f3e5f5
-    style D fill:#e8f5e8
-    style E fill:#fff3e0
-    style F fill:#e0f2f1
+    style A fill:#ffebee,color:#000000
+    style B fill:#e1f5fe,color:#000000
+    style C fill:#f3e5f5,color:#000000
+    style D fill:#e8f5e8,color:#000000
+    style E fill:#fff3e0,color:#000000
+    style F fill:#e0f2f1,color:#000000
 ```
 
 ## Detailed Document Analysis
@@ -184,9 +184,9 @@ graph TB
         K[Memory Management] --> L[Error Handling]
     end
     
-    style A fill:#e1f5fe
-    style E fill:#f3e5f5
-    style I fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#f3e5f5,color:#000000
+    style I fill:#e8f5e8,color:#000000
 ```
 
 **When to Use:**
@@ -225,9 +225,9 @@ graph TB
         M[UI Elements] --> N[State Management]
     end
     
-    style A fill:#e1f5fe
-    style G fill:#f3e5f5
-    style K fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style G fill:#f3e5f5,color:#000000
+    style K fill:#e8f5e8,color:#000000
 ```
 
 **When to Use:**
@@ -284,12 +284,12 @@ graph TB
     I --> K
     J --> L
     
-    style A fill:#e1f5fe
-    style C fill:#f3e5f5
-    style E fill:#e8f5e8
-    style G fill:#fff3e0
-    style I fill:#ffebee
-    style K fill:#f8bbd9
+    style A fill:#e1f5fe,color:#000000
+    style C fill:#f3e5f5,color:#000000
+    style E fill:#e8f5e8,color:#000000
+    style G fill:#fff3e0,color:#000000
+    style I fill:#ffebee,color:#000000
+    style K fill:#f8bbd9,color:#000000
 ```
 
 **When to Use:**
@@ -319,9 +319,9 @@ graph LR
     F --> G[Code Review]
     G --> H[Merge]
     
-    style A fill:#e1f5fe
-    style D fill:#e8f5e8
-    style G fill:#fff3e0
+    style A fill:#e1f5fe,color:#000000
+    style D fill:#e8f5e8,color:#000000
+    style G fill:#fff3e0,color:#000000
 ```
 
 **When to Use:**
@@ -371,9 +371,9 @@ flowchart TD
     F --> Q[Success]
     P --> Q
     
-    style A fill:#ffcccc
-    style Q fill:#ccffcc
-    style F fill:#ccffcc
+    style A fill:#ffcccc,color:#000000
+    style Q fill:#ccffcc,color:#000000
+    style F fill:#ccffcc,color:#000000
 ```
 
 **When to Use:**
@@ -406,8 +406,8 @@ graph TB
         F --> G[Accessibility Compliance]
     end
     
-    style A fill:#e1f5fe
-    style D fill:#f3e5f5
+    style A fill:#e1f5fe,color:#000000
+    style D fill:#f3e5f5,color:#000000
 ```
 
 **When to Use:**
@@ -482,8 +482,8 @@ graph TB
         H --> I[Visual Elements<br/>Extensive]
     end
     
-    style A fill:#e8f5e8
-    style F fill:#e1f5fe
+    style A fill:#e8f5e8,color:#000000
+    style F fill:#e1f5fe,color:#000000
 ```
 
 ## Access Methods
@@ -551,13 +551,13 @@ graph TB
     E --> F[Business Impact<br/>Performance Metrics]
     F --> G[Summary<br/>Portfolio Evidence]
     
-    style A fill:#f8bbd9
-    style B fill:#e1f5fe
-    style C fill:#f3e5f5
-    style D fill:#e8f5e8
-    style E fill:#fff3e0
-    style F fill:#ffebee
-    style G fill:#f8bbd9
+    style A fill:#f8bbd9,color:#000000
+    style B fill:#e1f5fe,color:#000000
+    style C fill:#f3e5f5,color:#000000
+    style D fill:#e8f5e8,color:#000000
+    style E fill:#fff3e0,color:#000000
+    style F fill:#ffebee,color:#000000
+    style G fill:#f8bbd9,color:#000000
 ```
 
 ### Key Assessment Points

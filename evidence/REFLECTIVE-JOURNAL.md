@@ -302,9 +302,9 @@ graph TB
         N --> O[Collaboration<br/>B4]
     end
     
-    style A fill:#e1f5fe
-    style F fill:#f3e5f5
-    style K fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style F fill:#f3e5f5,color:#000000
+    style K fill:#e8f5e8,color:#000000
 ```
 
 ### Key Learning Outcomes
@@ -387,9 +387,9 @@ graph LR
         P --> Q[Professional Standards<br/>Industry Best]
     end
     
-    style A fill:#e1f5fe
-    style E fill:#f3e5f5
-    style N fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#f3e5f5,color:#000000
+    style N fill:#e8f5e8,color:#000000
 ```
 
 ### Portfolio Excellence Demonstration

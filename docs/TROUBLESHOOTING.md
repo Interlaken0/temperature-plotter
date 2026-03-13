@@ -696,9 +696,9 @@ flowchart TD
     F --> Q[Success]
     P --> Q
     
-    style A fill:#ffcccc
-    style Q fill:#ccffcc
-    style F fill:#ccffcc
+    style A fill:#ffcccc,color:#000000
+    style Q fill:#ccffcc,color:#000000
+    style F fill:#ccffcc,color:#000000
 ```
 
 ### Error Resolution Decision Tree
@@ -725,9 +725,9 @@ flowchart TD
     K -->|Yes| L[Success]
     K -->|No| M[Escalate to Advanced Debugging]
     
-    style A fill:#ffcccc
-    style L fill:#ccffcc
-    style M fill:#ffffcc
+    style A fill:#ffcccc,color:#000000
+    style L fill:#ccffcc,color:#000000
+    style M fill:#ffffcc,color:#000000
 ```
 
 ### Hardware Integration Troubleshooting
@@ -752,12 +752,12 @@ graph TB
         I --> L[Adjust Permissions]
     end
     
-    style A fill:#ffebee
-    style C fill:#ffebee
-    style E fill:#ffebee
-    style J fill:#e8f5e8
-    style K fill:#e8f5e8
-    style L fill:#e8f5e8
+    style A fill:#ffebee,color:#000000
+    style C fill:#ffebee,color:#000000
+    style E fill:#ffebee,color:#000000
+    style J fill:#e8f5e8,color:#000000
+    style K fill:#e8f5e8,color:#000000
+    style L fill:#e8f5e8,color:#000000
 ```
 
 ### Performance Issue Diagnosis
@@ -782,12 +782,12 @@ graph TB
         I --> L[Optimise Imports]
     end
     
-    style A fill:#fff3e0
-    style C fill:#fff3e0
-    style E fill:#fff3e0
-    style J fill:#e8f5e8
-    style K fill:#e8f5e8
-    style L fill:#e8f5e8
+    style A fill:#fff3e0,color:#000000
+    style C fill:#fff3e0,color:#000000
+    style E fill:#fff3e0,color:#000000
+    style J fill:#e8f5e8,color:#000000
+    style K fill:#e8f5e8,color:#000000
+    style L fill:#e8f5e8,color:#000000
 ```
 
 ## Diagnostic Commands

@@ -277,11 +277,11 @@ graph TB
         Q --> E
     end
     
-    style A fill:#e1f5fe
-    style E fill:#f3e5f5
-    style I fill:#fff3e0
-    style P fill:#e8f5e8
-    style R fill:#ccffcc
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#f3e5f5,color:#000000
+    style I fill:#fff3e0,color:#000000
+    style P fill:#e8f5e8,color:#000000
+    style R fill:#ccffcc,color:#000000
 ```
 
 ### 1. Setup Development Environment
@@ -419,8 +419,8 @@ graph TB
         H --> I[Hardware Layer<br/>DLL/Simulator]
     end
     
-    style A fill:#e1f5fe
-    style F fill:#f3e5f5
+    style A fill:#e1f5fe,color:#000000
+    style F fill:#f3e5f5,color:#000000
 ```
 
 - Keep components small and focused
@@ -449,9 +449,9 @@ graph LR
         G --> H[Hardware/DLL]
     end
     
-    style A fill:#e1f5fe
-    style D fill:#f3e5f5
-    style F fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style D fill:#f3e5f5,color:#000000
+    style F fill:#e8f5e8,color:#000000
 ```
 
 - Use contextBridge for security
@@ -476,8 +476,8 @@ graph TB
         H --> I[Security Logging<br/>Track rejections]
     end
     
-    style A fill:#e1f5fe
-    style F fill:#ffebee
+    style A fill:#e1f5fe,color:#000000
+    style F fill:#ffebee,color:#000000
 ```
 
 - Use ring buffer for temperature history
@@ -503,8 +503,8 @@ graph TB
         G --> H[Reference Management]
     end
     
-    style A fill:#e1f5fe
-    style E fill:#ffebee
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#ffebee,color:#000000
 ```
 
 - Clean up intervals and listeners
@@ -527,8 +527,8 @@ graph LR
         G --> H[Efficient Algorithms]
     end
     
-    style A fill:#e1f5fe
-    style E fill:#f3e5f5
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#f3e5f5,color:#000000
 ```
 
 - Implement proper React.memo usage
@@ -559,9 +559,9 @@ graph TB
         J --> K[Audit Logging]
     end
     
-    style A fill:#e1f5fe
-    style D fill:#ffebee
-    style H fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style D fill:#ffebee,color:#000000
+    style H fill:#e8f5e8,color:#000000
 ```
 
 ### IPC Security
@@ -600,9 +600,9 @@ graph TB
         K --> L[Error Boundaries]
     end
     
-    style A fill:#e1f5fe
-    style E fill:#f3e5f5
-    style I fill:#ffebee
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#f3e5f5,color:#000000
+    style I fill:#ffebee,color:#000000
 ```
 
 ### Review Process

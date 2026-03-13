@@ -43,12 +43,12 @@ graph TB
     H --> K
     I --> L
     
-    style A fill:#e1f5fe
-    style C fill:#f3e5f5
-    style E fill:#e8f5e8
-    style G fill:#fff3e0
-    style J fill:#ffebee
-    style L fill:#f3e5f5
+    style A fill:#e1f5fe,color:#000000
+    style C fill:#f3e5f5,color:#000000
+    style E fill:#e8f5e8,color:#000000
+    style G fill:#fff3e0,color:#000000
+    style J fill:#ffebee,color:#000000
+    style L fill:#f3e5f5,color:#000000
 ```
 
 ## Phase 1: Project Understanding (15 minutes)
@@ -84,6 +84,10 @@ graph LR
     B --> C[Reading Order]
     C --> D[Cross-References]
     D --> E[Quick Access]
+    
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style C fill:#e8f5e8,color:#000000
 ```
 
 ## Phase 2: Technical Architecture (30 minutes)
@@ -113,9 +117,9 @@ graph TB
         J[Performance Optimisation] --> K[Memory Management]
     end
     
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style C fill:#e8f5e8,color:#000000
 ```
 
 ### 4. docs/API.md
@@ -142,8 +146,8 @@ graph TB
         I[Mode Changes] --> J[Status Updates]
     end
     
-    style A fill:#e1f5fe
-    style E fill:#f3e5f5
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#f3e5f5,color:#000000
 ```
 
 ## Phase 3: Development Setup (20 minutes)
@@ -167,6 +171,10 @@ graph LR
     E --> F[Submit Pull Request]
     F --> G[Code Review]
     G --> H[Merge]
+    
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style C fill:#e8f5e8,color:#000000
 ```
 
 ### 6. __tests__/README.md
@@ -193,8 +201,8 @@ graph TB
         I --> J[Quality Gates]
     end
     
-    style A fill:#e1f5fe
-    style G fill:#f3e5f5
+    style A fill:#e1f5fe,color:#000000
+    style G fill:#f3e5f5,color:#000000
 ```
 
 ## Phase 4: Code Deep Dive (45 minutes)
@@ -222,9 +230,9 @@ graph TB
         J --> K[Components/<br/>UI Elements]
     end
     
-    style A fill:#e1f5fe
-    style E fill:#f3e5f5
-    style I fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#f3e5f5,color:#000000
+    style I fill:#e8f5e8,color:#000000
 ```
 
 1. `src/main/main.js` - Application entry point
@@ -261,9 +269,9 @@ graph TB
         S[header] --> T[Section formatting]
     end
     
-    style A fill:#e1f5fe
-    style I fill:#f3e5f5
-    style Q fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style I fill:#f3e5f5,color:#000000
+    style Q fill:#e8f5e8,color:#000000
 ```
 
 **Core Logging Functions:**
@@ -337,8 +345,8 @@ graph TB
         F --> G[Accessibility Compliance]
     end
     
-    style A fill:#e1f5fe
-    style D fill:#f3e5f5
+    style A fill:#e1f5fe,color:#000000
+    style D fill:#f3e5f5,color:#000000
 ```
 
 ### 9. TROUBLESHOOTING.md
@@ -366,8 +374,8 @@ graph TB
         J --> K[Update Knowledge Base]
     end
     
-    style A fill:#ffebee
-    style G fill:#e8f5e8
+    style A fill:#ffebee,color:#000000
+    style G fill:#e8f5e8,color:#000000
 ```
 
 ## Phase 6: EPA Context (Optional - 15 minutes)

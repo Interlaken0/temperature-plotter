@@ -107,9 +107,9 @@ graph TB
         K[Windows Terminal] --> C
     end
     
-    style A fill:#e1f5fe
-    style C fill:#f3e5f5
-    style F fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style C fill:#f3e5f5,color:#000000
+    style F fill:#e8f5e8,color:#000000
 ```
 
 ### Multi-Process Design:
@@ -127,6 +127,8 @@ Temperature Sensor → Hardware Abstraction → Console Utilities → IPC Bridge
 - No Node.js exposure to renderer
 - Input validation and sanitisation
 - Secure file system operations
+- Zero security vulnerabilities
+- Professional IPC security with contextBridge
 
 ## v1.1.0 Enhancements
 
@@ -277,9 +279,9 @@ graph LR
     F -->|Yes| H[npm run make]
     H --> I[Package Distribution]
     
-    style A fill:#e1f5fe
-    style E fill:#fff3e0
-    style H fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#fff3e0,color:#000000
+    style H fill:#e8f5e8,color:#000000
 ```
 
 ## Key Performance Indicators

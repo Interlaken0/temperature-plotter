@@ -42,9 +42,9 @@ graph TB
         K --> O[force-hardware-mode]
     end
     
-    style A fill:#e1f5fe
-    style D fill:#f3e5f5
-    style G fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style D fill:#f3e5f5,color:#000000
+    style G fill:#e8f5e8,color:#000000
 ```
 
 ### Temperature Data Channels
@@ -169,10 +169,10 @@ graph TB
         D --> P[symbols - Prefixes]
     end
     
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style C fill:#e8f5e8,color:#000000
+    style D fill:#fff3e0,color:#000000
 ```
 
 #### `success(message)`
@@ -465,10 +465,10 @@ graph TB
         D --> N[NaN Prevention]
     end
     
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style C fill:#e8f5e8,color:#000000
+    style D fill:#fff3e0,color:#000000
 ```
 
 #### `updateTemperature(temperature)`
@@ -517,9 +517,9 @@ graph TB
         J --> K[USB Interface]
     end
     
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style C fill:#e8f5e8,color:#000000
 ```
 
 #### `checkConnection()`
@@ -567,9 +567,9 @@ graph TB
         D --> M[setFrequency]
     end
     
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style C fill:#e8f5e8,color:#000000
 ```
 
 #### `start()`
@@ -619,9 +619,9 @@ graph TB
         O --> P[UI Updates]
     end
     
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style H fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style H fill:#e8f5e8,color:#000000
 ```
 
 ### TemperatureChart Component
@@ -943,9 +943,9 @@ graph TB
         O[ENOENT] --> P[File Not Found]
     end
     
-    style D fill:#ffebee
-    style E fill:#ffcdd2
-    style F fill:#f8bbd9
+    style D fill:#ffebee,color:#000000
+    style E fill:#ffcdd2,color:#000000
+    style F fill:#f8bbd9,color:#000000
 ```
 
 ### Common Error Codes
@@ -995,9 +995,9 @@ graph TB
         L[Memory Limits<br/>Ring Buffer] --> H
     end
     
-    style A fill:#ffebee
-    style B fill:#e8f5e8
-    style C fill:#e3f2fd
+    style A fill:#ffebee,color:#000000
+    style B fill:#e8f5e8,color:#000000
+    style C fill:#e3f2fd,color:#000000
 ```
 
 - All IPC communication uses `contextBridge` for security
@@ -1029,9 +1029,9 @@ graph TB
         Q[File Operations<br/>Async] --> R[Non-blocking]
     end
     
-    style A fill:#e1f5fe
-    style G fill:#f3e5f5
-    style M fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style G fill:#f3e5f5,color:#000000
+    style M fill:#e8f5e8,color:#000000
 ```
 
 ### Rate Limiting
@@ -1102,9 +1102,9 @@ graph TB
         L[Hardware Status Check] --> F
     end
     
-    style A fill:#e1f5fe
-    style C fill:#f3e5f5
-    style E fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style C fill:#f3e5f5,color:#000000
+    style E fill:#e8f5e8,color:#000000
 ```
 
 ### IPC Communication Debugging

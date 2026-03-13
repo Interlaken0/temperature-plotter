@@ -45,9 +45,9 @@ graph TB
         P[File System] --> F
     end
     
-    style A fill:#e1f5fe
-    style G fill:#f3e5f5
-    style M fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style G fill:#f3e5f5,color:#000000
+    style M fill:#e8f5e8,color:#000000
 ```
 
 ## Component Architecture
@@ -75,10 +75,10 @@ graph TB
         D --> N[Event Broadcasting]
     end
     
-    style A fill:#ffecb3
-    style B fill:#c8e6c9
-    style C fill:#bbdefb
-    style D fill:#f8bbd9
+    style A fill:#ffecb3,color:#000000
+    style B fill:#c8e6c9,color:#000000
+    style C fill:#bbdefb,color:#000000
+    style D fill:#f8bbd9,color:#000000
 ```
 
 ### 3. Console Utilities Architecture
@@ -123,10 +123,10 @@ graph TB
         AA[status: > message]
     end
     
-    style A fill:#e1f5fe
-    style D fill:#f3e5f5
-    style Q fill:#e8f5e8
-    style X fill:#fff3e0
+    style A fill:#e1f5fe,color:#000000
+    style D fill:#f3e5f5,color:#000000
+    style Q fill:#e8f5e8,color:#000000
+    style X fill:#fff3e0,color:#000000
 ```
 
 ### 4. Data Flow Architecture
@@ -161,11 +161,11 @@ flowchart LR
         I --> O[Manual Export<br/>Enterprise Audit]
     end
     
-    style A fill:#4caf50
-    style B fill:#2196f3
-    style E fill:#ff9800
-    style H fill:#9c27b0
-    style L fill:#f44336
+    style A fill:#4caf50,color:#000000
+    style B fill:#2196f3,color:#000000
+    style E fill:#ff9800,color:#000000
+    style H fill:#9c27b0,color:#000000
+    style L fill:#f44336,color:#000000
 ```
 
 ### 5. Security Architecture
@@ -192,12 +192,12 @@ graph TB
         L[Memory Limits<br/>Ring Buffer] --> H
     end
     
-    style A fill:#ffebee
-    style B fill:#e8f5e8
-    style C fill:#e3f2fd
-    style D fill:#ffcdd2
-    style E fill:#ffcdd2
-    style F fill:#ffcdd2
+    style A fill:#ffebee,color:#000000
+    style B fill:#e8f5e8,color:#000000
+    style C fill:#e3f2fd,color:#000000
+    style D fill:#ffcdd2,color:#000000
+    style E fill:#ffcdd2,color:#000000
+    style F fill:#ffcdd2,color:#000000
 ```
 
 ## Module Architecture
@@ -349,9 +349,9 @@ graph TB
         J[Manual Export] --> K[Enterprise Audit<br/>Enhanced Analytics]
     end
     
-    style A fill:#e1f5fe
-    style E fill:#f3e5f5
-    style I fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style E fill:#f3e5f5,color:#000000
+    style I fill:#e8f5e8,color:#000000
 ```
 
 ## Communication Architecture
@@ -372,10 +372,10 @@ graph LR
         K[save-csv] --> L[Export Request]
     end
     
-    style A fill:#4caf50
-    style C fill:#2196f3
-    style E fill:#ff9800
-    style G fill:#9c27b0
+    style A fill:#4caf50,color:#000000
+    style C fill:#2196f3,color:#000000
+    style E fill:#ff9800,color:#000000
+    style G fill:#9c27b0,color:#000000
 ```
 
 ### 2. Component Communication
@@ -395,9 +395,9 @@ graph TB
         I --> J[Component Re-render]
     end
     
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style G fill:#e8f5e8
+    style A fill:#e1f5fe,color:#000000
+    style B fill:#f3e5f5,color:#000000
+    style G fill:#e8f5e8,color:#000000
 ```
 
 ## Technology Stack
