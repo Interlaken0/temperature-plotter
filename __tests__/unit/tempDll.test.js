@@ -20,8 +20,10 @@ jest.mock('../../src/main/state/temperatureStore', () => ({
 
 // MOCK ELECTRON APP - Handle packaged/development environments
 jest.mock('electron', () => ({
-  isPackaged: false,
-  getAppPath: () => process.cwd()
+  app: {
+    isPackaged: false,
+    getAppPath: () => process.cwd()
+  }
 }));
 
 describe('tempDll.js - Module Loading and Structure', () => {
@@ -322,8 +324,8 @@ describe('tempDll.js - Integration with Dependencies', () => {
     // Test that the module handles both packaged and development environments
     const electron = require('electron');
     expect(electron).toBeDefined();
-    expect(typeof electron.isPackaged).toBe('boolean');
-    expect(typeof electron.getAppPath).toBe('function');
+    expect(typeof electron.app.isPackaged).toBe('boolean');
+    expect(typeof electron.app.getAppPath).toBe('function');
   });
 });
 
