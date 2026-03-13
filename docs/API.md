@@ -271,7 +271,11 @@ Logs temperature readings with colour-coded formatting based on data source.
 **Parameters:**
 - `celsius` (number): Temperature in Celsius
 - `fahrenheit` (number): Temperature in Fahrenheit
-- `source` (string, optional): Data source ("REAL" or "SIMULATOR") - defaults to "REAL"
+- `source` (string, optional): Data source - defaults to "REAL"
+
+**Colour Logic:**
+- "REAL" source: Green colour with [+] symbol
+- All other sources ("SIMULATOR", "CONNECTED", etc.): Magenta colour with [~] symbol
 
 **Returns:** void
 
@@ -283,6 +287,9 @@ temperature(24.5, 76.1, 'REAL');
 
 temperature(22.0, 71.6, 'SIMULATOR');
 // Output: [~] [SIMULATOR] 22.00 deg C (71.60 deg F)
+
+temperature(25.3, 77.5, 'CONNECTED');
+// Output: [~] [CONNECTED] 25.30 deg C (77.50 deg F)
 ```
 
 #### `status(message, type = 'info')`
@@ -319,7 +326,7 @@ Outputs a visual separator line for console organisation.
 ```javascript
 const { separator } = require('./utils/consoleColours');
 separator();
-// Output: ==================================================
+// Output: ================================================== (50 equal signs, dim formatting)
 ```
 
 #### `header(title)`
@@ -335,9 +342,9 @@ Outputs a formatted section header with title.
 const { header } = require('./utils/consoleColours');
 header('AMF-Temperature-Plotter Starting');
 // Output:
-// ==================================================
-//   AMF-TEMPERATURE-PLOTTER STARTING  
-// ==================================================
+// ================================================== (50 equal signs, cyan bright)
+//   AMF-TEMPERATURE-PLOTTER STARTING  (uppercase, cyan bright)
+// ================================================== (50 equal signs, cyan bright)
 ```
 
 ### Exported Objects
@@ -406,8 +413,11 @@ The console utilities are used throughout the application with specific message 
 
 **Hardware Integration Messages:**
 - `consoleColours.hardware('Handshake Success: Forcing 30.00°C')`
+- `consoleColours.error('Koffi load failed: ${err.message}')`
+- `consoleColours.success('Hardware HAL: DLL loaded from ${assetsFolder}')`
+- `consoleColours.warning('Hardware HAL Failure: ${e.message}')`
 - `consoleColours.error('Hardware HAL: Function binding failed: ' + err.message)`
-- `consoleColours.error('Error stopping device: ' + e.message)`
+- `consoleColours.success('SUCCESS: Initialised Pico ID [${serial}]')`
 - `consoleColours.error('Discovery Error: ${err.message}')`
 
 **System Status Messages:**
@@ -415,21 +425,16 @@ The console utilities are used throughout the application with specific message 
 - `consoleColours.info('Starting hardware monitoring...')`
 - `consoleColours.success('Hardware signal detected! Initiating switch...')`
 - `consoleColours.status('Switching back to hardware mode', 'success')`
-- `consoleColours.warning('Hardware timeout detected. Hardware DLL dropped connection.')`
 - `consoleColours.error('Health check error: ' + e.message)`
+- `consoleColours.warning('Hardware timeout detected. Hardware DLL dropped connection.')`
 - `consoleColours.error('Failed to load hardware DLL on startup: ' + e.message)`
 - `consoleColours.error('Force hardware failed: ' + e.message)`
-
-**DLL Integration Messages:**
-- `consoleColours.error('Koffi load failed: ${err.message}')`
-- `consoleColours.success('Hardware HAL: DLL loaded from ${assetsFolder}')`
-- `consoleColours.warning('Hardware HAL Failure: ${e.message}')`
-- `consoleColours.success('SUCCESS: Initialised Pico ID [${serial}]')`
+- `consoleColours.error('Error stopping device: ' + e.message)`
 
 **Temperature Data Messages:**
-- `consoleColours.temperature(outputTemp, fahrenheit, 'CONNECTED')`
-- `consoleColours.temperature(reading, fahrenheit, 'SIMULATOR')`
-- `consoleColours.temperature(reading, fahrenheit, 'REAL')`
+- `consoleColours.temperature(outputTemp, fahrenheit, 'CONNECTED')` (Hardware mode with connected sensor - gets magenta colour and [~] symbol)
+- `consoleColours.temperature(reading, fahrenheit, 'SIMULATOR')` (Simulator mode - gets magenta colour and [~] symbol)
+- `consoleColours.temperature(reading, fahrenheit, 'REAL')` (Hardware mode with real sensor - gets green colour and [+] symbol)
 
 **Simulator Messages:**
 - `consoleColours.simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)')`

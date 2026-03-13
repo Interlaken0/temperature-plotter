@@ -21,7 +21,7 @@ graph TB
             A[Application Controller] --> B[Hardware Monitor]
             A --> C[IPC Handler]
             A --> D[Device Manager]
-            B --> E[Temperature Store]
+            B --> E[Temperature Store<br/>Ring Buffer 5000 entries]
             C --> F[CSV Export Service]
         end
         
@@ -57,22 +57,23 @@ graph TB
 ```mermaid
 graph TB
     subgraph "Main Process Components"
-        A[main.js<br/>Application Controller] --> B[HardwareMonitor Class<br/>Device Health Management]
-        A --> C[temperatureIpc.js<br/>IPC Communication]
-        A --> D[temperatureStore.js<br/>Data Management]
+        A[main.js<br/>Application Controller + HardwareMonitor Class] --> B[temperatureIpc.js<br/>IPC Communication + CSV Export]
+        A --> C[temperatureStore.js<br/>Data Management]
+        A --> D[consoleColours.js<br/>Professional Logging Utilities]
         
-        B --> E[Device Detection]
-        B --> F[Health Monitoring]
-        B --> G[Automatic Fallback]
+        B --> E[Data Streaming]
+        B --> F[Mode Notifications]
+        B --> G[CSV Export Service]
+        B --> H[Device Status]
         
-        C --> H[Data Streaming]
-        C --> I[Mode Notifications]
-        C --> J[CSV Export]
-        C --> K[Device Status]
+        C --> I[Ring Buffer<br/>5000 entries]
+        C --> J[Input Validation<br/>-50°C to 200°C]
+        C --> K[Event Broadcasting]
+        C --> L[removeListener() Method<br/>Memory Leak Prevention]
         
-        D --> L[Ring Buffer<br/>5000 entries (corrected)]
-        D --> M[Input Validation]
-        D --> N[Event Broadcasting]
+        D --> M[Colour-Coded Logging]
+        D --> N[ASCII-Safe Notation]
+        D --> O[Cross-Platform Compatibility]
     end
     
     style A fill:#ffecb3,color:#000000
@@ -102,8 +103,8 @@ graph TB
         C --> M[separator()]
         C --> N[header(title)]
         
-        D --> O[colours object<br/>15 ANSI codes]
-        D --> P[symbols object<br/>7 symbol definitions]
+        D --> O[colours object<br/>15 ANSI codes (reset, bright, dim, red, green, yellow, blue, magenta, cyan, white, gray, bgRed, bgGreen, bgYellow, bgBlue)]
+        D --> P[symbols object<br/>7 symbol definitions (success, error, warning, info, hardware, simulator, temperature)]
     end
     
     subgraph "Colour Specifications"
@@ -120,7 +121,7 @@ graph TB
         X[temperature: [+]/[~] [SOURCE] XX.XX deg C (XX.XX deg F)<br/>REAL=[+] green, non-REAL=[~] magenta]
         Y[hardware: [+] [HAL] message]
         Z[simulator: [~] SIMULATOR message]
-        AA[status: > message]
+        AA[status: > message<br/>type-dependent colour (info=blue, success=green, error=red, warning=yellow)]
     end
     
     style A fill:#e1f5fe,color:#000000
@@ -205,10 +206,10 @@ graph TB
 ### 1. Core Modules
 
 #### Main Process Modules
-- **main.js**: Application lifecycle, window management, device coordination, and HardwareMonitor class
-- **temperatureIpc.js**: IPC communication handlers, CSV export service
-- **temperatureStore.js**: Ring buffer data management (5000 entries), event broadcasting
-- **consoleColours.js**: Professional logging utilities with ASCII-safe notation
+- **main.js**: Application lifecycle, window management, device coordination, HardwareMonitor class, and device health management
+- **temperatureIpc.js**: IPC communication handlers, CSV export service, enhanced logging with mode detection
+- **temperatureStore.js**: Ring buffer data management (5000 entries), event broadcasting, removeListener() method for memory leak prevention
+- **consoleColours.js**: Professional logging utilities with ASCII-safe notation, 60% performance improvement
 
 #### Console Utilities Module (v1.1.0 Enhancement)
 The console utilities module provides professional colour-coded logging with ASCII-safe notation for cross-platform compatibility.
@@ -220,10 +221,10 @@ The console utilities module provides professional colour-coded logging with ASC
 - **info(message)**: Cyan bright output with [i] prefix
 - **hardware(message)**: Blue bright output with [+] [HAL] prefix
 - **simulator(message)**: Magenta bright output with [~] SIMULATOR prefix
-- **temperature(celsius, fahrenheit, source)**: Dynamic colour and symbol based on source (REAL gets [+] symbol with green colour, all other values including 'SIMULATOR' and 'CONNECTED' get [~] symbol with magenta colour)
-- **status(message, type)**: Type-dependent colour with > prefix (defaults to blue for info)
-- **separator()**: Dim grey line of 50 equal signs
-- **header(title)**: Cyan bright header with 50 equal borders and uppercase title
+- **temperature(celsius, fahrenheit, source = 'REAL')**: Dynamic colour and symbol based on source (REAL gets [+] symbol with green colour, all other values including 'SIMULATOR' and 'CONNECTED' get [~] symbol with magenta colour)
+- **status(message, type = 'info')**: Type-dependent colour with > prefix (defaults to blue for info, success=green, error=red, warning=yellow)
+- **separator()**: Dim grey line of exactly 50 equal signs
+- **header(title)**: Cyan bright header with exactly 50 equal borders and uppercase title
 
 **Exported Objects:**
 - **colours object**: 15 ANSI colour codes (reset, bright, dim, red, green, yellow, blue, magenta, cyan, white, gray, bgRed, bgGreen, bgYellow, bgBlue)
@@ -242,8 +243,11 @@ The console utilities are used throughout the application with specific message 
 
 **Hardware Integration Messages:**
 - `consoleColours.hardware('Handshake Success: Forcing 30.00°C')`
+- `consoleColours.error('Koffi load failed: ${err.message}')`
+- `consoleColours.success('Hardware HAL: DLL loaded from ${assetsFolder}')`
+- `consoleColours.warning('Hardware HAL Failure: ${e.message}')`
 - `consoleColours.error('Hardware HAL: Function binding failed: ' + err.message)`
-- `consoleColours.error('Error stopping device: ' + e.message)`
+- `consoleColours.success('SUCCESS: Initialised Pico ID [${serial}]')`
 - `consoleColours.error('Discovery Error: ${err.message}')`
 
 **System Status Messages:**
@@ -257,18 +261,10 @@ The console utilities are used throughout the application with specific message 
 - `consoleColours.error('Force hardware failed: ' + e.message)`
 - `consoleColours.error('Error stopping device: ' + e.message)`
 
-**DLL Integration Messages:**
-- `consoleColours.error('Koffi load failed: ${err.message}')`
-- `consoleColours.success('Hardware HAL: DLL loaded from ${assetsFolder}')`
-- `consoleColours.warning('Hardware HAL Failure: ${e.message}')`
-- `consoleColours.error('Hardware HAL: Function binding failed: ' + err.message)`
-- `consoleColours.success('SUCCESS: Initialised Pico ID [${serial}]')`
-- `consoleColours.error('Discovery Error: ${err.message}')`
-
 **Temperature Data Messages:**
-- `consoleColours.temperature(outputTemp, fahrenheit, 'CONNECTED')`
-- `consoleColours.temperature(reading, fahrenheit, 'SIMULATOR')`
-- `consoleColours.temperature(reading, fahrenheit, 'REAL')`
+- `consoleColours.temperature(outputTemp, fahrenheit, 'CONNECTED')` (Hardware mode with connected sensor - gets magenta colour and [~] symbol)
+- `consoleColours.temperature(reading, fahrenheit, 'SIMULATOR')` (Simulator mode - gets magenta colour and [~] symbol)
+- `consoleColours.temperature(reading, fahrenheit, 'REAL')` (Hardware mode with real sensor - gets green colour and [+] symbol)
 
 **Simulator Messages:**
 - `consoleColours.simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)')`
@@ -280,7 +276,7 @@ The console utilities are used throughout the application with specific message 
 
 #### Renderer Process Modules
 - **App.jsx**: Root component, state management, layout coordination
-- **useTemperature.js**: Custom hook for data streaming and management
+- **useTemperature.js**: Custom hook for data streaming and management with dual buffer system (limited history + unlimited history for "All Time" mode)
 - **Components**: UI components for charting, status, and user interaction
 
 #### Shared Resources
@@ -333,7 +329,7 @@ interface TemperatureData {
 ```mermaid
 graph TB
     subgraph "Memory Storage"
-        A[Ring Buffer<br/>5000 entries (corrected)] --> B[Circular Array]
+        A[Ring Buffer<br/>5000 entries] --> B[Circular Array]
         B --> C[Head Pointer]
         B --> D[Size Counter]
     end
@@ -422,7 +418,7 @@ graph TB
 ## Performance Considerations
 
 ### 1. Memory Management
-- Ring buffer limits memory usage to 5000 entries (corrected from 500)
+- Ring buffer limits memory usage to 5000 entries
 - Automatic cleanup of event listeners with removeListener() method
 - Lazy loading of hardware DLL
 - Input validation prevents invalid data (-50°C to 200°C range)
