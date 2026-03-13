@@ -246,8 +246,8 @@ Logs hardware-specific messages with blue colour formatting and HAL prefix.
 **Example:**
 ```javascript
 const { hardware } = require('./utils/consoleColours');
-hardware(`Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})`);
-// Output: [+] [HAL] Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})
+hardware('Handshake Success: Forcing 30.00°C');
+// Output: [+] [HAL] Handshake Success: Forcing 30.00°C
 ```
 
 #### `simulator(message)`
@@ -405,34 +405,34 @@ console.log(`${symbols.success} Operation completed`);
 The console utilities are used throughout the application with specific message patterns:
 
 **Hardware Integration Messages:**
-- `consoleColours.hardware('Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})')`
-- `consoleColours.error('Hardware Start Error: ' + err.message)`
-- `consoleColours.error('Stop error: ' + err.message)`
-- `consoleColours.warning('Hardware Stopped (callback unregistered)')`
+- `consoleColours.hardware('Handshake Success: Forcing 30.00°C')`
+- `consoleColours.error('Hardware HAL: Function binding failed: ' + err.message)`
+- `consoleColours.error('Error stopping device: ' + e.message)`
+- `consoleColours.error('Discovery Error: ${err.message}')`
 
 **System Status Messages:**
 - `consoleColours.header('AMF-Temperature-Plotter Starting')`
 - `consoleColours.info('Starting hardware monitoring...')`
-- `consoleColours.info('No prior DLL instance to unload.')`
 - `consoleColours.success('Hardware signal detected! Initiating switch...')`
 - `consoleColours.status('Switching back to hardware mode', 'success')`
 - `consoleColours.warning('Hardware timeout detected. Hardware DLL dropped connection.')`
 - `consoleColours.error('Health check error: ' + e.message)`
-
-**DLL Integration Messages:**
-- `consoleColours.warning('Hardware DLL not found. Falling back to simulator. (' + e.message + ')')`
-- `consoleColours.error('Failed to bind hardware functions from DLL: ' + err.message)`
-- `consoleColours.error('Failed to restore working directory: ' + e.message)`
-
-**Simulator Messages:**
-- `consoleColours.temperature(celsius, fahrenheit, 'REAL')`
-- `consoleColours.temperature(celsius, fahrenheit, 'SIMULATOR')`
-- `consoleColours.simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)')`
-
-**Error Handling Messages:**
 - `consoleColours.error('Failed to load hardware DLL on startup: ' + e.message)`
 - `consoleColours.error('Force hardware failed: ' + e.message)`
-- `consoleColours.error('Error stopping device: ' + e.message)`
+
+**DLL Integration Messages:**
+- `consoleColours.error('Koffi load failed: ${err.message}')`
+- `consoleColours.success('Hardware HAL: DLL loaded from ${assetsFolder}')`
+- `consoleColours.warning('Hardware HAL Failure: ${e.message}')`
+- `consoleColours.success('SUCCESS: Initialised Pico ID [${serial}]')`
+
+**Temperature Data Messages:**
+- `consoleColours.temperature(outputTemp, fahrenheit, 'CONNECTED')`
+- `consoleColours.temperature(reading, fahrenheit, 'SIMULATOR')`
+- `consoleColours.temperature(reading, fahrenheit, 'REAL')`
+
+**Simulator Messages:**
+- `consoleColours.simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)')`
 
 ### Temperature Store (`src/main/state/temperatureStore.js`)
 

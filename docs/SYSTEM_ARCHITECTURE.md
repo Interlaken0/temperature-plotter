@@ -117,7 +117,7 @@ graph TB
     end
     
     subgraph "Output Formats"
-        X[temperature: [+]/[~] [SOURCE] XX.XX deg C (XX.XX deg F)]
+        X[temperature: [+]/[~] [SOURCE] XX.XX deg C (XX.XX deg F)<br/>REAL=[+] green, non-REAL=[~] magenta]
         Y[hardware: [+] [HAL] message]
         Z[simulator: [~] SIMULATOR message]
         AA[status: > message]
@@ -220,7 +220,7 @@ The console utilities module provides professional colour-coded logging with ASC
 - **info(message)**: Cyan bright output with [i] prefix
 - **hardware(message)**: Blue bright output with [+] [HAL] prefix
 - **simulator(message)**: Magenta bright output with [~] SIMULATOR prefix
-- **temperature(celsius, fahrenheit, source)**: Dynamic colour based on source (green for REAL, magenta for SIMULATOR)
+- **temperature(celsius, fahrenheit, source)**: Dynamic colour and symbol based on source (REAL gets [+] symbol with green colour, all other values including 'SIMULATOR' and 'CONNECTED' get [~] symbol with magenta colour)
 - **status(message, type)**: Type-dependent colour with > prefix (defaults to blue for info)
 - **separator()**: Dim grey line of 50 equal signs
 - **header(title)**: Cyan bright header with 50 equal borders and uppercase title
@@ -241,35 +241,37 @@ The console utilities module provides professional colour-coded logging with ASC
 The console utilities are used throughout the application with specific message patterns:
 
 **Hardware Integration Messages:**
-- `consoleColours.hardware('Session Start: Forcing 30.00 deg C (Sensor was: X.XX)')`
-- `consoleColours.error('Hardware Start Error: ' + err.message)`
-- `consoleColours.error('Stop error: ' + err.message)`
-- `consoleColours.warning('Hardware Stopped (callback unregistered)')`
+- `consoleColours.hardware('Handshake Success: Forcing 30.00°C')`
+- `consoleColours.error('Hardware HAL: Function binding failed: ' + err.message)`
+- `consoleColours.error('Error stopping device: ' + e.message)`
+- `consoleColours.error('Discovery Error: ${err.message}')`
 
 **System Status Messages:**
 - `consoleColours.header('AMF-Temperature-Plotter Starting')`
 - `consoleColours.info('Starting hardware monitoring...')`
-- `consoleColours.info('No prior DLL instance to unload.')`
 - `consoleColours.success('Hardware signal detected! Initiating switch...')`
 - `consoleColours.status('Switching back to hardware mode', 'success')`
 - `consoleColours.error('Health check error: ' + e.message)`
 - `consoleColours.warning('Hardware timeout detected. Hardware DLL dropped connection.')`
-
-**DLL Integration Messages:**
-- `consoleColours.warning('Hardware DLL not found. Falling back to simulator. (' + e.message + ')')`
-- `consoleColours.error('Failed to bind hardware functions from DLL: ' + err.message)`
-- `consoleColours.error('Failed to restore working directory: ' + e.message)`
-
-**Simulator Messages:**
-- `consoleColours.temperature(celsius, fahrenheit, 'REAL')`
-- `consoleColours.temperature(celsius, fahrenheit, 'SIMULATOR')`
-- `consoleColours.simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)')`
-
-**Error Handling Messages:**
 - `consoleColours.error('Failed to load hardware DLL on startup: ' + e.message)`
 - `consoleColours.error('Force hardware failed: ' + e.message)`
 - `consoleColours.error('Error stopping device: ' + e.message)`
-- `consoleColours.error('Stop error: ' + e.message)`
+
+**DLL Integration Messages:**
+- `consoleColours.error('Koffi load failed: ${err.message}')`
+- `consoleColours.success('Hardware HAL: DLL loaded from ${assetsFolder}')`
+- `consoleColours.warning('Hardware HAL Failure: ${e.message}')`
+- `consoleColours.error('Hardware HAL: Function binding failed: ' + err.message)`
+- `consoleColours.success('SUCCESS: Initialised Pico ID [${serial}]')`
+- `consoleColours.error('Discovery Error: ${err.message}')`
+
+**Temperature Data Messages:**
+- `consoleColours.temperature(outputTemp, fahrenheit, 'CONNECTED')`
+- `consoleColours.temperature(reading, fahrenheit, 'SIMULATOR')`
+- `consoleColours.temperature(reading, fahrenheit, 'REAL')`
+
+**Simulator Messages:**
+- `consoleColours.simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)')`
 
 **Cross-Platform Features:**
 - ASCII-safe notation replaces °C with "deg C" to prevent PowerShell corruption
