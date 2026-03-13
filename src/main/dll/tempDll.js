@@ -1,112 +1,156 @@
 /**
- * @file Hardware Abstraction Layer for temperature sensor integration
+ * @file Hardware Abstraction Layer - Channel Exhaustion Fix
  * @module tempDll
  */
 
 const { app } = require('electron');
-const koffi = typeof __non_webpack_require__ !== 'undefined' ? __non_webpack_require__('koffi') : require('koffi');
 const path = require('path');
 const fs = require('fs');
 const store = require('../state/temperatureStore');
 const consoleColours = require('../utils/consoleColours');
 
-let assetsFolder = '';
-if (app && app.isPackaged) {
-  const resPath = process.resourcesPath || path.join(process.cwd(), 'resources');
-  assetsFolder = path.join(resPath, 'assets');
-} else {
-  assetsFolder = path.resolve(__dirname, '..', '..', 'assets');
+// 1. ISOLATE AND LOCATE THE KOFFI LIBRARY
+let koffi;
+try {
+    const koffiPath = app.isPackaged
+        ? path.join(process.resourcesPath, 'koffi') 
+        : 'koffi';                                  
+
+    koffi = typeof __non_webpack_require__ !== 'undefined' 
+        ? __non_webpack_require__(koffiPath) 
+        : require(koffiPath);
+} catch (err) {
+    consoleColours.error(`Koffi load failed: ${err.message}`);
+    throw err; 
 }
 
-const dllName = 'TempMeasure64.dll';
+// 2. RESOLVE ASSETS FOLDER
+let assetsFolder = app.isPackaged
+  ? path.join(process.resourcesPath, 'assets') 
+  : path.join(app.getAppPath(), 'assets');
+
+let dllPath = path.join(assetsFolder, 'TempMeasure64.dll');
+
+if (app.isPackaged && !fs.existsSync(dllPath)) {
+    assetsFolder = process.resourcesPath;
+    dllPath = path.join(assetsFolder, 'TempMeasure64.dll');
+}
+
+// 3. WINDOWS DLL PATH INJECTION
+process.env.PATH = `${assetsFolder};${process.env.PATH}`;
+
 let lib = null;
 let StartDevice_Func = null;
 let IsDeviceConnected_Func = null;
 const CallbackProto = koffi.proto('void __cdecl (float fTemp)');
-const originalCwd = process.cwd();
 
+// 4. LOAD DLL & PREVENT AMF CHANNEL EXHAUSTION
+const originalCwd = process.cwd();
 try {
-  const folderExists = typeof assetsFolder === 'string' && assetsFolder !== '' ? fs.existsSync(assetsFolder) : false;
-  
-  if (folderExists) {
-    process.chdir(assetsFolder);
-    // FIXED ERROR HANDLING: Replaced silent failure
-    try { koffi.unload(dllName); } catch (e) { consoleColours.info('No prior DLL instance to unload.'); } 
-    lib = koffi.load(dllName);
-  }
+    if (fs.existsSync(dllPath)) {
+        process.chdir(assetsFolder);
+        
+        // CRITICAL FIX: Unload previous instance to free up the 9 AMF Channels
+        try { 
+            if (koffi.unload) koffi.unload(dllPath); 
+        } catch (e) {
+            // Ignore if it is the first time loading
+        }
+
+        lib = koffi.load(dllPath); 
+        consoleColours.success(`Hardware HAL: DLL loaded from ${assetsFolder}`);
+    } else {
+        throw new Error(`DLL missing at expected path: ${dllPath}`);
+    }
 } catch (e) {
-  consoleColours.warning('Hardware DLL not found. Falling back to simulator. (' + e.message + ')');
+    consoleColours.warning(`Hardware HAL Failure: ${e.message}`);
 } finally {
-  try { process.chdir(originalCwd); } catch (e) { consoleColours.error('Failed to restore working directory: ' + e.message); }
+    process.chdir(originalCwd);
 }
 
 if (lib) {
-  try {
-    StartDevice_Func = lib.func('StartDevice', 'int', [koffi.pointer(CallbackProto), 'char*']);
-    IsDeviceConnected_Func = lib.func('IsDeviceConnected', 'int', []);
-  } catch (err) {
-    // FIXED ERROR HANDLING: Replaced silent failure
-    consoleColours.error('Failed to bind hardware functions from DLL: ' + err.message);
-  }
+    try {
+        StartDevice_Func = lib.func('StartDevice', 'int', [koffi.pointer(CallbackProto), 'char*']);
+        IsDeviceConnected_Func = lib.func('IsDeviceConnected', 'int', []);
+    } catch (err) {
+        consoleColours.error('Hardware HAL: Function binding failed: ' + err.message);
+    }
 }
 
 let registeredCallback = null;
 
 module.exports = {
-  checkConnection: () => {
-    if (IsDeviceConnected_Func) {
-      try { return IsDeviceConnected_Func(); } catch (e) { return 1; }
-    }
-    return 1;
-  },
-
-  start: () => {
-    if (!lib || !StartDevice_Func) return;
-
-    let isFirstReading = true;
-
-    const onMeasurement = (fTemp) => {
-      let outputTemp = fTemp;
-
-      if (isFirstReading) {
-        consoleColours.hardware(`Session Start: Forcing 30.00 deg C (Sensor was: ${fTemp.toFixed(2)})`);
-        outputTemp = 30.00;
-        isFirstReading = false;
-      }
-
-      const fahrenheit = (outputTemp * 9/5) + 32;
-      consoleColours.temperature(outputTemp, fahrenheit, 'REAL');
-
-      if (outputTemp > -50 && outputTemp < 200) {
-        store.updateTemperature(outputTemp, true);
-        if (global.hardwareMonitorInstance) {
-            global.hardwareMonitorInstance.updateLastUpdate();
+    checkConnection: () => {
+        if (IsDeviceConnected_Func) {
+            try { return IsDeviceConnected_Func(); } catch (e) { return 1; }
         }
-      }
-    };
+        return 1;
+    },
 
-    try {
-      if (registeredCallback) koffi.unregister(registeredCallback);
-      registeredCallback = koffi.register(onMeasurement, koffi.pointer(CallbackProto));
-      
-      const serialNumber = Buffer.alloc(32);
-      serialNumber.write('E66480454F6D2F31', 'utf8');
-      
-      StartDevice_Func(registeredCallback, serialNumber);
-    } catch (err) {
-      consoleColours.error('Hardware Start Error: ' + err.message);
-    }
-  },
+    start: () => {
+        if (!lib || !StartDevice_Func) return;
 
-  stop: () => {
-    if (registeredCallback) {
-      try {
-        koffi.unregister(registeredCallback);
-        registeredCallback = null;
-        consoleColours.warning('Hardware Stopped (callback unregistered)');
-      } catch (err) {
-        consoleColours.error('Stop error: ' + err.message);
-      }
+        const knownSerials = [
+            'E66480454F6D2F31', // Alpha
+            'E6614103E71E2122'  // Beta
+        ];
+
+        let isFirstReading = true;
+        
+        const onMeasurement = (fTemp) => {
+            let outputTemp = fTemp;
+            if (isFirstReading) {
+                consoleColours.hardware(`Handshake Success: Forcing 30.00°C`);
+                outputTemp = 30.00;
+                isFirstReading = false;
+            }
+            
+            const fahrenheit = (outputTemp * 9/5) + 32;
+            consoleColours.temperature(outputTemp, fahrenheit, 'CONNECTED');
+
+            if (outputTemp > -50 && outputTemp < 200) {
+                store.updateTemperature(outputTemp, true, "CONNECTED", "HARDWARE_ACTIVE");
+                if (global.hardwareMonitorInstance) {
+                    global.hardwareMonitorInstance.updateLastUpdate();
+                }
+            }
+        };
+
+        const discoveryCwd = process.cwd();
+        try {
+            process.chdir(assetsFolder); 
+            let discoverySuccess = false;
+
+            for (const serial of knownSerials) {
+                if (discoverySuccess) break;
+                try {
+                    if (registeredCallback) koffi.unregister(registeredCallback);
+                    registeredCallback = koffi.register(onMeasurement, koffi.pointer(CallbackProto));
+
+                    const serialBuffer = Buffer.alloc(32);
+                    serialBuffer.write(serial + '\0', 'utf8');
+
+                    const result = StartDevice_Func(registeredCallback, serialBuffer);
+
+                    if (result === 0) {
+                        discoverySuccess = true;
+                        consoleColours.success(`SUCCESS: Initialised Pico ID [${serial}]`);
+                    }
+                } catch (err) {
+                    consoleColours.error(`Discovery Error: ${err.message}`);
+                }
+            }
+        } finally {
+            process.chdir(discoveryCwd);
+        }
+    },
+
+    stop: () => {
+        if (registeredCallback) {
+            try {
+                koffi.unregister(registeredCallback);
+                registeredCallback = null;
+            } catch (err) {}
+        }
     }
-  }
 };

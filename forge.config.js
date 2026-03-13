@@ -1,10 +1,13 @@
+const path = require('path');
+
 module.exports = {
   packagerConfig: { 
     asar: true,
+    // THE FIX: Explicitly copy both the hardware drivers AND the Koffi library
     extraResource: [
-      './assets'
+      path.resolve(__dirname, 'assets'),
+      path.resolve(__dirname, 'node_modules', 'koffi')
     ],
-    // Unpack native modules from asar
     asarUnpack: [
       '**/node_modules/koffi/**/*'
     ],
@@ -18,11 +21,11 @@ module.exports = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        name: 'amf_temp_plotter', // Note: No spaces or dashes usually allowed here
-        authors: 'Greg Schaerer',    // Squirrel requires an author!
-        exe: 'AMF-Temperature-Plotter.exe', // Must match executableName
-        setupExe: 'AMF-Temperature-PlotterSetup.exe', // Optional: Names your installer nicely
-        description: 'AMF-Temperature-Plotter - Real-time temperature monitoring application'
+        name: 'amf_temp_plotter',
+        authors: 'Greg Schaerer',
+        exe: 'AMF-Temperature-Plotter.exe',
+        setupExe: 'AMF-Temperature-Plotter-Setup.exe',
+        description: 'AMF-Temperature-Plotter - Industrial Thermal Monitoring'
       }
     }
   ],

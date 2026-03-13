@@ -48,5 +48,10 @@ module.exports = {
     }
   },
   
+  // Add method to clear all listeners for testing
+  removeAllListeners() {
+    listeners.length = 0;
+  },
+  
   get() { return { temp: currentTemp, history: getOrderedHistory() }; }
 };

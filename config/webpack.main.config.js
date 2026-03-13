@@ -1,17 +1,14 @@
-const rendererConfig = require('./webpack.renderer.config.js');
-
 module.exports = {
-  /**
-   * This is the main entry point for your application.
-   */
   entry: './src/main/main.js',
   
-  module: {
-    rules: rendererConfig.module.rules,
-  },
-
-  // CRITICAL FIX: Stops Webpack from breaking the native Koffi library
+  // CRITICAL: Tells Webpack not to bundle Koffi, preventing the 18 red errors
   externals: {
     koffi: 'commonjs koffi'
-  }
+  },
+
+  module: {
+    rules: [], 
+  },
+
+  plugins: [], 
 };
