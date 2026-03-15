@@ -141,11 +141,46 @@ const consoleColours = require('./utils/consoleColours');
 consoleColours.temperature(24.5, 76.1, 'REAL');
 // Output: [+] [REAL] 24.50 deg C (76.10 deg F)
 
+consoleColours.temperature(22.3, 72.14, 'SIMULATOR');
+// Output: [~] [SIMULATOR] 22.30 deg C (72.14 deg F)
+
+consoleColours.temperature(30.00, 86.00, 'CONNECTED');
+// Output: [~] [CONNECTED] 30.00 deg C (86.00 deg F)
+
 // Status logging functions
-consoleColours.success('Hardware connected');
-consoleColours.error('Connection failed');
-consoleColours.warning('High temperature detected');
-consoleColours.info('System starting');
+consoleColours.success('Hardware signal detected! Initiating switch...');
+// Output: [OK] Hardware signal detected! Initiating switch...
+
+consoleColours.error('Failed to load hardware DLL on startup: DLL not found');
+// Output: [ERROR] Failed to load hardware DLL on startup: DLL not found
+
+consoleColours.warning('Hardware timeout detected. Hardware DLL dropped connection.');
+// Output: [!] Hardware timeout detected. Hardware DLL dropped connection.
+
+consoleColours.info('Starting hardware monitoring...');
+// Output: [i] Starting hardware monitoring...
+
+// Hardware-specific logging
+consoleColours.hardware('Handshake Success: Forcing 30.00°C');
+// Output: [+] [HAL] Handshake Success: Forcing 30.00°C
+
+// Simulator-specific logging
+consoleColours.simulator('Stopped: No final reading sent (Hardware disconnected - using simulation)');
+// Output: [~] SIMULATOR Stopped: No final reading sent (Hardware disconnected - using simulation)
+
+// Status messages with type
+consoleColours.status('Switching back to hardware mode', 'success');
+// Output: > Switching back to hardware mode
+
+consoleColours.status('Performing health check...', 'info');
+// Output: > Performing health check...
+
+// Utility functions
+consoleColours.header('AMF-Temperature-Plotter Starting');
+// Output: Cyan header with 50 equal signs and title
+
+consoleColours.separator();
+// Output: 50 dim equal signs (==================================================)
 ```
 
 ### Dual-Unit Temperature Support
@@ -156,7 +191,7 @@ consoleColours.info('System starting');
   iso_time: "2024-02-20T14:45:32.123Z",
   value: 24.5,           // Celsius
   fahrenheit: 76.1,      // Pre-calculated Fahrenheit
-  source: "REAL"         // "REAL" or "SIMULATOR"
+  source: "REAL"         // "REAL", "SIMULATOR", or "CONNECTED"
 }
 ```
 
