@@ -71,7 +71,7 @@ I needed to create a comprehensive console utilities module that:
 - Provides performance-optimised logging with minimal overhead
 
 #### A - Action
-I designed and implemented `src/utils/consoleColours.js` with comprehensive functionality:
+I designed and implemented `src/main/utils/consoleColours.js` with comprehensive functionality:
 
 ```javascript
 // Key architectural decisions:
@@ -84,9 +84,11 @@ I designed and implemented `src/utils/consoleColours.js` with comprehensive func
 ```
 
 The implementation included:
-- **`logTemperature()`** function with colour-coded source identification
-- **`logStatus()`** function for different message types (info, success, warning, error)
-- **`celsiusToFahrenheit()`** utility for dual-unit temperature support
+- **`temperature()`** function with colour-coded source identification and dual-unit support
+- **`status()`** function for different message types (info, success, warning, error)
+- **`success()`, `error()`, `warning()`, `info()`** functions for categorised logging
+- **`hardware()`** and `simulator()`** functions for context-specific messaging
+- **`separator()`** and `header()`** utility functions for visual organisation
 - **ASCII-safe notation** replacing °C with "deg C" to prevent corruption
 - **Colour-coded output** using ANSI escape sequences for professional appearance
 - **Performance optimisation** with <5ms overhead per temperature reading
@@ -174,7 +176,7 @@ This enhancement demonstrates professional software evolution practices, perform
 **KSB Focus:** S4, S5, S14, B7
 
 #### S - Situation
-The original test reporting system used static templates that required manual updates when the test suite changed. With the expansion to 99 tests in v1.1.0, I identified the need for a dynamic, automated test reporting system that would generate accurate summaries from actual test results rather than static templates.
+The original test reporting system used static templates that required manual updates when the test suite changed. With the expansion to 116 tests in v1.1.0, I identified the need for a dynamic, automated test reporting system that would generate accurate summaries from actual test results rather than static templates.
 
 #### T - Task
 I needed to implement a dynamic test reporting system that:
@@ -326,7 +328,7 @@ graph TB
 #### Industry Readiness Demonstration
 - **Enterprise Security**: Professional IPC implementation with context isolation
 - **Performance Engineering**: Sub-100ms real-time processing with efficient memory management
-- **Testing Professionalism**: 99-test suite with 100% success rate and comprehensive coverage
+- **Testing Professionalism**: 116-test suite with 100% success rate and comprehensive coverage
 - **Documentation Standards**: British English compliance with professional presentation
 - **CI/CD Integration**: Automated testing and reporting suitable for production environments
 
@@ -336,7 +338,7 @@ graph TB
 - **S1**: Maintainable code architecture with enhanced separation of concerns
 - **S2**: Professional React-based user interface with dual-unit temperature display
 - **S3**: Real-time data binding with enhanced source tracking and Fahrenheit support
-- **S4**: Comprehensive unit testing with 99 passing tests and dynamic reporting
+- **S4**: Comprehensive unit testing with 116 passing tests and dynamic reporting
 - **S5**: Integration testing covering end-to-end workflows including console utilities
 - **S7**: Advanced problem solving in cross-platform encoding and hardware communication
 - **S10**: Professional build and deployment processes with enhanced automation
