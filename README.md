@@ -4,7 +4,7 @@
 ![Test Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 ![Platform](https://img.shields.io/badge/platform-Windows_x64-blue)
 ![Version](https://img.shields.io/badge/version-1.1.0-blue)
-![Documentation](https://img.shields.io/badge/docs-8%20files-green)
+![Documentation](https://img.shields.io/badge/docs-7%20files-green)
 
 A professional real-time industrial temperature monitoring application built with Electron, React, and Node.js, featuring enhanced console utilities, dual-unit temperature support, and cross-platform compatibility.
 
@@ -16,8 +16,8 @@ This application provides a comprehensive solution for reading, visualising, and
 - **Console Utilities Module**: Professional colour-coded logging with ASCII-safe notation
 - **Dual-Unit Support**: Pre-calculated Fahrenheit conversions with source tracking
 - **Cross-Platform Encoding**: Fixed Windows PowerShell Unicode corruption issues
-- **Dynamic Test Reporting**: JSON-based test summary generation (116 tests, 100% pass rate)
-- **Enhanced Documentation**: 8-file professional documentation ecosystem
+- **Dynamic Test Reporting**: JSON-based test summary generation (116 tests, 12 test suites, 100% pass rate)
+- **Enhanced Documentation**: 7-file professional documentation ecosystem
 - **Hardware Mode Management**: Manual override and automatic mode switching
 - **IPC Test Coverage**: Dramatic improvement from 26.42% to 97.85% with comprehensive unit tests
 
@@ -51,7 +51,7 @@ npm start
 # Start development server
 npm start
 
-# Run tests (116 tests, 100% pass rate)
+# Run tests (116 tests, 12 test suites, 100% pass rate)
 npm test
 
 # Generate test summary (v1.1.0 dynamic reporting)
@@ -72,7 +72,7 @@ set DEBUG=temperature-plotter:* && npm start
 Professional colour-coded logging system with ASCII-safe notation:
 
 ```javascript
-const consoleColours = require('./utils/consoleColours');
+const consoleColours = require('./src/main/utils/consoleColours');
 
 // Temperature logging with source tracking
 consoleColours.temperature(24.5, 76.1, 'REAL');
@@ -116,12 +116,11 @@ consoleColours.header('System Title'); // Cyan header with 50 equal signs
 
 ## Documentation
 
-Professional documentation ecosystem (8 files):
+Professional documentation ecosystem (7 files):
 
-- **[docs/SYSTEM-ARCHITECTURE.md](docs/SYSTEM-ARCHITECTURE.md)** - Complete technical documentation
+- **[docs/SYSTEM_ARCHITECTURE.md](docs/SYSTEM_ARCHITECTURE.md)** - Complete technical documentation
 - **[docs/API.md](docs/API.md)** - Comprehensive API reference
 - **[docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)** - Development guidelines
-- **[docs/CHANGELOG.md](docs/CHANGELOG.md)** - Version history
 - **[docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)** - Troubleshooting guide
 - **[docs/NEW-DEVELOPER-ONBOARDING.md](docs/NEW-DEVELOPER-ONBOARDING.md)** - Onboarding pathway
 - **[docs/COMPLETE-DOCUMENTATION-GUIDE.md](docs/COMPLETE-DOCUMENTATION-GUIDE.md)** - Documentation navigation

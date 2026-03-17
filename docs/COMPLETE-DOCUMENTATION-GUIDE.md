@@ -1,82 +1,18 @@
 # Complete Documentation Guide
-## Professional Portfolio Documentation Navigation
+## Navigation for Temperature Plotter Documentation
 
-This guide provides comprehensive navigation for all Temperature Plotter project documentation, serving as the central hub for developers, assessors, and stakeholders.
+Central hub for all project documentation serving developers, assessors, and stakeholders.
 
-## Documentation Ecosystem Overview
+## Documentation Overview
 
 ```mermaid
 graph TB
-    subgraph "Core Documentation"
-        A[README.md<br/>Project Overview] --> B[SYSTEM-ARCHITECTURE.md<br/>Technical Design]
-        B --> C[API.md<br/>Interface Reference]
-        C --> D[NEW-DEVELOPER-ONBOARDING.md<br/>Learning Path]
-    end
-    
-    subgraph "Development Documentation"
-        E[CONTRIBUTING.md<br/>Development Standards] --> F[TROUBLESHOOTING.md<br/>Problem Resolution]
-        F --> G[CHANGELOG.md<br/>Version History]
-    end
-    
-    subgraph "Portfolio Evidence"
-        H[PORTFOLIO-SUMMARY.md<br/>Evidence Overview] --> I[EPA-PORTFOLIO-SUMMARY.md<br/>Assessment Context]
-        I --> J[Performance Metrics]
-    end
-    
-    subgraph "Testing Documentation"
-        K[__tests__/README.md<br/>Testing Strategy] --> L[Test Reports]
-        L --> M[Coverage Reports]
-    end
-    
-    A --> E
-    B --> F
-    C --> G
-    D --> H
-    E --> K
-    F --> J
-    
-    style A fill:#e1f5fe,color:#000000
-    style B fill:#f3e5f5,color:#000000
-    style C fill:#e8f5e8,color:#000000
-    style D fill:#fff3e0,color:#000000
-    style E fill:#ffebee,color:#000000
-    style H fill:#f8bbd9,color:#000000
-    style K fill:#e0f2f1,color:#000000
-```
-
-## Quick Navigation Index
-
-### Primary Documentation Files
-
-| Document | Purpose | Audience | Key Features |
-|----------|---------|----------|--------------|
-| **README.md** | Project overview & quick start | All stakeholders | Installation, features, structure |
-| **SYSTEM-ARCHITECTURE.md** | Technical design documentation | Developers, assessors | 14 Mermaid diagrams, component relationships |
-| **API.md** | Complete interface reference | Developers | IPC channels, functions, data structures |
-| **NEW-DEVELOPER-ONBOARDING.md** | Structured learning path | New developers | 2.5-hour progressive onboarding |
-| **CONTRIBUTING.md** | Development standards | Contributors | Code style, testing, Git workflow |
-| **TROUBLESHOOTING.md** | Problem resolution guide | All users | Diagnostic flows, solutions |
-| **CHANGELOG.md** | Version history | All stakeholders | Semantic versioning, feature tracking |
-
-### Portfolio Evidence Files
-
-| Document | Assessment Purpose | KSB Coverage | Evidence Type |
-|----------|-------------------|--------------|--------------|
-| **PORTFOLIO-SUMMARY.md** | Complete evidence overview | All 38 KSBs | Comprehensive mapping |
-| **EPA-PORTFOLIO-SUMMARY.md** | Assessment context | Professional standards | Business impact |
-| **Performance Metrics** | Quantified impact | B8, K1 | ROI, time savings |
-
-## Documentation Access Patterns
-
-### For New Developers
-
-```mermaid
-graph LR
-    A[Start Here<br/>README.md] --> B[Onboarding Guide<br/>NEW-DEVELOPER-ONBOARDING.md]
-    B --> C[System Architecture<br/>SYSTEM-ARCHITECTURE.md]
-    C --> D[API Reference<br/>API.md]
-    D --> E[Development Standards<br/>CONTRIBUTING.md]
-    E --> F[Testing Guide<br/>__tests__/README.md]
+    A[README.md<br/>Project Overview] --> B[SYSTEM-ARCHITECTURE.md<br/>Technical Design]
+    B --> C[API.md<br/>Interface Reference]
+    C --> D[NEW-DEVELOPER-ONBOARDING.md<br/>Learning Path]
+    D --> E[CONTRIBUTING.md<br/>Development Standards]
+    E --> F[TROUBLESHOOTING.md<br/>Problem Resolution]
+    F --> G[CHANGELOG.md<br/>Version History]
     
     style A fill:#e1f5fe,color:#000000
     style B fill:#f3e5f5,color:#000000
@@ -84,110 +20,72 @@ graph LR
     style D fill:#fff3e0,color:#000000
     style E fill:#ffebee,color:#000000
     style F fill:#e0f2f1,color:#000000
+    style G fill:#f8bbd9,color:#000000
 ```
 
-**Recommended Reading Order:**
-1. **README.md** - Project understanding (15 min)
-2. **NEW-DEVELOPER-ONBOARDING.md** - Structured learning (2.5 hours)
+## Quick Reference
+
+| Document | Purpose | Audience |
+|----------|---------|----------|
+| **README.md** | Project overview & quick start | All stakeholders |
+| **SYSTEM-ARCHITECTURE.md** | Technical design | Developers, assessors |
+| **API.md** | Interface reference | Developers |
+| **NEW-DEVELOPER-ONBOARDING.md** | Learning path | New developers |
+| **CONTRIBUTING.md** | Development standards | Contributors |
+| **TROUBLESHOOTING.md** | Problem resolution | All users |
+| **CHANGELOG.md** | Version history | All stakeholders |
+
+## Reading Paths
+
+### For New Developers
+1. **README.md** - Project overview (15 min)
+2. **NEW-DEVELOPER-ONBOARDING.md** - Structured learning (2 hours)
 3. **SYSTEM-ARCHITECTURE.md** - Technical design (30 min)
 4. **API.md** - Interface reference (30 min)
 5. **CONTRIBUTING.md** - Development standards (20 min)
 6. **TROUBLESHOOTING.md** - Problem resolution (15 min)
 
 ### For Assessors
-
-```mermaid
-graph TB
-    A[Portfolio Evidence<br/>PORTFOLIO-SUMMARY.md] --> B[System Design<br/>SYSTEM-ARCHITECTURE.md]
-    B --> C[Implementation Quality<br/>API.md + Source Code]
-    C --> D[Testing Excellence<br/>__tests__/]
-    D --> E[Professional Practises<br/>CONTRIBUTING.md + CHANGELOG.md]
-    E --> F[Business Impact<br/>Performance Metrics]
-    
-    style A fill:#f8bbd9,color:#000000
-    style B fill:#e1f5fe,color:#000000
-    style C fill:#f3e5f5,color:#000000
-    style D fill:#e8f5e8,color:#000000
-    style E fill:#fff3e0,color:#000000
-    style F fill:#ffebee,color:#000000
-```
-
-**Assessment Walkthrough:**
-1. **PORTFOLIO-SUMMARY.md** - Evidence overview (5 min)
-2. **SYSTEM-ARCHITECTURE.md** - Design thinking (15 min)
-3. **API.md + Source Code** - Code quality (20 min)
-4. **__tests__/ directory** - Testing strategy (15 min)
-5. **CONTRIBUTING.md + CHANGELOG.md** - Professional standards (10 min)
-6. **Performance Metrics** - Business impact (10 min)
+1. **PORTFOLIO-SUMMARY.md** - Evidence overview
+2. **SYSTEM-ARCHITECTURE.md** - Design thinking
+3. **API.md + Source Code** - Code quality
+4. **__tests__/ directory** - Testing strategy
+5. **CONTRIBUTING.md** - Professional standards
+6. **Performance Metrics** - Business impact
 
 ### For Maintainers
+- **CONTRIBUTING.md** → **API.md** → **SYSTEM-ARCHITECTURE.md**
+- **CHANGELOG.md** → Version tracking
+- **TROUBLESHOOTING.md** → Issue resolution
 
-```mermaid
-graph LR
-    A[Development<br/>CONTRIBUTING.md] --> B[API Changes<br/>API.md]
-    B --> C[Architecture Updates<br/>SYSTEM-ARCHITECTURE.md]
-    C --> D[Version Tracking<br/>CHANGELOG.md]
-    D --> E[Testing Updates<br/>__tests__/README.md]
-    E --> F[Issue Resolution<br/>TROUBLESHOOTING.md]
-    
-    style A fill:#ffebee,color:#000000
-    style B fill:#e1f5fe,color:#000000
-    style C fill:#f3e5f5,color:#000000
-    style D fill:#e8f5e8,color:#000000
-    style E fill:#fff3e0,color:#000000
-    style F fill:#e0f2f1,color:#000000
-```
+## Document Summaries
 
-## Detailed Document Analysis
+### Core Documentation
 
-### 1. README.md
-**Purpose:** Project entry point and quick start guide
-
-**Key Sections:**
-- Project description and purpose
-- Installation instructions
-- Quick start guide
+**README.md**
+- Project overview and quick start guide
+- Installation instructions and key features
 - Project structure overview
-- Features and capabilities
 
-**When to Use:**
-- First-time project visitors
-- Quick reference for basic operations
-- Project pitch to stakeholders
+**SYSTEM-ARCHITECTURE.md**
+- Technical design with Mermaid diagrams
+- System architecture and component relationships
+- Data flow and security considerations
 
-### 2. SYSTEM-ARCHITECTURE.md
-**Purpose:** Complete technical design documentation
+**API.md**
+- IPC channels and communication patterns
+- Main process APIs and utilities
+- Renderer components and data structures
 
-**Key Features:**
-- 14 professional Mermaid diagrams
-- High-level system architecture
-- Data flow visualisation
-- Component relationships
-- Security architecture
-- Performance considerations
+**NEW-DEVELOPER-ONBOARDING.md**
+- Structured learning path for new developers
+- Progressive onboarding with time estimates
+- Code deep dive and practical examples
 
-**Mermaid Diagrams Included:**
-```mermaid
-graph TB
-    subgraph "Architecture Diagrams"
-        A[High-Level Architecture] --> B[Component Architecture]
-        C[Data Flow Architecture] --> D[Security Architecture]
-    end
-    
-    subgraph "Process Diagrams"
-        E[Hardware Integration] --> F[Communication Flow]
-        G[Development Workflow] --> H[Testing Strategy]
-    end
-    
-    subgraph "Technical Diagrams"
-        I[Performance Architecture] --> J[Deployment Architecture]
-        K[Memory Management] --> L[Error Handling]
-    end
-    
-    style A fill:#e1f5fe,color:#000000
-    style E fill:#f3e5f5,color:#000000
-    style I fill:#e8f5e8,color:#000000
-```
+**CONTRIBUTING.md**
+- Development standards and workflow guidelines
+- Code style and testing requirements
+- Git workflow and commit message standards
 
 **When to Use:**
 - Understanding system design
@@ -428,7 +326,7 @@ graph TB
 | S3 - Data linkage | API documentation, Data flow | Exceptional |
 | S4 - Unit testing | __tests__/ directory, Coverage reports | Exceptional |
 | S5 - Integration testing | Test suites, Integration tests | Exceptional |
-| S6 - Test scenarios | Test documentation, 116 tests | Strong |
+| S6 - Test scenarios | Test documentation, 116 tests, 12 test suites | Strong |
 | S7 - Problem solving | TROUBLESHOOTING.md, Debugging | Exceptional |
 | S8 - Simple designs | System Architecture diagrams | Exceptional |
 | S9 - Analysis artefacts | Architecture documentation | Strong |
