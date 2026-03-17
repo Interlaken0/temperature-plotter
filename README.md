@@ -16,9 +16,10 @@ This application provides a comprehensive solution for reading, visualising, and
 - **Console Utilities Module**: Professional colour-coded logging with ASCII-safe notation
 - **Dual-Unit Support**: Pre-calculated Fahrenheit conversions with source tracking
 - **Cross-Platform Encoding**: Fixed Windows PowerShell Unicode corruption issues
-- **Dynamic Test Reporting**: JSON-based test summary generation (99 tests, 100% pass rate)
+- **Dynamic Test Reporting**: JSON-based test summary generation (116 tests, 100% pass rate)
 - **Enhanced Documentation**: 8-file professional documentation ecosystem
 - **Hardware Mode Management**: Manual override and automatic mode switching
+- **IPC Test Coverage**: Dramatic improvement from 26.42% to 97.85% with comprehensive unit tests
 
 **Key Capabilities:**
 - **Real-Time Visualisation**: Live graphing of sensor data (1Hz refresh rate) using Recharts
@@ -50,7 +51,7 @@ npm start
 # Start development server
 npm start
 
-# Run tests (99 tests, 100% pass rate)
+# Run tests (116 tests, 100% pass rate)
 npm test
 
 # Generate test summary (v1.1.0 dynamic reporting)
