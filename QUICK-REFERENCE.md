@@ -3,7 +3,7 @@
 ## Project Statistics
 
 **Technical Metrics:**
-- **Tests:** 99 tests across 11 suites (100% pass rate)
+- **Tests:** 116 tests across 12 suites (100% pass rate)
 - **Architecture:** Electron + React + Node.js
 - **Performance:** <100ms latency, 1Hz refresh rate
 - **Security:** Zero vulnerabilities, context isolation
@@ -33,9 +33,7 @@ src/
 │   │   └── SaveButton.jsx
 │   └── hooks/
 │       └── useTemperature.js
-├── utils/
-│   └── consoleColours.js   # v1.1.0 console utilities
-└── shared/
+├── shared/
     └── constants.js
 ```
 
@@ -135,7 +133,7 @@ Temperature Sensor → Hardware Abstraction → Console Utilities → IPC Bridge
 ### Console Utilities Module
 ```javascript
 // Professional colour-coded logging
-const consoleColours = require('./utils/consoleColours');
+const consoleColours = require('./src/main/utils/consoleColours');
 
 // Temperature logging with dual units
 consoleColours.temperature(24.5, 76.1, 'REAL');
@@ -322,7 +320,7 @@ graph LR
 ## Key Performance Indicators
 
 ### Technical KPIs:
-- **Test Success Rate:** 100% (99/99 tests)
+- **Test Success Rate:** 100% (116/116 tests)
 - **Code Coverage:** 90%+ across all modules
 - **Performance:** <100ms response time
 - **Memory Usage:** 45-50MB stable

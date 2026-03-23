@@ -1,43 +1,55 @@
 # Test Suite
 
-Comprehensive test suite for the Temperature Plotter application with 116 tests achieving 97.85% IPC coverage.
+Comprehensive test suite for the Temperature Plotter application with **116 tests** achieving **97.85% IPC coverage** and **100% pass rate**.
 
 ## Structure
 
 ```
 __tests__/
-├── unit/           # Unit tests for individual components and functions
+├── unit/           # Unit tests for components and functions
 ├── integration/    # Integration tests for component interactions
 ├── setup.js        # Jest configuration and global mocks
 └── README.md       # This file
 ```
 
-# Testing
+## Test Results
+
+- **Total Tests**: 116 passing
+- **Test Suites**: 12
+- **IPC Coverage**: 97.85%
+- **Pass Rate**: 100%
+- **Coverage Reports**: HTML in `coverage/`
+
+## Running Tests
 
 ```bash
-# Run all tests with automatic summary generation
-npm test                    # Runs tests, no coverage
-npm test -- --verbose       # Runs tests with verbose output, no coverage
-npm test -- --coverage      # Runs tests AND generates/updates coverage
+# Run all tests with coverage
+npm test
 
-# View Coverage Report
-start coverage/lcov-report/index.html    # Open coverage in browser (Windows)
-open coverage/lcov-report/index.html     # Open coverage in browser (macOS)
-xdg-open coverage/lcov-report/index.html # Open coverage in browser (Linux)
-# Or manually navigate to coverage/lcov-report/ and double-click index.html
+# Run tests with verbose output
+npm test -- --verbose
 
-# Run specific test file
-npm test -- unit/main-simple.test.js
+# Generate coverage report only
+npm test -- --coverage
+
+# View coverage report
+start coverage/lcov-report/index.html
 ```
 
-## Automated Test Summary
+## Coverage Areas
 
-The test suite includes an automated summary generation system:
+- **Unit Tests**: Individual component testing
+- **Integration Tests**: Cross-component functionality
+- **IPC Communication**: Main/renderer process testing
+- **Error Handling**: Edge cases and failure scenarios
+- **UI Components**: React component testing
+
+## Automated Test Summary
 
 - **Script**: `scripts/generate-test-summary.js`
 - **Output**: `evidence/test-reports/test-summary.txt`
 - **Trigger**: Runs automatically after `npm test`
-- **Features**: 
+- **Features**: Dynamic JSON-based reporting with test metrics: 
   - Captures current test results and execution metrics
   - Includes timestamp for Git change detection
   - Updates EPA evidence automatically

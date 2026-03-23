@@ -1,41 +1,67 @@
-# Temperature Plotter Project Objectives & Technical Implementation
+# Project Objectives - AMF Temperature Plotter v1.1.0
 
-## Executive Summary
+## Primary Objective
 
-The Temperature Plotter project successfully accomplishes two distinct strategic objectives for JJ Confederation:
+Develop a professional industrial temperature monitoring application with real-time visualisation, comprehensive testing, and enterprise-grade security.
 
-1. **AdMixFlow RPC Evaluation Platform**: Demonstrates thread-safe asynchronous communication between embedded systems and JavaScript applications
-2. **Industrial Temperature Monitoring System**: Provides cost-effective, portable temperature data acquisition for ultrasonic flow measurement system evaluation
+## Core Requirements
 
-## Objective 1: AdMixFlow RPC Evaluation Platform
+### Functional Requirements
+- **Real-time Temperature Monitoring**: 1Hz data updates with live visualisation
+- **Dual-Unit Support**: Celsius and Fahrenheit with pre-calculated conversions
+- **Hardware Integration**: DLL binding with simulation fallback
+- **Data Persistence**: Automatic CSV logging and on-demand export
+- **Professional Logging**: Colour-coded console utilities with cross-platform support
 
-### Technical Architecture
+### Non-Functional Requirements
+- **Performance**: <100ms UI response time, 45-50MB stable memory usage
+- **Reliability**: 100% data persistence, 24/7 operation capability
+- **Security**: Secure IPC, memory leak prevention, input validation
+- **Testing**: 97.85% IPC coverage with 116 passing tests
+- **Maintainability**: Clean architecture, comprehensive documentation
 
-The Temperature Plotter serves as a comprehensive demonstration of AdMixFlow RPC capabilities through a sophisticated embedded-JavaScript communication framework:
+## Technical Objectives
 
-#### Hardware Abstraction Layer (HAL)
-```javascript
-// tempDll.js - Embedded System Interface
-const koffi = require('koffi');  // Foreign Function Interface
-const CallbackProto = koffi.proto('void __cdecl (float fTemp)');
+### Architecture
+- Electron-based cross-platform application
+- React frontend with real-time chart visualisation
+- Node.js backend with hardware abstraction layer
+- Secure IPC communication between processes
 
-// Thread-safe callback registration for asynchronous notifications
-registeredCallback = koffi.register(onMeasurement, koffi.pointer(CallbackProto));
-```
+### Quality Assurance
+- Comprehensive test suite with 97.85% IPC coverage
+- Automated test reporting and documentation
+- Memory leak prevention and performance optimisation
+- Cross-platform compatibility (Windows focus)
 
-#### Asynchronous Notification System
-- **Thread-Safe Management**: Koffi FFI ensures safe cross-thread communication between embedded hardware and JavaScript event loop
-- **Event-Driven Architecture**: Hardware interrupts trigger JavaScript callbacks via Node.js EventEmitter pattern
-- **Real-Time Data Processing**: Sub-millisecond latency from hardware sensor to UI display
+## Success Criteria
 
-#### RPC Communication Protocol
-```mermaid
-graph LR
-    A[Embedded System] -->|DLL Callback| B[Koffi FFI Bridge]
-    B -->|Asynchronous Event| C[Node.js Event Loop]
-    C -->|IPC Channel| D[React Frontend]
-    D -->|User Interaction| E[Hardware Controls]
-```
+✅ **Completed Objectives:**
+- Real-time temperature monitoring with 1Hz updates
+- Professional UI with dark/light theme support
+- Hardware DLL integration with Koffi library
+- 116 tests with 100% pass rate
+- 97.85% IPC coverage achieved
+- Enterprise security implementation
+- Memory leak prevention
+- Professional documentation ecosystem
+
+## Current Status
+
+**Version**: 1.1.0  
+**Tests**: 116 passing (12 suites)  
+**Coverage**: 97.85% IPC  
+**Documentation**: 7 professional files  
+**Platform**: Windows x64  
+**Performance**: Production ready
+
+## Future Enhancements
+
+- Cross-platform deployment (macOS, Linux)
+- Advanced hardware sensor support
+- Cloud data synchronisation
+- Mobile companion application
+- Advanced analytics and reporting
 
 ### Thread Safety Implementation
 

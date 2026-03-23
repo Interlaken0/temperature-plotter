@@ -1,145 +1,93 @@
-# Temperature Plotter (v1.1.0)
+# AMF Temperature Plotter (v1.1.0)
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Test Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+![Test Coverage](https://img.shields.io/badge/coverage-97.85%25-brightgreen)
 ![Platform](https://img.shields.io/badge/platform-Windows_x64-blue)
 ![Version](https://img.shields.io/badge/version-1.1.0-blue)
-![Documentation](https://img.shields.io/badge/docs-7%20files-green)
+![Tests](https://img.shields.io/badge/tests-116%20passing-green)
 
-A professional real-time industrial temperature monitoring application built with Electron, React, and Node.js, featuring enhanced console utilities, dual-unit temperature support, and cross-platform compatibility.
+Professional industrial temperature monitoring application built with Electron, React, and Node.js. Features real-time visualisation, hardware abstraction, and comprehensive testing with 97.85% IPC coverage.
 
-## Project Overview
+## Key Features
 
-This application provides a comprehensive solution for reading, visualising, and logging temperature sensor data with professional-grade features. It features a robust IPC (Inter-Process Communication) architecture that bridges a Node.js backend (handling hardware/simulation) with a React frontend (handling visualisation), enhanced with v1.1.0 console utilities and cross-platform compatibility.
+- **Real-Time Visualisation**: Live temperature graphing with 1Hz refresh rate
+- **Dual-Unit Display**: Celsius and Fahrenheit with pre-calculated conversions  
+- **Hardware Abstraction**: DLL integration with simulation fallback
+- **Professional Logging**: Colour-coded console utilities with cross-platform support
+- **Data Persistence**: Automatic CSV logging and on-demand export
+- **Enterprise Security**: Memory leak prevention and secure IPC architecture
+- **Comprehensive Testing**: 116 tests with 97.85% IPC coverage
 
-### v1.1.0 Key Enhancements
-- **Console Utilities Module**: Professional colour-coded logging with ASCII-safe notation
-- **Dual-Unit Support**: Pre-calculated Fahrenheit conversions with source tracking
-- **Cross-Platform Encoding**: Fixed Windows PowerShell Unicode corruption issues
-- **Dynamic Test Reporting**: JSON-based test summary generation (116 tests, 12 test suites, 100% pass rate)
-- **Enhanced Documentation**: 7-file professional documentation ecosystem
-- **Hardware Mode Management**: Manual override and automatic mode switching
-- **IPC Test Coverage**: Dramatic improvement from 26.42% to 97.85% with comprehensive unit tests
+## Quick Start
 
-**Key Capabilities:**
-- **Real-Time Visualisation**: Live graphing of sensor data (1Hz refresh rate) using Recharts
-- **Dual-Unit Temperature Display**: Celsius and Fahrenheit with pre-calculated conversions
-- **Persistent Telemetry**: Background logging to temperature_telemetry.csv ensures data is never lost
-- **Data Export**: On-demand CSV export for reporting and analysis
-- **Hardware Abstraction**: Ready for seamless DLL integration with fallback simulation mode
-- **Professional Console Output**: Colour-coded logging with cross-platform compatibility
-
-## Quick Installation
-
-### End Users
-1. Navigate to: `out/make/squirrel.windows/x64/`
-2. Double-click `AMF-Temperature-PlotterSetup.exe`
-3. Application installs and launches automatically
-4. Desktop shortcut created for easy access
-
-### Developers
 ```bash
+# Clone and install
 git clone https://github.com/Interlaken0/temperature-plotter
 cd temperature-plotter
 npm install
+
+# Start development
 npm start
+
+# Run tests (116 passing)
+npm test
 ```
 
 ## Development Commands
 
 ```bash
-# Start development server
-npm start
-
-# Run tests (116 tests, 12 test suites, 100% pass rate)
-npm test
-
-# Generate test summary (v1.1.0 dynamic reporting)
-node scripts/generate-test-summary.js
-
-# Build application
-npm run make
-
-# Package for distribution
-npm run package
-
-# Run with debug logging
-set DEBUG=temperature-plotter:* && npm start
+npm start              # Start development server
+npm test               # Run all tests (116 passing)
+npm run make          # Build application
+npm run package       # Package for distribution
 ```
 
-## Console Utilities
+## Testing & Coverage
 
-Professional colour-coded logging system with ASCII-safe notation:
+- **116 tests** across 12 test suites
+- **97.85% IPC coverage** 
+- **100% pass rate**
+- Dynamic test summary generation
+- HTML coverage reports in `coverage/`
 
-```javascript
-const consoleColours = require('./src/main/utils/consoleColours');
+View coverage: `start coverage/lcov-report/index.html`
 
-// Temperature logging with source tracking
-consoleColours.temperature(24.5, 76.1, 'REAL');
-// Output: [+] [REAL] 24.50 deg C (76.10 deg F)
+## Architecture
 
-// Hardware-specific logging
-consoleColours.hardware('Device connected');
-// Output: [+] [HAL] Device connected
-
-consoleColours.simulator('Simulation started');
-// Output: [~] SIMULATOR Simulation started
-
-// Status logging with type support
-consoleColours.status('Operation complete', 'success');
-// Output: > Operation complete (in green)
-
-consoleColours.status('Processing...', 'info');
-// Output: > Processing... (in blue)
-
-// Utility functions
-consoleColours.separator(); // 50 dim equal signs
-consoleColours.header('System Title'); // Cyan header with 50 equal signs
-```
-
-## Technical Specifications
-
-**Dependencies:**
-- **Electron 40.1.0**: Cross-platform desktop framework
-- **React 18.2.0**: User interface library
-- **Recharts 2.12.0**: Data visualisation
-- **Tailwind CSS 3.4.17**: Utility-first CSS framework
-- **Jest 29.7.0**: JavaScript testing framework
-- **Koffi 2.15.1**: Foreign Function Interface for DLL binding
+**Technology Stack:**
+- **Electron 40.1.0** - Cross-platform desktop framework
+- **React 18.2.0** - User interface library  
+- **Recharts 2.12.0** - Data visualisation
+- **Tailwind CSS 3.4.17** - Styling framework
+- **Jest 29.7.0** - Testing framework
+- **Koffi 2.15.1** - DLL integration
 
 **Performance:**
-- **Data Rate**: 1Hz temperature updates
-- **Response Time**: <100ms UI update latency
-- **Memory Usage**: Optimised for 24/7 operation (45-50MB stable)
-- **Data Integrity**: 100% telemetry persistence
-- **Cross-Platform**: 100% Windows PowerShell/CMD compatibility
+- 1Hz temperature updates
+- <100ms UI response time
+- 45-50MB stable memory usage
+- 100% data persistence
 
 ## Documentation
 
-Professional documentation ecosystem (7 files):
+Professional documentation ecosystem:
 
-- **[docs/SYSTEM_ARCHITECTURE.md](docs/SYSTEM_ARCHITECTURE.md)** - Complete technical documentation
-- **[docs/API.md](docs/API.md)** - Comprehensive API reference
-- **[docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)** - Development guidelines
+- **[docs/SYSTEM_ARCHITECTURE.md](docs/SYSTEM_ARCHITECTURE.md)** - Technical architecture
+- **[docs/API.md](docs/API.md)** - API reference
 - **[docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)** - Troubleshooting guide
-- **[docs/NEW-DEVELOPER-ONBOARDING.md](docs/NEW-DEVELOPER-ONBOARDING.md)** - Onboarding pathway
+- **[docs/PROJECT-OBJECTIVES.md](docs/PROJECT-OBJECTIVES.md)** - Project objectives
+- **[docs/NEW-DEVELOPER-ONBOARDING.md](docs/NEW-DEVELOPER-ONBOARDING.md)** - Onboarding guide
 - **[docs/COMPLETE-DOCUMENTATION-GUIDE.md](docs/COMPLETE-DOCUMENTATION-GUIDE.md)** - Documentation navigation
-- **[docs/PROJECT-OBJECTIVES.md](docs/PROJECT-OBJECTIVES.md)** - Project objectives documentation
+- **[docs/USER_STORIES.md](docs/USER_STORIES.md)** - User requirements
 
-## Installation Troubleshooting
+## Quick Troubleshooting
 
-### Common Issues
-- **PowerShell Encoding**: Run `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8` before starting
-- **Missing Dependencies**: Ensure Node.js LTS 16+ is installed
-- **Build Failures**: Run `npm install` and `npm run make` in clean environment
-
-### Quick Fixes
-| Problem | Solution | Time |
-|---------|----------|------|
-| Console garbled text | Use ASCII-safe notation (built-in) | Instant |
-| Tests failing | `npm test -- --updateSnapshot` | 1 min |
-| Hardware not detected | Check DLL path in docs/TROUBLESHOOTING.md | 2 min |
+| Issue | Solution |
+|-------|----------|
+| Console garbled text | Built-in ASCII-safe notation |
+| Tests failing | `npm test -- --updateSnapshot` |
+| Hardware not detected | Check DLL path in troubleshooting guide |
 
 ---
 
-**Built with excellence for industrial temperature monitoring - v1.1.0 with enhanced professional features**
+**Professional industrial temperature monitoring - v1.1.0**
