@@ -341,8 +341,12 @@ describe('Real-Time Pico Temperature Tests', () => {
     expect(performanceMetrics.readingCount).toBeGreaterThanOrEqual(totalReadings);
     expect(performanceMetrics.readingCount).toBeLessThanOrEqual(totalReadings + 1); // Allow for potential initial reading
     expect(performanceMetrics.totalTime).toBeGreaterThan(totalReadings * readingFrequency * 0.8);
-    expect(performanceMetrics.minInterval).toBeGreaterThan(0);
-    expect(performanceMetrics.maxInterval).toBeLessThan(readingFrequency * 2);
+    
+    // Only check interval metrics if we have at least 2 readings (need intervals between readings)
+    if (performanceMetrics.readingCount >= 2) {
+      expect(performanceMetrics.minInterval).toBeGreaterThan(0);
+      expect(performanceMetrics.maxInterval).toBeLessThan(readingFrequency * 2);
+    }
     
     // Calculate average frequency
     const avgFrequency = 1000 / (performanceMetrics.totalTime / performanceMetrics.readingCount);

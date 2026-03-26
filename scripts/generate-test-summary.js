@@ -25,14 +25,19 @@ function generateTestSummary() {
       const rawData = fs.readFileSync(jsonReportPath);
       const parsedData = JSON.parse(rawData);
       
+      // Calculate execution time matching Jest's displayed Time:
+      // From root startTime (includes Jest startup) to last test endTime
+      const maxEndTime = Math.max(...parsedData.testResults.map(r => r.endTime));
+      const executionTimeMs = maxEndTime - parsedData.startTime;
+      
       testResults = {
         numTestSuites: parsedData.numPassedTestSuites,
         numTotalTestSuites: parsedData.numTotalTestSuites,
         numPassedTests: parsedData.numPassedTests,
         numTotalTests: parsedData.numTotalTests,
         numFailedTests: parsedData.numFailedTests,
-        // Convert from milliseconds to seconds
-        executionTime: ((parsedData.testResults.reduce((acc, curr) => acc + (curr.endTime - curr.startTime), 0)) / 1000).toFixed(2)
+        // Match Jest's displayed Time format
+        executionTime: (executionTimeMs / 1000).toFixed(3)
       };
     } else {
       console.warn("WARNING: test-results.json not found. Run 'npm test' first to generate it.");
