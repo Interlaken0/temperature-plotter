@@ -78,7 +78,6 @@ Professional documentation ecosystem:
 - **[docs/PROJECT-OBJECTIVES.md](docs/PROJECT-OBJECTIVES.md)** - Project objectives
 - **[docs/NEW-DEVELOPER-ONBOARDING.md](docs/NEW-DEVELOPER-ONBOARDING.md)** - Onboarding guide
 - **[docs/COMPLETE-DOCUMENTATION-GUIDE.md](docs/COMPLETE-DOCUMENTATION-GUIDE.md)** - Documentation navigation
-- **[docs/USER_STORIES.md](docs/USER_STORIES.md)** - User requirements
 
 ## Quick Troubleshooting
 

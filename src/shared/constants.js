@@ -1,12 +1,8 @@
-// GLOBAL CONSTANTS - Application Configuration Management
-// ============================================================================
-// Centralised configuration for application-wide settings:
-// - Defines buffer size for temperature data management
-// - Provides single source of truth for performance parameters
-// - Enables easy configuration adjustments across application
-// - Demonstrates professional constant management patterns
-// - Optimises memory usage and performance
-// ============================================================================
+/**
+ * @file Global Constants - Application Configuration Management
+ * @module constants
+ * @description Centralised configuration for application-wide settings and performance parameters
+ */
 
 // MAXIMUM BUFFER SIZE - Data retention limit for temperature history
 // ============================================================================
