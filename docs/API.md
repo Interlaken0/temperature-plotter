@@ -121,14 +121,12 @@ const result = await window.api.forceHardwareMode();
 - **Features**: Ring buffer (5000 entries), input validation (-50°C to 200°C), event broadcasting
 
 ### Hardware Layer (`src/main/dll/tempDll.js`)
-- **checkConnection()**: Returns 0 for connected, 1 for disconnected
 - **start()**: Start hardware monitoring
 - **stop()**: Stop hardware monitoring
 
 ### Simulator (`src/main/simulator.js`)
 - **start()**: Start temperature simulation
 - **stop()**: Stop temperature simulation
-- **setFrequency(frequency)**: Set update frequency
 
 ## Renderer Components
 

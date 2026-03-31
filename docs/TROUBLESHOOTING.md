@@ -138,10 +138,8 @@ const dllPath = path.join(__dirname, 'dll', 'TempMeasure64.dll');
 
 ### "Hardware not detected"
 ```bash
-# Test DLL connection
-node -e "require('./src/main/dll/tempDll.js').checkConnection()"
-
 # Run as administrator if needed
+# Check Electron console for hardware status messages
 ```
 
 ## Platform-Specific Issues
@@ -207,9 +205,6 @@ echo -e "\033[31mRed Text\033[0m"
 # System health check
 npm test && npm run make
 
-# Test hardware connection
-node -e "require('./src/main/dll/tempDll.js').checkConnection()"
-
 # Test console utilities
 node -e "require('./src/main/utils/consoleColours'); console.log('OK')"
 
@@ -254,7 +249,6 @@ npm start
 ### Related Documentation
 - **API Documentation:** `docs/API.md` - IPC channels and data structures
 - **System Architecture:** `docs/SYSTEM-ARCHITECTURE.md` - Design patterns
-- **Development Guide:** `docs/CONTRIBUTING.md` - Setup and standards
 
 ---
 

@@ -62,16 +62,7 @@ graph TB
 
 ## Phase 3: Development Setup (25 minutes)
 
-### 5. docs/CONTRIBUTING.md
-**Purpose:** Development guidelines
-
-**Essential information:**
-- Environment setup requirements
-- Code style and conventions
-- Testing requirements
-- Git workflow and commit standards
-
-### 6. __tests__/README.md
+### 5. __tests__/README.md
 **Purpose:** Testing framework understanding
 
 **Key points:**
@@ -171,7 +162,6 @@ npm test
 ### For Understanding:
 - **Architecture:** docs/SYSTEM-ARCHITECTURE.md
 - **API reference:** docs/API.md
-- **Development guide:** docs/CONTRIBUTING.md
 - **Troubleshooting:** docs/TROUBLESHOOTING.md
 
 ### For Problem Solving:
@@ -188,7 +178,6 @@ You're ready to contribute when you can:
 - ✅ Explain the basic system architecture
 - ✅ Navigate the documentation efficiently
 - ✅ Make and test a simple code change
-- ✅ Follow the contribution guidelines
 - ✅ Understand the project's purpose
 
 ## Next Steps
