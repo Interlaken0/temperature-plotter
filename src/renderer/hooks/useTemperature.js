@@ -1,3 +1,9 @@
+/**
+ * @file Custom React Hook - Temperature Data Streaming Management
+ * @module useTemperature
+ * @description Professional hook for managing real-time temperature data with IPC communication and buffer management
+ */
+
 // CUSTOM REACT HOOK - Temperature Data Streaming Management
 // ============================================================================
 // Professional hook for managing real-time temperature data:

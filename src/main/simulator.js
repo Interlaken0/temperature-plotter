@@ -1,3 +1,9 @@
+/**
+ * @file Temperature Simulator - Hardware Interrupt Emulation System
+ * @module simulator
+ * @description Event-driven temperature simulation with realistic patterns for hardware fallback
+ */
+
 // TEMPERATURE SIMULATOR - Hardware Interrupt Emulation System
 // ============================================================================
 // Advanced temperature sensor simulation with realistic patterns:

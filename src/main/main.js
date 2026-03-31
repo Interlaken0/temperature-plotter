@@ -1,3 +1,9 @@
+/**
+ * @file Electron Main Process Entry Point
+ * @module main
+ * @description Core application logic, window management, and hardware monitoring coordination
+ */
+
 // Electron Main Process Entry Point - AMF-Temperature-Plotter Application
 // ============================================================================
 process.noDeprecation = true; 

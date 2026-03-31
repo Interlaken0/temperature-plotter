@@ -1,3 +1,9 @@
+/**
+ * @file IPC Communication Handler - Main Process
+ * @module temperatureIpc
+ * @description Inter-process communication, CSV export, and temperature data management
+ */
+
 const { ipcMain, BrowserWindow, dialog } = require('electron');
 const fs = require('fs');
 const path = require('path');
