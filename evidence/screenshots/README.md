@@ -9,7 +9,6 @@ This folder contains visual evidence for the Temperature Plotter project.
 - **03-testing-quality/** - Test execution and results
 - **04-architecture/** - System design and architecture diagrams
 - **05-documentation/** - Documentation quality and structure
-- **app-running.png** - Main application interface screenshot
 
 ## Adding Screenshots
 
