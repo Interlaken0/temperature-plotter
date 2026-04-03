@@ -103,7 +103,7 @@ const result = await window.api.forceHardwareMode();
 - **info(message)**: Cyan output with [i] prefix
 - **hardware(message)**: Blue output with [+] [HAL] prefix
 - **simulator(message)**: Magenta output with [~] SIMULATOR prefix
-- **temperature(celsius, fahrenheit, source = 'REAL')**: Dynamic colour based on source (green for REAL, magenta for SIMULATOR)
+- **temperature(celsius, fahrenheit, source = 'CONNECTED')**: Dynamic colour based on source (green for CONNECTED, magenta for SIMULATOR)
 - **status(message, type = 'info')**: Type-dependent colour with > prefix (blue default)
 - **separator()**: 50 equal signs with dim formatting
 - **header(title)**: Cyan header with 50 equal borders and uppercase conversion

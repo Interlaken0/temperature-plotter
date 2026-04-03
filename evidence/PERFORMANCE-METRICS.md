@@ -4,8 +4,8 @@
 
 | Metric | Value | Target |
 |--------|-------|--------|
-| **Test Success Rate** | 100% (116/116) | 100% |
-| **Test Execution Time** | 6.449s | <10s |
+| **Test Success Rate** | 100% (142/142) | 100% |
+| **Test Execution Time** | 6.386s | <10s |
 | **UI Response Latency** | <100ms | <100ms |
 | **Memory Usage** | 45-50MB stable | <100MB |
 | **CPU Utilisation** | 2-3% (normal) | <10% |
@@ -22,11 +22,11 @@
 
 ```mermaid
 graph TB
-    A[116 Tests<br/>12 Suites] --> B[Unit Tests<br/>7 Suites]
+    A[142 Tests<br/>12 Suites] --> B[Unit Tests<br/>8 Suites]
     A --> C[Integration Tests<br/>4 Suites]
     B --> D[100% Pass Rate]
     C --> D
-    D --> E[6.449s Execution]
+    D --> E[6.386s Execution]
 ```
 
 ### Test Distribution
@@ -69,7 +69,7 @@ graph LR
 | **S1** | Modular React/Electron architecture |
 | **S2** | Responsive UI with Tailwind CSS |
 | **S3** | Real-time hardware data binding |
-| **S4** | 116 comprehensive unit tests |
+| **S4** | 142 comprehensive unit tests |
 | **S5** | End-to-end IPC validation |
 | **S7** | FFI integration with error handling |
 | **S10** | Electron Forge build pipeline |

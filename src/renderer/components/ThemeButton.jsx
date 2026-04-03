@@ -1,4 +1,4 @@
-// THEME BUTTON COMPONENT - Elite Theme Toggle System
+// THEME BUTTON COMPONENT - Theme Toggle System
 // ============================================================================
 // Professional component for switching between light and dark themes:
 // - Features elite UI design with advanced animations and visual feedback
