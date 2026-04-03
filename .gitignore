@@ -73,3 +73,10 @@ __tests__/*.bak
 
 # CSV data files
 *.csv
+
+# Generated documents (source is tracked, binaries are not)
+portfolio-evidence.docx
+~$portfolio-evidence.docx
+
+# Mermaid processing artifacts
+mermaid-filter.err
