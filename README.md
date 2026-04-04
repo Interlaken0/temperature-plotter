@@ -13,6 +13,10 @@ Professional industrial temperature monitoring application built with Electron, 
 - **Real-Time Visualisation**: Live temperature graphing with 1Hz refresh rate
 - **Dual-Unit Display**: Celsius and Fahrenheit with pre-calculated conversions  
 - **Hardware Abstraction**: DLL integration with simulation fallback
+- **Adaptive Theming**: Animated dark/light mode toggle with WCAG accessibility compliance
+- **Audio Feedback**: Sound design for user actions with memory-optimised AudioContext
+- **Hardware Auto-Switching**: Automatic detection and fallback between hardware DLL and simulator
+- **Accessibility First**: Full screen reader support with ARIA labels, roles, and live regions
 - **Professional Logging**: Colour-coded console utilities with cross-platform support
 - **Data Persistence**: Automatic CSV logging and on-demand export
 - **Enterprise Security**: Memory leak prevention and secure IPC architecture
@@ -32,6 +36,17 @@ npm start
 # Run tests (142 passing)
 npm test
 ```
+
+## System Requirements
+
+| Requirement | Specification |
+|-------------|---------------|
+| **Operating System** | Windows 10/11 x64 |
+| **Node.js** | Version 18.x or higher |
+| **RAM** | 4GB minimum (8GB recommended) |
+| **Storage** | 200MB for installation |
+| **Display** | 1280x720 minimum resolution |
+| **Hardware** | USB temperature sensor (optional - simulator available) |
 
 ## Development Commands
 
