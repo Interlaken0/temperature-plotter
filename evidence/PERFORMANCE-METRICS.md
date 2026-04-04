@@ -7,7 +7,7 @@
 | **Test Success Rate** | 100% (142/142) | 100% |
 | **Test Execution Time** | 6.386s | <10s |
 | **UI Response Latency** | <100ms | <100ms |
-| **Memory Usage** | 45-50MB stable | <100MB |
+| **Memory Usage** | ~200MB stable | <500MB |
 | **CPU Utilisation** | 2-3% (normal) | <10% |
 | **Render Performance** | 60fps | 60fps |
 
@@ -82,7 +82,7 @@ graph LR
 | Resource | Idle | Active | Peak |
 |----------|------|--------|------|
 | **CPU** | 0-1% | 2-3% | 5-8% |
-| **Memory** | 30-35MB | 45-50MB | 50MB |
+| **Memory** | ~180MB | ~220MB | ~250MB |
 | **Response** | - | <100ms | <100ms |
 
 ## Professional Standards

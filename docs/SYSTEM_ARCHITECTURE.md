@@ -59,7 +59,7 @@ graph TB
 
 - 1Hz temperature updates
 - <100ms UI response time
-- 45-50MB stable memory usage
+- ~200MB stable memory usage (Electron multi-process architecture)
 - 100% data persistence
 
 ## Core Components

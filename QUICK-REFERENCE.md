@@ -227,7 +227,7 @@ consoleColours.separator();
 - Ring buffer implementation for efficient data storage (500-point buffer)
 - Garbage collection optimisation
 - Memory leak prevention
-- Stable 45-50MB usage during extended operation
+- Stable ~200MB usage during extended operation
 
 ### Real-Time Processing:
 - Sub-100ms UI update latency
@@ -324,7 +324,7 @@ graph LR
 - **Test Success Rate:** 100% (142/142 tests)
 - **Code Coverage:** 90%+ across all modules
 - **Performance:** <100ms response time
-- **Memory Usage:** 45-50MB stable
+- **Memory Usage:** ~200MB stable
 - **Security:** Zero vulnerabilities
 
 ### Business KPIs:

@@ -14,7 +14,7 @@ Develop a professional industrial temperature monitoring application with real-t
 - **Professional Logging**: Colour-coded console utilities with cross-platform support
 
 ### Non-Functional Requirements
-- **Performance**: <100ms UI response time, 45-50MB stable memory usage
+- **Performance**: <100ms UI response time, ~200MB stable memory usage (Electron multi-process architecture)
 - **Reliability**: 100% data persistence, 24/7 operation capability
 - **Security**: Secure IPC, memory leak prevention, input validation
 - **Testing**: 97.85% IPC coverage with 116 passing tests
