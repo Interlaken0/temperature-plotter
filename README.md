@@ -8,6 +8,31 @@
 
 Professional industrial temperature monitoring application built with Electron, React, and Node.js. Features real-time visualisation, hardware abstraction, and comprehensive testing with 97.85% IPC coverage.
 
+## What's New in v1.1.0
+
+### Console Utilities Module
+Professional colour-coded logging system with cross-platform compatibility:
+- ASCII-safe notation prevents PowerShell encoding issues
+- 60% faster performance than Unicode rendering
+- 50KB stable memory footprint
+
+### Accessibility Enhancements
+- Full WCAG compliance with ARIA labels and roles
+- Screen reader optimised with live regions
+- Keyboard navigation support throughout
+
+### Audio Feedback System
+- Memory-optimised AudioContext with singleton pattern
+- Sound design for user actions and mode switches
+- Zero memory bloat with persistent reference
+
+### Hardware Auto-Switching
+- Automatic detection of hardware disconnection
+- Seamless fallback to simulator mode
+- Automatic reconnection when hardware available
+
+---
+
 ## Key Features
 
 - **Real-Time Visualisation**: Live temperature graphing with 1Hz refresh rate
@@ -133,7 +158,7 @@ Professional documentation ecosystem providing comprehensive coverage of design,
 | Document | Purpose | Location |
 |----------|---------|----------|
 | **README.md** | Project overview and quick start | `README.md` |
-| **System Architecture** | Technical design with Mermaid diagrams | `docs/SYSTEM_ARCHITECTURE.md` |
+| **System Architecture** | Technical design with Mermaid diagrams | `docs/SYSTEM-ARCHITECTURE.md` |
 | **API Reference** | IPC channels, APIs, and data structures | `docs/API.md` |
 | **Troubleshooting** | Problem resolution and diagnostics | `docs/TROUBLESHOOTING.md` |
 | **New Developer Onboarding** | Structured learning path | `docs/NEW-DEVELOPER-ONBOARDING.md` |
@@ -158,7 +183,7 @@ Business analysis documentation in `analysis-artefacts/`:
 
 Assessment and performance documentation:
 
-- **Portfolio Evidence** - EPA assessment evidence and KSB mapping (`PORTFOLIO-EVIDENCE.md`)
+- **Portfolio Evidence** - EPA assessment evidence and KSB mapping (auto-generated, see build script)
 - **Reflective Journal** - Development reflection and learning (`evidence/REFLECTIVE-JOURNAL.md`)
 - **Performance Metrics** - Benchmarks and optimisation data (`evidence/PERFORMANCE-METRICS.md`)
 - **Screenshots** - Visual evidence in `evidence/screenshots/`
