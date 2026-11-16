@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Input validation for temperature readings (-50°C to 200°C range)
 - Memory leak prevention with proper listener cleanup
 - Security logging for rejected temperature readings
-- Comprehensive test suite with 116 tests achieving 97.85% IPC coverage
+- Comprehensive test suite with 142 tests achieving 97.85% IPC coverage
 - Complete documentation ecosystem (6 guides)
 - Dark and light mode theme toggle
 - CSV export with statistical analysis

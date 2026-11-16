@@ -263,7 +263,7 @@ flowchart TD
 | S3 - Data linkage | API documentation, Data flow | Exceptional |
 | S4 - Unit testing | __tests__/ directory, Coverage reports | Exceptional |
 | S5 - Integration testing | Test suites, Integration tests | Exceptional |
-| S6 - Test scenarios | Test documentation, 116 tests, 12 test suites | Strong |
+| S6 - Test scenarios | Test documentation, 142 tests, 12 test suites | Strong |
 | S7 - Problem solving | TROUBLESHOOTING.md, Debugging | Exceptional |
 | S8 - Simple designs | System Architecture diagrams | Exceptional |
 | S9 - Analysis artefacts | Architecture documentation | Strong |

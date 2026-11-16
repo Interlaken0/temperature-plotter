@@ -51,7 +51,7 @@ graph TB
 - User interactions
 
 **Testing:**
-- 116 tests across 12 suites
+- 142 tests across 12 suites
 - 97.85% IPC coverage
 - 100% pass rate
 

@@ -69,7 +69,7 @@ graph TB
 - Test structure and organisation
 - How to run tests and check coverage
 - Test categories (unit, integration, security)
-- Expected test results (116 tests passing across 12 test suites)
+- Expected test results (142 tests passing across 12 test suites)
 
 ## Phase 4: Code Deep Dive (30 minutes)
 
@@ -147,7 +147,7 @@ npm test
 - Validate all inputs (-50°C to 200°C range)
 
 **Testing Standards:**
-- Maintain 116-test baseline across 12 test suites
+- Maintain 142-test baseline across 12 test suites
 - 100% test coverage expected
 - Include unit, integration, and security tests
 

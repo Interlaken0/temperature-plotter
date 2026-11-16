@@ -1,5 +1,6 @@
 # Reflective Journal - Temperature Plotter v1.1.0
-## Complete KSB Coverage (38/38)
+## KSB Coverage: 34/38 Evidenced by This Project
+K8 (organisational policies), K10 (databases), S10 (deployment into the relevant environment) and B5 (ethical, legal and regulatory integrity) are evidenced through wider workplace practice; entries below provide supporting context only.
 
 ---
 
@@ -99,13 +100,13 @@
 |-------|----------|
 | **Situation** | Static test templates required manual updates, prone to errors, not following testing frameworks |
 | **Task** | Implement comprehensive test scenarios with automated dynamic reporting following Jest methodologies |
-| **Action** | Created 116 tests across 12 suites (unit, integration, component), generate-test-summary.js for CI/CD, version control integration |
+| **Action** | Created 142 tests across 12 suites (unit, integration, component), generate-test-summary.js for CI/CD, version control integration |
 | **Result** | 100% automation, real-time accuracy, 6.449s execution, comprehensive coverage reports |
 | **Impact** | Professional testing framework implementation with scenario identification and continuous integration |
 
 **Industry Benchmark:**
 - Industry average test execution: 8-15 seconds for comparable suites
-- Your achievement: 6.449 seconds for 116 tests
+- Your achievement: 6.449 seconds for 142 tests
 - Performance delta: 19-57% faster than typical implementations
 
 **Challenges Faced:**
@@ -163,7 +164,7 @@
 - Stakeholder communication patterns transferable to consultancy and architecture roles
 
 ### Entry 6: Security Implementation (Context Isolation)
-**Date:** February 2026 | **KSB:** S17, K8, B3, B5
+**Date:** February 2026 | **KSB:** S17, B3 | **Supporting:** K8, B5 (evidenced via workplace practice)
 
 | STARI | Evidence |
 |-------|----------|
@@ -198,7 +199,7 @@
 - GDPR compliance knowledge transferable to any data-sensitive software project
 
 ### Entry 7: Documentation Ecosystem (Collaboration)
-**Date:** February 2026 | **KSB:** S10, S15, K4, K5, K6, B4, B7, B9
+**Date:** February 2026 | **KSB:** S15, K4, K5, K6, B4, B7, B9 | **Supporting:** S10 (evidenced via workplace practice)
 
 | STARI | Evidence |
 |-------|----------|
@@ -211,7 +212,7 @@
 ---
 
 ### Entry 8: Build and Deployment Pipeline
-**Date:** February 2026 | **KSB:** S10, S11, K1, B1
+**Date:** February 2026 | **KSB:** S11, K1, B1 | **Supporting:** S10 (evidenced via workplace practice)
 
 | STARI | Evidence |
 |-------|----------|
@@ -223,22 +224,23 @@
 
 ---
 
-## Complete KSB Achievement Mapping
+## KSB Achievement Mapping
+34 of 38 KSBs are evidenced by this project. K8, K10, S10 and B5 are evidenced through wider workplace practice, with supporting context noted below.
 
-### Skills (17/17 Complete)
+### Skills (16/17 Evidenced by This Project)
 
 | KSB | Description | Evidence Location |
 |-----|-------------|-------------------|
 | **S1** | Maintainable code | Entry 2: consoleColours.js modular architecture |
 | **S2** | User interfaces | Entry 3: React/Tailwind responsive design |
 | **S3** | Link to data sets | Entry 3: Temperature store with hardware binding |
-| **S4** | Unit testing | Entry 4: 116 tests with error correction |
+| **S4** | Unit testing | Entry 4: 142 tests with error correction |
 | **S5** | Range of test types | Entry 4: Unit, integration, component, security tests |
 | **S6** | Test scenarios | Entry 4: 12 test suites with comprehensive scenarios |
 | **S7** | Problem solving/debugging | Entry 1: FFI integration, encoding fixes |
 | **S8** | Software designs | Entry 2: Observer pattern, separation of concerns |
 | **S9** | Analysis artefacts | Entry 5: 7 analysis artefacts with diagrams |
-| **S10** | Build/deploy code | Entry 8: Electron Forge pipeline |
+| **S10** | Build/deploy code | Workplace practice (supporting context: Entry 8 Electron Forge pipeline) |
 | **S11** | Development approach | Entry 8: Event-driven Electron architecture |
 | **S12** | Follow specifications | Entry 1, 3: Technical spec compliance |
 | **S13** | Testing frameworks | Entry 4: Jest methodology implementation |
@@ -247,7 +249,7 @@
 | **S16** | Algorithms/data structures | Entry 1, 3: Ring buffer, conversion algorithms |
 | **S17** | Security/maintainability | Entry 6: Context isolation, validation |
 
-### Knowledge (12/12 Complete)
+### Knowledge (10/12 Evidenced by This Project)
 
 | KSB | Description | Evidence Location |
 |-----|-------------|-------------------|
@@ -258,13 +260,13 @@
 | **K5** | Methodologies | Entry 7: Agile approach to documentation |
 | **K6** | Team effectiveness | Entry 7: Onboarding guide for collaboration |
 | **K7** | Design patterns | Entry 2: Observer, HAL, IPC patterns |
-| **K8** | Organisational policies | Entry 6: Security compliance, GDPR principles |
+| **K8** | Organisational policies | Workplace practice (supporting context: Entry 6 security compliance) |
 | **K9** | Algorithms/data structures | Entry 3: Ring buffer, efficient processing |
-| **K10** | Databases | Entry 3: Temperature store as data repository |
+| **K10** | Databases | Workplace practice (no relational/non-relational database in this project) |
 | **K11** | Technical specifications | Entry 1: API documentation, FFI specifications |
 | **K12** | Testing frameworks | Entry 4: Jest implementation, coverage analysis |
 
-### Behaviours (9/9 Complete)
+### Behaviours (8/9 Evidenced by This Project)
 
 | KSB | Description | Evidence Location |
 |-----|-------------|-------------------|
@@ -272,7 +274,7 @@
 | **B2** | Applies logical thinking | Entry 1, 2: Systematic problem solving |
 | **B3** | Secure working environment | Entry 6: Security implementation |
 | **B4** | Works collaboratively | Entry 7: Documentation for team use |
-| **B5** | Acts with integrity | Entry 6: Data protection, ethical practices |
+| **B5** | Acts with integrity | Workplace practice (supporting context: Entry 6 data protection work) |
 | **B6** | Shows initiative | Entry 2, 4: Proactive feature development |
 | **B7** | Communicates effectively | Entry 5, 7: Technical and non-technical docs |
 | **B8** | Shows curiosity | Entry 1, 2: New technology exploration |
@@ -288,9 +290,9 @@ graph TB
     B --> C[Entry 3: Dual-Unit<br/>S3, S16, K9]
     C --> D[Entry 4: Testing<br/>S4-S6, S13, S14]
     D --> E[Entry 5: Analysis<br/>S9, K2, K3]
-    E --> F[Entry 6: Security<br/>S17, K8, B3]
+    E --> F[Entry 6: Security<br/>S17, B3]
     F --> G[Entry 7: Docs<br/>S15, K4-K6, B4]
-    G --> H[Entry 8: Build<br/>S10, S11, K1]
+    G --> H[Entry 8: Build<br/>S11, K1]
     
     style A fill:#e1f5fe,color:#000000
     style D fill:#f3e5f5,color:#000000
@@ -298,7 +300,7 @@ graph TB
 ```
 
 ### Key Achievements
-- **116 tests** with 100% pass rate and dynamic reporting
+- **142 tests** with 100% pass rate and dynamic reporting
 - **<100ms latency** from hardware to UI with 60fps rendering
 - **9 files** with JSDoc documentation (100% coverage)
 - **Zero vulnerabilities** with enterprise security practices
@@ -309,5 +311,5 @@ graph TB
 
 **Journal Version:** 1.1.0  
 **Project:** Temperature Plotter  
-**KSB Coverage:** 38/38 Complete  
+**KSB Coverage:** 34/38 evidenced by this project (K8, K10, S10, B5 via wider workplace practice)  
 **Assessment:** Exceptional Distinction
